@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.79.0" />
+
+  <title> WPF和MFC进程间传递数据 |  kira&#39;s 博客</title>
+  <meta name="description" content="WPF和MFC进程间传递数据">
+  <link rel="stylesheet" href="http://example.org/css/simpleness.css">
+  <link rel="canonical" href="http://example.org/post/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/">
+  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/apple-touch-icon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
+  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
+  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
+  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <link
+    rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+    crossorigin="anonymous">
+  </link>
+  <script
+    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous">
+  </script>
+  <script
+    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+    crossorigin="anonymous"
+    onload="renderMathInElement(document.body);">
+  </script>
+</head>
+
+
+<body>
+  <header class="menus">
+  
+  <a href="http://example.org/">kira&#39;s 博客</a>
+  
+
+  <nav >
+    
+  </nav>
+
+  <nav class="fontawesome">
+    
+    <a href="https://github.com/kira-96/" target="_blank">
+        <i title="GitHub" class="fab fa-github"></i>
+    </a>
+    
+    
+    <a href="http://example.org/index.xml" target="_blank">
+        <i title="RSS" class="fas fa-rss"></i>
+    </a>
+    
+  </nav>
+  
+  
+  <div class="hidden description">kira's blog</div>
+  
+</header>
+
+<article class="article">
+  <header>
+    <h1 style="text-align: center;" >WPF和MFC进程间传递数据</h1>
+
+    <div class="post-meta">
+    
+      <time datetime="2019-05-27T21:54:45&#43;08:00">May 27, 2019</time> &nbsp; 
+    
+
+     &nbsp;
+
+    
+    
+    
+
+    
+      <i class="far fa-clock"></i>
+      
+      
+      
+
+      
+        5 min
+      
+      21 s
+      &nbsp;
+    
+
+    
+      <i class="fas fa-folder"></i>
+      
+      <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
+      &nbsp;
+      
+    
+    </div>
+  </header>
+
+   
+
+  <div class="text">
+    <h2 id="进程间传递数据的方法">进程间传递数据的方法</h2>
+<p>在进程间传递数据也就意味着两个不同的应用程序之间的通讯，大家可能会想到使用消息队列(Message Queue)来作为解决方案，当然这可能是最优解，然而这里我要讲的是另外一种方法，通过Windows的消息机制来传递数据，内容比较硬核。</p>
+<p>依旧用到了两个Windows的API，<code>FindWindow</code>和<code>SendMessage</code>，以及WPF如何和MFC窗口通讯，可以参考<a href="https://kira-96.github.io/posts/wpf-ru-he-chu-liwindows-xiao-xi.html">上一篇文章</a>。</p>
+<h2 id="传递数据的方式">传递数据的方式</h2>
+<p>这里需要先知道一个Window消息<code>WM_COPYDATA</code>
+它在<code>WinUser.h</code>中的定义如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#define WM_COPYDATA 0x004A
+</span></code></pre></div><p>这个消息就是这次要讲的内容，通过这个消息就可以在不同的窗口间传递数据了，它有两个参数，<code>WPARAM</code>是发送消息窗口的句柄，<code>LPARAM</code>是一个结构体的指针，这个结构体在<code>WinUser.h</code>里定义如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * lParam of WM_COPYDATA message points to...
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">tagCOPYDATASTRUCT</span> {
+    ULONG_PTR dwData;
+    DWORD cbData;
+    _Field_size_bytes_(cbData) PVOID lpData;
+} COPYDATASTRUCT, <span style="color:#f92672">*</span>PCOPYDATASTRUCT;
+</code></pre></div><p>嗯&hellip;看起来也不是很复杂，为了能够正确处理这个指针，需要在C#中也定义一个相同的结构体</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">/// &lt;summary&gt;
+</span><span style="color:#75715e">/// COPYDATASTRUCT
+</span><span style="color:#75715e">/// 对应 C++ 里的 COPYDATASTRUCT
+</span><span style="color:#75715e">/// 不能更改
+</span><span style="color:#75715e">/// &lt;/summary&gt;
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[StructLayout(LayoutKind.Sequential)]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">COPYDATASTRUCT</span>
+{
+    <span style="color:#66d9ef">public</span> IntPtr dwData; <span style="color:#75715e">//可以是任意值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> cbData;    <span style="color:#75715e">//指定lpData内存区域的字节数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> IntPtr lpData; <span style="color:#75715e">//发送给目录窗口所在进程的数据
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>这样就可以了，其中最重要的就是<code>lpData</code>，它可以是任意对象的指针，只要C++和C#两边定义了一个相同的结构体，我们就可以用它来直接传递结构体对象😮，这种方式比通过消息队列传递数据要快得多。</p>
+<p>那么先来定义一个简单的结构体吧：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// C++
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">StructUser</span>
+{
+	<span style="color:#66d9ef">char</span> UserName[<span style="color:#ae81ff">32</span>];
+	<span style="color:#66d9ef">char</span> Password[<span style="color:#ae81ff">32</span>];
+
+	StructUser()
+	{
+		ZeroMemory(UserName, <span style="color:#ae81ff">32</span>);
+		ZeroMemory(Password, <span style="color:#ae81ff">32</span>);
+	}
+};
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// C#
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[StructLayout(LayoutKind.Sequential)]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">StructUser</span>
+{
+<span style="color:#a6e22e">    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> UserName;
+<span style="color:#a6e22e">    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Password;
+}
+</code></pre></div><p>这里定义了一个User的结构体，<code>UserName</code>和<code>Password</code>都是长度为32的字符串，注意C#中结构体的定义方式，这里指定了字符串的长度，就是为了和C++的结构体保持一致。</p>
+<p>先来看看C++中如何发送和处理<code>WM_COPYDATA</code>消息的：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// 发送
+</span><span style="color:#75715e"></span>StructUser user;
+<span style="color:#66d9ef">char</span> userName[<span style="color:#ae81ff">32</span>];
+<span style="color:#66d9ef">char</span> password[<span style="color:#ae81ff">32</span>];
+<span style="color:#75715e">// GetDlgItem(IDC_EDIT_USERNAME)-&gt;GetWindowTextA(userName, 32);
+</span><span style="color:#75715e">// GetDlgItem(IDC_EDIT_PASSWORD)-&gt;GetWindowTextA(password, 32);
+</span><span style="color:#75715e"></span>memcpy(user.UserName, userName, <span style="color:#ae81ff">32</span>);
+memcpy(user.Password, password, <span style="color:#ae81ff">32</span>);
+
+COPYDATASTRUCT copyData;
+copyData.dwData <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+copyData.lpData <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>user;
+copyData.cbData <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(StructUser);
+
+HWND hWnd <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+<span style="color:#66d9ef">if</span> (m_pTargerWnd <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>)
+{
+	hWnd <span style="color:#f92672">=</span> <span style="color:#f92672">::</span>FindWindow(<span style="color:#66d9ef">nullptr</span>, <span style="color:#e6db74">&#34;WpfWindow&#34;</span>);
+}
+<span style="color:#66d9ef">else</span>
+{
+	hWnd <span style="color:#f92672">=</span> m_pTargerWnd<span style="color:#f92672">-&gt;</span>GetSafeHwnd();
+}
+<span style="color:#f92672">::</span>SendMessage(hWnd, WM_COPYDATA, (WPARAM)GetSafeHwnd(), (LPARAM)<span style="color:#f92672">&amp;</span> copyData);
+
+<span style="color:#75715e">// 接收
+</span><span style="color:#75715e"></span><span style="color:#75715e">/* C++ 中相关代码
+</span><span style="color:#75715e"> * 处理 WM_COPYDATA 消息
+</span><span style="color:#75715e"> * Header File(.h)
+</span><span style="color:#75715e">---------------------------------------------------------------------
+</span><span style="color:#75715e">...
+</span><span style="color:#75715e">afx_msg BOOL OnCopyData(CWnd *pWnd, COPYDATASTRUCT *pCopyDataStruct);
+</span><span style="color:#75715e">...
+</span><span style="color:#75715e">DECLARE_MESSAGE_MAP()
+</span><span style="color:#75715e">---------------------------------------------------------------------
+</span><span style="color:#75715e">* Source File(.cpp)
+</span><span style="color:#75715e">BEGIN_MESSAGE_MAP(CxxxDlg, CDialogEx)
+</span><span style="color:#75715e">    ...
+</span><span style="color:#75715e">    ON_WM_COPYDATA()
+</span><span style="color:#75715e">    ...
+</span><span style="color:#75715e">    END_MESSAGE_MAP()
+</span><span style="color:#75715e">...
+</span><span style="color:#75715e"> */</span>
+
+BOOL CxxDlg<span style="color:#f92672">::</span>OnCopyData(CWnd<span style="color:#f92672">*</span> pWnd, COPYDATASTRUCT<span style="color:#f92672">*</span> pCopyDataStruct)
+{
+	<span style="color:#66d9ef">if</span> (pWnd <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)
+	{
+		m_pTargerWnd <span style="color:#f92672">=</span> pWnd;
+	}
+	<span style="color:#66d9ef">if</span> (pCopyDataStruct <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)
+	{
+		StructUser<span style="color:#f92672">*</span> pUser <span style="color:#f92672">=</span> (StructUser<span style="color:#f92672">*</span>)(pCopyDataStruct<span style="color:#f92672">-&gt;</span>lpData);
+		<span style="color:#75715e">// DWORD dwLen = pCopyDataStruct-&gt;cbData;
+</span><span style="color:#75715e"></span>
+		<span style="color:#75715e">// GetDlgItem(IDC_EDIT_USERNAME)-&gt;SetWindowTextA(pUser-&gt;UserName);
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// GetDlgItem(IDC_EDIT_PASSWORD)-&gt;SetWindowTextA(pUser-&gt;Password);
+</span><span style="color:#75715e"></span>	}
+
+	<span style="color:#66d9ef">return</span> CDialogEx<span style="color:#f92672">::</span>OnCopyData(pWnd, pCopyDataStruct);
+}
+</code></pre></div><p>C#会比较复杂一些</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// 消息处理函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> IntPtr WndProcFunc(IntPtr hwnd, <span style="color:#66d9ef">int</span> msg, IntPtr wParam, IntPtr lParam, <span style="color:#66d9ef">ref</span> <span style="color:#66d9ef">bool</span> handled)
+{
+    <span style="color:#66d9ef">switch</span> (msg)
+    {
+        <span style="color:#66d9ef">case</span> WM_COPYDATA:  <span style="color:#75715e">// public const int WM_COPYDATA = 0x004A;
+</span><span style="color:#75715e"></span>            IntPrt hWnd_Target = wParam;
+            COPYDATASTRUCT param = Marshal.PtrToStructure&lt;COPYDATASTRUCT&gt;(lParam);
+            StructUser user = Marshal.PtrToStructure&lt;StructUser&gt;(param.lpData);
+            <span style="color:#75715e">// UserName.Text = user.UserName;
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// Password.Text = user.Password;
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">break</span>;
+        <span style="color:#66d9ef">default</span>:
+            <span style="color:#66d9ef">break</span>;
+    }
+
+    <span style="color:#66d9ef">return</span> IntPtr.Zero;
+}
+
+<span style="color:#75715e">// 发送消息
+</span><span style="color:#75715e"></span>StructUser sctUser = <span style="color:#66d9ef">new</span> StructUser()
+{
+    UserName = UserName.Text,
+    Password = Password.Text
+};
+
+IntPtr userPtr = Marshal.AllocHGlobal(Marshal.SizeOf&lt;StructUser&gt;());
+Marshal.StructureToPtr&lt;StructUser&gt;(sctUser, userPtr, <span style="color:#66d9ef">true</span>);
+
+COPYDATASTRUCT copyData = <span style="color:#66d9ef">new</span> COPYDATASTRUCT()
+{
+    dwData = IntPtr.Zero,
+    cbData = Marshal.SizeOf&lt;StructUser&gt;(),
+    lpData = userPtr,
+};
+
+IntPtr copyDataPtr = Marshal.AllocHGlobal(Marshal.SizeOf&lt;COPYDATASTRUCT&gt;());
+Marshal.StructureToPtr&lt;COPYDATASTRUCT&gt;(copyData, copyDataPtr, <span style="color:#66d9ef">true</span>);
+
+<span style="color:#66d9ef">if</span> (hWnd_Target == IntPtr.Zero)
+    hWnd_Target = Win32Api.FindWindow(<span style="color:#66d9ef">null</span>, <span style="color:#e6db74">&#34;MfcWindow&#34;</span>);
+
+hWnd_MainWnd = <span style="color:#66d9ef">new</span> WindowInteropHelper(<span style="color:#66d9ef">this</span>).Handle;
+
+<span style="color:#66d9ef">if</span> (hWnd_Target != IntPtr.Zero)
+    Win32Api.SendMessage(hWnd_Target, WM_COPYDATA, hWnd_MainWnd, copyDataPtr);
+
+Marshal.FreeHGlobal(userPtr);     <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>Marshal.FreeHGlobal(copyDataPtr); <span style="color:#75715e">// 最后一定要释放掉非托管内存
+</span></code></pre></div><p>处理消息的地方和上一篇一样，发送的地方比较复杂，总体来讲就是用<code>Marshal</code>开辟了两块非托管的内存来存放两个结构体的数据，等到消息被处理之后再将非托管内存释放掉，避免内存泄漏。</p>
+<p>那么，这次的内容就到这里了，主要内容都是代码，但其实也不复杂，只是需要慢慢消化。</p>
+
+  </div>
+
+  <footer>
+    <hr class="end-line">
+
+    
+
+    
+    <div class="post-tags">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/WPF">WPF</a>
+        &nbsp;
+      
+        <a href="/tags/MFC">MFC</a>
+        &nbsp;
+      
+    </div>
+    
+
+    
+    
+    <div class="releated-posts">
+      <h3>Related Posts</h3>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/">WPF如何处理Windows消息</a>
+      <br>
+      
+    </div>
+    
+  </footer>
+
+  <div class="comments">
+
+
+
+</div>
+
+</article>
+
+
+</body>
+<div class="foot">
+  
+  
+    &copy; 2020 - 2020 &#183; 
+    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+    <a href="#"><i class="fas fa-chevron-up"></i></a>
+  
+
+  
+</div>
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+
+</html>

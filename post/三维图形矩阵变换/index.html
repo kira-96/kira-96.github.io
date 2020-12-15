@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.79.0" />
+
+  <title> 三维图形矩阵变换 |  kira&#39;s 博客</title>
+  <meta name="description" content="DICOM图像方位相关">
+  <link rel="stylesheet" href="http://example.org/css/simpleness.css">
+  <link rel="canonical" href="http://example.org/post/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/">
+  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/apple-touch-icon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
+  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
+  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
+  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <link
+    rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+    crossorigin="anonymous">
+  </link>
+  <script
+    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous">
+  </script>
+  <script
+    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+    crossorigin="anonymous"
+    onload="renderMathInElement(document.body);">
+  </script>
+</head>
+
+
+<body>
+  <header class="menus">
+  
+  <a href="http://example.org/">kira&#39;s 博客</a>
+  
+
+  <nav >
+    
+  </nav>
+
+  <nav class="fontawesome">
+    
+    <a href="https://github.com/kira-96/" target="_blank">
+        <i title="GitHub" class="fab fa-github"></i>
+    </a>
+    
+    
+    <a href="http://example.org/index.xml" target="_blank">
+        <i title="RSS" class="fas fa-rss"></i>
+    </a>
+    
+  </nav>
+  
+  
+  <div class="hidden description">kira's blog</div>
+  
+</header>
+
+<article class="article">
+  <header>
+    <h1 style="text-align: center;" >三维图形矩阵变换</h1>
+
+    <div class="post-meta">
+    
+      <time datetime="2020-05-05T13:30:10&#43;08:00">May 05, 2020</time> &nbsp; 
+    
+
+     &nbsp;
+
+    
+    
+    
+
+    
+      <i class="far fa-clock"></i>
+      
+      
+      
+
+      
+        9 min
+      
+      33 s
+      &nbsp;
+    
+
+    
+      <i class="fas fa-folder"></i>
+      
+      <a href="/categories/DICOM">DICOM</a>
+      &nbsp;
+      
+    
+    </div>
+  </header>
+
+   
+
+  <div class="text">
+    <h2 id="前言">前言</h2>
+<p>由于我是从事医疗行业软件开发的，所以必不可少的会和图像打交道，最近刚刚好在做一个图像旋转相关的功能，借此又复习（预习）了一下线性代数，趁着没忘赶紧做一下笔记。</p>
+<h2 id="dicom-中与方位计算有关的-tag">DICOM 中与方位计算有关的 Tag</h2>
+<p>在开始之前，有必要先了解一下<a href="https://baike.baidu.com/item/DICOM/2171358">DICOM</a>中与图像方位计算有关的几个Tag，主要有3个。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Tag</th>
+<th style="text-align:center">Keyword</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(0020,0032)</td>
+<td style="text-align:center">Image Position (Patient)</td>
+</tr>
+<tr>
+<td style="text-align:center">(0020,0037)</td>
+<td style="text-align:center">Image Orientation (Patient)</td>
+</tr>
+<tr>
+<td style="text-align:center">(0018,5100)</td>
+<td style="text-align:center">Patient Position</td>
+</tr>
+</tbody>
+</table>
+<p>其中<strong>Image Position</strong>指的是图像左上角的像素在患者坐标系中的位置。
+<strong>Image Orientation</strong>由6个数字组成，分别是图像的行(Row)方向和列(Column)方向的单位向量与x/y/z坐标轴夹角的余弦值(cosine)。
+<strong>Patient Position</strong>是患者的体位，和此次的内容关系不大。</p>
+<p>有了上面两个Tag的值，就可以计算出图像在空间坐标系中的位置和方位了。</p>
+<h2 id="计算法向量">计算法向量</h2>
+<p>现在我们已经有了图像平面上两个垂直的向量，<strong>行</strong>和<strong>列</strong>方向的向量，使用行列式就能计算出图像所在平面的法向量了。</p>
+<p>$$u × v = \left[\begin{matrix} i &amp; j &amp; k \ u_1 &amp; u_2 &amp; u_3 \ v_1 &amp; v_2 &amp; v_3 \end{matrix}\right]$$</p>
+<p>具体怎么算，可以看<a href="https://www.bilibili.com/read/cv2712664/">这里</a>，讲得很详细。</p>
+<p>代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">double</span>[] vector1 = <span style="color:#66d9ef">new</span>[] {orientation[<span style="color:#ae81ff">0</span>], orientation[<span style="color:#ae81ff">1</span>], orientation[<span style="color:#ae81ff">2</span>]};
+<span style="color:#66d9ef">double</span>[] vector2 = <span style="color:#66d9ef">new</span>[] {orientation[<span style="color:#ae81ff">3</span>], orientation[<span style="color:#ae81ff">4</span>], orientation[<span style="color:#ae81ff">5</span>]};
+
+<span style="color:#66d9ef">double</span>[] normal = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">double</span>[] { <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> };
+
+normal[<span style="color:#ae81ff">0</span>] = vector1[<span style="color:#ae81ff">1</span>] * vector2[<span style="color:#ae81ff">2</span>] - vector1[<span style="color:#ae81ff">2</span>] * vector2[<span style="color:#ae81ff">1</span>];
+normal[<span style="color:#ae81ff">1</span>] = vector1[<span style="color:#ae81ff">2</span>] * vector2[<span style="color:#ae81ff">0</span>] - vector1[<span style="color:#ae81ff">0</span>] * vector2[<span style="color:#ae81ff">2</span>];
+normal[<span style="color:#ae81ff">2</span>] = vector1[<span style="color:#ae81ff">0</span>] * vector2[<span style="color:#ae81ff">1</span>] - vector1[<span style="color:#ae81ff">1</span>] * vector2[<span style="color:#ae81ff">0</span>];
+
+<span style="color:#66d9ef">var</span> temp = Math.Sqrt(normal[<span style="color:#ae81ff">0</span>] * normal[<span style="color:#ae81ff">0</span>] + normal[<span style="color:#ae81ff">1</span>] * normal[<span style="color:#ae81ff">1</span>] + normal[<span style="color:#ae81ff">2</span>] * normal[<span style="color:#ae81ff">2</span>]);
+
+normal[<span style="color:#ae81ff">0</span>] /= temp;
+normal[<span style="color:#ae81ff">1</span>] /= temp;
+normal[<span style="color:#ae81ff">2</span>] /= temp;
+</code></pre></div><p>其中<code>orientation</code>就是<strong>Image Orientation</strong>中的6个值。计算得到的<code>normal</code>就是图像所在平面的法向量的单位向量。</p>
+<h2 id="图像方位矩阵">图像方位矩阵</h2>
+<p>在3D图形变换中经常使用的是4维矩阵，把图像的位置信息也放到矩阵中，可以方便的进行位置变换的计算。</p>
+<p>这里分别用u，v，w表示图像的行/列/法线方向向量，S代表图像位置。</p>
+<p>$u=(u_1,u_2,u_3)$，$v=(v_1,v_2,v_3)$，$w=(w_1,w_2,w_3)$，$S=(s_x,s_y,s_z)$</p>
+<p>4维矩阵则表示为</p>
+<p>$$matrix=\left[\begin{matrix} u_1 &amp; v_1 &amp; w_1 &amp; s_x \ u_2 &amp; v_2 &amp; w_2 &amp; s_y \ u_3 &amp; v_3 &amp; w_3 &amp; s_z \ 0 &amp; 0 &amp; 0 &amp; 1 \end{matrix}\right]$$</p>
+<h2 id="图像旋转">图像旋转</h2>
+<p>先来看特殊情况下的旋转，即矩阵绕坐标轴的旋转。<strong>T</strong>为变换矩阵。</p>
+<ul>
+<li>
+<p>绕X轴旋转</p>
+<p>$$T=\left[\begin{matrix} 1 &amp; 0 &amp; 0 &amp; 0 \ 0 &amp; cos\theta &amp; -sin\theta &amp; 0 \ 0 &amp; sin\theta &amp; cos\theta &amp; 0 \ 0 &amp; 0 &amp; 0 &amp; 1 \end{matrix}\right]$$</p>
+</li>
+<li>
+<p>绕Y轴旋转</p>
+<p>$$T=\left[\begin{matrix} cos\theta &amp; 0 &amp; sin\theta &amp; 0 \ 0 &amp; 1 &amp; 0 &amp; 0 \ -sin\theta &amp; 0 &amp; cos\theta &amp; 0 \ 0 &amp; 0 &amp; 0 &amp; 1 \end{matrix}\right]$$</p>
+</li>
+<li>
+<p>绕Z轴旋转</p>
+<p>$$T=\left[\begin{matrix} cos\theta &amp; -sin\theta &amp; 0 &amp; 0 \ sin\theta &amp; cos\theta &amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 1 &amp; 0 \ 0 &amp; 0 &amp; 0 &amp; 1 \end{matrix}\right]$$</p>
+</li>
+</ul>
+<p>直接用$matrix \times T$就可以得到旋转后的矩阵了。</p>
+<p>但是图像旋转并不一定是绕坐标轴旋转，这里说图像旋转指的是在图像所在平面上的旋转，即图像矩阵绕法线旋转一定角度，不存在其它情况，所以需要一种更加通用的计算方法。角度的正负按右手定则决定。</p>
+<p><strong>经测试，下面的方法并不通用，下面的旋转矩阵适用于点位置的变换，不适用于DICOM中的方位变换</strong></p>
+<p><del>这里直接给出结果，图像矩阵绕向量$(u,v,w)$旋转$\theta$的变换矩阵<strong>T</strong>。</del></p>
+<p>$$T=\left[\begin{matrix} u^2+(1-u^2)cos\theta &amp; u v(1-cos\theta)-w sin\theta &amp; u w(1-cos\theta)+v sin\theta &amp; 0 \ u v(1-cos\theta)+w sin\theta &amp; v^2+(1-v^2)cos\theta &amp; v w(1-cos\theta)-u sin\theta &amp; 0 \ u w(1-cos\theta)-v sin\theta &amp; v w(1-cos\theta)+u sin\theta &amp; w^2+(1-w^2)cos\theta &amp; 0 \ 0 &amp; 0 &amp; 0 &amp; 1 \end{matrix}\right]$$</p>
+<p><del>代码示例：</del></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><del>这里用到了<a href="https://github.com/fo-dicom/fo-dicom/blob/development/DICOM/Imaging/Mathematics/Matrix.cs">MatrixD</a>，主要是用于矩阵的运算。</del></p>
+<p>这里其实是我想的复杂了，DICOM图像旋转的本质就是两个方向向量的旋转，只需要将两个方向向量绕法向量旋转即可。而这一切fo-dicom都已经为我们做好了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">Vector3D forward = <span style="color:#66d9ef">new</span> Vector3D(<span style="color:#66d9ef">new</span>[] { orientation[<span style="color:#ae81ff">0</span>], orientation[<span style="color:#ae81ff">1</span>], orientation[<span style="color:#ae81ff">2</span>] });
+Vector3D down = <span style="color:#66d9ef">new</span> Vector3D(<span style="color:#66d9ef">new</span>[] { orientation[<span style="color:#ae81ff">3</span>], orientation[<span style="color:#ae81ff">4</span>], orientation[<span style="color:#ae81ff">5</span>] });
+
+Orientation3D orientation3D = <span style="color:#66d9ef">new</span> Orientation3D(forward, down);
+
+<span style="color:#75715e">// 旋转，顺时针为正，逆时针为负
+</span><span style="color:#75715e"></span>orientation3D.Pitch(angle * Math.PI / <span style="color:#ae81ff">180.0</span>);
+
+<span style="color:#75715e">// orientation3D.Forward
+</span><span style="color:#75715e">// orientation3D.Down
+</span></code></pre></div><p>实现起来很简单，浏览<code>Pitch</code>的<a href="https://github.com/fo-dicom/fo-dicom/blob/development/DICOM/Imaging/Mathematics/Geometry3D.cs#L866">源码</a>就会发现，其实就是将两个向量绕<code>Right</code>向量（即法向量）旋转，得到新的<code>Forward</code>和<code>Down</code>就是旋转后图像的方位信息。</p>
+<p>这里借一张图来说明问题：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/images/3332945-5df6c38d053128fa.png" alt="pitch"></p>
+<p>在创建<code>Orientation3D</code>时的参数<code>Forward</code>和<code>Down</code>就是图像的行方向和列方向的方向向量，<code>Pitch</code>方法将<code>Forward</code>和<code>Down</code>向量旋转一个角度，得到的就是旋转后图像的行和列的方向向量。</p>
+<h2 id="图像翻转">图像翻转</h2>
+<p>翻转后的方位计算则比较简单，如果是水平翻转，只需要将水平(Row)方向的向量反向即可，竖直翻转将竖直(Column)方向的向量反向即可。</p>
+<p>向量反向只需要将 $(u,v,w)$ 3个值前面添加负号即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// 水平翻转
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> newOrientation = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">double</span>[<span style="color:#ae81ff">6</span>]
+{
+    -orientation[<span style="color:#ae81ff">0</span>], -orientation[<span style="color:#ae81ff">1</span>], -orientation[<span style="color:#ae81ff">2</span>],
+    orientation[<span style="color:#ae81ff">3</span>], orientation[<span style="color:#ae81ff">4</span>], orientation[<span style="color:#ae81ff">5</span>]
+};
+<span style="color:#75715e">// 竖直翻转
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> newOrientation = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">double</span>[<span style="color:#ae81ff">6</span>]
+{
+    orientation[<span style="color:#ae81ff">0</span>], orientation[<span style="color:#ae81ff">1</span>], orientation[<span style="color:#ae81ff">2</span>],
+    -orientation[<span style="color:#ae81ff">3</span>], -orientation[<span style="color:#ae81ff">4</span>], -orientation[<span style="color:#ae81ff">5</span>]
+};
+</code></pre></div><p>不过，像这么奇葩的功能应该不会有人去用吧。</p>
+<p><strong>注意</strong></p>
+<p>对图像矩阵进行旋转或者翻转操作之后，由于图像左上角的像素已经发生变化，所以原有的位置信息也已经改变，需要重新计算才能保证图像在空间中处于正确的位置。对于图像翻转来说或许能够轻易计算出来，不过旋转之后的图像却比较难计算了。</p>
+<p>最后，附上一段计算图像方位的代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// [R] Right - 沿着X方向递减
+</span><span style="color:#75715e">// [L] Left - 沿着X方向递增
+</span><span style="color:#75715e">// [A] Anterior - 沿着Y方向递减
+</span><span style="color:#75715e">// [P] Posterior - 沿着Y方向递增
+</span><span style="color:#75715e">// [F] Feet - 沿着Z方向递减
+</span><span style="color:#75715e">// [H] Head - 沿着Z方向递增
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">string</span> ComputeOrientation(Vector3D vector)
+{
+    <span style="color:#66d9ef">char</span> x = vector.X &lt; <span style="color:#ae81ff">0</span> ? <span style="color:#e6db74">&#39;R&#39;</span> : <span style="color:#e6db74">&#39;L&#39;</span>;
+    <span style="color:#66d9ef">char</span> y = vector.Y &lt; <span style="color:#ae81ff">0</span> ? <span style="color:#e6db74">&#39;A&#39;</span> : <span style="color:#e6db74">&#39;P&#39;</span>;
+    <span style="color:#66d9ef">char</span> z = vector.Z &lt; <span style="color:#ae81ff">0</span> ? <span style="color:#e6db74">&#39;F&#39;</span> : <span style="color:#e6db74">&#39;H&#39;</span>;
+
+    <span style="color:#66d9ef">double</span> x1 = Math.Abs(vector.X);
+    <span style="color:#66d9ef">double</span> y1 = Math.Abs(vector.Y);
+    <span style="color:#66d9ef">double</span> z1 = Math.Abs(vector.Z);
+
+    <span style="color:#66d9ef">string</span> result = <span style="color:#e6db74">&#34;&#34;</span>;
+
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; <span style="color:#ae81ff">3</span>; i++)
+    {
+        <span style="color:#66d9ef">if</span> (x1 &gt; <span style="color:#ae81ff">0.0001</span> &amp;&amp; x1 &gt; y1 &amp;&amp; x1 &gt; z1)
+        {
+            result += x;
+            x1 = <span style="color:#ae81ff">0</span>;
+        }
+        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (y1 &gt; <span style="color:#ae81ff">0.0001</span> &amp;&amp; y1 &gt; x1 &amp;&amp; y1 &gt; z1)
+        {
+            result += y;
+            y1 = <span style="color:#ae81ff">0</span>;
+        }
+        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (z1 &gt; <span style="color:#ae81ff">0.0001</span> &amp;&amp; z1 &gt; x1 &amp;&amp; z1 &gt; y1)
+        {
+            result += z;
+            z1 = <span style="color:#ae81ff">0</span>;
+        }
+        <span style="color:#66d9ef">else</span>
+        {
+            <span style="color:#66d9ef">break</span>;
+        }
+    }
+
+    <span style="color:#66d9ef">return</span> result;
+}
+</code></pre></div><p>这里用到了<a href="https://github.com/fo-dicom/fo-dicom/blob/development/DICOM/Imaging/Mathematics/Geometry3D.cs">Vector3D</a>，表示一个3维向量，可以使用数组代替。</p>
+<p><strong>参考</strong></p>
+<p><a href="https://www.zhihu.com/question/20534668">知乎：如何理解线性代数？</a></p>
+<p><a href="https://www.bilibili.com/read/cv2712664/">行列式，快速求出法向量</a></p>
+<p><a href="https://wenku.baidu.com/view/0c5c3619001ca300a6c30c22590102020740f28e.html">MRI的DICOM图像方位算法的研究</a></p>
+<p><a href="https://blog.csdn.net/piaoxuezhong/article/details/70171525">三维空间几何变换矩阵</a></p>
+<p><a href="https://www.jianshu.com/p/ac1b34420be7">图形学 位移，旋转，缩放矩阵变换</a></p>
+<p><a href="https://www.cnblogs.com/h2zZhou/p/9072967.html">DICOM中几个判断图像方向的tag</a></p>
+<p><a href="https://dicom.innolitics.com/ciods/mr-image/image-plane/00200037">DICOM Standard Browser</a></p>
+
+  </div>
+
+  <footer>
+    <hr class="end-line">
+
+    
+
+    
+    <div class="post-tags">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/DICOM">DICOM</a>
+        &nbsp;
+      
+        <a href="/tags/%E7%9F%A9%E9%98%B5">矩阵</a>
+        &nbsp;
+      
+    </div>
+    
+
+    
+    
+    <div class="releated-posts">
+      <h3>Related Posts</h3>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85-Power-Shell-%E5%B9%B6%E7%94%A8-oh-my-posh-%E7%BE%8E%E5%8C%96/">在树莓派上安装 Power Shell 并用 oh-my-posh 美化</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/">个人常用软件分享</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/%E5%A5%BD%E7%94%A8%E7%9A%84-Markdown-%E7%BC%96%E8%BE%91%E5%99%A8/">好用的 Markdown 编辑器 - 全平台</a>
+      <br>
+      
+    </div>
+    
+  </footer>
+
+  <div class="comments">
+
+
+
+</div>
+
+</article>
+
+
+</body>
+<div class="foot">
+  
+  
+    &copy; 2020 - 2020 &#183; 
+    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+    <a href="#"><i class="fas fa-chevron-up"></i></a>
+  
+
+  
+</div>
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+
+</html>

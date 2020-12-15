@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JSON on kira&#39;s 博客</title>
+    <link>http://example.org/tags/JSON/</link>
+    <description>Recent content in JSON on kira&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
+    <lastBuildDate>Sat, 22 Feb 2020 12:24:48 +0800</lastBuildDate><atom:link href="http://example.org/tags/JSON/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Newtonsoft.NET 基本使用</title>
+      <link>http://example.org/post/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 22 Feb 2020 12:24:48 +0800</pubDate>
+      
+      <guid>http://example.org/post/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>简介 JSON是一种常用的轻量级数据交换格式。与XML相比，JSON无论是体积还是可读性都更好，所以在网络数据传输和应用程序中被广泛的应用。 那</description>
+    </item>
+    
+  </channel>
+</rss>

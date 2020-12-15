@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.79.0" />
+
+  <title> 应用程序单例模式 |  kira&#39;s 博客</title>
+  <meta name="description" content="WPF 应用程序单例模式">
+  <link rel="stylesheet" href="http://example.org/css/simpleness.css">
+  <link rel="canonical" href="http://example.org/post/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/apple-touch-icon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
+  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
+  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
+  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <link
+    rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+    crossorigin="anonymous">
+  </link>
+  <script
+    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous">
+  </script>
+  <script
+    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+    crossorigin="anonymous"
+    onload="renderMathInElement(document.body);">
+  </script>
+</head>
+
+
+<body>
+  <header class="menus">
+  
+  <a href="http://example.org/">kira&#39;s 博客</a>
+  
+
+  <nav >
+    
+  </nav>
+
+  <nav class="fontawesome">
+    
+    <a href="https://github.com/kira-96/" target="_blank">
+        <i title="GitHub" class="fab fa-github"></i>
+    </a>
+    
+    
+    <a href="http://example.org/index.xml" target="_blank">
+        <i title="RSS" class="fas fa-rss"></i>
+    </a>
+    
+  </nav>
+  
+  
+  <div class="hidden description">kira's blog</div>
+  
+</header>
+
+<article class="article">
+  <header>
+    <h1 style="text-align: center;" >应用程序单例模式</h1>
+
+    <div class="post-meta">
+    
+      <time datetime="2020-03-25T10:43:05&#43;08:00">March 25, 2020</time> &nbsp; 
+    
+
+     &nbsp;
+
+    
+    
+    
+
+    
+      <i class="far fa-clock"></i>
+      
+      
+      
+
+      
+        6 min
+      
+      7 s
+      &nbsp;
+    
+
+    
+      <i class="fas fa-folder"></i>
+      
+      <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
+      &nbsp;
+      
+    
+    </div>
+  </header>
+
+   
+
+  <div class="text">
+    <h2 id="简介">简介</h2>
+<p>通常来说，应用程序可以启动任意数目的实例，前提是你的电脑内存足够大，想启动多少都可以。但有时候我们只希望程序同时只有一个实例在运行，应用程序不会重复运行。这就是应用程序的单例模式。</p>
+<h2 id="实现wpf">实现（WPF）</h2>
+<p>当然，实现的方法不是唯一的。</p>
+<p>可以在程序启动的时候查找应用程序的窗口名字，如果查找的结果不为空，就说明已经有一个实例正在运行，但如果你的程序碰巧和其它程序的窗口名字重复就不好说了。</p>
+<p>也可以在程序启动时获取应用程序进程的名字，然后再查找系统所有进程，看是否有重复的，原理和上一种类似。</p>
+<p>这里要讲的并不是上面两种，而是通过<code>Mutex</code>来实现，使用比前两种更加简单和有效。</p>
+<p><code>System.Threading.Mutex</code>官方说明是<strong>可用于进程间同步的同步基元。</strong>。</p>
+<p>使用起来也很简单，重写应用程序的<code>OnStartup</code>方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// App.xaml.cs
+</span><span style="color:#75715e">/// &lt;summary&gt;
+</span><span style="color:#75715e">/// App.xaml 的交互逻辑
+</span><span style="color:#75715e">/// &lt;/summary&gt;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">partial</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> : Application
+{
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnStartup(StartupEventArgs e)
+    {
+        Mutex mutex = <span style="color:#66d9ef">new</span> Mutex(<span style="color:#66d9ef">true</span>, <span style="color:#e6db74">&#34;MutexName&#34;</span>, <span style="color:#66d9ef">out</span> <span style="color:#66d9ef">bool</span> createNew);
+
+        <span style="color:#66d9ef">if</span> (createNew)
+        {
+            <span style="color:#66d9ef">base</span>.OnStartup(e);
+        }
+        <span style="color:#66d9ef">else</span>
+        {
+            MessageBox.Show(<span style="color:#e6db74">&#34;程序已在运行中。&#34;</span>, <span style="color:#e6db74">&#34;提示&#34;</span>, MessageBoxButton.OK, MessageBoxImage.Information);
+            Application.Current.Shutdown();
+        }
+    }
+}
+</code></pre></div><p>注意<code>Mutex</code>的第2个参数，可以是任意字符串，越复杂越好，避免和其它程序冲突。
+如果<code>createNew</code>为<code>false</code>，就说明已经有一个实例正在运行了，直接退出当前程序。</p>
+<p><strong>注意：必须保证Mutex在程序运行过程中不被垃圾回收，否则就失效了。</strong></p>
+<p>上面的写法是可以的，但如果我们使用的是<code>Caliburn.Micro</code>或者<code>Stylet</code>等框架，程序启动时都是通过<code>Bootstrapper</code>的，在<code>Bootstrapper</code>中的写法会有一些不同。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// 使用 Stylet
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bootstrapper</span> : Bootstrapper&lt;ShellViewModel&gt;
+{
+    <span style="color:#75715e">/// &lt;summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// 必须定义在类内部，一旦被释放就无效了
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">/// &lt;/summary&gt;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> Mutex mutex;
+
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnStart()
+    {
+        mutex = <span style="color:#66d9ef">new</span> Mutex(<span style="color:#66d9ef">true</span>, MUTEX_NAME, <span style="color:#66d9ef">out</span> <span style="color:#66d9ef">bool</span> createNew);
+        <span style="color:#66d9ef">if</span> (!createNew)
+        {
+            MessageBox.Show(<span style="color:#e6db74">&#34;程序已在运行中。&#34;</span>, <span style="color:#e6db74">&#34;提示&#34;</span>, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            <span style="color:#75715e">// 退出当前应用程序
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// 尽量不要使用
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// Application.Shutdown();
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// 因为在这里使用会触发主窗口的Closing事件
+</span><span style="color:#75715e"></span>            System.Environment.Exit(<span style="color:#ae81ff">0</span>);
+        }
+
+        <span style="color:#66d9ef">base</span>.OnStart();
+    }
+}
+</code></pre></div><p>需要注意的是要将<code>Mutex</code>定义在类的内部，如果定义在<code>OnStartup</code>函数体内，那么在程序运行时它就失效了，就不能使程序以单例模式运行了。</p>
+<p>如果你想要写在其它地方，可以将<code>Mutex</code>定义为<code>static</code>，这样就可以保证它在应用程序运行过程中不会失效了。</p>
+<p>还有就是在这里尽量使用<code>System.Environment.Exit(0)</code>而不是<code>Application.Current.Shutdown()</code>，因为我发现这里会触发主窗口的<code>Closing</code>事件，如果你不希望触发它，那么就使用<code>Environment.Exit(0)</code>。</p>
+<h2 id="补充">补充</h2>
+<p>关于应用程序单例模式还可以通过<code>WindowsFormsApplicationBase</code>来实现，但我也没试过。使用<code>Mutex</code>已经足够满足要求了。</p>
+<p>最后再加一项功能，我想要在当前程序检测到已经存在正在运行的实例时，退出并激活已经存在的程序窗口。</p>
+<p>这一点可以通过Windows的API来实现，思路就是查找应用程序的主窗口，并将其激活。代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">[DllImport(&#34;user32.dll&#34;, EntryPoint = &#34;FindWindow&#34;)]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">extern</span> IntPtr FindWindow(<span style="color:#66d9ef">string</span> classname, <span style="color:#66d9ef">string</span> windowname);
+<span style="color:#a6e22e">
+</span><span style="color:#a6e22e">[DllImport(&#34;user32.dll&#34;, EntryPoint = &#34;ShowWindow&#34;)]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">bool</span> ShowWindow(IntPtr hWnd, <span style="color:#66d9ef">int</span> nCmdShow);
+<span style="color:#a6e22e">
+</span><span style="color:#a6e22e">[DllImport(&#34;user32.dll&#34;, EntryPoint = &#34;SetForegroundWindow&#34;)]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">bool</span> SetForegroundWindow(IntPtr hWnd);
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> SW_NORMAL = <span style="color:#ae81ff">1</span>;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> SW_RESTORE = <span style="color:#ae81ff">9</span>;
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> FindWindowAndActive(<span style="color:#66d9ef">string</span> classname, <span style="color:#66d9ef">string</span> windowname)
+{
+    IntPtr hWnd = FindWindow(classname, windowname);
+    ShowWindow(hWnd, SW_NORMAL);
+    SetForegroundWindow(hWnd);
+}
+</code></pre></div><p>在应用程序退出之前调用<code>FindWindowAndActive</code>函数即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">...
+FindWindowAndActive(<span style="color:#66d9ef">null</span>, <span style="color:#e6db74">&#34;Main Window&#34;</span>);  <span style="color:#75715e">// 激活已经存在的实例窗口
+</span><span style="color:#75715e"></span>System.Environment.Exit(<span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// 退出当前应用程序
+</span><span style="color:#75715e"></span>...
+</code></pre></div>
+  </div>
+
+  <footer>
+    <hr class="end-line">
+
+    
+
+    
+    <div class="post-tags">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/WPF">WPF</a>
+        &nbsp;
+      
+    </div>
+    
+
+    
+    
+    <div class="releated-posts">
+      <h3>Related Posts</h3>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/WPF-%E8%8E%B7%E5%8F%96%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/">WPF 获取命令行参数</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/Stylet-%E6%A1%86%E6%9E%B6%E4%BD%93%E9%AA%8C/">Stylet 框架体验</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/">WPF和MFC进程间传递数据</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/">WPF如何处理Windows消息</a>
+      <br>
+      
+    </div>
+    
+  </footer>
+
+  <div class="comments">
+
+
+
+</div>
+
+</article>
+
+
+</body>
+<div class="foot">
+  
+  
+    &copy; 2020 - 2020 &#183; 
+    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+    <a href="#"><i class="fas fa-chevron-up"></i></a>
+  
+
+  
+</div>
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+
+</html>

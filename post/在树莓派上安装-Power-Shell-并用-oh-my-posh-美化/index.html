@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.79.0" />
+
+  <title> 在树莓派上安装 Power Shell 并用 oh-my-posh 美化 |  kira&#39;s 博客</title>
+  <meta name="description" content="在树莓派上安装 Power Shell">
+  <link rel="stylesheet" href="http://example.org/css/simpleness.css">
+  <link rel="canonical" href="http://example.org/post/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85-Power-Shell-%E5%B9%B6%E7%94%A8-oh-my-posh-%E7%BE%8E%E5%8C%96/">
+  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/apple-touch-icon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
+  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
+  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
+  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  <link
+    rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+    crossorigin="anonymous">
+  </link>
+  <script
+    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous">
+  </script>
+  <script
+    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+    crossorigin="anonymous"
+    onload="renderMathInElement(document.body);">
+  </script>
+</head>
+
+
+<body>
+  <header class="menus">
+  
+  <a href="http://example.org/">kira&#39;s 博客</a>
+  
+
+  <nav >
+    
+  </nav>
+
+  <nav class="fontawesome">
+    
+    <a href="https://github.com/kira-96/" target="_blank">
+        <i title="GitHub" class="fab fa-github"></i>
+    </a>
+    
+    
+    <a href="http://example.org/index.xml" target="_blank">
+        <i title="RSS" class="fas fa-rss"></i>
+    </a>
+    
+  </nav>
+  
+  
+  <div class="hidden description">kira's blog</div>
+  
+</header>
+
+<article class="article">
+  <header>
+    <h1 style="text-align: center;" >在树莓派上安装 Power Shell 并用 oh-my-posh 美化</h1>
+
+    <div class="post-meta">
+    
+      <time datetime="2020-03-07T15:56:50&#43;08:00">March 07, 2020</time> &nbsp; 
+    
+
+     &nbsp;
+
+    
+    
+    
+
+    
+      <i class="far fa-clock"></i>
+      
+      
+      
+
+      
+        5 min
+      
+      45 s
+      &nbsp;
+    
+
+    
+      <i class="fas fa-folder"></i>
+      
+      <a href="/categories/%E5%88%86%E4%BA%AB">分享</a>
+      &nbsp;
+      
+    
+    </div>
+  </header>
+
+   
+
+  <div class="text">
+    <h2 id="前言">前言</h2>
+<p>由于我平时是将树莓派(Respberry Pi)当成一个Linux电脑来使用，平时都是通过ssh连接到树莓派来进行操作的，所以一直都是通过终端进行操作的。而树莓派系统的终端又中规中距，不怎么好看。刚好这两天接触到了一个十分漂亮的Power Shell主题<a href="https://github.com/JanDeDobbeleer/oh-my-posh">oh-my-posh</a>，所以就想着能不能弄到树莓派上。折腾了半天，终于成功了，过程还算顺利。</p>
+<h2 id="目标">目标</h2>
+<p>我的目标是美化树莓派的终端，由于oh-my-posh是power shell的主题，所以首先需要安装power shell，然后再通过power shell安装oh-my-posh。</p>
+<ol>
+<li>安装 <a href="https://github.com/PowerShell/PowerShell">Power Shell</a></li>
+<li>安装 <a href="https://github.com/JanDeDobbeleer/oh-my-posh">oh-my-posh</a></li>
+</ol>
+<h2 id="安装-power-shell-core">安装 Power Shell Core</h2>
+<p>刚好前几天Power Shell Core 7发布了，所以我这里就安装了最新的版本。</p>
+<p>Power Shell 官网是这样的说明的。</p>
+<blockquote>
+<p>当前仅 Raspbian Stretch 支持 PowerShell。
+CoreCLR 和 PowerShell Core 仅适用于 Pi 2 和 Pi 3 设备，因为其他设备（如 Pi 0）有不受支持的处理器。</p>
+</blockquote>
+<p>我是用的是树莓派 3B+，测试是可以的。</p>
+<p>具体的操作按照Power Shell官网的<a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7#raspbian">安装说明</a></p>
+<p>首先安装Power Shell的依赖：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># Prerequisites</span>
+
+<span style="color:#75715e"># Update package lists</span>
+sudo apt-get update
+
+<span style="color:#75715e"># Install libunwind8 and libssl1.0</span>
+<span style="color:#75715e"># Regex is used to ensure that we do not install libssl1.0-dev, as it is a variant that is not required</span>
+sudo apt-get install <span style="color:#e6db74">&#39;^libssl1.0.[0-9]$&#39;</span> libunwind8 -y
+</code></pre></div><p>然后到<a href="https://github.com/PowerShell/PowerShell/releases">这里</a>下载最新的Power Shell二进制包。</p>
+<p>这里需要下载arm32位的二进制包。</p>
+<p><strong>powershell-7.0.0-linux-arm32.tar.gz</strong></p>
+<p>下载完成后解压到任意目录即可运行。</p>
+<p>或者使用官网的方式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># Download and extract PowerShell</span>
+
+<span style="color:#75715e"># Grab the latest tar.gz</span>
+wget https://github.com/PowerShell/PowerShell/releases/download/v7.0.0/powershell-7.0.0-linux-arm32.tar.gz
+
+<span style="color:#75715e"># Make folder to put powershell</span>
+mkdir ~/powershell
+
+<span style="color:#75715e"># Unpack the tar.gz file</span>
+tar -xvf ./powershell-7.0.0-linux-arm32.tar.gz -C ~/powershell
+
+<span style="color:#75715e"># Start PowerShell</span>
+~/powershell/pwsh
+</code></pre></div><p>最后，如果想要在任意位置都能启动Power Shell，需要创建启动Power Shell的软链接。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ln -s ~/path/to/powershell/pwsh /usr/bin/pwsh
+</code></pre></div><p>或者参考官网的方式:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># Start PowerShell from bash with sudo to create a symbolic link</span>
+sudo ~/powershell/pwsh -c New-Item -ItemType SymbolicLink -Path <span style="color:#e6db74">&#34;/usr/bin/pwsh&#34;</span> -Target <span style="color:#e6db74">&#34;\$PSHOME/pwsh&#34;</span> -Force
+
+<span style="color:#75715e"># alternatively you can run following to create a symbolic link</span>
+<span style="color:#75715e"># sudo ln -s ~/powershell/pwsh /usr/bin/pwsh</span>
+
+<span style="color:#75715e"># Now to start PowerShell you can just run &#34;pwsh&#34;</span>
+</code></pre></div><p>现在只要在终端输入<code>pwsh</code>就可以进入Power Shell了。</p>
+<h2 id="为-power-shell-安装-oh-my-posh">为 Power Shell 安装 oh-my-posh</h2>
+<p>安装之前需要先安装<a href="https://github.com/powerline/fonts">powerline字体</a>，否则，oh-my-posh安装完成后会由于缺少字体而显示不正常。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install fonts-powerline
+</code></pre></div><p>然后就可以为Power Shell安装oh-my-posh主题了。</p>
+<p>首先要进入Power Shell，在终端输入<code>pwsh</code>即可。</p>
+<p>在Power Shell下依次执行下面两个命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Install-Module posh-git -Scope CurrentUser
+Install-Module oh-my-posh -Scope CurrentUser
+</code></pre></div><p>安装过程中全部选 <strong>是(Y)</strong> 就可以了。</p>
+<p>安装完成后就可以使用oh-my-posh了：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># Start the default settings</span>
+Set-Prompt
+<span style="color:#75715e"># Alternatively set the desired theme:</span>
+Set-Theme Agnoster
+</code></pre></div><p>最后需要保存Power Shell的配置，这样每次进入Power Shell就是我们设定的主题了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 在 Power Shell下执行下面命令，如果不存在配置文件就创建一个</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>!<span style="color:#f92672">(</span>Test-Path -Path $PROFILE <span style="color:#f92672">))</span> <span style="color:#f92672">{</span> New-Item -Type File -Path $PROFILE -Force <span style="color:#f92672">}</span>
+
+<span style="color:#75715e"># 使用树莓派的编辑器修改配置文件</span>
+vi $PROFILE
+</code></pre></div><p>在配置文件中输入下面内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Import-Module posh-git
+Import-Module oh-my-posh
+Set-Theme Paradox
+</code></pre></div><p>然后再重新进入Power Shell就可以看到主题已经成功应用了。</p>
+<p>oh-my-posh提供了多种主题效果，可以看<a href="https://github.com/JanDeDobbeleer/oh-my-posh#themes">这里</a>，如果需要更换主题，可以直接在Power Shell中执行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Set-Theme mytheme
+</code></pre></div><h2 id="效果">效果</h2>
+<p>虽然 Power Shell 启动有一点慢，但显示效果还是很不错的。</p>
+<p>最后放上实际运行的效果：</p>
+<p>在树莓派中显示效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/images/raspberry-pi-shell-oh-my-posh.png" alt="respberry-pi-shell"></p>
+<p>在其它终端中的显示效果(Termius)：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/images/termius-oh-my-posh.png" alt="termius"></p>
+<p><strong>参考</strong></p>
+<ul>
+<li><a href="https://docs.microsoft.com/zh-cn/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7#raspbian">在树莓派上安装PowerShellCore</a></li>
+<li><a href="https://github.com/powerline/fonts">安装powerline-fonts</a></li>
+<li><a href="https://github.com/JanDeDobbeleer/oh-my-posh">安装oh-my-posh</a></li>
+</ul>
+
+  </div>
+
+  <footer>
+    <hr class="end-line">
+
+    
+
+    
+    <div class="post-tags">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/%E5%88%86%E4%BA%AB">分享</a>
+        &nbsp;
+      
+        <a href="/tags/Power-Shell">Power Shell</a>
+        &nbsp;
+      
+    </div>
+    
+
+    
+    
+    <div class="releated-posts">
+      <h3>Related Posts</h3>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/">个人常用软件分享</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/post/%E5%A5%BD%E7%94%A8%E7%9A%84-Markdown-%E7%BC%96%E8%BE%91%E5%99%A8/">好用的 Markdown 编辑器 - 全平台</a>
+      <br>
+      
+    </div>
+    
+  </footer>
+
+  <div class="comments">
+
+
+
+</div>
+
+</article>
+
+
+</body>
+<div class="foot">
+  
+  
+    &copy; 2020 - 2020 &#183; 
+    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+    <a href="#"><i class="fas fa-chevron-up"></i></a>
+  
+
+  
+</div>
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+
+</html>

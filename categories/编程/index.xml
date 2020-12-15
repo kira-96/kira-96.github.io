@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程 on kira&#39;s 博客</title>
+    <link>http://example.org/categories/%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 编程 on kira&#39;s 博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
+    <lastBuildDate>Fri, 04 Sep 2020 09:10:00 +0800</lastBuildDate><atom:link href="http://example.org/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prism note</title>
+      <link>http://example.org/post/Prism-note/</link>
+      <pubDate>Fri, 04 Sep 2020 09:10:00 +0800</pubDate>
+      
+      <guid>http://example.org/post/Prism-note/</guid>
+      <description>简介 Prism是一个用于WPF、Xamarin Forms、WinUI等的MVVM框架，刚刚学习，这里只是个人总结的一些知识点笔记。 IoC IContainerProvider protected override Window</description>
+    </item>
+    
+    <item>
+      <title>C#传递函数指针到C&#43;&#43;</title>
+      <link>http://example.org/post/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/</link>
+      <pubDate>Fri, 17 Jul 2020 14:30:30 +0800</pubDate>
+      
+      <guid>http://example.org/post/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/</guid>
+      <description>简介 在编码的时候难免会遇到不同编程语言之间的接口调用，其中最通用的就是C的动态链接库，几乎所有语言都可以调用C的接口函数。那么这种关系能否反</description>
+    </item>
+    
+    <item>
+      <title>Rust 学习资源收集</title>
+      <link>http://example.org/post/Rust-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86/</link>
+      <pubDate>Thu, 04 Jun 2020 16:00:00 +0800</pubDate>
+      
+      <guid>http://example.org/post/Rust-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86/</guid>
+      <description>文档 The Rust Programming Language Second edition Rust 程序设计语言（第二版）简体中文版 Rust by Example 通过例子学 Rust 其它 Rust Language Cheat Sheet Rust 语言备忘清单 Rust Fundamentals Rust语言中文社区</description>
+    </item>
+    
+    <item>
+      <title>一些基本没什么用的MFC技巧</title>
+      <link>http://example.org/post/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%B2%A1%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84MFC%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Fri, 24 Apr 2020 14:35:30 +0800</pubDate>
+      
+      <guid>http://example.org/post/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%B2%A1%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84MFC%E6%8A%80%E5%B7%A7/</guid>
+      <description>前言 由于我很少用MFC，只有工作上需要的时候才会用到，所以我也是个新手，遇到问题需要到网上找很久资料。这里只是记录一些特殊情景下会用到的技巧</description>
+    </item>
+    
+    <item>
+      <title>如何获取Windows10主题颜色</title>
+      <link>http://example.org/post/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96Windows10%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2/</link>
+      <pubDate>Fri, 24 Apr 2020 12:12:00 +0800</pubDate>
+      
+      <guid>http://example.org/post/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96Windows10%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2/</guid>
+      <description>前言 最近公司的系统也开始陆续向 Windows 10 迁移了，我的办公电脑也终于换上了新系统。为了适应新的开发环境，有时候需要获取一些系统相关的信息，这里就稍微</description>
+    </item>
+    
+    <item>
+      <title>为程序添加通知栏图标</title>
+      <link>http://example.org/post/%E4%B8%BA%E7%A8%8B%E5%BA%8F%E6%B7%BB%E5%8A%A0%E9%80%9A%E7%9F%A5%E6%A0%8F%E5%9B%BE%E6%A0%87/</link>
+      <pubDate>Wed, 25 Mar 2020 10:43:36 +0800</pubDate>
+      
+      <guid>http://example.org/post/%E4%B8%BA%E7%A8%8B%E5%BA%8F%E6%B7%BB%E5%8A%A0%E9%80%9A%E7%9F%A5%E6%A0%8F%E5%9B%BE%E6%A0%87/</guid>
+      <description>前言 经常看到其它程序在最小化或者窗口隐藏后依旧会在通知栏显示一个托盘图标，像微信、QQ之类的，即使主窗口不显示，程序并不会退出，依旧可以通过</description>
+    </item>
+    
+    <item>
+      <title>应用程序单例模式</title>
+      <link>http://example.org/post/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 25 Mar 2020 10:43:05 +0800</pubDate>
+      
+      <guid>http://example.org/post/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description>简介 通常来说，应用程序可以启动任意数目的实例，前提是你的电脑内存足够大，想启动多少都可以。但有时候我们只希望程序同时只有一个实例在运行，应用</description>
+    </item>
+    
+    <item>
+      <title>WPF 获取命令行参数</title>
+      <link>http://example.org/post/WPF-%E8%8E%B7%E5%8F%96%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</link>
+      <pubDate>Wed, 25 Mar 2020 10:42:32 +0800</pubDate>
+      
+      <guid>http://example.org/post/WPF-%E8%8E%B7%E5%8F%96%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</guid>
+      <description>虽然平时很少会用到命令行参数，但有时候可以使用命令行参数来使程序执行不同的行为。 在写控制台程序的时候，我们可以直接得到程序命令行参数。 static void Main(string[]</description>
+    </item>
+    
+    <item>
+      <title>Newtonsoft.NET 基本使用</title>
+      <link>http://example.org/post/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 22 Feb 2020 12:24:48 +0800</pubDate>
+      
+      <guid>http://example.org/post/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>简介 JSON是一种常用的轻量级数据交换格式。与XML相比，JSON无论是体积还是可读性都更好，所以在网络数据传输和应用程序中被广泛的应用。 那</description>
+    </item>
+    
+    <item>
+      <title>Stylet 框架体验</title>
+      <link>http://example.org/post/Stylet-%E6%A1%86%E6%9E%B6%E4%BD%93%E9%AA%8C/</link>
+      <pubDate>Thu, 12 Dec 2019 19:20:36 +0800</pubDate>
+      
+      <guid>http://example.org/post/Stylet-%E6%A1%86%E6%9E%B6%E4%BD%93%E9%AA%8C/</guid>
+      <description>简介 Stylet是一个轻量且功能强大的MVVM框架。支持 .NET 4.5+ 和 .NET Core 3.0+。 Stylet的作者也是受到Caliburn.Micro的启发，并</description>
+    </item>
+    
+    <item>
+      <title>使用 Named Pipe 进行进程间通讯</title>
+      <link>http://example.org/post/%E4%BD%BF%E7%94%A8-Named-Pipe-%E8%BF%9B%E8%A1%8C%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF/</link>
+      <pubDate>Fri, 15 Nov 2019 19:12:30 +0800</pubDate>
+      
+      <guid>http://example.org/post/%E4%BD%BF%E7%94%A8-Named-Pipe-%E8%BF%9B%E8%A1%8C%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF/</guid>
+      <description>这段时间公司的一个项目打算使用Named Pipe进行进程间的通讯，刚好花了点时间了解了一下，这里做一下笔记。 Named Pipe（命名管道），顾名思义</description>
+    </item>
+    
+    <item>
+      <title>Hprose C# 初探</title>
+      <link>http://example.org/post/Hprose-C_-%E5%88%9D%E6%8E%A2/</link>
+      <pubDate>Mon, 19 Aug 2019 19:51:52 +0800</pubDate>
+      
+      <guid>http://example.org/post/Hprose-C_-%E5%88%9D%E6%8E%A2/</guid>
+      <description>简介 Hprose（High Performance Remote Object Service Engine）是一款先进的轻量级、跨语言、跨平台、无侵入式、高性能动态远程对象调用引擎库。它不仅简单易用，</description>
+    </item>
+    
+    <item>
+      <title>Thrift C# 初探</title>
+      <link>http://example.org/post/Thrift-C_-%E5%88%9D%E6%8E%A2/</link>
+      <pubDate>Mon, 19 Aug 2019 19:51:15 +0800</pubDate>
+      
+      <guid>http://example.org/post/Thrift-C_-%E5%88%9D%E6%8E%A2/</guid>
+      <description>简介 Thrift是由Facebook为“大规模跨语言服务开发”而开发的一种接口描述语言和二进制通讯协议，它被用来定义和创建跨语言的服务。目前</description>
+    </item>
+    
+    <item>
+      <title>gRPC C# 初探</title>
+      <link>http://example.org/post/gRPC-C_-%E5%88%9D%E6%8E%A2/</link>
+      <pubDate>Sun, 18 Aug 2019 17:52:36 +0800</pubDate>
+      
+      <guid>http://example.org/post/gRPC-C_-%E5%88%9D%E6%8E%A2/</guid>
+      <description>简介 gRPC是Google开源的一个现代化、高性能的RPC框架，基于HTTP/2标准设计，同时提供多个语言版本，并支持跨语言调用，可以在任何</description>
+    </item>
+    
+    <item>
+      <title>WPF和MFC进程间传递数据</title>
+      <link>http://example.org/post/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Mon, 27 May 2019 21:54:45 +0800</pubDate>
+      
+      <guid>http://example.org/post/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</guid>
+      <description>进程间传递数据的方法 在进程间传递数据也就意味着两个不同的应用程序之间的通讯，大家可能会想到使用消息队列(Message Queue)来作为解决</description>
+    </item>
+    
+    <item>
+      <title>WPF如何处理Windows消息</title>
+      <link>http://example.org/post/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/</link>
+      <pubDate>Sun, 26 May 2019 15:30:50 +0800</pubDate>
+      
+      <guid>http://example.org/post/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/</guid>
+      <description>发送消息到指定窗口 发送消息相对来说比较简单，这里先讲，这里需要用到两个Windows的API // 查找指定窗口 [DllImport(&amp;#34;User32.dll&amp;#34;, EntryPoint = &amp;#34;FindWindow&amp;#34;, CharSet = CharSet.Auto)] public static extern IntPtr FindWindow(string lpClassName, string lpWindowName); //</description>
+    </item>
+    
+  </channel>
+</rss>
