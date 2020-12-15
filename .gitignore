@@ -1,0 +1,5 @@
+# hugo
+hugo.exe
+
+# Build dist dir
+public/

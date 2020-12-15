@@ -1,0 +1,46 @@
+baseURL = "http://example.org/"
+languageCode = "zh-cn"
+title = "kira's 博客"
+author = "kira-96"
+copyright = "[kira-96](/) &#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)"
+
+theme = "simpleness"
+
+enableInlineShortcodes = true
+enableEmoji = true
+
+## 保持分类的原始名字（false会做转小写处理）
+preserveTaxonomyNames = true
+## 是否禁止URL Path转小写
+disablePathToLower = true
+## 自动检测是否包含中文/日文/韩文，建议设置为true
+hasCJKLanguage = true
+
+[params]
+  lazyImage = true
+  enableMathJax = true # enable it in Front Matter
+  enableReadingTime = true
+  # favicon = "favicon.ico"
+  startyear = "2020"
+  showmonth = true
+  # slogan = "always make it happen"
+  description = "kira's blog"
+  disqus = ""
+
+[social]
+  github = "https://github.com/kira-96/"
+  rss = "index.xml"
+
+# doc: https://gohugo.io/getting-started/configuration-markup#highlight
+# syntax style: https://xyproto.github.io/splash/docs/longer/all.html
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai" # github, dracula, vim, monokai
+    tabWidth = 4
