@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "https://kira-96.github.io/"
 languageCode = "zh-cn"
 title = "kira's 博客"
 author = "kira-96"
@@ -21,7 +21,7 @@ hasCJKLanguage = true
   enableMathJax = true # enable it in Front Matter
   enableReadingTime = true
   # favicon = "favicon.ico"
-  startyear = "2020"
+  startyear = "2019"
   showmonth = true
   # slogan = "always make it happen"
   description = "kira's blog"
