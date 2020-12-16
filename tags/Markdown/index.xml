@@ -17,5 +17,14 @@
       <description>标题 # 一级标题 ## 二级标题 ### 三级标题 #### 四级标题 ##### 五级标题 ###### 六级标题 也可以使用闭合方式的标题，结尾的#可以不必和开头一致 # 一级标题 # ## 二级标题 ##</description>
     </item>
     
+    <item>
+      <title>好用的 Markdown 编辑器 - 全平台</title>
+      <link>https://kira-96.github.io/post/%E5%A5%BD%E7%94%A8%E7%9A%84-Markdown-%E7%BC%96%E8%BE%91%E5%99%A8/</link>
+      <pubDate>Thu, 25 Apr 2019 21:50:18 +0800</pubDate>
+      
+      <guid>https://kira-96.github.io/post/%E5%A5%BD%E7%94%A8%E7%9A%84-Markdown-%E7%BC%96%E8%BE%91%E5%99%A8/</guid>
+      <description>桌面端 Typora 支持 Mac, Windows, Linux MarkText 支持 Mac, Windows, Linux iA Writer 收费, 支持 Mac, Windows 移动端 iA Writer iOS - 收费 Android - 免费 熊掌记 支持 Mac, iOS, 可免费使用，部分功能需要订购 笔记软件 Joplin 支持 Windows, Mac, Linux, Android, iOS</description>
+    </item>
+    
   </channel>
 </rss>

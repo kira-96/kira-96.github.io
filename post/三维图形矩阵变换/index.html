@@ -83,6 +83,11 @@
 
     
     
+      <i class="far fa-eye"></i>
+      <span id="/post/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/" class="leancloud_visitors" data-flag-title="三维图形矩阵变换">
+          <span class="leancloud-visitors-count">  </span>
+      </span> &nbsp;
+    
     
 
     
@@ -322,7 +327,59 @@ Orientation3D orientation3D = <span style="color:#66d9ef">new</span> Orientation
 
   <div class="comments">
 
+  <div class="comments-item">
+    <div id="disqus_thread"></div>
+    <script>
+      window.addEventListener("load", () => {
+        (function() {
+          
+          var d = document,
+            s = d.createElement("script");
+          s.src = "https://kira.disqus.com/embed.js";
+          s.setAttribute("data-timestamp", +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
+
+
+  <div class="comments-item comments-valine" >
+    
+    
+    
+    <div id="vcomments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script type="text/javascript">
+      new Valine({
+          el: '#vcomments',
+          highlight: false,
+          lang: "zh-CN",
+          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
+          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
+          placeholder: "在这里写下你的留言丨支持 MarkDown 语法",
+          requiredFields: ["nick","mail"],
+          avatar: "mp",
+          visitor:  true ,
+          recordIP: true
+      });
+    </script>
+    <script>
+      if(window.location.hash){
+          var checkExist = setInterval(function() {
+             if ($(window.location.hash).length) {
+                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
+                clearInterval(checkExist);
+             }
+          }, 100);
+      }
+    </script>
+  </div>
 
 </div>
 
