@@ -6,6 +6,8 @@ tags: [ "DICOM" , "图像" ]
 keywords: [ "DICOM" ]
 categories: [ "DICOM" ]
 isCJKLanguage: true
+enableMathJax: true
+enableDisqus: true
 ---
 
 ## 常用图像像素相关的一些Tag

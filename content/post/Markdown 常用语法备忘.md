@@ -7,6 +7,8 @@ tags: [ "Markdown" ]
 keywords: [ "Markdown" ]
 categories: [ "分享" ]
 isCJKLanguage: true
+enableMathJax: true
+enableDisqus: true
 ---
 
 ## 标题 ##
