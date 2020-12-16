@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Prism on kira&#39;s 博客</title>
-    <link>http://example.org/tags/Prism/</link>
+    <link>https://kira-96.github.io/tags/Prism/</link>
     <description>Recent content in Prism on kira&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Fri, 04 Sep 2020 09:10:00 +0800</lastBuildDate><atom:link href="http://example.org/tags/Prism/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Sep 2020 09:10:00 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/Prism/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Prism note</title>
-      <link>http://example.org/post/Prism-note/</link>
+      <link>https://kira-96.github.io/post/Prism-note/</link>
       <pubDate>Fri, 04 Sep 2020 09:10:00 +0800</pubDate>
       
-      <guid>http://example.org/post/Prism-note/</guid>
+      <guid>https://kira-96.github.io/post/Prism-note/</guid>
       <description>简介 Prism是一个用于WPF、Xamarin Forms、WinUI等的MVVM框架，刚刚学习，这里只是个人总结的一些知识点笔记。 IoC IContainerProvider protected override Window</description>
     </item>
     

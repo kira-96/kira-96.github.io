@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MFC on kira&#39;s 博客</title>
-    <link>http://example.org/tags/MFC/</link>
+    <link>https://kira-96.github.io/tags/MFC/</link>
     <description>Recent content in MFC on kira&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Fri, 24 Apr 2020 14:35:30 +0800</lastBuildDate><atom:link href="http://example.org/tags/MFC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Apr 2020 14:35:30 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/MFC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>一些基本没什么用的MFC技巧</title>
-      <link>http://example.org/post/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%B2%A1%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84MFC%E6%8A%80%E5%B7%A7/</link>
+      <link>https://kira-96.github.io/post/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%B2%A1%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84MFC%E6%8A%80%E5%B7%A7/</link>
       <pubDate>Fri, 24 Apr 2020 14:35:30 +0800</pubDate>
       
-      <guid>http://example.org/post/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%B2%A1%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84MFC%E6%8A%80%E5%B7%A7/</guid>
+      <guid>https://kira-96.github.io/post/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%B2%A1%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84MFC%E6%8A%80%E5%B7%A7/</guid>
       <description>前言 由于我很少用MFC，只有工作上需要的时候才会用到，所以我也是个新手，遇到问题需要到网上找很久资料。这里只是记录一些特殊情景下会用到的技巧</description>
     </item>
     
     <item>
       <title>WPF和MFC进程间传递数据</title>
-      <link>http://example.org/post/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</link>
+      <link>https://kira-96.github.io/post/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Mon, 27 May 2019 21:54:45 +0800</pubDate>
       
-      <guid>http://example.org/post/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</guid>
+      <guid>https://kira-96.github.io/post/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/</guid>
       <description>进程间传递数据的方法 在进程间传递数据也就意味着两个不同的应用程序之间的通讯，大家可能会想到使用消息队列(Message Queue)来作为解决</description>
     </item>
     

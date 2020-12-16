@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>inno-setup on kira&#39;s 博客</title>
-    <link>http://example.org/tags/inno-setup/</link>
+    <link>https://kira-96.github.io/tags/inno-setup/</link>
     <description>Recent content in inno-setup on kira&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Fri, 16 Oct 2020 12:00:00 +0800</lastBuildDate><atom:link href="http://example.org/tags/inno-setup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Oct 2020 12:00:00 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/inno-setup/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Inno Setup 简体中文语言包</title>
-      <link>http://example.org/post/inno-setup-chinese-simplified-translation/</link>
+      <link>https://kira-96.github.io/post/inno-setup-chinese-simplified-translation/</link>
       <pubDate>Fri, 16 Oct 2020 12:00:00 +0800</pubDate>
       
-      <guid>http://example.org/post/inno-setup-chinese-simplified-translation/</guid>
+      <guid>https://kira-96.github.io/post/inno-setup-chinese-simplified-translation/</guid>
       <description>食用方法 Step 1 将ChineseSimplified.isl放到Inno Setup安装目录下的&amp;quot;Languages&amp;quot;文件夹里</description>
     </item>
     
     <item>
       <title>Inno Setup 6.1.0 新增的功能体验</title>
-      <link>http://example.org/post/Inno-Setup-6.1.0-%E6%96%B0%E5%A2%9E%E7%9A%84%E5%8A%9F%E8%83%BD%E4%BD%93%E9%AA%8C/</link>
+      <link>https://kira-96.github.io/post/Inno-Setup-6.1.0-%E6%96%B0%E5%A2%9E%E7%9A%84%E5%8A%9F%E8%83%BD%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Thu, 20 Aug 2020 10:00:10 +0800</pubDate>
       
-      <guid>http://example.org/post/Inno-Setup-6.1.0-%E6%96%B0%E5%A2%9E%E7%9A%84%E5%8A%9F%E8%83%BD%E4%BD%93%E9%AA%8C/</guid>
+      <guid>https://kira-96.github.io/post/Inno-Setup-6.1.0-%E6%96%B0%E5%A2%9E%E7%9A%84%E5%8A%9F%E8%83%BD%E4%BD%93%E9%AA%8C/</guid>
       <description>简介 Inno Setup是一个免费的安装包生成软件，完全开源免费，使用起来也非常方便，文档也十分全面。与其它同类软件相比十分的小巧便携，功能也十分全</description>
     </item>
     
