@@ -81,9 +81,9 @@
       
 
       
-        4 min
+        5 min
       
-      56 s
+      19 s
       &nbsp;
     
 
@@ -197,6 +197,20 @@ $ git push -u origin master
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git push origin -d 标签名
 </code></pre></div><p>推送标签到远程仓库</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git push origin 标签名
+</code></pre></div><h2 id="子模块submodule">子模块（submodule）</h2>
+<p>当前仓库添加子模块</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git submodule add &lt;url&gt; &lt;path&gt;
+</code></pre></div><p>拉取仓库后拉取子模块</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git submodule init
+$ git submodule update
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git submodule update --init
+</code></pre></div><p>或</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone --recurse-submodules
+</code></pre></div><p>更新子模块</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git submodule update --remote &lt;submodule&gt;
+</code></pre></div><p>删除子模块</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git submodule deinit &lt;submodule&gt;
+$ git rm --cached &lt;submodule&gt;
 </code></pre></div><h2 id="保持fork之后的仓库和上游同步">保持fork之后的仓库和上游同步</h2>
 <p>遇到一些好的代码仓库，有时候会fork一份到自己的账号，但一旦原来的代码仓库有了新的提交，如何保持自己的仓库和源仓库代码同步呢？</p>
 <p>一种方式是通过远程仓库向fork之后的仓库提交一个PR，但这样会导致提交记录不一致，非常EP，在网上搜罗了好久，终于找到一个完美的方法。</p>
@@ -220,6 +234,13 @@ $ git merge upstream/main
   <footer>
     <hr class="end-line">
 
+    
+    <div class="post-lastmod">
+      <time datetime="2020-12-17T08:47:56&#43;08:00">
+        update @ December 17, 2020
+      </time>
+      <p></p>
+    </div>
     
 
     
