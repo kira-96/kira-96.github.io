@@ -1,6 +1,7 @@
 ---
 title: 一些常用的git命令
 date: 2020-11-26T09:45:36+08:00
+lastmod: 2020-12-17T08:47:56+08:00
 draft: false
 description: 一些常用的git命令
 tags: [ "git" ]
@@ -261,6 +262,44 @@ $ git push origin -d 标签名
 
 ``` bash
 $ git push origin 标签名
+```
+
+## 子模块（submodule）
+
+当前仓库添加子模块
+
+``` bash
+$ git submodule add <url> <path>
+```
+
+拉取仓库后拉取子模块
+
+``` bash
+$ git submodule init
+$ git submodule update
+```
+
+``` bash
+$ git submodule update --init
+```
+
+或
+
+``` bash
+$ git clone --recurse-submodules
+```
+
+更新子模块
+
+``` bash
+$ git submodule update --remote <submodule>
+```
+
+删除子模块
+
+``` bash
+$ git submodule deinit <submodule>
+$ git rm --cached <submodule>
 ```
 
 ## 保持fork之后的仓库和上游同步
