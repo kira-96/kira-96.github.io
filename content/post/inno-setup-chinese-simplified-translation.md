@@ -24,7 +24,7 @@ isCJKLanguage: true
 
   如果你是通过新建脚本的方式创建脚本，在**Languages**选项勾选**Chinese Simplified**即可：
 
-  ![wizard](https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/images/Wizard.png)
+  ![wizard](https://cdn.jsdelivr.net/gh/kira-96/Inno-Setup-Chinese-Simplified-Translation@main/Wizard.png)
 
   如果你需要在现有脚本中添加简体中文支持
   直接在你的脚本的`[Languages]`部分添加下面一行即可
@@ -41,7 +41,7 @@ isCJKLanguage: true
   Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
   ```
 
-**注意：此翻译版本支持 Inno Setup 6.1.0+ 的软件**
+**注意：此翻译版本支持 Inno Setup 6.1.0+ 的软件，Inno Setup 5 的翻译文件在[这里](https://github.com/kira-96/Inno-Setup-Chinese-Simplified-Translation/tree/5.5.3+)**
 
 查看6.1.0+和6.0.0+的[区别](https://github.com/jrsoftware/issrc/commit/9e03ea4de5b8639937d2c4024ec8582a7e63b048)
 

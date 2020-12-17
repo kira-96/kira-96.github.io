@@ -156,11 +156,11 @@ Set-Theme mytheme
 
 在树莓派中显示效果：
 
-![respberry-pi-shell](https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/images/raspberry-pi-shell-oh-my-posh.png)
+![respberry-pi-shell](https://i.loli.net/2020/12/17/Vji4rY71szntmeR.png)
 
 在其它终端中的显示效果(Termius)：
 
-![termius](https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/images/termius-oh-my-posh.png)
+![termius](https://i.loli.net/2020/12/17/kRtrNwd9lJnWxia.png)
 
 **参考**
 

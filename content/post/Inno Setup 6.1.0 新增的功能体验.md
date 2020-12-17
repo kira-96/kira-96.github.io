@@ -132,7 +132,7 @@ end;
 
 软件的工具菜单（Tools）中新增了消息框设计器（MessageBox Designer）工具。
 
-![MessageBox Designer](https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/images/Snipaste_2020-08-20_10-46-20.png)
+![MessageBox Designer](https://i.loli.net/2020/12/17/yvRmi2tD8EHpOrF.png)
 
 工具提供了两种消息框，*Message Box*和*Task Dialog Message Box*，工具可以设置对话框的图标，按钮和默认选项等。
 
