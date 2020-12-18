@@ -32,12 +32,13 @@ hasCJKLanguage = true
   lang = 'zh-CN'
   appId = 'X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz'
   appKey = 'ljO0GYMaeqs5KWK2vCtk1Ii8'
-  placeholder = '在这里写下你的留言丨支持 MarkDown 语法'
+  placeholder = '在这里写下你的留言丨支持 Markdown 语法'
   requiredFields = ['nick', 'mail']
   recordIP = true
   avatar = 'mp'
   visitor = true
   enableHeaderVisitor = true
+  enableQQ = true
   debug = false
 
 [social]
