@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Win10主题色 on kira&#39;s 博客</title>
-    <link>https://kira-96.github.io/tags/Win10%E4%B8%BB%E9%A2%98%E8%89%B2/</link>
+    <link>/tags/Win10%E4%B8%BB%E9%A2%98%E8%89%B2/</link>
     <description>Recent content in Win10主题色 on kira&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Fri, 24 Apr 2020 12:12:00 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/Win10%E4%B8%BB%E9%A2%98%E8%89%B2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Apr 2020 12:12:00 +0800</lastBuildDate><atom:link href="/tags/Win10%E4%B8%BB%E9%A2%98%E8%89%B2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何获取Windows10主题颜色</title>
-      <link>https://kira-96.github.io/post/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96Windows10%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2/</link>
+      <link>/post/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96Windows10%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2/</link>
       <pubDate>Fri, 24 Apr 2020 12:12:00 +0800</pubDate>
       
-      <guid>https://kira-96.github.io/post/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96Windows10%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2/</guid>
+      <guid>/post/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96Windows10%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2/</guid>
       <description>前言 最近公司的系统也开始陆续向 Windows 10 迁移了，我的办公电脑也终于换上了新系统。为了适应新的开发环境，有时候需要获取一些系统相关的信息，这里就稍微</description>
     </item>
     

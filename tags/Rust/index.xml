@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rust on kira&#39;s 博客</title>
-    <link>https://kira-96.github.io/tags/Rust/</link>
+    <link>/tags/Rust/</link>
     <description>Recent content in Rust on kira&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Thu, 04 Jun 2020 16:00:00 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/Rust/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Jun 2020 16:00:00 +0800</lastBuildDate><atom:link href="/tags/Rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rust 学习资源收集</title>
-      <link>https://kira-96.github.io/post/Rust-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86/</link>
+      <link>/post/Rust-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86/</link>
       <pubDate>Thu, 04 Jun 2020 16:00:00 +0800</pubDate>
       
-      <guid>https://kira-96.github.io/post/Rust-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86/</guid>
+      <guid>/post/Rust-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86/</guid>
       <description>文档 The Rust Programming Language Second edition Rust 程序设计语言（第二版）简体中文版 Rust by Example 通过例子学 Rust 其它 Rust Language Cheat Sheet Rust 语言备忘清单 Rust Fundamentals Rust语言中文社区</description>
     </item>
     
