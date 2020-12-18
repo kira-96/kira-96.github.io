@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C&#43;&#43; on kira&#39;s 博客</title>
-    <link>/tags/C&#43;&#43;/</link>
+    <link>https://kira-96.github.io/tags/C&#43;&#43;/</link>
     <description>Recent content in C&#43;&#43; on kira&#39;s 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Fri, 17 Jul 2020 14:30:30 +0800</lastBuildDate><atom:link href="/tags/C++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jul 2020 14:30:30 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/C++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>C#传递函数指针到C&#43;&#43;</title>
-      <link>/post/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/</link>
+      <link>https://kira-96.github.io/post/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/</link>
       <pubDate>Fri, 17 Jul 2020 14:30:30 +0800</pubDate>
       
-      <guid>/post/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/</guid>
+      <guid>https://kira-96.github.io/post/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/</guid>
       <description>简介 在编码的时候难免会遇到不同编程语言之间的接口调用，其中最通用的就是C的动态链接库，几乎所有语言都可以调用C的接口函数。那么这种关系能否反</description>
     </item>
     
