@@ -7,6 +7,7 @@ tags: [ "inno-setup" ]
 keywords: [ "inno-setup" ]
 categories: [ "分享" ]
 isCJKLanguage: true
+url: "Inno-Setup-Chinese-Simplified-Translation"
 ---
 
 [![GitHub issues](https://img.shields.io/github/issues/kira-96/Inno-Setup-Chinese-Simplified-Translation)](https://github.com/kira-96/Inno-Setup-Chinese-Simplified-Translation/issues)
