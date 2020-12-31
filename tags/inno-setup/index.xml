@@ -10,10 +10,10 @@
     <lastBuildDate>Fri, 16 Oct 2020 12:00:00 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/inno-setup/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Inno Setup 简体中文语言包</title>
-      <link>https://kira-96.github.io/post/inno-setup-chinese-simplified-translation/</link>
+      <link>https://kira-96.github.io/inno-setup-chinese-simplified-translation/</link>
       <pubDate>Fri, 16 Oct 2020 12:00:00 +0800</pubDate>
       
-      <guid>https://kira-96.github.io/post/inno-setup-chinese-simplified-translation/</guid>
+      <guid>https://kira-96.github.io/inno-setup-chinese-simplified-translation/</guid>
       <description>食用方法 Step 1 将ChineseSimplified.isl放到Inno Setup安装目录下的&amp;quot;Languages&amp;quot;文件夹里</description>
     </item>
     
