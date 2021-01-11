@@ -5,3 +5,21 @@
 [![GitHub license](https://img.shields.io/github/license/kira-96/kira-96.github.io?style=flat-square)](https://github.com/kira-96/kira-96.github.io/blob/src/LICENSE)
 
 Use [Hugo](https://gohugo.io/) & theme [Simpleness](https://github.com/RainerChiang/simpleness)
+
+### Clone
+
+``` bash
+$ git clone --recurse-submodules https://github.com/kira-96/kira-96.github.io.git
+```
+
+### Update Theme
+
+``` bash
+$ git submodule update --remote themes/simpleness
+```
+
+### New draft
+
+``` bash
+$ hugo new post/my-first-post.md
+```
