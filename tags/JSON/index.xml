@@ -10,10 +10,10 @@
     <lastBuildDate>Sat, 22 Feb 2020 12:24:48 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/JSON/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Newtonsoft.NET 基本使用</title>
-      <link>https://kira-96.github.io/post/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <link>https://kira-96.github.io/posts/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 22 Feb 2020 12:24:48 +0800</pubDate>
       
-      <guid>https://kira-96.github.io/post/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://kira-96.github.io/posts/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
       <description>简介 JSON是一种常用的轻量级数据交换格式。与XML相比，JSON无论是体积还是可读性都更好，所以在网络数据传输和应用程序中被广泛的应用。 那</description>
     </item>
     

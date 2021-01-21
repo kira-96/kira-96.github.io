@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <title> 一些基本没什么用的MFC技巧 |  kira&#39;s 博客</title>
+  <meta name="description" content="MFC小技巧">
+  <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
+  <link rel="canonical" href="https://kira-96.github.io/posts/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%B2%A1%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84MFC%E6%8A%80%E5%B7%A7/">
+  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/apple-touch-icon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
+  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
+  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
+  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+</head>
+
+
+<body>
+  <header class="menus">
+  
+
+  <nav >
+    
+    <a href="/"> Home</a>
+    
+    <a href="/notes/"> Notes</a>
+    
+  </nav>
+
+  <nav class="fontawesome">
+    
+    <a href="https://github.com/kira-96/" target="_blank">
+        <i title="GitHub" class="fab fa-github"></i>
+    </a>
+    
+    
+    <a href="https://kira-96.github.io/index.xml" target="_blank">
+        <i title="RSS" class="fas fa-rss"></i>
+    </a>
+    
+  </nav>
+  
+  
+  <div class="hidden description">kira's blog</div>
+  
+</header>
+
+<article class="article">
+  <header>
+    <h1 style="text-align: center;" >一些基本没什么用的MFC技巧</h1>
+
+    <div class="post-meta">
+    
+      <time datetime="2020-04-24T14:35:30&#43;08:00">April 24, 2020</time> &nbsp; 
+    
+
+     &nbsp;
+
+    
+    
+      <i class="far fa-eye"></i>
+      <span id="/posts/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%B2%A1%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84MFC%E6%8A%80%E5%B7%A7/" class="leancloud_visitors" data-flag-title="一些基本没什么用的MFC技巧">
+          <span class="leancloud-visitors-count">  </span>
+      </span> &nbsp;
+    
+    
+
+    
+      <i class="far fa-clock"></i>
+      
+      
+      
+
+      
+        7 min
+      
+      55 s
+      &nbsp;
+    
+
+    
+      <i class="fas fa-folder"></i>
+      
+      <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
+      &nbsp;
+      
+    
+    </div>
+  </header>
+
+   
+
+  <div class="text">
+    <h2 id="前言">前言</h2>
+<p>由于我很少用MFC，只有工作上需要的时候才会用到，所以我也是个新手，遇到问题需要到网上找很久资料。这里只是记录一些特殊情景下会用到的技巧，方便以后查找。</p>
+<h2 id="隐藏窗口任务栏图标">隐藏窗口任务栏图标</h2>
+<p>这个问题我在网上找了很久，大致有两种方案：</p>
+<p><strong>修改窗口的扩展样式</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">ModifyStyleEx(WS_EX_APPWINDOW,WS_EX_TOOLWINDOW);
+</code></pre></div><p>但是这样做会导致整个窗口的样式会变得很难看。</p>
+<p><strong>将一个隐藏窗口设置成主窗口的父窗口</strong></p>
+<p>这样做比较麻烦，而且任务视图下也不能再看到窗口，显然不是我想要的效果。</p>
+<p>最后终于找到了一个比较完美的解决方案，通过COM的方式移除任务栏列表中的图标。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// 显示/隐藏任务栏图标(COM方式)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">ShowInTaskbar</span>(HWND hWnd, <span style="color:#66d9ef">bool</span> isShow)
+{
+	CoInitialize(<span style="color:#66d9ef">nullptr</span>);
+
+	ITaskbarList<span style="color:#f92672">*</span> pTaskbarList;
+	HRESULT hr <span style="color:#f92672">=</span> CoCreateInstance(CLSID_TaskbarList, <span style="color:#66d9ef">nullptr</span>, CLSCTX_INPROC_SERVER, IID_ITaskbarList, (<span style="color:#66d9ef">void</span><span style="color:#f92672">**</span>)<span style="color:#f92672">&amp;</span>pTaskbarList);
+
+	<span style="color:#66d9ef">if</span> (SUCCEEDED(hr))
+	{
+		pTaskbarList<span style="color:#f92672">-&gt;</span>HrInit();
+
+		<span style="color:#66d9ef">if</span> (isShow)
+		{
+			pTaskbarList<span style="color:#f92672">-&gt;</span>AddTab(hWnd);
+		}
+		<span style="color:#66d9ef">else</span>
+		{
+			pTaskbarList<span style="color:#f92672">-&gt;</span>DeleteTab(hWnd);
+		}
+
+		CoUninitialize();
+
+		<span style="color:#66d9ef">return</span> true;
+	}
+
+	CoUninitialize();
+	<span style="color:#66d9ef">return</span> false;
+}
+</code></pre></div><h2 id="程序启动时默认隐藏窗口">程序启动时默认隐藏窗口</h2>
+<p>一种比较简单的方法是在程序启动时将窗口移动到屏幕外的不可见区域。
+如果直接在<code>OnInitDialog</code>中设置<code>ShowWindow(SW_HIDE)</code>是无效的，因为此时窗口还没有显示出来，自然也无法隐藏。</p>
+<p>这里的思路是在程序启动的时候先将窗口移动到屏幕外，然后通过另一个线程将窗口隐藏起来，这样做虽然程序启动后窗口还是会一闪即逝，但由于是在屏幕之外，实际上并不能看到，然后在窗口需要显示的时候调用<code>ShowWindow(SW_SHOW)</code>即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// CxxxDlg.h 头文件
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;future&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CxxxDlg</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> CDialogEx
+{
+    ...
+    ...
+    ...
+
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    std<span style="color:#f92672">::</span>future<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> hideTask;  <span style="color:#75715e">// 后台隐藏窗口线程
+</span><span style="color:#75715e"></span>}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">BOOL CxxxDlg<span style="color:#f92672">::</span>OnInitDialog()
+{
+    ...
+
+    CRect rcClient;
+	GetWindowRect(<span style="color:#f92672">&amp;</span>rcClient);
+    <span style="color:#75715e">// 将窗口移动到屏幕外
+</span><span style="color:#75715e"></span>	MoveWindow(<span style="color:#f92672">-</span>rcClient.Width(), rcClient.top, rcClient.Width(), rcClient.Height());
+	<span style="color:#75715e">// 新建线程，延时1s后隐藏窗口
+</span><span style="color:#75715e"></span>	hideTask <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>async(
+		std<span style="color:#f92672">::</span>launch<span style="color:#f92672">::</span>async, [<span style="color:#f92672">&amp;</span>] {
+		std<span style="color:#f92672">::</span>this_thread<span style="color:#f92672">::</span>sleep_for(std<span style="color:#f92672">::</span>chrono<span style="color:#f92672">::</span>seconds(<span style="color:#ae81ff">1</span>));
+		<span style="color:#75715e">// ShowWindow(SW_HIDE);
+</span><span style="color:#75715e"></span>		ShowWindowAsync(m_hWnd, SW_HIDE);
+		std<span style="color:#f92672">::</span>this_thread<span style="color:#f92672">::</span>sleep_for(std<span style="color:#f92672">::</span>chrono<span style="color:#f92672">::</span>seconds(<span style="color:#ae81ff">1</span>));
+		<span style="color:#75715e">// 延时1s，待窗口完全隐藏后再将窗口居中
+</span><span style="color:#75715e"></span>		CenterWindow();
+		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+	});
+
+    ...
+	<span style="color:#66d9ef">return</span> TRUE;  <span style="color:#75715e">// 除非将焦点设置到控件，否则返回 TRUE
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h2 id="点击关闭时隐藏窗口">点击关闭时隐藏窗口</h2>
+<p>有时候我们希望在点击主窗口的关闭按钮之后将窗口隐藏或者最小化，而不是退出程序。这时只需要拦截掉窗口的关闭消息即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// CxxxDlg.h 头文件
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CxxxDlg</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> CDialogEx
+{
+    ...
+
+<span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+	afx_msg <span style="color:#66d9ef">void</span> OnSysCommand(UINT nID, LPARAM lParam);
+
+    ...
+}
+
+<span style="color:#66d9ef">void</span> CxxxDlg<span style="color:#f92672">::</span>OnSysCommand(UINT nID, LPARAM lParam)
+{
+	<span style="color:#75715e">/////////////////////////////////////
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 这里捕获窗口的关闭消息
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 不直接关闭窗口，而是隐藏起来
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> (nID <span style="color:#f92672">==</span> SC_CLOSE)
+	{
+		ShowWindowAsync(m_hWnd, SW_HIDE);
+	}
+	<span style="color:#75715e">/////////////////////////////////////
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">else</span>
+	{
+		CDialogEx<span style="color:#f92672">::</span>OnSysCommand(nID, lParam);
+	}
+}
+</code></pre></div><p>这样就可以拦截掉窗口的关闭消息了，这样不仅仅是点击关闭按钮时会隐藏窗口，通过窗口菜单关闭窗口或是使用<code>Alt+F4</code>都不能真正关闭窗口。那么我怎样才能退出程序呢，总不能用任务管理器吧。</p>
+<p>其实很简单，在需要退出程序的时候向窗口发送<code>WM_CLOSE</code>消息即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">SendMessage(WM_CLOSE);
+</code></pre></div><h2 id="cfiledialog导致cdialogex失去焦点的解决方法"><code>CFileDialog</code>导致<code>CDialogEx</code>“失去焦点”的解决方法</h2>
+<p>继承自<code>CDialogEx</code>的窗口在使用<code>CFileDialog</code>之后会导致窗口标题栏变成灰色，很像是窗口失去了焦点，此时窗口仍然能够正常操作，但即使鼠标点击在窗口上窗口的标题栏依旧是灰色，无法恢复到窗口激活状态的颜色，即使将窗口属性设置为<code>WS_EX_TOPMOST</code>（置顶）依旧是这样，必须点击窗口外的其它区域或者使用Tab切换一下才能恢复正常。</p>
+<p>而继承自<code>CDialog</code>的窗口则没有这个问题，可以将窗口的基类改成<code>CDialog</code>来避免这个问题。对于我这样的强迫症来说是无法忍受的，所以用尽千方百计终于找到了一个可行的解决方案。</p>
+<p>经过尝试，单纯让窗口获取焦点或者将窗口放到前台的方法都是无效的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">CFileDialog <span style="color:#a6e22e">dlg</span>(
+	TRUE, _T(<span style="color:#e6db74">&#34;ini&#34;</span>), <span style="color:#66d9ef">nullptr</span>,
+	OFN_HIDEREADONLY <span style="color:#f92672">|</span> OFN_OVERWRITEPROMPT,
+	_T(<span style="color:#e6db74">&#34;ini(*.ini)|*.ini|TEXT(*.txt)|*.txt|&#34;</span>), <span style="color:#66d9ef">this</span>);
+
+<span style="color:#66d9ef">auto</span> dlgResult <span style="color:#f92672">=</span> dlg.DoModal();
+
+<span style="color:#75715e">// 无效的方法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>SetFocus();
+<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>SetForegroundWindow();
+
+...
+</code></pre></div><p>所以只能曲线救国，既然通过手动切换的方式可以恢复到正常状态，不妨先切换到其它窗口再切换回来。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">CFileDialog <span style="color:#a6e22e">dlg</span>(
+	TRUE, _T(<span style="color:#e6db74">&#34;ini&#34;</span>), <span style="color:#66d9ef">nullptr</span>,
+	OFN_HIDEREADONLY <span style="color:#f92672">|</span> OFN_OVERWRITEPROMPT,
+	_T(<span style="color:#e6db74">&#34;ini(*.ini)|*.ini|TEXT(*.txt)|*.txt|&#34;</span>), <span style="color:#66d9ef">this</span>);
+
+<span style="color:#66d9ef">auto</span> dlgResult <span style="color:#f92672">=</span> dlg.DoModal();
+
+<span style="color:#75715e">// 先将焦点放到桌面，再切换回本窗口
+</span><span style="color:#75715e"></span><span style="color:#f92672">::</span>SetForegroundWindow(<span style="color:#f92672">::</span>GetDesktopWindow());
+<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>SetForegroundWindow();
+
+...
+</code></pre></div><p>完美解决了问题。</p>
+<h2 id="窗口启用视觉样式">窗口启用视觉样式</h2>
+<p>启用视觉样式之后，可以让程序看起来更加现代化一些，只支持Window XP以后的系统。
+可以通过为程序添加清单文件来实现，不过比较麻烦。在VC++ 2005之后，直接添加编译器指令到代码中就可以了。</p>
+<p>在预编译头文件中添加下面代码即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#if defined _M_IX86
+</span><span style="color:#75715e">#pragma comment(linker,&#34;/manifestdependency:\&#34;type=&#39;win32&#39; name=&#39;Microsoft.Windows.Common-Controls&#39; version=&#39;6.0.0.0&#39; processorArchitecture=&#39;x86&#39; publicKeyToken=&#39;6595b64144ccf1df&#39; language=&#39;*&#39;\&#34;&#34;)
+</span><span style="color:#75715e">#elif defined _M_IA64
+</span><span style="color:#75715e">#pragma comment(linker,&#34;/manifestdependency:\&#34;type=&#39;win32&#39; name=&#39;Microsoft.Windows.Common-Controls&#39; version=&#39;6.0.0.0&#39; processorArchitecture=&#39;ia64&#39; publicKeyToken=&#39;6595b64144ccf1df&#39; language=&#39;*&#39;\&#34;&#34;)
+</span><span style="color:#75715e">#elif defined _M_X64
+</span><span style="color:#75715e">#pragma comment(linker,&#34;/manifestdependency:\&#34;type=&#39;win32&#39; name=&#39;Microsoft.Windows.Common-Controls&#39; version=&#39;6.0.0.0&#39; processorArchitecture=&#39;amd64&#39; publicKeyToken=&#39;6595b64144ccf1df&#39; language=&#39;*&#39;\&#34;&#34;)
+</span><span style="color:#75715e">#else
+</span><span style="color:#75715e">#pragma comment(linker,&#34;/manifestdependency:\&#34;type=&#39;win32&#39; name=&#39;Microsoft.Windows.Common-Controls&#39; version=&#39;6.0.0.0&#39; processorArchitecture=&#39;*&#39; publicKeyToken=&#39;6595b64144ccf1df&#39; language=&#39;*&#39;\&#34;&#34;)
+</span><span style="color:#75715e">#endif
+</span></code></pre></div><h2 id="任务栏显示进度">任务栏显示进度</h2>
+<p>为窗口的任务栏图标添加进度显示，也可以为任务栏添加按钮。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">ITaskbarList3<span style="color:#f92672">*</span> pTaskbar;
+
+<span style="color:#75715e">// 初始化COM组件
+</span><span style="color:#75715e"></span>CoInitialize(NULL);
+CoCreateInstance(CLSID_TaskbarList, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(<span style="color:#f92672">&amp;</span>pTaskbar));
+
+<span style="color:#75715e">// TBPF_NOPROGRESS	= 0,        // 正常状态，不显示进度
+</span><span style="color:#75715e">// TBPF_INDETERMINATE	= 0x1,  // 忙碌状态，不显示进度
+</span><span style="color:#75715e">// TBPF_NORMAL	= 0x2,          // 正常状态，显示进度（绿色）
+</span><span style="color:#75715e">// TBPF_ERROR	= 0x4,          // 错误状态，显示进度（红色）
+</span><span style="color:#75715e">// TBPF_PAUSED	= 0x8           // 停止状态，显示进度（黄色）
+</span><span style="color:#75715e"></span>pTaskbar<span style="color:#f92672">-&gt;</span>SetProgressState(GetSafeHwnd(), TBPF_NORMAL);
+pTaskbar<span style="color:#f92672">-&gt;</span>SetProgressValue(GetSafeHwnd(), <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">100</span>);
+
+<span style="color:#75715e">// 设置提示信息
+</span><span style="color:#75715e"></span>pTaskbar<span style="color:#f92672">-&gt;</span>SetThumbnailTooltip(GetSafeHwnd(), TEXT(<span style="color:#e6db74">&#34;Tooltip&#34;</span>));
+
+<span style="color:#75715e">// 设置覆盖图标
+</span><span style="color:#75715e"></span>HICON hIcon <span style="color:#f92672">=</span> AfxGetApp()<span style="color:#f92672">-&gt;</span>LoadIcon(IDI_ICON_ERR);
+pTaskbar<span style="color:#f92672">-&gt;</span>SetOverlayIcon(GetSafeHwnd(), hIcon, _T(<span style="color:#e6db74">&#34;Error&#34;</span>));
+
+<span style="color:#75715e">// 添加任务栏按钮
+</span><span style="color:#75715e"></span>THUMBBUTTONMASK dwMask <span style="color:#f92672">=</span> THB_ICON <span style="color:#f92672">|</span> THB_TOOLTIP;
+THUMBBUTTON buttons[<span style="color:#ae81ff">3</span>];
+buttons[<span style="color:#ae81ff">0</span>].iId <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+buttons[<span style="color:#ae81ff">0</span>].dwMask <span style="color:#f92672">=</span> dwMask;
+buttons[<span style="color:#ae81ff">0</span>].hIcon <span style="color:#f92672">=</span> hIcon;
+memcpy(buttons[<span style="color:#ae81ff">0</span>].szTip, TEXT(<span style="color:#e6db74">&#34;Tooltip&#34;</span>), <span style="color:#66d9ef">sizeof</span>(buttons[<span style="color:#ae81ff">0</span>].szTip));
+<span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>pTaskbar<span style="color:#f92672">-&gt;</span>ThumbBarAddButtons(GetSafeHwnd(), <span style="color:#ae81ff">3</span>, buttons);
+
+<span style="color:#75715e">// 最后释放COM组件
+</span><span style="color:#75715e"></span>CoUninitialize();
+</code></pre></div><h2 id="未完待续持续更新中">未完待续，持续更新中&hellip;</h2>
+<p><strong>参考</strong></p>
+<p><a href="https://blog.csdn.net/wgxh05/article/details/83415463">MFC简单的启动时隐藏界面方式(仅启动时隐藏)</a></p>
+<p><a href="https://docs.microsoft.com/zh-cn/windows/win32/controls/cookbook-overview">Enabling Visual Styles</a></p>
+
+  </div>
+
+  <footer>
+    <hr class="end-line">
+
+    
+
+    
+    <div class="post-tags">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/MFC">MFC</a>
+        &nbsp;
+      
+    </div>
+    
+
+    
+    
+    <div class="releated-posts">
+      <h3>Related Posts</h3>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/posts/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/">WPF和MFC进程间传递数据</a>
+      <br>
+      
+    </div>
+    
+  </footer>
+
+  <div class="comments">
+
+
+
+  <div class="comments-item comments-valine" >
+    
+    
+    
+    <div id="vcomments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script type="text/javascript">
+      new Valine({
+          el: '#vcomments',
+          highlight: false,
+          lang: "zh-CN",
+          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
+          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
+          placeholder: "在这里写下你的留言丨支持 Markdown 语法",
+          requiredFields: ["nick","mail"],
+          avatar: "mp",
+          visitor:  true ,
+          recordIP: true
+      });
+    </script>
+    <script>
+      if(window.location.hash){
+          var checkExist = setInterval(function() {
+             if ($(window.location.hash).length) {
+                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
+                clearInterval(checkExist);
+             }
+          }, 100);
+      }
+    </script>
+  </div>
+
+</div>
+
+</article>
+
+
+</body>
+<div class="foot">
+  
+  
+    &copy; 2019 - 2021 &#183; 
+    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+    <a href="#"><i class="fas fa-chevron-up"></i></a>
+  
+
+  
+</div>
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <title> WPF如何处理Windows消息 |  kira&#39;s 博客</title>
+  <meta name="description" content="在WPF中处理窗口事件">
+  <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
+  <link rel="canonical" href="https://kira-96.github.io/posts/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/">
+  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/apple-touch-icon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
+  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
+  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
+  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+</head>
+
+
+<body>
+  <header class="menus">
+  
+
+  <nav >
+    
+    <a href="/"> Home</a>
+    
+    <a href="/notes/"> Notes</a>
+    
+  </nav>
+
+  <nav class="fontawesome">
+    
+    <a href="https://github.com/kira-96/" target="_blank">
+        <i title="GitHub" class="fab fa-github"></i>
+    </a>
+    
+    
+    <a href="https://kira-96.github.io/index.xml" target="_blank">
+        <i title="RSS" class="fas fa-rss"></i>
+    </a>
+    
+  </nav>
+  
+  
+  <div class="hidden description">kira's blog</div>
+  
+</header>
+
+<article class="article">
+  <header>
+    <h1 style="text-align: center;" >WPF如何处理Windows消息</h1>
+
+    <div class="post-meta">
+    
+      <time datetime="2019-05-26T15:30:50&#43;08:00">May 26, 2019</time> &nbsp; 
+    
+
+     &nbsp;
+
+    
+    
+      <i class="far fa-eye"></i>
+      <span id="/posts/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/" class="leancloud_visitors" data-flag-title="WPF如何处理Windows消息">
+          <span class="leancloud-visitors-count">  </span>
+      </span> &nbsp;
+    
+    
+
+    
+      <i class="far fa-clock"></i>
+      
+      
+      
+
+      
+        3 min
+      
+      6 s
+      &nbsp;
+    
+
+    
+      <i class="fas fa-folder"></i>
+      
+      <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
+      &nbsp;
+      
+    
+    </div>
+  </header>
+
+   
+
+  <div class="text">
+    <h2 id="发送消息到指定窗口">发送消息到指定窗口</h2>
+<p>发送消息相对来说比较简单，这里先讲，这里需要用到两个Windows的API</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// 查找指定窗口
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[DllImport(&#34;User32.dll&#34;, EntryPoint = &#34;FindWindow&#34;, CharSet = CharSet.Auto)]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">extern</span> IntPtr FindWindow(<span style="color:#66d9ef">string</span> lpClassName, <span style="color:#66d9ef">string</span> lpWindowName);
+
+<span style="color:#75715e">//消息发送API
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[DllImport(&#34;User32.dll&#34;, EntryPoint = &#34;SendMessage&#34;, CharSet = CharSet.Auto)]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> SendMessage(
+    IntPtr hWnd,        <span style="color:#75715e">// 信息发往的窗口的句柄
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> Msg,            <span style="color:#75715e">// 消息ID
+</span><span style="color:#75715e"></span>    IntPtr wParam,      <span style="color:#75715e">// 参数1
+</span><span style="color:#75715e"></span>    IntPtr lParam       <span style="color:#75715e">// 参数2
+</span><span style="color:#75715e"></span>);
+</code></pre></div><p><code>FindWindow</code>就是根据窗口的名字去找到相应的窗口句柄，<code>SendMessage</code>就是发送消息到指定窗口了，写过MFC的应该不陌生</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">IntPtr hWnd = FindWindow(<span style="color:#66d9ef">null</span>, windowName);
+<span style="color:#66d9ef">if</span> (hWnd == IntPtr.Zero)
+    <span style="color:#66d9ef">return</span>;
+SendMessage(hWnd, WM_USER + <span style="color:#ae81ff">2</span>, IntPtr.Zero, <span style="color:#e6db74">&#34;msg&#34;</span>);
+</code></pre></div><p>发送消息就讲这么多，剩下的需要自行摸索，下面是用WPF窗口接收消息</p>
+<h2 id="获取wpf窗口句柄">获取WPF窗口句柄</h2>
+<p>Windows消息是通过窗口句柄来传递给指定窗口的，所以想要处理WPF窗口的收到消息，首先就需要获取自身的窗口句柄。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">HwndSource hWnd = PresentationSource.FromVisual(<span style="color:#66d9ef">this</span>) <span style="color:#66d9ef">as</span> HwndSource;
+</code></pre></div><p>或者</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">IntPtr hwnd = <span style="color:#66d9ef">new</span> WindowInteropHelper(<span style="color:#66d9ef">this</span>).Handle;
+HwndSource source = HwndSource.FromHwnd(hwnd);
+</code></pre></div><p>这里的<code>this</code>就是WPF的窗口，当然也可以通过这种方式获取窗口任意控件的句柄</p>
+<h2 id="添加钩子addhook">添加钩子(AddHook)</h2>
+<p>得到窗口的句柄之后就可以为该窗口添加钩子来处理窗口收到的消息了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnSourceInitialized(EventArgs e)
+{
+    <span style="color:#66d9ef">base</span>.OnSourceInitialized(e);
+
+    <span style="color:#75715e">// Add Hook
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// HwndSource source = PresentationSource.FromVisual(this) as HwndSource;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// source.AddHook(WndProcFunc);
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// 或者
+</span><span style="color:#75715e"></span>
+    HwndSource.FromHwnd(<span style="color:#66d9ef">new</span> WindowInteropHelper(<span style="color:#66d9ef">this</span>).Handle).AddHook(<span style="color:#66d9ef">new</span> HwndSourceHook(WndProcFunc));
+}
+</code></pre></div><p>或者</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> MainWindow()
+{
+    InitializeComponent();
+    <span style="color:#66d9ef">this</span>.SourceInitialized += (s, e) =&gt; {
+        HwndSource.FromHwnd(<span style="color:#66d9ef">new</span> WindowInteropHelper(<span style="color:#66d9ef">this</span>).Handle).AddHook(<span style="color:#66d9ef">new</span> HwndSourceHook(WndProcFunc));
+    };
+}
+</code></pre></div><p>这个<code>WndProcFunc</code>就是我们的消息处理函数了，窗口在收到消息之后就会走到这个函数里面，它看起来像是这样</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> IntPtr WndProc(IntPtr hwnd, <span style="color:#66d9ef">int</span> msg, IntPtr wParam, IntPtr lParam, <span style="color:#66d9ef">ref</span> <span style="color:#66d9ef">bool</span> handled)
+{
+    <span style="color:#75715e">// Handle Msg Here
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">switch</span> (msg)
+    {
+        <span style="color:#66d9ef">case</span> WM_USER + <span style="color:#ae81ff">1</span>:  <span style="color:#75715e">// 你的消息值
+</span><span style="color:#75715e"></span>        {
+            <span style="color:#75715e">// 处理 wParam, lParam
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">break</span>;
+        }
+        <span style="color:#75715e">// ... 其它消息
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">default</span>: <span style="color:#66d9ef">break</span>;
+    }
+
+    <span style="color:#66d9ef">return</span> IntPtr.Zero;
+}
+</code></pre></div><p>这样就完了吗？是的，但是！目前还不能处理传递的参数，如果WPF程序和C++程序处于一个进程还好说，如果是两个进程，那么他们之间的内存是不共用的，所以即使WPF窗口拿到了指针也读不出指针里的内容。</p>
+<p>那么要怎样才能在WPF程序和C++程序之间传递值呢，有空在讲&hellip;</p>
+
+  </div>
+
+  <footer>
+    <hr class="end-line">
+
+    
+
+    
+    <div class="post-tags">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/C">C#</a>
+        &nbsp;
+      
+        <a href="/tags/WPF">WPF</a>
+        &nbsp;
+      
+    </div>
+    
+
+    
+    
+  </footer>
+
+  <div class="comments">
+
+
+
+  <div class="comments-item comments-valine" >
+    
+    
+    
+    <div id="vcomments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script type="text/javascript">
+      new Valine({
+          el: '#vcomments',
+          highlight: false,
+          lang: "zh-CN",
+          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
+          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
+          placeholder: "在这里写下你的留言丨支持 Markdown 语法",
+          requiredFields: ["nick","mail"],
+          avatar: "mp",
+          visitor:  true ,
+          recordIP: true
+      });
+    </script>
+    <script>
+      if(window.location.hash){
+          var checkExist = setInterval(function() {
+             if ($(window.location.hash).length) {
+                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
+                clearInterval(checkExist);
+             }
+          }, 100);
+      }
+    </script>
+  </div>
+
+</div>
+
+</article>
+
+
+</body>
+<div class="foot">
+  
+  
+    &copy; 2019 - 2021 &#183; 
+    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+    <a href="#"><i class="fas fa-chevron-up"></i></a>
+  
+
+  
+</div>
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+
+</html>

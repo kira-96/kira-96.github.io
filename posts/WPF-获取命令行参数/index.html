@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <title> WPF 获取命令行参数 |  kira&#39;s 博客</title>
+  <meta name="description" content="WPF 获取命令行参数">
+  <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
+  <link rel="canonical" href="https://kira-96.github.io/posts/WPF-%E8%8E%B7%E5%8F%96%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/">
+  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/apple-touch-icon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
+  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
+  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
+  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+</head>
+
+
+<body>
+  <header class="menus">
+  
+
+  <nav >
+    
+    <a href="/"> Home</a>
+    
+    <a href="/notes/"> Notes</a>
+    
+  </nav>
+
+  <nav class="fontawesome">
+    
+    <a href="https://github.com/kira-96/" target="_blank">
+        <i title="GitHub" class="fab fa-github"></i>
+    </a>
+    
+    
+    <a href="https://kira-96.github.io/index.xml" target="_blank">
+        <i title="RSS" class="fas fa-rss"></i>
+    </a>
+    
+  </nav>
+  
+  
+  <div class="hidden description">kira's blog</div>
+  
+</header>
+
+<article class="article">
+  <header>
+    <h1 style="text-align: center;" >WPF 获取命令行参数</h1>
+
+    <div class="post-meta">
+    
+      <time datetime="2020-03-25T10:42:32&#43;08:00">March 25, 2020</time> &nbsp; 
+    
+
+     &nbsp;
+
+    
+    
+      <i class="far fa-eye"></i>
+      <span id="/posts/WPF-%E8%8E%B7%E5%8F%96%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/" class="leancloud_visitors" data-flag-title="WPF 获取命令行参数">
+          <span class="leancloud-visitors-count">  </span>
+      </span> &nbsp;
+    
+    
+
+    
+      <i class="far fa-clock"></i>
+      
+      
+      
+
+      
+        1 min
+      
+      48 s
+      &nbsp;
+    
+
+    
+      <i class="fas fa-folder"></i>
+      
+      <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
+      &nbsp;
+      
+    
+    </div>
+  </header>
+
+   
+
+  <div class="text">
+    <p>虽然平时很少会用到命令行参数，但有时候可以使用命令行参数来使程序执行不同的行为。</p>
+<p>在写控制台程序的时候，我们可以直接得到程序命令行参数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span>[] args)
+{
+    <span style="color:#75715e">// args 就是命令行参数
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>那么如果不是控制台程序如何获取命令行参数呢？</p>
+<p><strong>在 WPF 中有两种方法获取命令行参数</strong></p>
+<p>第一种方法是<strong>重写应用的<code>OnStartup</code>方法</strong>，通过<code>StartupEventArgs</code>来获取命令行参数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// App.xaml.cs
+</span><span style="color:#75715e">/// &lt;summary&gt;
+</span><span style="color:#75715e">/// App.xaml 的交互逻辑
+</span><span style="color:#75715e">/// &lt;/summary&gt;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">partial</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> : Application
+{
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnStartup(StartupEventArgs e)
+    {
+        <span style="color:#66d9ef">base</span>.OnStartup(e);
+
+        <span style="color:#75715e">// 获取命令行参数
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">string</span>[] args = e.Args;
+
+        <span style="color:#75715e">// do something
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><p>如果没有命令行参数，那么<code>args</code>就为<code>null</code>。</p>
+<p>第二种方法则比较灵活，可以在任意地方获取到命令行参数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">string</span>[] args = System.Environment.GetCommandLineArgs();
+</code></pre></div><p>直接使用<code>Environment</code>的静态方法来获取命令行参数，需要注意的是，第二种方法获取到的参数和前面一种方法结果不同。</p>
+<p>第二种方法获取的结果不会为<code>null</code>，通过<code>Environment</code>获取到的命令行参数第一个是<strong>当前程序的路径</strong>，从第2项开始才是命令行参数（如果有）。</p>
+
+  </div>
+
+  <footer>
+    <hr class="end-line">
+
+    
+
+    
+    <div class="post-tags">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/WPF">WPF</a>
+        &nbsp;
+      
+    </div>
+    
+
+    
+    
+    <div class="releated-posts">
+      <h3>Related Posts</h3>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/posts/Stylet-%E6%A1%86%E6%9E%B6%E4%BD%93%E9%AA%8C/">Stylet 框架体验</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/posts/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/">WPF和MFC进程间传递数据</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/posts/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/">WPF如何处理Windows消息</a>
+      <br>
+      
+    </div>
+    
+  </footer>
+
+  <div class="comments">
+
+
+
+  <div class="comments-item comments-valine" >
+    
+    
+    
+    <div id="vcomments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script type="text/javascript">
+      new Valine({
+          el: '#vcomments',
+          highlight: false,
+          lang: "zh-CN",
+          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
+          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
+          placeholder: "在这里写下你的留言丨支持 Markdown 语法",
+          requiredFields: ["nick","mail"],
+          avatar: "mp",
+          visitor:  true ,
+          recordIP: true
+      });
+    </script>
+    <script>
+      if(window.location.hash){
+          var checkExist = setInterval(function() {
+             if ($(window.location.hash).length) {
+                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
+                clearInterval(checkExist);
+             }
+          }, 100);
+      }
+    </script>
+  </div>
+
+</div>
+
+</article>
+
+
+</body>
+<div class="foot">
+  
+  
+    &copy; 2019 - 2021 &#183; 
+    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+    <a href="#"><i class="fas fa-chevron-up"></i></a>
+  
+
+  
+</div>
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+
+</html>
