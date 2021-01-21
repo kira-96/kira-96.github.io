@@ -21,5 +21,5 @@ $ git submodule update --remote themes/simpleness
 ### New draft
 
 ``` bash
-$ hugo new post/my-first-post.md
+$ hugo new posts/my-first-post.md
 ```
