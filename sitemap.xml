@@ -3,42 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kira-96.github.io/categories/</loc>
+    <lastmod>2021-02-03T09:26:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kira-96.github.io/tags/DICOM/</loc>
+    <lastmod>2021-02-03T09:26:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kira-96.github.io/categories/DICOM/</loc>
+    <lastmod>2021-02-03T09:26:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kira-96.github.io/</loc>
+    <lastmod>2021-02-03T09:26:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kira-96.github.io/notes/</loc>
+    <lastmod>2021-02-03T09:26:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</loc>
+    <lastmod>2021-02-03T09:26:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kira-96.github.io/tags/</loc>
+    <lastmod>2021-02-03T09:26:58+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kira-96.github.io/notes/Draw-rotate-ellipse-with-gdi/</loc>
     <lastmod>2021-01-21T16:23:42+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kira-96.github.io/</loc>
-    <lastmod>2021-01-21T16:23:42+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kira-96.github.io/notes/</loc>
-    <lastmod>2021-01-21T16:23:42+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kira-96.github.io/categories/</loc>
-    <lastmod>2021-01-21T15:31:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kira-96.github.io/tags/DICOM/</loc>
-    <lastmod>2021-01-21T15:31:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kira-96.github.io/categories/DICOM/</loc>
-    <lastmod>2021-01-21T15:31:46+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://kira-96.github.io/notes/Private-dicom-element/</loc>
-    <lastmod>2021-01-21T15:31:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kira-96.github.io/tags/</loc>
     <lastmod>2021-01-21T15:31:46+08:00</lastmod>
   </url>
   

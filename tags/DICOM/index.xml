@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Thu, 21 Jan 2021 15:31:46 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/DICOM/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Feb 2021 09:26:58 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/DICOM/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Running Dcm4chee Arc Light on Docker</title>
+      <link>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</link>
+      <pubDate>Wed, 03 Feb 2021 09:26:58 +0800</pubDate>
+      
+      <guid>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</guid>
+      <description>首先需要安装Docker 安装完成后，拉取以下3个仓库 $ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1 $ docker pull dcm4che/postgres-dcm4chee:13.1-23 $ docker pull dcm4che/dcm4chee-arc-psql:5.23.0 拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Dock</description>
+    </item>
+    
     <item>
       <title>Private Dicom Element</title>
       <link>https://kira-96.github.io/notes/Private-dicom-element/</link>
