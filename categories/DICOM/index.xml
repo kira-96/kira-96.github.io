@@ -14,7 +14,7 @@
       <pubDate>Wed, 03 Feb 2021 09:26:58 +0800</pubDate>
       
       <guid>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</guid>
-      <description>首先需要安装Docker 安装完成后，拉取以下3个仓库 $ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1 $ docker pull dcm4che/postgres-dcm4chee:13.1-23 $ docker pull dcm4che/dcm4chee-arc-psql:5.23.0 拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Dock</description>
+      <description>首先需要安装Docker 安装完成后，拉取以下3个仓库 $ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1 $ docker pull dcm4che/postgres-dcm4chee:13.1-23 $ docker pull dcm4che/dcm4chee-arc-psql:5.23.1 拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Dock</description>
     </item>
     
     <item>
