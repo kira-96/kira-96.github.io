@@ -1,6 +1,7 @@
 ---
 title: "Running Dcm4chee Arc Light on Docker"
 date: 2021-02-03T09:26:58+08:00
+lastmod: 2021-02-19T11:18:17+08:00
 tags: [ "DICOM" ]
 keywords: [ "DICOM" ]
 categories: [ "DICOM" ]
@@ -15,7 +16,7 @@ isCJKLanguage: true
 ``` bash
 $ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1
 $ docker pull dcm4che/postgres-dcm4chee:13.1-23
-$ docker pull dcm4che/dcm4chee-arc-psql:5.23.0
+$ docker pull dcm4che/dcm4chee-arc-psql:5.23.1
 ```
 
 拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Docker命令行依次启动上面3个服务，不过比较麻烦，也容易出错，另一种是直接使用Docker Copmose，相对来说要简单很多。这里就直接使用 Docker Compose的方式。
@@ -53,7 +54,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.23.0
+    image: dcm4che/dcm4chee-arc-psql:5.23.1
     logging:
       driver: json-file
       options:
