@@ -3,7 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kira-96.github.io/categories/</loc>
-    <lastmod>2021-03-18T09:26:32+08:00</lastmod>
+    <lastmod>2021-03-22T10:07:35+08:00</lastmod>
+  </url><url>
+    <loc>https://kira-96.github.io/tags/git/</loc>
+    <lastmod>2021-03-22T10:07:35+08:00</lastmod>
+  </url><url>
+    <loc>https://kira-96.github.io/posts/install-gitea/</loc>
+    <lastmod>2021-03-22T10:07:35+08:00</lastmod>
+  </url><url>
+    <loc>https://kira-96.github.io/</loc>
+    <lastmod>2021-03-22T10:07:35+08:00</lastmod>
+  </url><url>
+    <loc>https://kira-96.github.io/posts/</loc>
+    <lastmod>2021-03-22T10:07:35+08:00</lastmod>
+  </url><url>
+    <loc>https://kira-96.github.io/tags/</loc>
+    <lastmod>2021-03-22T10:07:35+08:00</lastmod>
+  </url><url>
+    <loc>https://kira-96.github.io/categories/%E5%88%86%E4%BA%AB/</loc>
+    <lastmod>2021-03-22T10:07:35+08:00</lastmod>
   </url><url>
     <loc>https://kira-96.github.io/tags/DICOM/</loc>
     <lastmod>2021-02-19T11:18:17+08:00</lastmod>
@@ -11,17 +29,11 @@
     <loc>https://kira-96.github.io/categories/DICOM/</loc>
     <lastmod>2021-02-19T11:18:17+08:00</lastmod>
   </url><url>
-    <loc>https://kira-96.github.io/</loc>
-    <lastmod>2021-03-18T09:26:32+08:00</lastmod>
-  </url><url>
     <loc>https://kira-96.github.io/notes/</loc>
     <lastmod>2021-02-19T11:18:17+08:00</lastmod>
   </url><url>
     <loc>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</loc>
     <lastmod>2021-02-19T11:18:17+08:00</lastmod>
-  </url><url>
-    <loc>https://kira-96.github.io/tags/</loc>
-    <lastmod>2021-03-18T09:26:32+08:00</lastmod>
   </url><url>
     <loc>https://kira-96.github.io/notes/Draw-rotate-ellipse-with-gdi/</loc>
     <lastmod>2021-01-21T16:23:42+08:00</lastmod>
@@ -29,17 +41,8 @@
     <loc>https://kira-96.github.io/notes/Private-dicom-element/</loc>
     <lastmod>2021-01-21T15:31:46+08:00</lastmod>
   </url><url>
-    <loc>https://kira-96.github.io/tags/git/</loc>
-    <lastmod>2020-12-17T08:47:56+08:00</lastmod>
-  </url><url>
-    <loc>https://kira-96.github.io/posts/</loc>
-    <lastmod>2021-03-18T09:26:32+08:00</lastmod>
-  </url><url>
     <loc>https://kira-96.github.io/posts/%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84git%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2020-12-17T08:47:56+08:00</lastmod>
-  </url><url>
-    <loc>https://kira-96.github.io/categories/%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2021-03-18T09:26:32+08:00</lastmod>
   </url><url>
     <loc>https://kira-96.github.io/Inno-Setup-Chinese-Simplified-Translation/</loc>
     <lastmod>2020-10-16T12:00:00+08:00</lastmod>

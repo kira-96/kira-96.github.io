@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Wed, 03 Feb 2021 09:26:58 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Mar 2021 10:07:35 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gitea 安装使用</title>
+      <link>https://kira-96.github.io/posts/install-gitea/</link>
+      <pubDate>Mon, 22 Mar 2021 10:07:35 +0800</pubDate>
+      
+      <guid>https://kira-96.github.io/posts/install-gitea/</guid>
+      <description>前言 今天偶然看到一个新的开源的git服务软件Gitea，一看到界面，瞬间就爱了，因为之前我自己用的是gitblit，界面比较简单，主要是用来</description>
+    </item>
+    
     <item>
       <title>Running Dcm4chee Arc Light on Docker</title>
       <link>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</link>
