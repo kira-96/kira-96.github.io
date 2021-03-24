@@ -1,6 +1,7 @@
 ---
 title: Rust 学习资源收集
 date: 2020-06-04T16:00:00+08:00
+lastmod: 2021-03-23T10:38:58+08:00
 draft: false
 description: Rust 学习资源
 tags: [ "Rust" ]
@@ -19,11 +20,13 @@ isCJKLanguage: true
 
 [通过例子学 Rust](https://rustwiki.org/zh-CN/rust-by-example/)
 
+[Async programming in Rust with async-std](https://book.async.rs/)
+
+[async-std 中文文档](https://learnku.com/docs/rust-async-std)
+
 ## 其它
 
 [Rust Language Cheat Sheet](https://cheats.rs/)
-
-[Rust 语言备忘清单](http://cheats.rs.kingfree.moe/)
 
 [Rust Fundamentals](https://www.hackertouch.com/rust-fundamentals.html)
 
