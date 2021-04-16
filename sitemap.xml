@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://kira-96.github.io/</loc>
+    <lastmod>2021-04-16T16:35:20+08:00</lastmod>
+  </url><url>
+    <loc>https://kira-96.github.io/posts/</loc>
+    <lastmod>2021-04-16T16:35:20+08:00</lastmod>
+  </url><url>
+    <loc>https://kira-96.github.io/posts/build-mitk-on-windows/</loc>
+    <lastmod>2021-04-16T16:35:20+08:00</lastmod>
+  </url><url>
     <loc>https://kira-96.github.io/categories/</loc>
     <lastmod>2021-03-23T10:38:58+08:00</lastmod>
   </url><url>
@@ -10,12 +19,6 @@
   </url><url>
     <loc>https://kira-96.github.io/posts/install-gitea/</loc>
     <lastmod>2021-03-22T10:07:35+08:00</lastmod>
-  </url><url>
-    <loc>https://kira-96.github.io/</loc>
-    <lastmod>2021-03-23T10:38:58+08:00</lastmod>
-  </url><url>
-    <loc>https://kira-96.github.io/posts/</loc>
-    <lastmod>2021-03-23T10:38:58+08:00</lastmod>
   </url><url>
     <loc>https://kira-96.github.io/tags/</loc>
     <lastmod>2021-03-23T10:38:58+08:00</lastmod>

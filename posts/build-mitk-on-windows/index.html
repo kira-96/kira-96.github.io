@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.82.0" />
+
+  <title> 在 Windows 上编译 MITK |  kira&#39;s 博客</title>
+  <meta name="description" content="kira&#39;s blog">
+  <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
+  <link rel="canonical" href="https://kira-96.github.io/posts/build-mitk-on-windows/">
+  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="在 Windows 上编译 MITK">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
+  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
+  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
+  <link rel="icon" sizes="96x96" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png">
+  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+</head>
+
+
+<body>
+  <header class="menus">
+  
+
+  <nav >
+    
+    <a href="/"> Home</a>
+    
+    <a href="/notes/"> Notes</a>
+    
+  </nav>
+
+  <nav class="fontawesome">
+    
+    <a href="https://github.com/kira-96/" target="_blank">
+        <i title="GitHub" class="fab fa-github"></i>
+    </a>
+    
+    
+    <a href="https://kira-96.github.io/index.xml" target="_blank">
+        <i title="RSS" class="fas fa-rss"></i>
+    </a>
+    
+  </nav>
+  
+  
+  <div class="hidden description">kira's blog</div>
+  
+</header>
+
+<article class="article">
+  <header>
+    <h1 style="text-align: center;" >在 Windows 上编译 MITK</h1>
+
+    <div class="post-meta">
+    
+      <time datetime="2021-03-29T09:54:57&#43;08:00">March 29, 2021</time> &nbsp; 
+    
+
+     &nbsp;
+
+    
+    
+      <i class="far fa-eye"></i>
+      <span id="/posts/build-mitk-on-windows/" class="leancloud_visitors" data-flag-title="在 Windows 上编译 MITK">
+          <span class="leancloud-visitors-count">  </span>
+      </span> &nbsp;
+    
+    
+
+    
+      <i class="far fa-clock"></i>
+      
+      
+      
+
+      
+        7 min
+      
+      5 s
+      &nbsp;
+    
+
+    
+    </div>
+  </header>
+
+   
+
+  <div class="text">
+    <h2 id="前言">前言</h2>
+<p><a href="https://www.mitk.org/">The Medical Imaging Interaction Toolkit (MITK)</a>是一个免费的开源软件，用于开发交互式医学影像处理软件。最近突然安排我做相关的一些工作，首先就要从编译开始，当然官网也有编译好的版本，可以直接下载使用。本来在Windows上编译这种开源的软件就很麻烦，在加上github上的东西下载巨慢，常常出错，折腾了好久才编译完成，这里就记录一下踩过的那些坑。</p>
+<h2 id="准备工作">准备工作</h2>
+<ul>
+<li>Visual Studio 2017</li>
+<li><a href="https://cmake.org/download/">CMake</a> (&gt;=3.19)</li>
+<li><a href="http://iso.mirrors.ustc.edu.cn/qtproject/archive/qt/5.12/5.12.10/qt-opensource-windows-x86-5.12.10.exe">Qt 5.12.10</a> (&gt;=5.12.9)</li>
+<li><a href="https://www.python.org/">Python3</a></li>
+<li><a href="https://npm.taobao.org/mirrors/git-for-windows/">Git</a></li>
+<li><a href="https://www.openssl.org/">OpenSSL</a> <a href="http://slproweb.com/products/Win32OpenSSL.html">安装包</a></li>
+<li><a href="https://www.doxygen.nl/download.html">Doxygen</a></li>
+<li><a href="https://github.com/MITK/MITK/">MITK</a></li>
+<li><a href="https://github.com/MIC-DKFZ/MITK-Diffusion/">MITK-Diffusion</a></li>
+</ul>
+<p>我这里使用的是Visual Studio 2017版本，2019应该也可以。</p>
+<p>Qt需要安装5.12.9以上的版本，官方编译似乎用的5.12.10，所以我这里也选择5.12.10版本，安装过程中尽量把所有组件都选上，因为编译时会使用到很多组件。</p>
+<p>CMake，Python，OpenSSL都选择64位版本安装。</p>
+<p>最后就是用git克隆下MITK和MITK-Diffusion的仓库。</p>
+<p>由于MITK在编译的过程中会下载一些第三方的软件包，所以要能克隆github上的仓库才行，最好有梯子，我就是这里卡了很久。</p>
+<h2 id="cmake-相关配置">CMake 相关配置</h2>
+<ol>
+<li>在MITK仓库目录下新建build文件夹（名字可以随意），然后打开cmake GUI工具，填写<code>source code</code>和<code>build</code>文件夹路径</li>
+<li>点击<strong>Configure</strong>按钮，第一次会弹出对话框选择编译器，根据需要配置即可，这里选择msvc-2017，x64</li>
+<li>此时会出现错误提示，找不到Qt，需要手动设置一下Qt5的路径，找到<code>Qt5_DIR</code>项，在<code>Value</code>中填写路径，例：<code>D:/Qt/Qt5.12.10/msvc2017_64/lib/cmake/Qt5</code>，再次点击<strong>Configure</strong>按钮</li>
+<li>检查是否所有的安装路径都正确被检测到（Qt，OpenSSL），确保<strong>没有</strong>选项是红色</li>
+<li>如果只需要编译MITK，那么就可以直接跳到<strong>第9步</strong></li>
+<li>找到<code>MITK_EXTENSION_DIRS</code>选项，在<code>Value</code>中填写<code>MITK-Diffusion</code>仓库的路径，再次点击<strong>Configure</strong>按钮</li>
+<li>找到<code>MITK_BUILD_CONFIGURATION</code>选项，<code>Value</code>设置为<code>DiffusionRelease</code>，再次点击<strong>Configure</strong>按钮</li>
+<li>此时下方输出会报错，提示找不到<code>NumPy</code>，需要先安装python库<strong>NumPy</strong>，打开终端，执行<code>pip3 install --user NumPy</code>，完成后再次点击<strong>Configure</strong>按钮，确保没有错误，<strong>没有</strong>选项是红色</li>
+<li>点击<strong>Generate</strong>按钮，下方输出<code>Generating done</code>之后，点击<strong>Open Project</strong>按钮</li>
+</ol>
+<p>附上我的配置：</p>
+<p><img src="https://i.loli.net/2021/03/29/NcKQr2l9Xm5aELu.png" alt="mitk-cmake-0.png"></p>
+<p><img src="https://i.loli.net/2021/03/29/GD4CdoemLE8StZX.png" alt="mitk-cmake-1.png"></p>
+<h2 id="编译">编译</h2>
+<ol>
+<li>
+<p>直接编译<strong>ALL_BUILD</strong>项目即可，但此时编译可能会有一堆莫名奇妙的错误，可以先到MITK仓库目录下找到<strong>CMakeExternals</strong>目录，然后将里面所有的文件换行符改为Windows下的换行符（CRLF），可以使用VS Code或者Notepad++等工具，过程会有点枯燥。</p>
+</li>
+<li>
+<p>确保网络可用，最好有国外朋友帮忙，因为编译过程中会下载很多github上的仓库，没有国外朋友帮忙很容易出错。编译<strong>ALL_BUILD</strong>项目，第一次编译会非常慢，通常需要几个小时，建议先去忙点其它事情。</p>
+</li>
+<li>
+<p>编译过程中经常会遇到<em>警告被视为错误</em>，<em>没有生成object</em>，导致编译出错，双击错误，打开错误文件，然后再找到错误文件的位置，用记事本打开，选择<em>文件→另存为</em>，选择保存编码为<code>Unicode</code>，再次编译。</p>
+</li>
+<li>
+<p>在编译<code>MITK-Diffusion</code>的过程中，可能会遇到一些类型转换的报错，如<em>无法将itk::Point转换为mitk::PointSet::PointType</em>等，可能一些编译器能通过，但msvc会报错，只需要稍微修改一下，将出错的参数强制转换成对应类型即可，如：<code>mitk::PointSet::PointType(itkPoint)</code>。</p>
+</li>
+</ol>
+<p>重复3、4若干次，直到编译成功。</p>
+<p>编译后的可执行文件在<em>build/MITK-build/bin</em>目录下。</p>
+
+  </div>
+
+  <footer>
+    <hr class="end-line">
+
+    
+    <div class="post-lastmod">
+      <time datetime="2021-04-16T16:35:20&#43;08:00">
+        update @ April 16, 2021
+      </time>
+      <p></p>
+    </div>
+    
+
+    
+
+    
+    
+  </footer>
+
+  <div class="comments">
+
+
+
+  <div class="comments-item comments-valine" >
+    
+    
+    
+    <div id="vcomments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script type="text/javascript">
+      new Valine({
+          el: '#vcomments',
+          highlight: false,
+          lang: "zh-CN",
+          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
+          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
+          placeholder: "在这里写下你的留言丨支持 Markdown 语法",
+          requiredFields: ["nick","mail"],
+          avatar: "mp",
+          visitor:  true ,
+          recordIP: true
+      });
+    </script>
+    <script>
+      if(window.location.hash){
+          var checkExist = setInterval(function() {
+             if ($(window.location.hash).length) {
+                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
+                clearInterval(checkExist);
+             }
+          }, 100);
+      }
+    </script>
+  </div>
+
+</div>
+
+</article>
+
+
+</body>
+<div class="foot">
+  
+  
+    &copy; 2019 - 2021 &#183; 
+    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+    <a href="#"><i class="fas fa-chevron-up"></i></a>
+  
+
+  
+</div>
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+
+</html>
