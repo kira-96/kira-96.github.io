@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="Hugo 0.82.1" />
 
-  <title> 好用的 Markdown 编辑器 - 全平台 |  kira&#39;s 博客</title>
-  <meta name="description" content="好用的 Markdown 编辑器分享">
+  <title> Calculate Spacing Between Slices |  kira&#39;s 博客</title>
+  <meta name="description" content="kira&#39;s blog">
   <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
-  <link rel="canonical" href="https://kira-96.github.io/posts/%E5%A5%BD%E7%94%A8%E7%9A%84-Markdown-%E7%BC%96%E8%BE%91%E5%99%A8/">
+  <link rel="canonical" href="https://kira-96.github.io/notes/calculate-spacing-between-slices/">
   <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="好用的 Markdown 编辑器 - 全平台">
+  <meta name="apple-mobile-web-app-title" content="Calculate Spacing Between Slices">
   <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
@@ -62,11 +62,11 @@
 
 <article class="article">
   <header>
-    <h1 style="text-align: center;" >好用的 Markdown 编辑器 - 全平台</h1>
+    <h1 style="text-align: center;" >Calculate Spacing Between Slices</h1>
 
     <div class="post-meta">
     
-      <time datetime="2019-04-25T21:50:18&#43;08:00">April 25, 2019</time> &nbsp; 
+      <time datetime="2021-04-30T10:26:13&#43;08:00">April 30, 2021</time> &nbsp; 
     
 
      &nbsp;
@@ -74,7 +74,7 @@
     
     
       <i class="far fa-eye"></i>
-      <span id="/posts/%E5%A5%BD%E7%94%A8%E7%9A%84-Markdown-%E7%BC%96%E8%BE%91%E5%99%A8/" class="leancloud_visitors" data-flag-title="好用的 Markdown 编辑器 - 全平台">
+      <span id="/notes/calculate-spacing-between-slices/" class="leancloud_visitors" data-flag-title="Calculate Spacing Between Slices">
           <span class="leancloud-visitors-count">  </span>
       </span> &nbsp;
     
@@ -87,14 +87,14 @@
       
 
       
-      34 s
+      37 s
       &nbsp;
     
 
     
       <i class="fas fa-folder"></i>
       
-      <a href="/categories/%E5%88%86%E4%BA%AB">分享</a>
+      <a href="/categories/DICOM">DICOM</a>
       &nbsp;
       
     
@@ -104,25 +104,15 @@
    
 
   <div class="text">
-    <h2 id="桌面端">桌面端</h2>
-<p><a href="https://www.typora.io/">Typora</a>
-支持 Mac, Windows, Linux</p>
-<p><a href="https://marktext.app/">MarkText</a>
-支持 Mac, Windows, Linux</p>
-<p><a href="https://ia.net/writer">iA Writer</a>
-收费, 支持 Mac, Windows</p>
-<h2 id="移动端">移动端</h2>
-<p><a href="https://ia.net/writer">iA Writer</a>
-iOS - 收费
-Android - 免费</p>
-<p><a href="https://bear.app/cn/">熊掌记</a>
-支持 Mac, iOS, 可免费使用，部分功能需要订购</p>
-<h2 id="笔记软件">笔记软件</h2>
-<p><a href="https://joplinapp.org">Joplin</a>
-支持 Windows, Mac, Linux, Android, iOS
-真正的全平台，支持Markdown语法，可以配合OneDrive或者WebDav同步笔记
-这里推荐使用<a href="https://www.jianguoyun.com/">坚果云</a>做同步盘。</p>
-
+    <p>计算切片间距的方法：</p>
+<p>对于CT扫描出的断层图像，没有存储<strong>Spacing Between Slices</strong>信息，但可以利用位置信息计算得到。</p>
+<p>需要先读取相邻两层切片的位置信息，假设为<code>pos1</code>和<code>pos2</code>，然后计算两个位置的距离即为切片间距。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// double pos1[3], pos2[3];
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> spacing = sqrt(
+    (pos1[<span style="color:#ae81ff">0</span>] - pos2[<span style="color:#ae81ff">0</span>]) * (pos1[<span style="color:#ae81ff">0</span>] - pos2[<span style="color:#ae81ff">0</span>]) +
+    (pos1[<span style="color:#ae81ff">1</span>] - pos2[<span style="color:#ae81ff">1</span>]) * (pos1[<span style="color:#ae81ff">1</span>] - pos2[<span style="color:#ae81ff">1</span>]) +
+    (pos1[<span style="color:#ae81ff">2</span>] - pos2[<span style="color:#ae81ff">2</span>]) * (pos1[<span style="color:#ae81ff">2</span>] - pos2[<span style="color:#ae81ff">2</span>]));
+</code></pre></div>
   </div>
 
   <footer>
@@ -134,19 +124,26 @@ Android - 免费</p>
     <div class="post-tags">
       <i class="fas fa-tags"></i>
       
-        <a href="/tags/Markdown">Markdown</a>
-        &nbsp;
-      
-        <a href="/tags/%E5%88%86%E4%BA%AB">分享</a>
-        &nbsp;
-      
-        <a href="/tags/%E8%BD%AF%E4%BB%B6">软件</a>
+        <a href="/tags/DICOM">DICOM</a>
         &nbsp;
       
     </div>
     
 
     
+    
+    <div class="releated-posts">
+      <h3>Related Posts</h3>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/">DICOM图像像素相关Tag说明</a>
+      <br>
+      
+      <i class="fas fa-paperclip"></i>
+      <a href="/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/">三维图形矩阵变换</a>
+      <br>
+      
+    </div>
     
   </footer>
 

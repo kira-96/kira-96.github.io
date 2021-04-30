@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Wed, 03 Feb 2021 09:26:58 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/categories/DICOM/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Apr 2021 10:26:13 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/categories/DICOM/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Calculate Spacing Between Slices</title>
+      <link>https://kira-96.github.io/notes/calculate-spacing-between-slices/</link>
+      <pubDate>Fri, 30 Apr 2021 10:26:13 +0800</pubDate>
+      
+      <guid>https://kira-96.github.io/notes/calculate-spacing-between-slices/</guid>
+      <description>计算切片间距的方法： 对于CT扫描出的断层图像，没有存储Spacing Between Slices信息，但可以利用位置信息计算得到。 需要先读取相邻两层切片的</description>
+    </item>
+    
     <item>
       <title>Running Dcm4chee Arc Light on Docker</title>
       <link>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</link>

@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>[kira-96](/) &amp;#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)</copyright>
-    <lastBuildDate>Mon, 29 Mar 2021 09:54:57 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Apr 2021 10:26:13 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Calculate Spacing Between Slices</title>
+      <link>https://kira-96.github.io/notes/calculate-spacing-between-slices/</link>
+      <pubDate>Fri, 30 Apr 2021 10:26:13 +0800</pubDate>
+      
+      <guid>https://kira-96.github.io/notes/calculate-spacing-between-slices/</guid>
+      <description>计算切片间距的方法： 对于CT扫描出的断层图像，没有存储Spacing Between Slices信息，但可以利用位置信息计算得到。 需要先读取相邻两层切片的</description>
+    </item>
+    
     <item>
       <title>在 Windows 上编译 MITK</title>
       <link>https://kira-96.github.io/posts/build-mitk-on-windows/</link>
