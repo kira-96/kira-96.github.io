@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Hugo 0.82.1" />
+  <meta name="generator" content="Hugo 0.83.1" />
 
   <title> Stylet 框架体验 |  kira&#39;s 博客</title>
   <meta name="description" content="Stylet简单使用">
@@ -145,14 +145,14 @@
         <span style="color:#a6e22e">Command=</span><span style="color:#e6db74">&#34;{stylet:Action SayHello}&#34;</span> <span style="color:#f92672">/&gt;</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// ShellViewModel.cs
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span> _name;
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span> <span style="color:#ae81ff">_</span>name;
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> YourName
 {
-    <span style="color:#66d9ef">get</span> =&gt; _name;
+    <span style="color:#66d9ef">get</span> =&gt; <span style="color:#ae81ff">_</span>name;
     <span style="color:#66d9ef">set</span>
     {
-        SetAndNotify(<span style="color:#66d9ef">ref</span> _name, <span style="color:#66d9ef">value</span>);
+        SetAndNotify(<span style="color:#66d9ef">ref</span> <span style="color:#ae81ff">_</span>name, <span style="color:#66d9ef">value</span>);
         NotifyOfPropertyChange(() =&gt; CanSayHello);
     }
 }
@@ -161,8 +161,8 @@
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> SayHello()
 {
-    _logger.Info(<span style="color:#e6db74">&#34;Say Hello {0}&#34;</span>, _name);
-    _windowManager.ShowMessageBox(<span style="color:#e6db74">$&#34;Hello {_name}&#34;</span>);
+    <span style="color:#ae81ff">_l</span>ogger.Info(<span style="color:#e6db74">&#34;Say Hello {0}&#34;</span>, <span style="color:#ae81ff">_</span>name);
+    <span style="color:#ae81ff">_</span>windowManager.ShowMessageBox(<span style="color:#e6db74">$&#34;Hello {_name}&#34;</span>);
 }
 </code></pre></div><p>不同于Caliburn.Micro的写法<code>cal:Message.Attach=&quot;[Click]=[OnClick()]&quot;</code></p>
 <p>Stylet可以直接指定相应的事件，可读性自然是提升了不少，并且依旧不需要在ViewModel中写<code>ICommand</code>，直接写函数即可。当然也可以通过<code>CommandParameter</code>传递参数。</p>
@@ -209,7 +209,7 @@
     FirstTabViewModel tab1,
     SecondTabViewModel tab2)
 {
-    <span style="color:#66d9ef">this</span>._eventAggregator = eventAggregator;
+    <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span>eventAggregator = eventAggregator;
     <span style="color:#66d9ef">this</span>.Items.Add(tab1);
     <span style="color:#66d9ef">this</span>.Items.Add(tab2);
 }
@@ -220,7 +220,7 @@
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Logger</span> : ILogger
 {}
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">[Inject(Key = &#34;filelogger&#34;)]</span>
-<span style="color:#66d9ef">private</span> ILogger _logger;
+<span style="color:#66d9ef">private</span> ILogger <span style="color:#ae81ff">_l</span>ogger;
 </code></pre></div><p><strong>抽象工厂</strong></p>
 <p>Stylet提供了一种抽象工厂的模式来获取相应的服务。</p>
 <p>这里我定义了一个<code>IViewModelFactory</code>的接口</p>
@@ -243,19 +243,19 @@
 <p>注意这个过程中我并没有手动去实现<code>IViewModelFactory</code>的接口。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// ShellViewModel.cs
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">[Inject]</span>
-<span style="color:#66d9ef">private</span> IViewModelFactory _viewModelFactory;
+<span style="color:#66d9ef">private</span> IViewModelFactory <span style="color:#ae81ff">_</span>viewModelFactory;
 
 <span style="color:#75715e">// 这时就可以通过Factory来获取相应的ViewModel
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> vm = _viewModelFactory.GetNavViewModel();
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> vm = <span style="color:#ae81ff">_</span>viewModelFactory.GetNavViewModel();
 </code></pre></div><h2 id="ioc">IoC</h2>
 <p>虽然可以通过注入的方式来获取服务，但有时也需要通过IoC Container来获取相应的服务。Stylet依然有多种方式来获取。</p>
 <p><strong>注入IoC Container</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// 注入IoC Conatiner
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">[Inject]</span>
-<span style="color:#66d9ef">private</span> IContainer _container;
+<span style="color:#66d9ef">private</span> IContainer <span style="color:#ae81ff">_</span>container;
 
 <span style="color:#75715e">// 通过Container获取ViewModel
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> vm = _container.Get&lt;NavViewModel&gt;();
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> vm = <span style="color:#ae81ff">_</span>container.Get&lt;NavViewModel&gt;();
 </code></pre></div><p><strong>Static Service Locator</strong></p>
 <p>用过Caliburn.Micro的可能都知道，CM提供了一种非常好用的获取服务的方式。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">var</span> vm = IoC.Get&lt;MyDialogViewModel&gt;();
@@ -285,26 +285,26 @@
 }
 </code></pre></div><p>Stylet的<code>IWindowManager</code>提供了3个接口函数，一个<code>MessageBox</code>，其它两个用于显示窗口，和Caliburn.Micro用法相同，在使用时把ViewModel传如即可。<code>IWindowManager</code>可以直接通过注入的方式获得。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">[Inject]</span>
-<span style="color:#66d9ef">private</span> IWindowManager _windowManager;
+<span style="color:#66d9ef">private</span> IWindowManager <span style="color:#ae81ff">_</span>windowManager;
 
-_windowManager.ShowWindow(_viewModelFactory.GetNavViewModel());
+<span style="color:#ae81ff">_</span>windowManager.ShowWindow(<span style="color:#ae81ff">_</span>viewModelFactory.GetNavViewModel());
 </code></pre></div><h2 id="eventaggregator">EventAggregator</h2>
 <p><code>EventAggregator</code>和Caliburn.Micro中的用法相同。结合<code>IHandle&lt;T&gt;</code>用于在ViewModel中传递消息。</p>
 <p><strong>订阅消息：</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// ShellViewModel.cs
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ShellViewModel</span> : Screen, IHandle&lt;TabChangedEvent&gt;
 {
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> IEventAggregator _eventAggregator;
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> IEventAggregator <span style="color:#ae81ff">_</span>eventAggregator;
     ...
     <span style="color:#66d9ef">public</span> ShellViewModel(IEventAggregator eventAggregator)
     {
         DisplayName = <span style="color:#e6db74">&#34;Hello Stylet!&#34;</span>;
-        _eventAggregator = eventAggregator;
-        _eventAggregator.Subscribe(<span style="color:#66d9ef">this</span>);
+        <span style="color:#ae81ff">_</span>eventAggregator = eventAggregator;
+        <span style="color:#ae81ff">_</span>eventAggregator.Subscribe(<span style="color:#66d9ef">this</span>);
     }
     <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnClose()
     {
-        _eventAggregator.Unsubscribe(<span style="color:#66d9ef">this</span>);
+        <span style="color:#ae81ff">_</span>eventAggregator.Unsubscribe(<span style="color:#66d9ef">this</span>);
         <span style="color:#66d9ef">base</span>.OnClose();
     }
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Handle(TabChangedEvent message)
@@ -315,17 +315,17 @@ _windowManager.ShowWindow(_viewModelFactory.GetNavViewModel());
 }
 </code></pre></div><p><strong>发布消息：</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// AnotherViewModel.cs
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> IEventAggregator _eventAggregator;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> IEventAggregator <span style="color:#ae81ff">_</span>eventAggregator;
 
 <span style="color:#66d9ef">public</span> NavViewModel(IEventAggregator eventAggregator)
 {
-    <span style="color:#66d9ef">this</span>._eventAggregator = eventAggregator;
+    <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span>eventAggregator = eventAggregator;
 }
 
 <span style="color:#75715e">// 发布消息
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> Publish()
 {
-    _eventAggregator.Publish(<span style="color:#66d9ef">new</span> TabChangedEvent());
+    <span style="color:#ae81ff">_</span>eventAggregator.Publish(<span style="color:#66d9ef">new</span> TabChangedEvent());
 }
 </code></pre></div><p>Stylet中的<code>EventAggregator</code>同时提供了<code>channels</code>，可以在不同的管道之中<strong>订阅/发布</strong>消息。</p>
 <h2 id="总结">总结</h2>

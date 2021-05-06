@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Hugo 0.82.1" />
+  <meta name="generator" content="Hugo 0.83.1" />
 
   <title> 如何获取Windows10主题颜色 |  kira&#39;s 博客</title>
   <meta name="description" content="获取Windows10主题颜色">
@@ -231,10 +231,10 @@
 </span><span style="color:#75715e"></span>            <span style="color:#66d9ef">int</span> accentColor = (<span style="color:#66d9ef">int</span>)dwm.GetValue(<span style="color:#e6db74">&#34;AccentColor&#34;</span>);
             <span style="color:#75715e">// 注意：读取到的颜色为 AABBGGRR
 </span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> Color.FromArgb(
-                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">24</span>) &amp; <span style="color:#ae81ff">0</span>xFF),
-                (<span style="color:#66d9ef">byte</span>)(accentColor &amp; <span style="color:#ae81ff">0</span>xFF),
-                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">8</span>) &amp; <span style="color:#ae81ff">0</span>xFF),
-                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">16</span>) &amp; <span style="color:#ae81ff">0</span>xFF));
+                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">24</span>) &amp; <span style="color:#ae81ff">0xFF</span>),
+                (<span style="color:#66d9ef">byte</span>)(accentColor &amp; <span style="color:#ae81ff">0xFF</span>),
+                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">8</span>) &amp; <span style="color:#ae81ff">0xFF</span>),
+                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">16</span>) &amp; <span style="color:#ae81ff">0xFF</span>));
         }
     }
 
@@ -252,10 +252,10 @@
             <span style="color:#66d9ef">int</span> accentColor = (<span style="color:#66d9ef">int</span>)dwm.GetValue(<span style="color:#e6db74">&#34;ColorizationColor&#34;</span>);
             <span style="color:#75715e">// 注意：读取到的颜色为 AARRGGBB
 </span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> Color.FromArgb(
-                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">24</span>) &amp; <span style="color:#ae81ff">0</span>xFF),
-                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">16</span>) &amp; <span style="color:#ae81ff">0</span>xFF),
-                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">8</span>) &amp; <span style="color:#ae81ff">0</span>xFF),
-                (<span style="color:#66d9ef">byte</span>)(accentColor &amp; <span style="color:#ae81ff">0</span>xFF));
+                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">24</span>) &amp; <span style="color:#ae81ff">0xFF</span>),
+                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">16</span>) &amp; <span style="color:#ae81ff">0xFF</span>),
+                (<span style="color:#66d9ef">byte</span>)((accentColor &gt;&gt; <span style="color:#ae81ff">8</span>) &amp; <span style="color:#ae81ff">0xFF</span>),
+                (<span style="color:#66d9ef">byte</span>)(accentColor &amp; <span style="color:#ae81ff">0xFF</span>));
         }
     }
 

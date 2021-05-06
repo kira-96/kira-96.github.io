@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Hugo 0.82.1" />
+  <meta name="generator" content="Hugo 0.83.1" />
 
   <title> 三维图形矩阵变换 |  kira&#39;s 博客</title>
   <meta name="description" content="DICOM图像方位相关">
@@ -105,7 +105,7 @@
       
         9 min
       
-      33 s
+      7 s
       &nbsp;
     
 
@@ -142,15 +142,10 @@
 <td style="text-align:center">(0020,0037)</td>
 <td style="text-align:center">Image Orientation (Patient)</td>
 </tr>
-<tr>
-<td style="text-align:center">(0018,5100)</td>
-<td style="text-align:center">Patient Position</td>
-</tr>
 </tbody>
 </table>
 <p>其中<strong>Image Position</strong>指的是图像左上角的像素在患者坐标系中的位置。
-<strong>Image Orientation</strong>由6个数字组成，分别是图像的行(Row)方向和列(Column)方向的单位向量与x/y/z坐标轴夹角的余弦值(cosine)。
-<strong>Patient Position</strong>是患者的体位，和此次的内容关系不大。</p>
+<strong>Image Orientation</strong>由6个数字组成，分别是图像的行(Row)方向和列(Column)方向的单位向量与x/y/z坐标轴夹角的余弦值(cosine)。</p>
 <p>有了上面两个Tag的值，就可以计算出图像在空间坐标系中的位置和方位了。</p>
 <h2 id="计算法向量">计算法向量</h2>
 <p>现在我们已经有了图像平面上两个垂直的向量，<strong>行</strong>和<strong>列</strong>方向的向量，使用行列式就能计算出图像所在平面的法向量了。</p>
@@ -175,7 +170,10 @@ normal[<span style="color:#ae81ff">2</span>] /= temp;
 <h2 id="图像方位矩阵">图像方位矩阵</h2>
 <p>在3D图形变换中经常使用的是4维矩阵，把图像的位置信息也放到矩阵中，可以方便的进行位置变换的计算。</p>
 <p>这里分别用u，v，w表示图像的行/列/法线方向向量，S代表图像位置。</p>
-<p>$u=(u_1,u_2,u_3)$，$v=(v_1,v_2,v_3)$，$w=(w_1,w_2,w_3)$，$S=(s_x,s_y,s_z)$</p>
+<p>$$u=(u_1,u_2,u_3)$$
+$$v=(v_1,v_2,v_3)$$
+$$w=(w_1,w_2,w_3)$$
+$$S=(s_x,s_y,s_z)$$</p>
 <p>4维矩阵则表示为</p>
 <p>$$matrix=\left[\begin{matrix} u_1 &amp; v_1 &amp; w_1 &amp; s_x \\ u_2 &amp; v_2 &amp; w_2 &amp; s_y \\ u_3 &amp; v_3 &amp; w_3 &amp; s_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{matrix}\right]$$</p>
 <h2 id="图像旋转">图像旋转</h2>
@@ -295,6 +293,13 @@ Orientation3D orientation3D = <span style="color:#66d9ef">new</span> Orientation
   <footer>
     <hr class="end-line">
 
+    
+    <div class="post-lastmod">
+      <time datetime="2021-05-06T17:56:35&#43;08:00">
+        update @ May 06, 2021
+      </time>
+      <p></p>
+    </div>
     
 
     
