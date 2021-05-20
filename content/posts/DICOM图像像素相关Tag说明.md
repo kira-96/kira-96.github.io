@@ -1,6 +1,7 @@
 ---
 title: DICOM图像像素相关Tag说明
 date: 2020-06-15T10:30:00+08:00
+lastmod: 2021-05-20T09:25:12+08:00
 description: DICOM图像相关
 tags: [ "DICOM" , "图像" ]
 keywords: [ "DICOM" ]
@@ -23,7 +24,7 @@ enableDisqus: true
 |(0028,0101)|US|Bits Stored|
 |(0028,0102)|US|High Bit|
 |(0028,0103)|US|Pixel Representation|
-|(7FE0,0010)|OW|Pixel Data|
+|(7FE0,0010)|OB/OW|Pixel Data|
 
 ## 相关Tag说明
 
@@ -141,7 +142,7 @@ Pixel Representation指定了像素数据的类型。值只能为0或者1，对�
 
 ## 最后
 
-其实，在写这篇文章之前，一些东西我都还是一知半解的，在写的过程中我也是不断的在查阅资料和源码。其中一些东西难免会掺杂了自己的理解，如果由错误的地方欢迎指正。
+其实，在写这篇文章之前，一些东西我都还是一知半解的，在写的过程中我也是不断的在查阅资料和源码。其中一些东西难免会掺杂了自己的理解，如果有错误的地方欢迎指正。
 
 **参考**
 
