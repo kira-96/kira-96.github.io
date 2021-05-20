@@ -2,8 +2,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {{ hugo.Generator }}
-
-  <title>{{ if .IsHome }} {{ "Home" }} | {{ else }} {{ .Title }} | {{ end }} {{ .Site.Title }}</title>
+  <title>{{ if .IsHome }} {{ .Site.Title }} {{ else }} {{ .Title }} | {{ .Site.Title }} {{ end }}</title>
   {{- if or .Description .Site.Params.description }}
   <meta name="description" content="{{ .Description | default .Site.Params.description }}">
   {{- end }}
@@ -14,7 +13,8 @@
   <link rel="canonical" href="{{ .Permalink }}">
   <link rel="alternate" type="application/rss+xml" href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" title="{{ .Site.Title }}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <!-- <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <!-- PWA -->
   <meta name="theme-color" content="#ffffff">
   <meta name="msapplication-TileColor" content="#da532c">
@@ -48,4 +48,7 @@
     onload="renderMathInElement(document.body);">
   </script>
   {{- end }}
+  {{ if .Site.GoogleAnalytics }}
+  {{ template "_internal/google_analytics.html" . }}
+  {{ end }}
 </head>
