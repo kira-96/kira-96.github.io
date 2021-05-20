@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+  <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="Hugo 0.83.1" />
-
-  <title> DICOM图像像素相关Tag说明 |  kira&#39;s 博客</title>
+  <title> DICOM图像像素相关Tag说明 | kira&#39;s 博客 </title>
   <meta name="description" content="DICOM图像相关">
   <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
   <link rel="canonical" href="https://kira-96.github.io/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/">
   <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   
   <meta name="theme-color" content="#ffffff">
   <meta name="msapplication-TileColor" content="#da532c">
@@ -43,50 +43,47 @@
     crossorigin="anonymous"
     onload="renderMathInElement(document.body);">
   </script>
+  
 </head>
 
-
-<body>
-  <header class="menus">
-  
-
-  <nav >
+<body class="container">
+  <nav class="navigation">
+  <div class="nav-left">
     
-    <a href="/"> Home</a>
+    <div class="nav-item nav-title">
+      <a href="https://kira-96.github.io/"> kira&#39;s 博客</a>
+    </div>
+    <div class="nav-item nav-menu">
+      
+      <a href="/"> Home</a>
+      
+      <a href="/notes/"> Notes</a>
+      
+    </div>
+  </div>
+  <div class="nav-item nav-right fontawesome">
     
-    <a href="/notes/"> Notes</a>
-    
-  </nav>
-
-  <nav class="fontawesome">
     
     <a href="https://github.com/kira-96/" target="_blank">
-        <i title="GitHub" class="fab fa-github"></i>
+      <i title="GitHub" class="fab fa-github"></i>
     </a>
     
     
     <a href="https://kira-96.github.io/index.xml" target="_blank">
-        <i title="RSS" class="fas fa-rss"></i>
+      <i title="RSS" class="fas fa-rss"></i>
     </a>
     
-  </nav>
-  
-  
-  <div class="hidden description">kira's blog</div>
-  
-</header>
+  </div>
+</nav>
 
-<article class="article">
-  <header>
+  
+<article class="post">
+  <header class="post-header">
     <h1 style="text-align: center;" >DICOM图像像素相关Tag说明</h1>
-
-    <div class="post-meta">
+    <div class="post-metadata">
     
       <time datetime="2020-06-15T10:30:00&#43;08:00">June 15, 2020</time> &nbsp; 
     
-
-     &nbsp;
-
     
     
       <i class="far fa-eye"></i>
@@ -95,20 +92,17 @@
       </span> &nbsp;
     
     
-
     
       <i class="far fa-clock"></i>
       
       
       
-
       
         8 min
       
       54 s
       &nbsp;
     
-
     
       <i class="fas fa-folder"></i>
       
@@ -119,9 +113,9 @@
     </div>
   </header>
 
-   
+  
 
-  <div class="text">
+  <div class="post-text">
     <h2 id="常用图像像素相关的一些tag">常用图像像素相关的一些Tag</h2>
 <table>
 <thead>
@@ -179,7 +173,7 @@
 </tr>
 <tr>
 <td style="text-align:center">(7FE0,0010)</td>
-<td style="text-align:center">OW</td>
+<td style="text-align:center">OB/OW</td>
 <td style="text-align:center">Pixel Data</td>
 </tr>
 </tbody>
@@ -284,7 +278,7 @@ $$B=Cb+G$$</p>
 <h3 id="pixel-data">Pixel Data</h3>
 <p>图像像素。一堆二进制数字，通常会存放在Dicom文件最后的位置。</p>
 <h2 id="最后">最后</h2>
-<p>其实，在写这篇文章之前，一些东西我都还是一知半解的，在写的过程中我也是不断的在查阅资料和源码。其中一些东西难免会掺杂了自己的理解，如果由错误的地方欢迎指正。</p>
+<p>其实，在写这篇文章之前，一些东西我都还是一知半解的，在写的过程中我也是不断的在查阅资料和源码。其中一些东西难免会掺杂了自己的理解，如果有错误的地方欢迎指正。</p>
 <p><strong>参考</strong></p>
 <ul>
 <li><a href="https://dicom.innolitics.com/ciods/mr-image/image-pixel/00280004">DICOM Standard Browser</a></li>
@@ -293,9 +287,14 @@ $$B=Cb+G$$</p>
 
   </div>
 
-  <footer>
-    <hr class="end-line">
-
+  <footer class="post-footer">
+    
+    <div class="post-lastmod">
+      <time datetime="2021-05-20T09:25:12&#43;08:00">
+        update @ May 20, 2021
+      </time>
+      <p></p>
+    </div>
     
 
     
@@ -313,8 +312,8 @@ $$B=Cb+G$$</p>
 
     
     
-    <div class="releated-posts">
-      <h3>Related Posts</h3>
+    <div class="related-posts">
+      <h4>Related Posts</h4>
       
       <i class="fas fa-paperclip"></i>
       <a href="/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/">三维图形矩阵变换</a>
@@ -323,10 +322,11 @@ $$B=Cb+G$$</p>
     </div>
     
   </footer>
-
+  
+  <div class="comments">
   <div class="comments">
 
-  <div class="comments-item">
+  <div class="comments-item comments-disqus">
     <div id="disqus_thread"></div>
     <script>
       window.addEventListener("load", () => {
@@ -381,28 +381,23 @@ $$B=Cb+G$$</p>
   </div>
 
 </div>
-
+  </div>
 </article>
 
-
-</body>
-<div class="foot">
+  <div class="foot">
   
-  
-    &copy; 2019 - 2021 &#183; 
-    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
-    <a href="#"><i class="fas fa-chevron-up"></i></a>
-  
-
-  
+  &copy; 2019 - 2021 &#183;
+  <a href="/"> kira&#39;s 博客 </a> &#183;
+  Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a> Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+  <a href="#"><i class="fas fa-chevron-up"></i></a>
 </div>
-
-<script src="/js/lazyload.min.js"></script>
+</body>
+  <script src="/js/lazyload.min.js"></script>
 <script>
-  var lazyImage = new LazyLoad({
-    container: document.getElementById('article')
-  });
+  var lazyImage = new LazyLoad({container: document.getElementById('article')});
 </script>
+
+
 
 
 </html>

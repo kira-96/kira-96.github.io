@@ -77,7 +77,7 @@
       <pubDate>Mon, 15 Jun 2020 10:30:00 +0800</pubDate>
       
       <guid>https://kira-96.github.io/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/</guid>
-      <description>常用图像像素相关的一些Tag Tag VR Keyword (0028,0002) US Samples Per Pixel (0028,0004) CS Photometric Interpretation (0028,0006) US Planar Configuration (0028,0010) US Rows (0028,0011) US Columns (0028,0100) US Bits Allocated (0028,0101) US Bits Stored (0028,0102) US High Bit (0028,0103) US Pixel Representation (7FE0,0010) OW Pixel Data 相关Tag说明 Sample Per Pixel Samples per Pixel (0028,0002)</description>
+      <description>常用图像像素相关的一些Tag Tag VR Keyword (0028,0002) US Samples Per Pixel (0028,0004) CS Photometric Interpretation (0028,0006) US Planar Configuration (0028,0010) US Rows (0028,0011) US Columns (0028,0100) US Bits Allocated (0028,0101) US Bits Stored (0028,0102) US High Bit (0028,0103) US Pixel Representation (7FE0,0010) OB/OW Pixel Data 相关Tag说明 Sample Per Pixel Samples per Pixel (0028,0002)</description>
     </item>
     
     <item>

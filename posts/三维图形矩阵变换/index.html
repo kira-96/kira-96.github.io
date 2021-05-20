@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+  <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="Hugo 0.83.1" />
-
-  <title> 三维图形矩阵变换 |  kira&#39;s 博客</title>
+  <title> 三维图形矩阵变换 | kira&#39;s 博客 </title>
   <meta name="description" content="DICOM图像方位相关">
   <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
   <link rel="canonical" href="https://kira-96.github.io/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/">
   <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   
   <meta name="theme-color" content="#ffffff">
   <meta name="msapplication-TileColor" content="#da532c">
@@ -43,50 +43,47 @@
     crossorigin="anonymous"
     onload="renderMathInElement(document.body);">
   </script>
+  
 </head>
 
-
-<body>
-  <header class="menus">
-  
-
-  <nav >
+<body class="container">
+  <nav class="navigation">
+  <div class="nav-left">
     
-    <a href="/"> Home</a>
+    <div class="nav-item nav-title">
+      <a href="https://kira-96.github.io/"> kira&#39;s 博客</a>
+    </div>
+    <div class="nav-item nav-menu">
+      
+      <a href="/"> Home</a>
+      
+      <a href="/notes/"> Notes</a>
+      
+    </div>
+  </div>
+  <div class="nav-item nav-right fontawesome">
     
-    <a href="/notes/"> Notes</a>
-    
-  </nav>
-
-  <nav class="fontawesome">
     
     <a href="https://github.com/kira-96/" target="_blank">
-        <i title="GitHub" class="fab fa-github"></i>
+      <i title="GitHub" class="fab fa-github"></i>
     </a>
     
     
     <a href="https://kira-96.github.io/index.xml" target="_blank">
-        <i title="RSS" class="fas fa-rss"></i>
+      <i title="RSS" class="fas fa-rss"></i>
     </a>
     
-  </nav>
-  
-  
-  <div class="hidden description">kira's blog</div>
-  
-</header>
+  </div>
+</nav>
 
-<article class="article">
-  <header>
+  
+<article class="post">
+  <header class="post-header">
     <h1 style="text-align: center;" >三维图形矩阵变换</h1>
-
-    <div class="post-meta">
+    <div class="post-metadata">
     
       <time datetime="2020-05-05T13:30:10&#43;08:00">May 05, 2020</time> &nbsp; 
     
-
-     &nbsp;
-
     
     
       <i class="far fa-eye"></i>
@@ -95,20 +92,17 @@
       </span> &nbsp;
     
     
-
     
       <i class="far fa-clock"></i>
       
       
       
-
       
         9 min
       
       7 s
       &nbsp;
     
-
     
       <i class="fas fa-folder"></i>
       
@@ -119,9 +113,9 @@
     </div>
   </header>
 
-   
+  
 
-  <div class="text">
+  <div class="post-text">
     <h2 id="前言">前言</h2>
 <p>由于我是从事医疗行业软件开发的，所以必不可少的会和图像打交道，最近刚刚好在做一个图像旋转相关的功能，借此又复习（预习）了一下线性代数，趁着没忘赶紧做一下笔记。</p>
 <h2 id="dicom-中与方位计算有关的-tag">DICOM 中与方位计算有关的 Tag</h2>
@@ -218,7 +212,7 @@ Orientation3D orientation3D = <span style="color:#66d9ef">new</span> Orientation
 <p>在创建<code>Orientation3D</code>时的参数<code>Forward</code>和<code>Down</code>就是图像的行方向和列方向的方向向量，<code>Pitch</code>方法将<code>Forward</code>和<code>Down</code>向量旋转一个角度，得到的就是旋转后图像的行和列的方向向量。</p>
 <h2 id="图像翻转">图像翻转</h2>
 <p>翻转后的方位计算则比较简单，如果是水平翻转，只需要将水平(Row)方向的向量反向即可，竖直翻转将竖直(Column)方向的向量反向即可。</p>
-<p>向量反向只需要将 $(u,v,w)$ 3个值前面添加负号即可。</p>
+<p>向量反向只需要将 (u,v,w) 3个值前面添加负号即可。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// 水平翻转
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> newOrientation = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">double</span>[<span style="color:#ae81ff">6</span>]
 {
@@ -290,13 +284,11 @@ Orientation3D orientation3D = <span style="color:#66d9ef">new</span> Orientation
 
   </div>
 
-  <footer>
-    <hr class="end-line">
-
+  <footer class="post-footer">
     
     <div class="post-lastmod">
-      <time datetime="2021-05-06T17:56:35&#43;08:00">
-        update @ May 06, 2021
+      <time datetime="2021-05-20T09:24:52&#43;08:00">
+        update @ May 20, 2021
       </time>
       <p></p>
     </div>
@@ -317,8 +309,8 @@ Orientation3D orientation3D = <span style="color:#66d9ef">new</span> Orientation
 
     
     
-    <div class="releated-posts">
-      <h3>Related Posts</h3>
+    <div class="related-posts">
+      <h4>Related Posts</h4>
       
       <i class="fas fa-paperclip"></i>
       <a href="/posts/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85-Power-Shell-%E5%B9%B6%E7%94%A8-oh-my-posh-%E7%BE%8E%E5%8C%96/">在树莓派上安装 Power Shell 并用 oh-my-posh 美化</a>
@@ -335,10 +327,11 @@ Orientation3D orientation3D = <span style="color:#66d9ef">new</span> Orientation
     </div>
     
   </footer>
-
+  
+  <div class="comments">
   <div class="comments">
 
-  <div class="comments-item">
+  <div class="comments-item comments-disqus">
     <div id="disqus_thread"></div>
     <script>
       window.addEventListener("load", () => {
@@ -393,28 +386,23 @@ Orientation3D orientation3D = <span style="color:#66d9ef">new</span> Orientation
   </div>
 
 </div>
-
+  </div>
 </article>
 
-
-</body>
-<div class="foot">
+  <div class="foot">
   
-  
-    &copy; 2019 - 2021 &#183; 
-    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
-    <a href="#"><i class="fas fa-chevron-up"></i></a>
-  
-
-  
+  &copy; 2019 - 2021 &#183;
+  <a href="/"> kira&#39;s 博客 </a> &#183;
+  Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a> Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+  <a href="#"><i class="fas fa-chevron-up"></i></a>
 </div>
-
-<script src="/js/lazyload.min.js"></script>
+</body>
+  <script src="/js/lazyload.min.js"></script>
 <script>
-  var lazyImage = new LazyLoad({
-    container: document.getElementById('article')
-  });
+  var lazyImage = new LazyLoad({container: document.getElementById('article')});
 </script>
+
+
 
 
 </html>

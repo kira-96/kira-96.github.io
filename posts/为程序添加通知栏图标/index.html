@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+  <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="Hugo 0.83.1" />
-
-  <title> 为程序添加通知栏图标 |  kira&#39;s 博客</title>
+  <title> 为程序添加通知栏图标 | kira&#39;s 博客 </title>
   <meta name="description" content="WPF 添加通知栏图标">
   <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
   <link rel="canonical" href="https://kira-96.github.io/posts/%E4%B8%BA%E7%A8%8B%E5%BA%8F%E6%B7%BB%E5%8A%A0%E9%80%9A%E7%9F%A5%E6%A0%8F%E5%9B%BE%E6%A0%87/">
   <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   
   <meta name="theme-color" content="#ffffff">
   <meta name="msapplication-TileColor" content="#da532c">
@@ -27,50 +27,47 @@
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
   <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  
 </head>
 
-
-<body>
-  <header class="menus">
-  
-
-  <nav >
+<body class="container">
+  <nav class="navigation">
+  <div class="nav-left">
     
-    <a href="/"> Home</a>
+    <div class="nav-item nav-title">
+      <a href="https://kira-96.github.io/"> kira&#39;s 博客</a>
+    </div>
+    <div class="nav-item nav-menu">
+      
+      <a href="/"> Home</a>
+      
+      <a href="/notes/"> Notes</a>
+      
+    </div>
+  </div>
+  <div class="nav-item nav-right fontawesome">
     
-    <a href="/notes/"> Notes</a>
-    
-  </nav>
-
-  <nav class="fontawesome">
     
     <a href="https://github.com/kira-96/" target="_blank">
-        <i title="GitHub" class="fab fa-github"></i>
+      <i title="GitHub" class="fab fa-github"></i>
     </a>
     
     
     <a href="https://kira-96.github.io/index.xml" target="_blank">
-        <i title="RSS" class="fas fa-rss"></i>
+      <i title="RSS" class="fas fa-rss"></i>
     </a>
     
-  </nav>
-  
-  
-  <div class="hidden description">kira's blog</div>
-  
-</header>
+  </div>
+</nav>
 
-<article class="article">
-  <header>
+  
+<article class="post">
+  <header class="post-header">
     <h1 style="text-align: center;" >为程序添加通知栏图标</h1>
-
-    <div class="post-meta">
+    <div class="post-metadata">
     
       <time datetime="2020-03-25T10:43:36&#43;08:00">March 25, 2020</time> &nbsp; 
     
-
-     &nbsp;
-
     
     
       <i class="far fa-eye"></i>
@@ -79,20 +76,17 @@
       </span> &nbsp;
     
     
-
     
       <i class="far fa-clock"></i>
       
       
       
-
       
         3 min
       
       48 s
       &nbsp;
     
-
     
       <i class="fas fa-folder"></i>
       
@@ -103,9 +97,9 @@
     </div>
   </header>
 
-   
+  
 
-  <div class="text">
+  <div class="post-text">
     <h2 id="前言">前言</h2>
 <p>经常看到其它程序在最小化或者窗口隐藏后依旧会在通知栏显示一个托盘图标，像微信、QQ之类的，即使主窗口不显示，程序并不会退出，依旧可以通过托盘图标进行操作。
 那么怎样为自己的程序添加一个托盘图标呢？这次就来讲一讲。</p>
@@ -200,9 +194,7 @@
 
   </div>
 
-  <footer>
-    <hr class="end-line">
-
+  <footer class="post-footer">
     
 
     
@@ -217,8 +209,8 @@
 
     
     
-    <div class="releated-posts">
-      <h3>Related Posts</h3>
+    <div class="related-posts">
+      <h4>Related Posts</h4>
       
       <i class="fas fa-paperclip"></i>
       <a href="/posts/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">应用程序单例模式</a>
@@ -243,7 +235,8 @@
     </div>
     
   </footer>
-
+  
+  <div class="comments">
   <div class="comments">
 
 
@@ -282,28 +275,23 @@
   </div>
 
 </div>
-
+  </div>
 </article>
 
-
-</body>
-<div class="foot">
+  <div class="foot">
   
-  
-    &copy; 2019 - 2021 &#183; 
-    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
-    <a href="#"><i class="fas fa-chevron-up"></i></a>
-  
-
-  
+  &copy; 2019 - 2021 &#183;
+  <a href="/"> kira&#39;s 博客 </a> &#183;
+  Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a> Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+  <a href="#"><i class="fas fa-chevron-up"></i></a>
 </div>
-
-<script src="/js/lazyload.min.js"></script>
+</body>
+  <script src="/js/lazyload.min.js"></script>
 <script>
-  var lazyImage = new LazyLoad({
-    container: document.getElementById('article')
-  });
+  var lazyImage = new LazyLoad({container: document.getElementById('article')});
 </script>
+
+
 
 
 </html>

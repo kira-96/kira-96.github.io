@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+  <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="Hugo 0.83.1" />
-
-  <title> Newtonsoft.NET 基本使用 |  kira&#39;s 博客</title>
+  <title> Newtonsoft.NET 基本使用 | kira&#39;s 博客 </title>
   <meta name="description" content="Newtonsoft.NET 基本使用">
   <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
   <link rel="canonical" href="https://kira-96.github.io/posts/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
   <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   
   <meta name="theme-color" content="#ffffff">
   <meta name="msapplication-TileColor" content="#da532c">
@@ -27,50 +27,47 @@
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
   <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+  
 </head>
 
-
-<body>
-  <header class="menus">
-  
-
-  <nav >
+<body class="container">
+  <nav class="navigation">
+  <div class="nav-left">
     
-    <a href="/"> Home</a>
+    <div class="nav-item nav-title">
+      <a href="https://kira-96.github.io/"> kira&#39;s 博客</a>
+    </div>
+    <div class="nav-item nav-menu">
+      
+      <a href="/"> Home</a>
+      
+      <a href="/notes/"> Notes</a>
+      
+    </div>
+  </div>
+  <div class="nav-item nav-right fontawesome">
     
-    <a href="/notes/"> Notes</a>
-    
-  </nav>
-
-  <nav class="fontawesome">
     
     <a href="https://github.com/kira-96/" target="_blank">
-        <i title="GitHub" class="fab fa-github"></i>
+      <i title="GitHub" class="fab fa-github"></i>
     </a>
     
     
     <a href="https://kira-96.github.io/index.xml" target="_blank">
-        <i title="RSS" class="fas fa-rss"></i>
+      <i title="RSS" class="fas fa-rss"></i>
     </a>
     
-  </nav>
-  
-  
-  <div class="hidden description">kira's blog</div>
-  
-</header>
+  </div>
+</nav>
 
-<article class="article">
-  <header>
+  
+<article class="post">
+  <header class="post-header">
     <h1 style="text-align: center;" >Newtonsoft.NET 基本使用</h1>
-
-    <div class="post-meta">
+    <div class="post-metadata">
     
       <time datetime="2020-02-22T12:24:48&#43;08:00">February 22, 2020</time> &nbsp; 
     
-
-     &nbsp;
-
     
     
       <i class="far fa-eye"></i>
@@ -79,20 +76,17 @@
       </span> &nbsp;
     
     
-
     
       <i class="far fa-clock"></i>
       
       
       
-
       
         5 min
       
       31 s
       &nbsp;
     
-
     
       <i class="fas fa-folder"></i>
       
@@ -103,9 +97,9 @@
     </div>
   </header>
 
-   
+  
 
-  <div class="text">
+  <div class="post-text">
     <h2 id="简介">简介</h2>
 <p><a href="https://baike.baidu.com/item/JSON">JSON</a>是一种常用的轻量级数据交换格式。与<a href="https://baike.baidu.com/item/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/2885849?fromtitle=xml&amp;fromid=86251&amp;fr=aladdin">XML</a>相比，JSON无论是体积还是可读性都更好，所以在网络数据传输和应用程序中被广泛的应用。</p>
 <p>那么，.NET平台使用最广泛的JSON库是什么呢？自然要数<a href="https://www.newtonsoft.com/json">Newtonsoft.NET</a>了，打开<a href="https://www.nuget.org/">nuget</a>包管理器第一个就是，在所有包下载量排行中排名第一。使用简单，性能可靠，<a href="https://www.newtonsoft.com/json/help/html/Introduction.htm">文档</a>也很齐全。</p>
@@ -202,9 +196,7 @@ TestJsonDeseClass des =
 
   </div>
 
-  <footer>
-    <hr class="end-line">
-
+  <footer class="post-footer">
     
 
     
@@ -222,8 +214,8 @@ TestJsonDeseClass des =
 
     
     
-    <div class="releated-posts">
-      <h3>Related Posts</h3>
+    <div class="related-posts">
+      <h4>Related Posts</h4>
       
       <i class="fas fa-paperclip"></i>
       <a href="/posts/%E4%BD%BF%E7%94%A8-Named-Pipe-%E8%BF%9B%E8%A1%8C%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF/">使用 Named Pipe 进行进程间通讯</a>
@@ -248,7 +240,8 @@ TestJsonDeseClass des =
     </div>
     
   </footer>
-
+  
+  <div class="comments">
   <div class="comments">
 
 
@@ -287,28 +280,23 @@ TestJsonDeseClass des =
   </div>
 
 </div>
-
+  </div>
 </article>
 
-
-</body>
-<div class="foot">
+  <div class="foot">
   
-  
-    &copy; 2019 - 2021 &#183; 
-    <a href="/">kira-96</a> · Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a>|Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
-    <a href="#"><i class="fas fa-chevron-up"></i></a>
-  
-
-  
+  &copy; 2019 - 2021 &#183;
+  <a href="/"> kira&#39;s 博客 </a> &#183;
+  Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a> Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
+  <a href="#"><i class="fas fa-chevron-up"></i></a>
 </div>
-
-<script src="/js/lazyload.min.js"></script>
+</body>
+  <script src="/js/lazyload.min.js"></script>
 <script>
-  var lazyImage = new LazyLoad({
-    container: document.getElementById('article')
-  });
+  var lazyImage = new LazyLoad({container: document.getElementById('article')});
 </script>
+
+
 
 
 </html>
