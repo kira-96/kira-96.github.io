@@ -1,280 +1,188 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Hugo 0.85.0" />
-  <title> Running Dcm4chee Arc Light on Docker | kira&#39;s 博客 </title>
-  <meta name="description" content="kira&#39;s blog">
-  <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
-  <link rel="canonical" href="https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/">
-  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
-  
-  
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-  
-  <meta name="theme-color" content="#ffffff">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Running Dcm4chee Arc Light on Docker">
-  <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png">
-  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
-  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
-  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
-  <link rel="icon" sizes="96x96" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png">
-  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
-  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
-  
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.92.1">
+<title> Running Dcm4chee Arc Light on Docker | kira's 博客 </title>
+<meta name=description content="kira's blog">
+<link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css>
+<link rel=canonical href=https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/>
+<link rel=alternate type=application/rss+xml href title="kira's 博客">
+<link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet>
+<meta name=theme-color content="#ffffff">
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-title content="Running Dcm4chee Arc Light on Docker">
+<link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png>
+<link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png>
+<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico>
+<link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png>
+<link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png>
+<link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png>
+<link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css>
+<script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script>
 </head>
-
-<body class="container">
-  <nav class="navigation">
-  <div class="nav-left">
-    
-    <div class="nav-item nav-title">
-      <a href="https://kira-96.github.io/"> kira&#39;s 博客</a>
-    </div>
-    <div class="nav-item nav-menu">
-      
-      <a href="/"> Home</a>
-      
-      <a href="/notes/"> Notes</a>
-      
-    </div>
-  </div>
-  <div class="nav-item nav-right fontawesome">
-    
-    
-    <a href="https://github.com/kira-96/" target="_blank">
-      <i title="GitHub" class="fab fa-github"></i>
-    </a>
-    
-    
-    <a href="https://kira-96.github.io/index.xml" target="_blank">
-      <i title="RSS" class="fas fa-rss"></i>
-    </a>
-    
-  </div>
+<body class=container>
+<nav class=navigation>
+<div class=nav-left>
+<div class="nav-item nav-title">
+<a href=https://kira-96.github.io/> kira's 博客</a>
+</div>
+<div class="nav-item nav-menu">
+<a href=/> Home</a>
+<a href=/notes/> Notes</a>
+</div>
+</div>
+<div class="nav-item nav-right fontawesome">
+<a href=https://github.com/kira-96/ target=_blank>
+<i title=GitHub class="fab fa-github"></i>
+</a>
+<a href=https://kira-96.github.io/index.xml target=_blank>
+<i title=RSS class="fas fa-rss"></i>
+</a>
+</div>
 </nav>
-
-  
-<article class="post">
-  <header class="post-header">
-    <h1 style="text-align: center;" >Running Dcm4chee Arc Light on Docker</h1>
-    <div class="post-metadata">
-    
-      <time datetime="2021-02-03T09:26:58&#43;08:00">February 03, 2021</time> &nbsp; 
-    
-    
-    
-      <i class="far fa-eye"></i>
-      <span id="/notes/running-dcm4chee-arc-light-on-docker/" class="leancloud_visitors" data-flag-title="Running Dcm4chee Arc Light on Docker">
-          <span class="leancloud-visitors-count">  </span>
-      </span> &nbsp;
-    
-    
-    
-      <i class="far fa-clock"></i>
-      
-      
-      
-      
-        1 min
-      
-      25 s
-      &nbsp;
-    
-    
-      <i class="fas fa-folder"></i>
-      
-      <a href="/categories/DICOM">DICOM</a>
-      &nbsp;
-      
-    
-    </div>
-  </header>
-
-  
-
-  <div class="post-text">
-    <p>首先需要<a href="https://docs.docker.com/get-docker/">安装Docker</a></p>
+<article class=post>
+<header class=post-header>
+<h1 style=text-align:center>Running Dcm4chee Arc Light on Docker</h1>
+<div class=post-metadata>
+<time datetime=2021-02-03T09:26:58+08:00>February 03, 2021</time> &nbsp;
+<i class="far fa-eye"></i>
+<span id=/notes/running-dcm4chee-arc-light-on-docker/ class=leancloud_visitors data-flag-title="Running Dcm4chee Arc Light on Docker">
+<span class=leancloud-visitors-count> </span>
+</span> &nbsp;
+<i class="far fa-clock"></i>
+1 min
+25 s
+&nbsp;
+<i class="fas fa-folder"></i>
+<a href=/categories/DICOM>DICOM</a>
+&nbsp;
+</div>
+</header>
+<div class=post-text>
+<p>首先需要<a href=https://docs.docker.com/get-docker/>安装Docker</a></p>
 <p>安装完成后，拉取以下3个仓库</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1
 $ docker pull dcm4che/postgres-dcm4chee:13.1-23
 $ docker pull dcm4che/dcm4chee-arc-psql:5.23.1
 </code></pre></div><p>拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Docker命令行依次启动上面3个服务，不过比较麻烦，也容易出错，另一种是直接使用Docker Copmose，相对来说要简单很多。这里就直接使用 Docker Compose的方式。</p>
 <p>创建以下两个文件：</p>
 <p><code>docker-compose.yml</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#34;3&#34;</span>
-<span style="color:#f92672">services</span>:
-  <span style="color:#f92672">ldap</span>:
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">dcm4che/slapd-dcm4chee:2.4.56-23.1</span>
-    <span style="color:#f92672">logging</span>:
-      <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">json-file</span>
-      <span style="color:#f92672">options</span>:
-        <span style="color:#f92672">max-size</span>: <span style="color:#e6db74">&#34;10m&#34;</span>
-    <span style="color:#f92672">ports</span>:
-      - <span style="color:#e6db74">&#34;389:389&#34;</span>
-    <span style="color:#f92672">env_file</span>: <span style="color:#ae81ff">docker-compose.env</span>
-    <span style="color:#f92672">volumes</span>:
-      - <span style="color:#ae81ff">/var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data</span>
-      - <span style="color:#ae81ff">/var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d</span>
-  <span style="color:#f92672">db</span>:
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">dcm4che/postgres-dcm4chee:13.1-23</span>
-    <span style="color:#f92672">logging</span>:
-      <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">json-file</span>
-      <span style="color:#f92672">options</span>:
-        <span style="color:#f92672">max-size</span>: <span style="color:#e6db74">&#34;10m&#34;</span>
-    <span style="color:#f92672">ports</span>:
-      - <span style="color:#e6db74">&#34;5432:5432&#34;</span>
-    <span style="color:#f92672">env_file</span>: <span style="color:#ae81ff">docker-compose.env</span>
-    <span style="color:#f92672">volumes</span>:
-      - <span style="color:#ae81ff">/etc/localtime:/etc/localtime:ro</span>
-      - <span style="color:#ae81ff">/etc/timezone:/etc/timezone:ro</span>
-      - <span style="color:#ae81ff">/var/local/dcm4chee-arc/db:/var/lib/postgresql/data</span>
-  <span style="color:#f92672">arc</span>:
-    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">dcm4che/dcm4chee-arc-psql:5.23.1</span>
-    <span style="color:#f92672">logging</span>:
-      <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">json-file</span>
-      <span style="color:#f92672">options</span>:
-        <span style="color:#f92672">max-size</span>: <span style="color:#e6db74">&#34;10m&#34;</span>
-    <span style="color:#f92672">ports</span>:
-      - <span style="color:#e6db74">&#34;8080:8080&#34;</span>
-      - <span style="color:#e6db74">&#34;8443:8443&#34;</span>
-      - <span style="color:#e6db74">&#34;9990:9990&#34;</span>
-      - <span style="color:#e6db74">&#34;9993:9993&#34;</span>
-      - <span style="color:#e6db74">&#34;11112:11112&#34;</span>
-      - <span style="color:#e6db74">&#34;2762:2762&#34;</span>
-      - <span style="color:#e6db74">&#34;2575:2575&#34;</span>
-      - <span style="color:#e6db74">&#34;12575:12575&#34;</span>
-    <span style="color:#f92672">env_file</span>: <span style="color:#ae81ff">docker-compose.env</span>
-    <span style="color:#f92672">environment</span>:
-      <span style="color:#f92672">WILDFLY_CHOWN</span>: <span style="color:#ae81ff">/opt/wildfly/standalone /storage</span>
-      <span style="color:#f92672">WILDFLY_WAIT_FOR</span>: <span style="color:#ae81ff">ldap:389 db:5432</span>
-    <span style="color:#f92672">depends_on</span>:
-      - <span style="color:#ae81ff">ldap</span>
-      - <span style="color:#ae81ff">db</span>
-    <span style="color:#f92672">volumes</span>:
-      - <span style="color:#ae81ff">/etc/localtime:/etc/localtime:ro</span>
-      - <span style="color:#ae81ff">/etc/timezone:/etc/timezone:ro</span>
-      - <span style="color:#ae81ff">/var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone</span>
-      - <span style="color:#ae81ff">/var/local/dcm4chee-arc/storage:/storage</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>version</span>: <span style=color:#e6db74>&#34;3&#34;</span>
+<span style=color:#f92672>services</span>:
+  <span style=color:#f92672>ldap</span>:
+    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>dcm4che/slapd-dcm4chee:2.4.56-23.1</span>
+    <span style=color:#f92672>logging</span>:
+      <span style=color:#f92672>driver</span>: <span style=color:#ae81ff>json-file</span>
+      <span style=color:#f92672>options</span>:
+        <span style=color:#f92672>max-size</span>: <span style=color:#e6db74>&#34;10m&#34;</span>
+    <span style=color:#f92672>ports</span>:
+      - <span style=color:#e6db74>&#34;389:389&#34;</span>
+    <span style=color:#f92672>env_file</span>: <span style=color:#ae81ff>docker-compose.env</span>
+    <span style=color:#f92672>volumes</span>:
+      - <span style=color:#ae81ff>/var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data</span>
+      - <span style=color:#ae81ff>/var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d</span>
+  <span style=color:#f92672>db</span>:
+    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>dcm4che/postgres-dcm4chee:13.1-23</span>
+    <span style=color:#f92672>logging</span>:
+      <span style=color:#f92672>driver</span>: <span style=color:#ae81ff>json-file</span>
+      <span style=color:#f92672>options</span>:
+        <span style=color:#f92672>max-size</span>: <span style=color:#e6db74>&#34;10m&#34;</span>
+    <span style=color:#f92672>ports</span>:
+      - <span style=color:#e6db74>&#34;5432:5432&#34;</span>
+    <span style=color:#f92672>env_file</span>: <span style=color:#ae81ff>docker-compose.env</span>
+    <span style=color:#f92672>volumes</span>:
+      - <span style=color:#ae81ff>/etc/localtime:/etc/localtime:ro</span>
+      - <span style=color:#ae81ff>/etc/timezone:/etc/timezone:ro</span>
+      - <span style=color:#ae81ff>/var/local/dcm4chee-arc/db:/var/lib/postgresql/data</span>
+  <span style=color:#f92672>arc</span>:
+    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>dcm4che/dcm4chee-arc-psql:5.23.1</span>
+    <span style=color:#f92672>logging</span>:
+      <span style=color:#f92672>driver</span>: <span style=color:#ae81ff>json-file</span>
+      <span style=color:#f92672>options</span>:
+        <span style=color:#f92672>max-size</span>: <span style=color:#e6db74>&#34;10m&#34;</span>
+    <span style=color:#f92672>ports</span>:
+      - <span style=color:#e6db74>&#34;8080:8080&#34;</span>
+      - <span style=color:#e6db74>&#34;8443:8443&#34;</span>
+      - <span style=color:#e6db74>&#34;9990:9990&#34;</span>
+      - <span style=color:#e6db74>&#34;9993:9993&#34;</span>
+      - <span style=color:#e6db74>&#34;11112:11112&#34;</span>
+      - <span style=color:#e6db74>&#34;2762:2762&#34;</span>
+      - <span style=color:#e6db74>&#34;2575:2575&#34;</span>
+      - <span style=color:#e6db74>&#34;12575:12575&#34;</span>
+    <span style=color:#f92672>env_file</span>: <span style=color:#ae81ff>docker-compose.env</span>
+    <span style=color:#f92672>environment</span>:
+      <span style=color:#f92672>WILDFLY_CHOWN</span>: <span style=color:#ae81ff>/opt/wildfly/standalone /storage</span>
+      <span style=color:#f92672>WILDFLY_WAIT_FOR</span>: <span style=color:#ae81ff>ldap:389 db:5432</span>
+    <span style=color:#f92672>depends_on</span>:
+      - <span style=color:#ae81ff>ldap</span>
+      - <span style=color:#ae81ff>db</span>
+    <span style=color:#f92672>volumes</span>:
+      - <span style=color:#ae81ff>/etc/localtime:/etc/localtime:ro</span>
+      - <span style=color:#ae81ff>/etc/timezone:/etc/timezone:ro</span>
+      - <span style=color:#ae81ff>/var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone</span>
+      - <span style=color:#ae81ff>/var/local/dcm4chee-arc/storage:/storage</span>
 </code></pre></div><p><code>docker-compose.env</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">TZ</span><span style="color:#f92672">=</span><span style="color:#e6db74">Asia/Shanghai</span>
-<span style="color:#a6e22e">STORAGE_DIR</span><span style="color:#f92672">=</span><span style="color:#e6db74">/storage/fs1</span>
-<span style="color:#a6e22e">POSTGRES_DB</span><span style="color:#f92672">=</span><span style="color:#e6db74">pacsdb</span>
-<span style="color:#a6e22e">POSTGRES_USER</span><span style="color:#f92672">=</span><span style="color:#e6db74">pacs</span>
-<span style="color:#a6e22e">POSTGRES_PASSWORD</span><span style="color:#f92672">=</span><span style="color:#e6db74">pacs</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=color:#a6e22e>TZ</span><span style=color:#f92672>=</span><span style=color:#e6db74>Asia/Shanghai</span>
+<span style=color:#a6e22e>STORAGE_DIR</span><span style=color:#f92672>=</span><span style=color:#e6db74>/storage/fs1</span>
+<span style=color:#a6e22e>POSTGRES_DB</span><span style=color:#f92672>=</span><span style=color:#e6db74>pacsdb</span>
+<span style=color:#a6e22e>POSTGRES_USER</span><span style=color:#f92672>=</span><span style=color:#e6db74>pacs</span>
+<span style=color:#a6e22e>POSTGRES_PASSWORD</span><span style=color:#f92672>=</span><span style=color:#e6db74>pacs</span>
 </code></pre></div><p>其中<code>TZ</code>是用来设置时区的。</p>
 <p>启动</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ docker-compose -p dcm4chee up -d
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ docker-compose -p dcm4chee up -d
 </code></pre></div><p>停止</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ docker-compose -p dcm4chee stop
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ docker-compose -p dcm4chee stop
 </code></pre></div><p>重新启动</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ docker-compose -p dcm4chee start
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ docker-compose -p dcm4chee start
 </code></pre></div><p>删除</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ docker-compose -p dcm4chee down
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ docker-compose -p dcm4chee down
 </code></pre></div><p><strong>参考</strong></p>
-<p><a href="https://github.com/dcm4che/dcm4chee-arc-light/wiki/Run-minimum-set-of-archive-services-on-a-single-host">Run minimum set of archive services on a single host</a></p>
-
-  </div>
-
-  <footer class="post-footer">
-    
-    <div class="post-lastmod">
-      <time datetime="2021-02-19T11:18:17&#43;08:00">
-        update @ February 19, 2021
-      </time>
-      <p></p>
-    </div>
-    
-
-    
-    <div class="post-tags">
-      <i class="fas fa-tags"></i>
-      
-        <a href="/tags/DICOM">DICOM</a>
-        &nbsp;
-      
-    </div>
-    
-
-    
-    
-    <div class="related-posts">
-      <h4>Related Posts</h4>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/">DICOM图像像素相关Tag说明</a>
-      <br>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/">三维图形矩阵变换</a>
-      <br>
-      
-    </div>
-    
-  </footer>
-  
-  <div class="comments">
-  <div class="comments">
-
-
-
-  <div class="comments-item comments-valine" >
-    
-    
-    
-    <div id="vcomments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    <script type="text/javascript">
-      new Valine({
-          el: '#vcomments',
-          highlight: false,
-          lang: "zh-CN",
-          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
-          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
-          placeholder: "在这里写下你的留言丨支持 Markdown 语法",
-          requiredFields: ["nick","mail"],
-          avatar: "mp",
-          visitor:  true ,
-          recordIP: true
-      });
-    </script>
-    <script>
-      if(window.location.hash){
-          var checkExist = setInterval(function() {
-             if ($(window.location.hash).length) {
-                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
-                clearInterval(checkExist);
-             }
-          }, 100);
-      }
-    </script>
-  </div>
-
+<p><a href=https://github.com/dcm4che/dcm4chee-arc-light/wiki/Run-minimum-set-of-archive-services-on-a-single-host>Run minimum set of archive services on a single host</a></p>
 </div>
-  </div>
+<footer class=post-footer>
+<div class=post-lastmod>
+<time datetime=2021-02-19T11:18:17+08:00>
+update @ February 19, 2021
+</time>
+<p></p>
+</div>
+<div class=post-tags>
+<i class="fas fa-tags"></i>
+<a href=/tags/DICOM>DICOM</a>
+&nbsp;
+</div>
+<div class=related-posts>
+<h4>Related Posts</h4>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/>DICOM图像像素相关Tag说明</a>
+<br>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/>三维图形矩阵变换</a>
+<br>
+</div>
+</footer>
+<div class=comments>
+<div class=comments>
+<div class="comments-item comments-valine">
+<div id=vcomments></div>
+<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:'#vcomments',highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,recordIP:!0})</script>
+<script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($('html, body, article').animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script>
+</div>
+</div>
+</div>
 </article>
-
-  <div class="foot">
-  
-  &copy; 2019 - 2021 &#183;
-  <a href="/"> kira&#39;s 博客 </a> &#183;
-  Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a> Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
-  <a href="#"><i class="fas fa-chevron-up"></i></a>
+<div class=foot>
+&copy; 2019 - 2022 &#183;
+<a href=/> kira's 博客 </a> &#183;
+Theme <a href=https://github.com/RainerChiang/simpleness>Simpleness</a> Powered by <a href=https://gohugo.io/>Hugo</a> &#183;
+<a href=#><i class="fas fa-chevron-up"></i></a>
 </div>
 </body>
-  <script src="/js/lazyload.min.js"></script>
-<script>
-  var lazyImage = new LazyLoad({container: document.getElementById('article')});
-</script>
-
-
-
-
+<script src=/js/lazyload.min.js></script>
+<script>var lazyImage=new LazyLoad({container:document.getElementById('article')})</script>
 </html>

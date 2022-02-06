@@ -1,109 +1,71 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Hugo 0.85.0" />
-  <title> Hprose C# 初探 | kira&#39;s 博客 </title>
-  <meta name="description" content="Hprose简单使用">
-  <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
-  <link rel="canonical" href="https://kira-96.github.io/posts/Hprose-C_-%E5%88%9D%E6%8E%A2/">
-  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
-  
-  
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-  
-  <meta name="theme-color" content="#ffffff">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Hprose C# 初探">
-  <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png">
-  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
-  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
-  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
-  <link rel="icon" sizes="96x96" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png">
-  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
-  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
-  
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.92.1">
+<title> Hprose C# 初探 | kira's 博客 </title>
+<meta name=description content="Hprose简单使用">
+<link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css>
+<link rel=canonical href=https://kira-96.github.io/posts/Hprose-C_-%E5%88%9D%E6%8E%A2/>
+<link rel=alternate type=application/rss+xml href title="kira's 博客">
+<link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet>
+<meta name=theme-color content="#ffffff">
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-title content="Hprose C# 初探">
+<link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png>
+<link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png>
+<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico>
+<link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png>
+<link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png>
+<link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png>
+<link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css>
+<script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script>
 </head>
-
-<body class="container">
-  <nav class="navigation">
-  <div class="nav-left">
-    
-    <div class="nav-item nav-title">
-      <a href="https://kira-96.github.io/"> kira&#39;s 博客</a>
-    </div>
-    <div class="nav-item nav-menu">
-      
-      <a href="/"> Home</a>
-      
-      <a href="/notes/"> Notes</a>
-      
-    </div>
-  </div>
-  <div class="nav-item nav-right fontawesome">
-    
-    
-    <a href="https://github.com/kira-96/" target="_blank">
-      <i title="GitHub" class="fab fa-github"></i>
-    </a>
-    
-    
-    <a href="https://kira-96.github.io/index.xml" target="_blank">
-      <i title="RSS" class="fas fa-rss"></i>
-    </a>
-    
-  </div>
+<body class=container>
+<nav class=navigation>
+<div class=nav-left>
+<div class="nav-item nav-title">
+<a href=https://kira-96.github.io/> kira's 博客</a>
+</div>
+<div class="nav-item nav-menu">
+<a href=/> Home</a>
+<a href=/notes/> Notes</a>
+</div>
+</div>
+<div class="nav-item nav-right fontawesome">
+<a href=https://github.com/kira-96/ target=_blank>
+<i title=GitHub class="fab fa-github"></i>
+</a>
+<a href=https://kira-96.github.io/index.xml target=_blank>
+<i title=RSS class="fas fa-rss"></i>
+</a>
+</div>
 </nav>
-
-  
-<article class="post">
-  <header class="post-header">
-    <h1 style="text-align: center;" >Hprose C# 初探</h1>
-    <div class="post-metadata">
-    
-      <time datetime="2019-08-19T19:51:52&#43;08:00">August 19, 2019</time> &nbsp; 
-    
-    
-    
-      <i class="far fa-eye"></i>
-      <span id="/posts/Hprose-C_-%E5%88%9D%E6%8E%A2/" class="leancloud_visitors" data-flag-title="Hprose C# 初探">
-          <span class="leancloud-visitors-count">  </span>
-      </span> &nbsp;
-    
-    
-    
-      <i class="far fa-clock"></i>
-      
-      
-      
-      
-        3 min
-      
-      15 s
-      &nbsp;
-    
-    
-      <i class="fas fa-folder"></i>
-      
-      <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
-      &nbsp;
-      
-    
-    </div>
-  </header>
-
-  
-
-  <div class="post-text">
-    <h2 id="简介">简介</h2>
-<p><a href="https://hprose.com/">Hprose</a>（High Performance Remote Object Service Engine）是一款先进的轻量级、跨语言、跨平台、无侵入式、高性能动态远程对象调用引擎库。它不仅简单易用，而且功能强大。</p>
+<article class=post>
+<header class=post-header>
+<h1 style=text-align:center>Hprose C# 初探</h1>
+<div class=post-metadata>
+<time datetime=2019-08-19T19:51:52+08:00>August 19, 2019</time> &nbsp;
+<i class="far fa-eye"></i>
+<span id=/posts/Hprose-C_-%E5%88%9D%E6%8E%A2/ class=leancloud_visitors data-flag-title="Hprose C# 初探">
+<span class=leancloud-visitors-count> </span>
+</span> &nbsp;
+<i class="far fa-clock"></i>
+3 min
+15 s
+&nbsp;
+<i class="fas fa-folder"></i>
+<a href=/categories/%E7%BC%96%E7%A8%8B>编程</a>
+&nbsp;
+</div>
+</header>
+<div class=post-text>
+<h2 id=简介>简介</h2>
+<p><a href=https://hprose.com/>Hprose</a>（High Performance Remote Object Service Engine）是一款先进的轻量级、跨语言、跨平台、无侵入式、高性能动态远程对象调用引擎库。它不仅简单易用，而且功能强大。</p>
 <p>也是一个跨语言的RPC框架，但由于库的质量参差不齐，一些语言的库并不完善。这里以C#为例来实现一个简单的服务端和客户端程序。</p>
-<h2 id="创建项目">创建项目</h2>
+<h2 id=创建项目>创建项目</h2>
 <p>新建解决方案，包含两个项目</p>
 <ul>
 <li>
@@ -117,99 +79,99 @@
 </ul>
 <p>然后，通过Nuget分别为两个项目安装<code>Hprose.RPC</code>库。</p>
 <p>这里并不需要再创建额外的服务接口项目，只需要手动定义一个接口即可。</p>
-<h2 id="创建服务接口">创建服务接口</h2>
+<h2 id=创建服务接口>创建服务接口</h2>
 <p>在<code>server</code>和<code>client</code>项目下都新建一个接口，作为服务接口</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// IHello.cs
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ServiceVersion</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#75715e>// IHello.cs
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ServiceVersion</span>
 {
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Name { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Version { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Name { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Version { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
 
-    <span style="color:#66d9ef">public</span> ServiceVersion() { }
+    <span style=color:#66d9ef>public</span> ServiceVersion() { }
 
-    <span style="color:#66d9ef">public</span> ServiceVersion(<span style="color:#66d9ef">string</span> name, <span style="color:#66d9ef">string</span> ver)
+    <span style=color:#66d9ef>public</span> ServiceVersion(<span style=color:#66d9ef>string</span> name, <span style=color:#66d9ef>string</span> ver)
     {
         Name = name;
         Version = ver;
     }
 }
 
-<span style="color:#75715e">// 服务接口
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> IHello
+<span style=color:#75715e>// 服务接口
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> IHello
 {
     ServiceVersion GetVersion();
-    List&lt;<span style="color:#66d9ef">string</span>&gt; SayHello(<span style="color:#66d9ef">string</span> name);
+    List&lt;<span style=color:#66d9ef>string</span>&gt; SayHello(<span style=color:#66d9ef>string</span> name);
 }
 </code></pre></div><p><code>IHello</code>里面的两个接口函数就是服务接口了。</p>
-<h2 id="服务端程序">服务端程序</h2>
+<h2 id=服务端程序>服务端程序</h2>
 <p>依旧是服务端实现接口，客户端来调用，在<code>server</code>项目下新建类<code>Hello.cs</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// Hello.cs
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">namespace</span> server
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#75715e>// Hello.cs
+</span><span style=color:#75715e></span><span style=color:#66d9ef>namespace</span> server
 {
-    <span style="color:#66d9ef">using</span> System.Collections.Generic;
+    <span style=color:#66d9ef>using</span> System.Collections.Generic;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Hello</span> : IHello
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Hello</span> : IHello
     {
-        <span style="color:#66d9ef">public</span> ServiceVersion GetVersion()
+        <span style=color:#66d9ef>public</span> ServiceVersion GetVersion()
         {
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ServiceVersion(<span style="color:#e6db74">&#34;Hello Service&#34;</span>, <span style="color:#e6db74">&#34;0.0.1.21&#34;</span>);
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> ServiceVersion(<span style=color:#e6db74>&#34;Hello Service&#34;</span>, <span style=color:#e6db74>&#34;0.0.1.21&#34;</span>);
         }
 
-        <span style="color:#66d9ef">public</span> List&lt;<span style="color:#66d9ef">string</span>&gt; SayHello(<span style="color:#66d9ef">string</span> name)
+        <span style=color:#66d9ef>public</span> List&lt;<span style=color:#66d9ef>string</span>&gt; SayHello(<span style=color:#66d9ef>string</span> name)
         {
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;()
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> List&lt;<span style=color:#66d9ef>string</span>&gt;()
             {
-                <span style="color:#e6db74">$&#34;你好 {name}&#34;</span>,
-                <span style="color:#e6db74">$&#34;Hello {name}&#34;</span>,
-                <span style="color:#e6db74">$&#34;Hola {name}&#34;</span>,
-                <span style="color:#e6db74">$&#34;Bonjour {name}&#34;</span>,
-                <span style="color:#e6db74">$&#34;こんにちは {name}&#34;</span>,
-                <span style="color:#e6db74">$&#34;hallo {name}&#34;</span>
+                <span style=color:#e6db74>$&#34;你好 {name}&#34;</span>,
+                <span style=color:#e6db74>$&#34;Hello {name}&#34;</span>,
+                <span style=color:#e6db74>$&#34;Hola {name}&#34;</span>,
+                <span style=color:#e6db74>$&#34;Bonjour {name}&#34;</span>,
+                <span style=color:#e6db74>$&#34;こんにちは {name}&#34;</span>,
+                <span style=color:#e6db74>$&#34;hallo {name}&#34;</span>
             };
         }
     }
 }
 </code></pre></div><p>编写服务启动程序</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">namespace</span> server
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#66d9ef>namespace</span> server
 {
-    <span style="color:#66d9ef">using</span> Hprose.RPC;
-    <span style="color:#66d9ef">using</span> System.Net;
+    <span style=color:#66d9ef>using</span> Hprose.RPC;
+    <span style=color:#66d9ef>using</span> System.Net;
 
-    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
     {
-        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+        <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
         {
-            HttpListener server = <span style="color:#66d9ef">new</span> HttpListener();
-            server.Prefixes.Add(<span style="color:#e6db74">&#34;http://localhost:10240/&#34;</span>);
+            HttpListener server = <span style=color:#66d9ef>new</span> HttpListener();
+            server.Prefixes.Add(<span style=color:#e6db74>&#34;http://localhost:10240/&#34;</span>);
             server.Start();
 
-            Service service = <span style="color:#66d9ef">new</span> Service().Bind(server).AddInstanceMethods(<span style="color:#66d9ef">new</span> Hello());
+            Service service = <span style=color:#66d9ef>new</span> Service().Bind(server).AddInstanceMethods(<span style=color:#66d9ef>new</span> Hello());
 
-            System.Console.WriteLine(<span style="color:#e6db74">&#34;Server listening at http://localhost:10240/ \n Press any key exit ...&#34;</span>);
+            System.Console.WriteLine(<span style=color:#e6db74>&#34;Server listening at http://localhost:10240/ \n Press any key exit ...&#34;</span>);
             System.Console.ReadKey();
             server.Stop();
         }
     }
 }
-</code></pre></div><h2 id="客户端程序">客户端程序</h2>
+</code></pre></div><h2 id=客户端程序>客户端程序</h2>
 <p>由于<code>client</code>项目刚刚也定义了<code>IHello</code>接口，这里就可以直接调用接口函数了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">namespace</span> client
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#66d9ef>namespace</span> client
 {
-    <span style="color:#66d9ef">using</span> Hprose.RPC;
+    <span style=color:#66d9ef>using</span> Hprose.RPC;
 
-    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
     {
-        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+        <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
         {
-            Client cli = <span style="color:#66d9ef">new</span> Client(<span style="color:#e6db74">&#34;http://localhost:10240/&#34;</span>);
+            Client cli = <span style=color:#66d9ef>new</span> Client(<span style=color:#e6db74>&#34;http://localhost:10240/&#34;</span>);
             IHello hello = cli.UseService&lt;IHello&gt;();
 
             ServiceVersion ver = hello.GetVersion();
-            System.Console.WriteLine(<span style="color:#e6db74">&#34;Remote Service Version: {0} - v{1}&#34;</span>, ver.Name, ver.Version);
+            System.Console.WriteLine(<span style=color:#e6db74>&#34;Remote Service Version: {0} - v{1}&#34;</span>, ver.Name, ver.Version);
 
-            <span style="color:#66d9ef">var</span> hellos = hello.SayHello(<span style="color:#e6db74">&#34;Hprose&#34;</span>);
+            <span style=color:#66d9ef>var</span> hellos = hello.SayHello(<span style=color:#e6db74>&#34;Hprose&#34;</span>);
 
-            <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> item <span style="color:#66d9ef">in</span> hellos)
+            <span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>string</span> item <span style=color:#66d9ef>in</span> hellos)
             {
                 System.Console.WriteLine(item);
             }
@@ -218,9 +180,9 @@
         }
     }
 }
-</code></pre></div><h2 id="运行测试">运行测试</h2>
+</code></pre></div><h2 id=运行测试>运行测试</h2>
 <p>先启动服务端程序，再启动客户端程序，可以看到客户端输出</p>
-<pre><code>Remote Service Version: Hello Service - v0.0.1.21
+<pre tabindex=0><code>Remote Service Version: Hello Service - v0.0.1.21
 你好 Hprose
 Hello Hprose
 Hola Hprose
@@ -228,106 +190,50 @@ Bonjour Hprose
 こんにちは Hprose
 hallo Hprose
 </code></pre><p>与<code>Thrift</code>和<code>gRPC</code>相比，<code>Hprose</code>实现起来要简单很多，暂时还没有尝试跨语言调用，不知道是不是同样简单。</p>
-
-  </div>
-
-  <footer class="post-footer">
-    
-
-    
-    <div class="post-tags">
-      <i class="fas fa-tags"></i>
-      
-        <a href="/tags/C">C#</a>
-        &nbsp;
-      
-        <a href="/tags/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1">进程通信</a>
-        &nbsp;
-      
-    </div>
-    
-
-    
-    
-    <div class="related-posts">
-      <h4>Related Posts</h4>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/Thrift-C_-%E5%88%9D%E6%8E%A2/">Thrift C# 初探</a>
-      <br>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/gRPC-C_-%E5%88%9D%E6%8E%A2/">gRPC C# 初探</a>
-      <br>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/">WPF和MFC进程间传递数据</a>
-      <br>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/">WPF如何处理Windows消息</a>
-      <br>
-      
-    </div>
-    
-  </footer>
-  
-  <div class="comments">
-  <div class="comments">
-
-
-
-  <div class="comments-item comments-valine" >
-    
-    
-    
-    <div id="vcomments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    <script type="text/javascript">
-      new Valine({
-          el: '#vcomments',
-          highlight: false,
-          lang: "zh-CN",
-          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
-          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
-          placeholder: "在这里写下你的留言丨支持 Markdown 语法",
-          requiredFields: ["nick","mail"],
-          avatar: "mp",
-          visitor:  true ,
-          recordIP: true
-      });
-    </script>
-    <script>
-      if(window.location.hash){
-          var checkExist = setInterval(function() {
-             if ($(window.location.hash).length) {
-                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
-                clearInterval(checkExist);
-             }
-          }, 100);
-      }
-    </script>
-  </div>
-
 </div>
-  </div>
+<footer class=post-footer>
+<div class=post-tags>
+<i class="fas fa-tags"></i>
+<a href=/tags/C>C#</a>
+&nbsp;
+<a href=/tags/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1>进程通信</a>
+&nbsp;
+</div>
+<div class=related-posts>
+<h4>Related Posts</h4>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/Thrift-C_-%E5%88%9D%E6%8E%A2/>Thrift C# 初探</a>
+<br>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/gRPC-C_-%E5%88%9D%E6%8E%A2/>gRPC C# 初探</a>
+<br>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/>WPF和MFC进程间传递数据</a>
+<br>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/>WPF如何处理Windows消息</a>
+<br>
+</div>
+</footer>
+<div class=comments>
+<div class=comments>
+<div class="comments-item comments-valine">
+<div id=vcomments></div>
+<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:'#vcomments',highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,recordIP:!0})</script>
+<script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($('html, body, article').animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script>
+</div>
+</div>
+</div>
 </article>
-
-  <div class="foot">
-  
-  &copy; 2019 - 2021 &#183;
-  <a href="/"> kira&#39;s 博客 </a> &#183;
-  Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a> Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
-  <a href="#"><i class="fas fa-chevron-up"></i></a>
+<div class=foot>
+&copy; 2019 - 2022 &#183;
+<a href=/> kira's 博客 </a> &#183;
+Theme <a href=https://github.com/RainerChiang/simpleness>Simpleness</a> Powered by <a href=https://gohugo.io/>Hugo</a> &#183;
+<a href=#><i class="fas fa-chevron-up"></i></a>
 </div>
 </body>
-  <script src="/js/lazyload.min.js"></script>
-<script>
-  var lazyImage = new LazyLoad({container: document.getElementById('article')});
-</script>
-
-
-
-
+<script src=/js/lazyload.min.js></script>
+<script>var lazyImage=new LazyLoad({container:document.getElementById('article')})</script>
 </html>

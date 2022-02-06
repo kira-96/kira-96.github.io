@@ -1,185 +1,135 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Hugo 0.85.0" />
-  <title> DICOM图像像素相关Tag说明 | kira&#39;s 博客 </title>
-  <meta name="description" content="DICOM图像相关">
-  <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
-  <link rel="canonical" href="https://kira-96.github.io/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/">
-  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
-  
-  
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-  
-  <meta name="theme-color" content="#ffffff">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="DICOM图像像素相关Tag说明">
-  <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png">
-  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
-  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
-  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
-  <link rel="icon" sizes="96x96" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png">
-  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
-  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
-  <link
-    rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
-    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
-    crossorigin="anonymous">
-  </link>
-  <script
-    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
-    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
-    crossorigin="anonymous">
-  </script>
-  <script
-    defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
-    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
-    crossorigin="anonymous"
-    onload="renderMathInElement(document.body);">
-  </script>
-  
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.92.1">
+<title> DICOM图像像素相关Tag说明 | kira's 博客 </title>
+<meta name=description content="DICOM图像相关">
+<link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css>
+<link rel=canonical href=https://kira-96.github.io/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/>
+<link rel=alternate type=application/rss+xml href title="kira's 博客">
+<link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet>
+<meta name=theme-color content="#ffffff">
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-title content="DICOM图像像素相关Tag说明">
+<link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png>
+<link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png>
+<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico>
+<link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png>
+<link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png>
+<link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png>
+<link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css>
+<script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css integrity=sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq crossorigin=anonymous>
+</link>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js integrity=sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js integrity=sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI crossorigin=anonymous onload=renderMathInElement(document.body)></script>
 </head>
-
-<body class="container">
-  <nav class="navigation">
-  <div class="nav-left">
-    
-    <div class="nav-item nav-title">
-      <a href="https://kira-96.github.io/"> kira&#39;s 博客</a>
-    </div>
-    <div class="nav-item nav-menu">
-      
-      <a href="/"> Home</a>
-      
-      <a href="/notes/"> Notes</a>
-      
-    </div>
-  </div>
-  <div class="nav-item nav-right fontawesome">
-    
-    
-    <a href="https://github.com/kira-96/" target="_blank">
-      <i title="GitHub" class="fab fa-github"></i>
-    </a>
-    
-    
-    <a href="https://kira-96.github.io/index.xml" target="_blank">
-      <i title="RSS" class="fas fa-rss"></i>
-    </a>
-    
-  </div>
+<body class=container>
+<nav class=navigation>
+<div class=nav-left>
+<div class="nav-item nav-title">
+<a href=https://kira-96.github.io/> kira's 博客</a>
+</div>
+<div class="nav-item nav-menu">
+<a href=/> Home</a>
+<a href=/notes/> Notes</a>
+</div>
+</div>
+<div class="nav-item nav-right fontawesome">
+<a href=https://github.com/kira-96/ target=_blank>
+<i title=GitHub class="fab fa-github"></i>
+</a>
+<a href=https://kira-96.github.io/index.xml target=_blank>
+<i title=RSS class="fas fa-rss"></i>
+</a>
+</div>
 </nav>
-
-  
-<article class="post">
-  <header class="post-header">
-    <h1 style="text-align: center;" >DICOM图像像素相关Tag说明</h1>
-    <div class="post-metadata">
-    
-      <time datetime="2020-06-15T10:30:00&#43;08:00">June 15, 2020</time> &nbsp; 
-    
-    
-    
-      <i class="far fa-eye"></i>
-      <span id="/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/" class="leancloud_visitors" data-flag-title="DICOM图像像素相关Tag说明">
-          <span class="leancloud-visitors-count">  </span>
-      </span> &nbsp;
-    
-    
-    
-      <i class="far fa-clock"></i>
-      
-      
-      
-      
-        8 min
-      
-      54 s
-      &nbsp;
-    
-    
-      <i class="fas fa-folder"></i>
-      
-      <a href="/categories/DICOM">DICOM</a>
-      &nbsp;
-      
-    
-    </div>
-  </header>
-
-  
-
-  <div class="post-text">
-    <h2 id="常用图像像素相关的一些tag">常用图像像素相关的一些Tag</h2>
+<article class=post>
+<header class=post-header>
+<h1 style=text-align:center>DICOM图像像素相关Tag说明</h1>
+<div class=post-metadata>
+<time datetime=2020-06-15T10:30:00+08:00>June 15, 2020</time> &nbsp;
+<i class="far fa-eye"></i>
+<span id=/posts/DICOM%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3Tag%E8%AF%B4%E6%98%8E/ class=leancloud_visitors data-flag-title=DICOM图像像素相关Tag说明>
+<span class=leancloud-visitors-count> </span>
+</span> &nbsp;
+<i class="far fa-clock"></i>
+8 min
+54 s
+&nbsp;
+<i class="fas fa-folder"></i>
+<a href=/categories/DICOM>DICOM</a>
+&nbsp;
+</div>
+</header>
+<div class=post-text>
+<h2 id=常用图像像素相关的一些tag>常用图像像素相关的一些Tag</h2>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">Tag</th>
-<th style="text-align:center">VR</th>
-<th style="text-align:center">Keyword</th>
+<th style=text-align:center>Tag</th>
+<th style=text-align:center>VR</th>
+<th style=text-align:center>Keyword</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">(0028,0002)</td>
-<td style="text-align:center">US</td>
-<td style="text-align:center">Samples Per Pixel</td>
+<td style=text-align:center>(0028,0002)</td>
+<td style=text-align:center>US</td>
+<td style=text-align:center>Samples Per Pixel</td>
 </tr>
 <tr>
-<td style="text-align:center">(0028,0004)</td>
-<td style="text-align:center">CS</td>
-<td style="text-align:center">Photometric Interpretation</td>
+<td style=text-align:center>(0028,0004)</td>
+<td style=text-align:center>CS</td>
+<td style=text-align:center>Photometric Interpretation</td>
 </tr>
 <tr>
-<td style="text-align:center">(0028,0006)</td>
-<td style="text-align:center">US</td>
-<td style="text-align:center">Planar Configuration</td>
+<td style=text-align:center>(0028,0006)</td>
+<td style=text-align:center>US</td>
+<td style=text-align:center>Planar Configuration</td>
 </tr>
 <tr>
-<td style="text-align:center">(0028,0010)</td>
-<td style="text-align:center">US</td>
-<td style="text-align:center">Rows</td>
+<td style=text-align:center>(0028,0010)</td>
+<td style=text-align:center>US</td>
+<td style=text-align:center>Rows</td>
 </tr>
 <tr>
-<td style="text-align:center">(0028,0011)</td>
-<td style="text-align:center">US</td>
-<td style="text-align:center">Columns</td>
+<td style=text-align:center>(0028,0011)</td>
+<td style=text-align:center>US</td>
+<td style=text-align:center>Columns</td>
 </tr>
 <tr>
-<td style="text-align:center">(0028,0100)</td>
-<td style="text-align:center">US</td>
-<td style="text-align:center">Bits Allocated</td>
+<td style=text-align:center>(0028,0100)</td>
+<td style=text-align:center>US</td>
+<td style=text-align:center>Bits Allocated</td>
 </tr>
 <tr>
-<td style="text-align:center">(0028,0101)</td>
-<td style="text-align:center">US</td>
-<td style="text-align:center">Bits Stored</td>
+<td style=text-align:center>(0028,0101)</td>
+<td style=text-align:center>US</td>
+<td style=text-align:center>Bits Stored</td>
 </tr>
 <tr>
-<td style="text-align:center">(0028,0102)</td>
-<td style="text-align:center">US</td>
-<td style="text-align:center">High Bit</td>
+<td style=text-align:center>(0028,0102)</td>
+<td style=text-align:center>US</td>
+<td style=text-align:center>High Bit</td>
 </tr>
 <tr>
-<td style="text-align:center">(0028,0103)</td>
-<td style="text-align:center">US</td>
-<td style="text-align:center">Pixel Representation</td>
+<td style=text-align:center>(0028,0103)</td>
+<td style=text-align:center>US</td>
+<td style=text-align:center>Pixel Representation</td>
 </tr>
 <tr>
-<td style="text-align:center">(7FE0,0010)</td>
-<td style="text-align:center">OB/OW</td>
-<td style="text-align:center">Pixel Data</td>
+<td style=text-align:center>(7FE0,0010)</td>
+<td style=text-align:center>OB/OW</td>
+<td style=text-align:center>Pixel Data</td>
 </tr>
 </tbody>
 </table>
-<h2 id="相关tag说明">相关Tag说明</h2>
-<h3 id="sample-per-pixel">Sample Per Pixel</h3>
+<h2 id=相关tag说明>相关Tag说明</h2>
+<h3 id=sample-per-pixel>Sample Per Pixel</h3>
 <blockquote>
 <p>Samples per Pixel (0028,0002) is the number of separate planes in this image. One and three image planes are defined. Other numbers of image planes are allowed, but their meaning is not defined by this Standard.</p>
 </blockquote>
@@ -189,7 +139,7 @@ For RGB and other three vector color models, the value of this Attribute is 3.</
 </blockquote>
 <p>Samples Per Pixel 指此图像中平面的个数。对于灰度图像，它的值为<strong>1</strong>，对于RGB等彩色图像，它的值为<strong>3</strong>。
 听起来可能比较拗口，简单解释一下，对于灰度的图像，它只有一个灰度值，所以是1，而彩色的图像通常是由RGB三个通道混合而成，它的值为3。</p>
-<h3 id="photometric-interpretation">Photometric Interpretation</h3>
+<h3 id=photometric-interpretation>Photometric Interpretation</h3>
 <p>指定解析图像像素的格式。个人比较习惯叫它图像类型，可以根据这个tag判断图像是灰度还是彩色图像。</p>
 <ul>
 <li>
@@ -204,7 +154,7 @@ For RGB and other three vector color models, the value of this Attribute is 3.</
 <p>PALETTE COLOR</p>
 <p>自带调色板的图像，显示出来是彩色的，所以属于彩图。当使用它时，Samples Per Pixel的值必须为<strong>1</strong>。并且必须要有RGB三种颜色的调色板查找表，它的像素值(Pixel Data)用于查找表。</p>
 <blockquote>
-<p>The pixel value is used as an index into each of the Red, Blue, and Green Palette Color Lookup Tables (0028,1101-1103&amp;1201-1203).</p>
+<p>The pixel value is used as an index into each of the Red, Blue, and Green Palette Color Lookup Tables (0028,1101-1103&1201-1203).</p>
 </blockquote>
 </li>
 <li>
@@ -259,15 +209,15 @@ $$B=Cb+G$$</p>
 <p>HSV、ARGB、CMYK</p>
 </li>
 </ul>
-<h3 id="planar-configuration">Planar Configuration</h3>
+<h3 id=planar-configuration>Planar Configuration</h3>
 <p>指定颜色是按照像素来排列的或是按平面（plane）来排列的。当Samples Per Pixel大于1时应设定此值。
 当值为0时表示颜色按像素排列。对于RGB图像，像素的格式为：<code>R1,G1,B1,R2,G2,B2,...</code>
 当值为1时表示颜色按平面排列。对于RGB图像，像素的格式为：<code>R1,R2,R3,...Rn,G1,G2,G3,...Gn,B1,B2,B3,...Bn</code></p>
-<h3 id="rows">Rows</h3>
+<h3 id=rows>Rows</h3>
 <p>图像的行数量，即图像的高(Height)。</p>
-<h3 id="columns">Columns</h3>
+<h3 id=columns>Columns</h3>
 <p>图像的列数量，即图像的宽(Width)。</p>
-<h3 id="bits-allocated-bits-stored-high-bit-pixel-representation">Bits Allocated, Bits Stored, High Bit, Pixel Representation</h3>
+<h3 id=bits-allocated-bits-stored-high-bit-pixel-representation>Bits Allocated, Bits Stored, High Bit, Pixel Representation</h3>
 <p>Bits Allocated指定每个像素分配多少位(bit)。值应当为1或者8的倍数。而对于图像像素，Bits Allocated的值通常为8或者16，实际上可以理解为每个像素分配多少字节，因为是8的倍数。</p>
 <p>Bits Stored指定存储每个像素占用了多少位(bit)，值不能大于Bits Allocated。</p>
 <p>High Bit则指定了像素的最高位，通常应该是<code>Bits Stored - 1</code>。</p>
@@ -275,129 +225,63 @@ $$B=Cb+G$$</p>
 值为0时，表示像素为<strong>无符号整型</strong>（unsigned integer）。
 值为1时，表示像素为<strong>2的补码</strong>，其实就是有符号整型，即允许存在负数。
 这里一定要注意，如果不能正确处理负数，全部按照无符号整型来计算的话，就会遇到符号位的问题，即一个负数会变成一个很大的正数，图像上原本是黑色的区域会变得很亮。</p>
-<h3 id="pixel-data">Pixel Data</h3>
+<h3 id=pixel-data>Pixel Data</h3>
 <p>图像像素。一堆二进制数字，通常会存放在Dicom文件最后的位置。</p>
-<h2 id="最后">最后</h2>
+<h2 id=最后>最后</h2>
 <p>其实，在写这篇文章之前，一些东西我都还是一知半解的，在写的过程中我也是不断的在查阅资料和源码。其中一些东西难免会掺杂了自己的理解，如果有错误的地方欢迎指正。</p>
 <p><strong>参考</strong></p>
 <ul>
-<li><a href="https://dicom.innolitics.com/ciods/mr-image/image-pixel/00280004">DICOM Standard Browser</a></li>
-<li><a href="https://www.nmm-hd.org/doc/%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4">颜色空间</a></li>
+<li><a href=https://dicom.innolitics.com/ciods/mr-image/image-pixel/00280004>DICOM Standard Browser</a></li>
+<li><a href=https://www.nmm-hd.org/doc/%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4>颜色空间</a></li>
 </ul>
-
-  </div>
-
-  <footer class="post-footer">
-    
-    <div class="post-lastmod">
-      <time datetime="2021-05-20T09:25:12&#43;08:00">
-        update @ May 20, 2021
-      </time>
-      <p></p>
-    </div>
-    
-
-    
-    <div class="post-tags">
-      <i class="fas fa-tags"></i>
-      
-        <a href="/tags/DICOM">DICOM</a>
-        &nbsp;
-      
-        <a href="/tags/%E5%9B%BE%E5%83%8F">图像</a>
-        &nbsp;
-      
-    </div>
-    
-
-    
-    
-    <div class="related-posts">
-      <h4>Related Posts</h4>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/">三维图形矩阵变换</a>
-      <br>
-      
-    </div>
-    
-  </footer>
-  
-  <div class="comments">
-  <div class="comments">
-
-  <div class="comments-item comments-disqus">
-    <div id="disqus_thread"></div>
-    <script>
-      window.addEventListener("load", () => {
-        (function() {
-          
-          var d = document,
-            s = d.createElement("script");
-          s.src = "https://kira.disqus.com/embed.js";
-          s.setAttribute("data-timestamp", +new Date());
-          (d.head || d.body).appendChild(s);
-        })();
-      });
-    </script>
-    <noscript>Please enable JavaScript to view the
-      <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
-  </div>
-
-
-
-  <div class="comments-item comments-valine" >
-    
-    
-    
-    <div id="vcomments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    <script type="text/javascript">
-      new Valine({
-          el: '#vcomments',
-          highlight: false,
-          lang: "zh-CN",
-          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
-          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
-          placeholder: "在这里写下你的留言丨支持 Markdown 语法",
-          requiredFields: ["nick","mail"],
-          avatar: "mp",
-          visitor:  true ,
-          recordIP: true
-      });
-    </script>
-    <script>
-      if(window.location.hash){
-          var checkExist = setInterval(function() {
-             if ($(window.location.hash).length) {
-                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
-                clearInterval(checkExist);
-             }
-          }, 100);
-      }
-    </script>
-  </div>
-
 </div>
-  </div>
+<footer class=post-footer>
+<div class=post-lastmod>
+<time datetime=2021-05-20T09:25:12+08:00>
+update @ May 20, 2021
+</time>
+<p></p>
+</div>
+<div class=post-tags>
+<i class="fas fa-tags"></i>
+<a href=/tags/DICOM>DICOM</a>
+&nbsp;
+<a href=/tags/%E5%9B%BE%E5%83%8F>图像</a>
+&nbsp;
+</div>
+<div class=related-posts>
+<h4>Related Posts</h4>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/>三维图形矩阵变换</a>
+<br>
+</div>
+</footer>
+<div class=comments>
+<div class=comments>
+<div class="comments-item comments-disqus">
+<div id=disqus_thread></div>
+<script>window.addEventListener("load",()=>{(function(){var a=document,b=a.createElement("script");b.src="https://kira.disqus.com/embed.js",b.setAttribute("data-timestamp",+new Date),(a.head||a.body).appendChild(b)})()})</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a>
+</noscript>
+</div>
+<div class="comments-item comments-valine">
+<div id=vcomments></div>
+<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:'#vcomments',highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,recordIP:!0})</script>
+<script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($('html, body, article').animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script>
+</div>
+</div>
+</div>
 </article>
-
-  <div class="foot">
-  
-  &copy; 2019 - 2021 &#183;
-  <a href="/"> kira&#39;s 博客 </a> &#183;
-  Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a> Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
-  <a href="#"><i class="fas fa-chevron-up"></i></a>
+<div class=foot>
+&copy; 2019 - 2022 &#183;
+<a href=/> kira's 博客 </a> &#183;
+Theme <a href=https://github.com/RainerChiang/simpleness>Simpleness</a> Powered by <a href=https://gohugo.io/>Hugo</a> &#183;
+<a href=#><i class="fas fa-chevron-up"></i></a>
 </div>
 </body>
-  <script src="/js/lazyload.min.js"></script>
-<script>
-  var lazyImage = new LazyLoad({container: document.getElementById('article')});
-</script>
-
-
-
-
+<script src=/js/lazyload.min.js></script>
+<script>var lazyImage=new LazyLoad({container:document.getElementById('article')})</script>
 </html>

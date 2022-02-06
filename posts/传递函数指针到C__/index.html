@@ -1,318 +1,224 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Hugo 0.85.0" />
-  <title> C#传递函数指针到C&#43;&#43; | kira&#39;s 博客 </title>
-  <meta name="description" content="C#传递函数指针到C&#43;&#43;">
-  <link rel="stylesheet" href="https://kira-96.github.io/css/simpleness.css">
-  <link rel="canonical" href="https://kira-96.github.io/posts/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/">
-  <link rel="alternate" type="application/rss+xml" href="" title="kira&#39;s 博客">
-  
-  
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-  
-  <meta name="theme-color" content="#ffffff">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="C#传递函数指针到C&#43;&#43;">
-  <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png">
-  <link rel="icon" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico">
-  <link rel="icon" sizes="16x16" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png">
-  <link rel="icon" sizes="32x32" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png">
-  <link rel="icon" sizes="96x96" href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png">
-  <link rel="manifest"  href="https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json">
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
-  <script defer src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
-  
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=generator content="Hugo 0.92.1">
+<title> C#传递函数指针到C++ | kira's 博客 </title>
+<meta name=description content="C#传递函数指针到C++">
+<link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css>
+<link rel=canonical href=https://kira-96.github.io/posts/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/>
+<link rel=alternate type=application/rss+xml href title="kira's 博客">
+<link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet>
+<meta name=theme-color content="#ffffff">
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-title content="C#传递函数指针到C++">
+<link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png>
+<link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png>
+<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico>
+<link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png>
+<link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png>
+<link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png>
+<link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css>
+<script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script>
 </head>
-
-<body class="container">
-  <nav class="navigation">
-  <div class="nav-left">
-    
-    <div class="nav-item nav-title">
-      <a href="https://kira-96.github.io/"> kira&#39;s 博客</a>
-    </div>
-    <div class="nav-item nav-menu">
-      
-      <a href="/"> Home</a>
-      
-      <a href="/notes/"> Notes</a>
-      
-    </div>
-  </div>
-  <div class="nav-item nav-right fontawesome">
-    
-    
-    <a href="https://github.com/kira-96/" target="_blank">
-      <i title="GitHub" class="fab fa-github"></i>
-    </a>
-    
-    
-    <a href="https://kira-96.github.io/index.xml" target="_blank">
-      <i title="RSS" class="fas fa-rss"></i>
-    </a>
-    
-  </div>
+<body class=container>
+<nav class=navigation>
+<div class=nav-left>
+<div class="nav-item nav-title">
+<a href=https://kira-96.github.io/> kira's 博客</a>
+</div>
+<div class="nav-item nav-menu">
+<a href=/> Home</a>
+<a href=/notes/> Notes</a>
+</div>
+</div>
+<div class="nav-item nav-right fontawesome">
+<a href=https://github.com/kira-96/ target=_blank>
+<i title=GitHub class="fab fa-github"></i>
+</a>
+<a href=https://kira-96.github.io/index.xml target=_blank>
+<i title=RSS class="fas fa-rss"></i>
+</a>
+</div>
 </nav>
-
-  
-<article class="post">
-  <header class="post-header">
-    <h1 style="text-align: center;" >C#传递函数指针到C&#43;&#43;</h1>
-    <div class="post-metadata">
-    
-      <time datetime="2020-07-17T14:30:30&#43;08:00">July 17, 2020</time> &nbsp; 
-    
-    
-    
-      <i class="far fa-eye"></i>
-      <span id="/posts/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/" class="leancloud_visitors" data-flag-title="C#传递函数指针到C&#43;&#43;">
-          <span class="leancloud-visitors-count">  </span>
-      </span> &nbsp;
-    
-    
-    
-      <i class="far fa-clock"></i>
-      
-      
-      
-      
-        3 min
-      
-      6 s
-      &nbsp;
-    
-    
-      <i class="fas fa-folder"></i>
-      
-      <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
-      &nbsp;
-      
-    
-    </div>
-  </header>
-
-  
-
-  <div class="post-text">
-    <h2 id="简介">简介</h2>
+<article class=post>
+<header class=post-header>
+<h1 style=text-align:center>C#传递函数指针到C++</h1>
+<div class=post-metadata>
+<time datetime=2020-07-17T14:30:30+08:00>July 17, 2020</time> &nbsp;
+<i class="far fa-eye"></i>
+<span id=/posts/%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%88%B0C__/ class=leancloud_visitors data-flag-title=C#传递函数指针到C++>
+<span class=leancloud-visitors-count> </span>
+</span> &nbsp;
+<i class="far fa-clock"></i>
+3 min
+6 s
+&nbsp;
+<i class="fas fa-folder"></i>
+<a href=/categories/%E7%BC%96%E7%A8%8B>编程</a>
+&nbsp;
+</div>
+</header>
+<div class=post-text>
+<h2 id=简介>简介</h2>
 <p>在编码的时候难免会遇到不同编程语言之间的接口调用，其中最通用的就是<code>C</code>的动态链接库，几乎所有语言都可以调用<code>C</code>的接口函数。那么这种关系能否反过来呢？用<code>C</code>调用其它的函数接口，当然也是可以的，只需要将函数指针作为参数传递进去就可以了。</p>
 <p>C#中使用<code>Delegate</code>来表示函数指针。</p>
-<h2 id="准备工作">准备工作</h2>
+<h2 id=准备工作>准备工作</h2>
 <p>首先新建一个C++的动态库，随便定义一个函数指针类型，以及一个导出函数。大致内容如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;pch.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&#34;pch.h&#34;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
 
-<span style="color:#75715e">#ifdef DYNLIB_EXPORTS
-</span><span style="color:#75715e">#define DLL_API extern &#34;C&#34; __declspec(dllexport)
-</span><span style="color:#75715e">#else
-</span><span style="color:#75715e">#define DLL_API extern &#34;C&#34; __declspec(dllimport)
-</span><span style="color:#75715e">#endif
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span>
+<span style=color:#75715e>#ifdef DYNLIB_EXPORTS
+</span><span style=color:#75715e>#define DLL_API extern &#34;C&#34; __declspec(dllexport)
+</span><span style=color:#75715e>#else
+</span><span style=color:#75715e>#define DLL_API extern &#34;C&#34; __declspec(dllimport)
+</span><span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>typedef</span> <span style=color:#66d9ef>struct</span>
 {
-    <span style="color:#66d9ef">int</span> Left;
-    <span style="color:#66d9ef">int</span> Top;
-    <span style="color:#66d9ef">int</span> Right;
-    <span style="color:#66d9ef">int</span> Bottom;
-} MyRect, <span style="color:#f92672">*</span> MyRectPtr;
+    <span style=color:#66d9ef>int</span> Left;
+    <span style=color:#66d9ef>int</span> Top;
+    <span style=color:#66d9ef>int</span> Right;
+    <span style=color:#66d9ef>int</span> Bottom;
+} MyRect, <span style=color:#f92672>*</span> MyRectPtr;
 
-<span style="color:#75715e">// 函数指针
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">VOID</span>(CALLBACK<span style="color:#f92672">*</span> PRINTCALLBACK)(MyRectPtr);
+<span style=color:#75715e>// 函数指针
+</span><span style=color:#75715e></span><span style=color:#66d9ef>typedef</span> <span style=color:#a6e22e>VOID</span>(CALLBACK<span style=color:#f92672>*</span> PRINTCALLBACK)(MyRectPtr);
 
-BOOL APIENTRY <span style="color:#a6e22e">DllMain</span>( HMODULE hModule,
+BOOL APIENTRY <span style=color:#a6e22e>DllMain</span>( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
                      )
 {
-    <span style="color:#66d9ef">switch</span> (ul_reason_for_call)
+    <span style=color:#66d9ef>switch</span> (ul_reason_for_call)
     {
-    <span style="color:#66d9ef">case</span> DLL_PROCESS_ATTACH:
-    <span style="color:#66d9ef">case</span> DLL_THREAD_ATTACH:
-    <span style="color:#66d9ef">case</span> DLL_THREAD_DETACH:
-    <span style="color:#66d9ef">case</span> DLL_PROCESS_DETACH:
-        <span style="color:#66d9ef">break</span>;
+    <span style=color:#66d9ef>case</span> DLL_PROCESS_ATTACH:
+    <span style=color:#66d9ef>case</span> DLL_THREAD_ATTACH:
+    <span style=color:#66d9ef>case</span> DLL_THREAD_DETACH:
+    <span style=color:#66d9ef>case</span> DLL_PROCESS_DETACH:
+        <span style=color:#66d9ef>break</span>;
     }
-    <span style="color:#66d9ef">return</span> TRUE;
+    <span style=color:#66d9ef>return</span> TRUE;
 }
 
-<span style="color:#75715e">// 导出函数，使用上面定义的函数指针类型作为参数
-</span><span style="color:#75715e"></span>DLL_API VOID <span style="color:#a6e22e">Print</span>(MyRectPtr pRect, PRINTCALLBACK callback)
+<span style=color:#75715e>// 导出函数，使用上面定义的函数指针类型作为参数
+</span><span style=color:#75715e></span>DLL_API VOID <span style=color:#a6e22e>Print</span>(MyRectPtr pRect, PRINTCALLBACK callback)
 {
-    <span style="color:#66d9ef">if</span> (callback <span style="color:#f92672">==</span> NULL)
+    <span style=color:#66d9ef>if</span> (callback <span style=color:#f92672>==</span> NULL)
     {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\t&#39;</span> <span style="color:#f92672">&lt;&lt;</span> pRect<span style="color:#f92672">-&gt;</span>Top <span style="color:#f92672">&lt;&lt;</span> endl;
-        cout <span style="color:#f92672">&lt;&lt;</span> pRect<span style="color:#f92672">-&gt;</span>Left <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t\t</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> pRect<span style="color:#f92672">-&gt;</span>Right <span style="color:#f92672">&lt;&lt;</span> endl;
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\t&#39;</span> <span style="color:#f92672">&lt;&lt;</span> pRect<span style="color:#f92672">-&gt;</span>Bottom <span style="color:#f92672">&lt;&lt;</span> endl;
+        cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#39;\t&#39;</span> <span style=color:#f92672>&lt;&lt;</span> pRect<span style=color:#f92672>-&gt;</span>Top <span style=color:#f92672>&lt;&lt;</span> endl;
+        cout <span style=color:#f92672>&lt;&lt;</span> pRect<span style=color:#f92672>-&gt;</span>Left <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\t\t</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>&lt;&lt;</span> pRect<span style=color:#f92672>-&gt;</span>Right <span style=color:#f92672>&lt;&lt;</span> endl;
+        cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#39;\t&#39;</span> <span style=color:#f92672>&lt;&lt;</span> pRect<span style=color:#f92672>-&gt;</span>Bottom <span style=color:#f92672>&lt;&lt;</span> endl;
     }
-    <span style="color:#66d9ef">else</span>
+    <span style=color:#66d9ef>else</span>
     {
         callback(pRect);
     }
 }
 </code></pre></div><p>准备好了C++的部分，再来写C#部分的代码：</p>
 <p>首先定义一个和C++部分相同的<code>MyRect</code>结构体和函数指针类型<code>delegate</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">// 对应C++部分的MyRect
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">[StructLayout(LayoutKind.Sequential)]</span>
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MyRect</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#75715e>// 对应C++部分的MyRect
+</span><span style=color:#75715e></span><span style=color:#a6e22e>[StructLayout(LayoutKind.Sequential)]</span>
+<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>MyRect</span>
 {
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Left;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Top;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Right;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Bottom;
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Left;
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Top;
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Right;
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Bottom;
 }
 
-<span style="color:#75715e">// 对应C++部分的 PRINTCALLBACK
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">[UnmanagedFunctionPointer(CallingConvention.StdCall)]</span>
-<span style="color:#66d9ef">delegate</span> <span style="color:#66d9ef">void</span> PrintRect(<span style="color:#66d9ef">ref</span> MyRect myRect);
+<span style=color:#75715e>// 对应C++部分的 PRINTCALLBACK
+</span><span style=color:#75715e></span><span style=color:#a6e22e>[UnmanagedFunctionPointer(CallingConvention.StdCall)]</span>
+<span style=color:#66d9ef>delegate</span> <span style=color:#66d9ef>void</span> PrintRect(<span style=color:#66d9ef>ref</span> MyRect myRect);
 </code></pre></div><p>这样准备工作就做完了，一定要保证C++部分和C#部分定义的数据类型和接口一致，不然调用时会出问题的。</p>
-<h2 id="调用">调用</h2>
+<h2 id=调用>调用</h2>
 <p>导入C++动态库的函数入口</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">[DllImport(&#34;DynLib.dll&#34;, EntryPoint = &#34;#1&#34;, CallingConvention = CallingConvention.Cdecl)]</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">void</span> PrintInCpp(<span style="color:#66d9ef">ref</span> MyRect pRect, PrintRect callback);
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#a6e22e>[DllImport(&#34;DynLib.dll&#34;, EntryPoint = &#34;#1&#34;, CallingConvention = CallingConvention.Cdecl)]</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>extern</span> <span style=color:#66d9ef>void</span> PrintInCpp(<span style=color:#66d9ef>ref</span> MyRect pRect, PrintRect callback);
 </code></pre></div><p>然后定义好C#这边的<code>delegate</code>实例，就完成了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Print(<span style="color:#66d9ef">ref</span> MyRect myRect)
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Print(<span style=color:#66d9ef>ref</span> MyRect myRect)
 {
-    Console.WriteLine(<span style="color:#e6db74">&#34;C# Print func called.&#34;</span>);
-    Console.WriteLine(<span style="color:#e6db74">&#34;[({0},{1}),({2},{3})]&#34;</span>, myRect.Left, myRect.Top, myRect.Right, myRect.Bottom);
+    Console.WriteLine(<span style=color:#e6db74>&#34;C# Print func called.&#34;</span>);
+    Console.WriteLine(<span style=color:#e6db74>&#34;[({0},{1}),({2},{3})]&#34;</span>, myRect.Left, myRect.Top, myRect.Right, myRect.Bottom);
 }
 
-<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+<span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
 {
-    <span style="color:#66d9ef">var</span> rect = <span style="color:#66d9ef">new</span> MyRect()
+    <span style=color:#66d9ef>var</span> rect = <span style=color:#66d9ef>new</span> MyRect()
     {
-        Left = <span style="color:#ae81ff">100</span>,
-        Top = <span style="color:#ae81ff">100</span>,
-        Right = <span style="color:#ae81ff">220</span>,
-        Bottom = <span style="color:#ae81ff">200</span>
+        Left = <span style=color:#ae81ff>100</span>,
+        Top = <span style=color:#ae81ff>100</span>,
+        Right = <span style=color:#ae81ff>220</span>,
+        Bottom = <span style=color:#ae81ff>200</span>
     };
 
-    PrintInCpp(<span style="color:#66d9ef">ref</span> rect, <span style="color:#66d9ef">null</span>);  <span style="color:#75715e">// callback为null
-</span><span style="color:#75715e"></span>    PrintInCpp(<span style="color:#66d9ef">ref</span> rect, <span style="color:#66d9ef">new</span> PrintRect(Print));
+    PrintInCpp(<span style=color:#66d9ef>ref</span> rect, <span style=color:#66d9ef>null</span>);  <span style=color:#75715e>// callback为null
+</span><span style=color:#75715e></span>    PrintInCpp(<span style=color:#66d9ef>ref</span> rect, <span style=color:#66d9ef>new</span> PrintRect(Print));
 
-    Console.WriteLine(<span style="color:#e6db74">&#34;Press any key exit...&#34;</span>);
-    Console.ReadKey(<span style="color:#66d9ef">true</span>);
+    Console.WriteLine(<span style=color:#e6db74>&#34;Press any key exit...&#34;</span>);
+    Console.ReadKey(<span style=color:#66d9ef>true</span>);
 }
 </code></pre></div><p>这里调用了两次接口函数，为了方便看出区别，在<code>callback</code>参数为<code>NULL</code>时，会由c++打印结果，否则c++会调用外部的函数接口。</p>
 <p>输出结果：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./delegatefunc
-        <span style="color:#ae81ff">100</span>
-<span style="color:#ae81ff">100</span>             <span style="color:#ae81ff">220</span>
-        <span style="color:#ae81ff">200</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>./delegatefunc
+        <span style=color:#ae81ff>100</span>
+<span style=color:#ae81ff>100</span>             <span style=color:#ae81ff>220</span>
+        <span style=color:#ae81ff>200</span>
 C# Print func called.
-<span style="color:#f92672">[(</span>100,100<span style="color:#f92672">)</span>,<span style="color:#f92672">(</span>220,200<span style="color:#f92672">)]</span>
+<span style=color:#f92672>[(</span>100,100<span style=color:#f92672>)</span>,<span style=color:#f92672>(</span>220,200<span style=color:#f92672>)]</span>
 Press any key exit...
 </code></pre></div>
-  </div>
-
-  <footer class="post-footer">
-    
-
-    
-    <div class="post-tags">
-      <i class="fas fa-tags"></i>
-      
-        <a href="/tags/C">C#</a>
-        &nbsp;
-      
-        <a href="/tags/C&#43;&#43;">C&#43;&#43;</a>
-        &nbsp;
-      
-    </div>
-    
-
-    
-    
-    <div class="related-posts">
-      <h4>Related Posts</h4>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Newtonsoft.NET 基本使用</a>
-      <br>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/%E4%BD%BF%E7%94%A8-Named-Pipe-%E8%BF%9B%E8%A1%8C%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF/">使用 Named Pipe 进行进程间通讯</a>
-      <br>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/Hprose-C_-%E5%88%9D%E6%8E%A2/">Hprose C# 初探</a>
-      <br>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/Thrift-C_-%E5%88%9D%E6%8E%A2/">Thrift C# 初探</a>
-      <br>
-      
-      <i class="fas fa-paperclip"></i>
-      <a href="/posts/gRPC-C_-%E5%88%9D%E6%8E%A2/">gRPC C# 初探</a>
-      <br>
-      
-    </div>
-    
-  </footer>
-  
-  <div class="comments">
-  <div class="comments">
-
-
-
-  <div class="comments-item comments-valine" >
-    
-    
-    
-    <div id="vcomments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    <script type="text/javascript">
-      new Valine({
-          el: '#vcomments',
-          highlight: false,
-          lang: "zh-CN",
-          appId: "X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",
-          appKey: "ljO0GYMaeqs5KWK2vCtk1Ii8",
-          placeholder: "在这里写下你的留言丨支持 Markdown 语法",
-          requiredFields: ["nick","mail"],
-          avatar: "mp",
-          visitor:  true ,
-          recordIP: true
-      });
-    </script>
-    <script>
-      if(window.location.hash){
-          var checkExist = setInterval(function() {
-             if ($(window.location.hash).length) {
-                $('html, body, article').animate({scrollTop: $(window.location.hash).offset().top-90}, 1000);
-                clearInterval(checkExist);
-             }
-          }, 100);
-      }
-    </script>
-  </div>
-
 </div>
-  </div>
+<footer class=post-footer>
+<div class=post-tags>
+<i class="fas fa-tags"></i>
+<a href=/tags/C>C#</a>
+&nbsp;
+<a href=/tags/C++>C++</a>
+&nbsp;
+</div>
+<div class=related-posts>
+<h4>Related Posts</h4>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/Newtonsoft.NET-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>Newtonsoft.NET 基本使用</a>
+<br>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/%E4%BD%BF%E7%94%A8-Named-Pipe-%E8%BF%9B%E8%A1%8C%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF/>使用 Named Pipe 进行进程间通讯</a>
+<br>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/Hprose-C_-%E5%88%9D%E6%8E%A2/>Hprose C# 初探</a>
+<br>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/Thrift-C_-%E5%88%9D%E6%8E%A2/>Thrift C# 初探</a>
+<br>
+<i class="fas fa-paperclip"></i>
+<a href=/posts/gRPC-C_-%E5%88%9D%E6%8E%A2/>gRPC C# 初探</a>
+<br>
+</div>
+</footer>
+<div class=comments>
+<div class=comments>
+<div class="comments-item comments-valine">
+<div id=vcomments></div>
+<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:'#vcomments',highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,recordIP:!0})</script>
+<script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($('html, body, article').animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script>
+</div>
+</div>
+</div>
 </article>
-
-  <div class="foot">
-  
-  &copy; 2019 - 2021 &#183;
-  <a href="/"> kira&#39;s 博客 </a> &#183;
-  Theme <a href="https://github.com/RainerChiang/simpleness">Simpleness</a> Powered by <a href="https://gohugo.io/">Hugo</a> &#183;
-  <a href="#"><i class="fas fa-chevron-up"></i></a>
+<div class=foot>
+&copy; 2019 - 2022 &#183;
+<a href=/> kira's 博客 </a> &#183;
+Theme <a href=https://github.com/RainerChiang/simpleness>Simpleness</a> Powered by <a href=https://gohugo.io/>Hugo</a> &#183;
+<a href=#><i class="fas fa-chevron-up"></i></a>
 </div>
 </body>
-  <script src="/js/lazyload.min.js"></script>
-<script>
-  var lazyImage = new LazyLoad({container: document.getElementById('article')});
-</script>
-
-
-
-
+<script src=/js/lazyload.min.js></script>
+<script>var lazyImage=new LazyLoad({container:document.getElementById('article')})</script>
 </html>
