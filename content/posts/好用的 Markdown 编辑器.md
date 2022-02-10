@@ -12,7 +12,7 @@ isCJKLanguage: true
 ## 桌面端
 
 [Typora](https://www.typora.io/)
-支持 Mac, Windows, Linux
+收费，支持 Mac, Windows, Linux
 
 [MarkText](https://marktext.app/)
 支持 Mac, Windows, Linux
