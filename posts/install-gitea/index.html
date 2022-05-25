@@ -1,158 +1,27 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.1">
-<title> Gitea 安装使用 | kira's 博客 </title>
-<meta name=description content="安装 Gitea 创建自己的git服务">
-<link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css>
-<link rel=canonical href=https://kira-96.github.io/posts/install-gitea/>
-<link rel=alternate type=application/rss+xml href title="kira's 博客">
-<link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet>
-<meta name=theme-color content="#ffffff">
-<meta name=msapplication-TileColor content="#da532c">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-title content="Gitea 安装使用">
-<link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png>
-<link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png>
-<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico>
-<link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png>
-<link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png>
-<link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png>
-<link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css>
-<script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script>
-</head>
-<body class=container>
-<nav class=navigation>
-<div class=nav-left>
-<div class="nav-item nav-title">
-<a href=https://kira-96.github.io/> kira's 博客</a>
-</div>
-<div class="nav-item nav-menu">
-<a href=/> Home</a>
-<a href=/notes/> Notes</a>
-</div>
-</div>
-<div class="nav-item nav-right fontawesome">
-<a href=https://github.com/kira-96/ target=_blank>
-<i title=GitHub class="fab fa-github"></i>
-</a>
-<a href=https://kira-96.github.io/index.xml target=_blank>
-<i title=RSS class="fas fa-rss"></i>
-</a>
-</div>
-</nav>
-<article class=post>
-<header class=post-header>
-<h1 style=text-align:center>Gitea 安装使用</h1>
-<div class=post-metadata>
-<time datetime=2021-03-22T10:07:35+08:00>March 22, 2021</time> &nbsp;
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.99.1"><title>Gitea 安装使用 | kira's 博客</title><meta name=description content="安装 Gitea 创建自己的git服务"><link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css><link rel=canonical href=https://kira-96.github.io/posts/install-gitea/><link rel=alternate type=application/rss+xml href title="kira's 博客"><link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-title content="Gitea 安装使用"><link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png><link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png><link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico><link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png><link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png><link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png><link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css><script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script></head><body class=container><nav class=navigation><div class=nav-left><div class="nav-item nav-title"><a href=https://kira-96.github.io/>kira's 博客</a></div><div class="nav-item nav-menu"><a href=/>Home</a>
+<a href=/notes/>Notes</a></div></div><div class="nav-item nav-right fontawesome"><a href=https://github.com/kira-96/ target=_blank><i title=GitHub class="fab fa-github"></i></a>
+<a href=https://kira-96.github.io/index.xml target=_blank><i title=RSS class="fas fa-rss"></i></a></div></nav><article class=post><header class=post-header><h1 style=text-align:center>Gitea 安装使用</h1><div class=post-metadata><time datetime=2021-03-22T10:07:35+08:00>March 22, 2021</time> &nbsp;
 <i class="far fa-eye"></i>
-<span id=/posts/install-gitea/ class=leancloud_visitors data-flag-title="Gitea 安装使用">
-<span class=leancloud-visitors-count> </span>
-</span> &nbsp;
+<span id=/posts/install-gitea/ class=leancloud_visitors data-flag-title="Gitea 安装使用"><span class=leancloud-visitors-count></span></span>&nbsp;
 <i class="far fa-clock"></i>
 4 min
 52 s
 &nbsp;
 <i class="fas fa-folder"></i>
 <a href=/categories/%E5%88%86%E4%BA%AB>分享</a>
-&nbsp;
-</div>
-</header>
-<div class=post-text>
-<h2 id=前言>前言</h2>
-<p>今天偶然看到一个新的开源的git服务软件<a href=https://gitea.io/>Gitea</a>，一看到界面，瞬间就爱了，因为之前我自己用的是<a href=http://gitblit.github.io/gitblit/>gitblit</a>，界面比较简单，主要是用来管理公司的一些小项目。今天看到Gitea之后，就决定迁移到过去，简单折腾了一下，配置起来比gitblit要简单一些，但界面却更加漂亮了，总体上看起来比较像github，并且还支持主题系统，很合我的胃口。</p>
-<h2 id=下载二进制包>下载二进制包</h2>
-<p>首先去下载对应系统的二进制包，可以去<a href=https://github.com/go-gitea/gitea/releases>github</a>或者<a href=https://dl.gitea.io/gitea>官网</a>下载最新的发布版本。</p>
-<p>我是在windows下配置的，所以选择下载windows版的可执行程序。</p>
-<h2 id=开启服务>开启服务</h2>
-<p>下载后不需要安装，直接就能运行，但直接运行的话会有一个控制台显示在桌面，所以可以考虑将程序作为一个系统服务在后台运行。</p>
-<ol>
-<li>
-<p>由于不需要安装，可以直接将下载的可执行程序放在自己想要安装的目录，eg: <code>D:\gitea\gitea.exe</code></p>
-</li>
-<li>
-<p>以<strong>管理员方式</strong>打开<code>cmd</code>或者<code>powershell</code>，执行命令：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>sc create gitea start<span style=color:#f92672>=</span> auto binPath<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;\&#34;D:\gitea\gitea.exe\&#34; web --config \&#34;D:\gitea\custom\conf\app.ini\&#34;&#34;</span>
-</code></pre></div></li>
-<li>
-<p>打开系统的服务管理界面，找到<code>gitea</code>，此时是<strong>已停止</strong>状态，按下鼠标右键，在弹出的菜单选择<strong>开始</strong>，然后可以看到状态变为<strong>正在启动</strong>。</p>
-</li>
-<li>
-<p>打开浏览器访问 <a href=http://localhost:3000>http://localhost:3000</a>，应该就能看到Gitea的界面了，点击页面上的<strong>探索</strong>（explore），还需要进行一些配置才能正常运行，数据库可以直接使用<code>sqlite</code>，这样就不需要再安装其它的数据库了，然后就是一些目录配置，根据需要选择目录就行。</p>
-</li>
-<li>
-<p>最后可以创建管理员账号，也可以不用设置，完成安装后第一个注册的账号会自动成为管理员。</p>
-</li>
-</ol>
-<p>到这里安装和配置就完成了，此时再看服务中的<code>gitea</code>的状态，已经变为<strong>正在运行</strong>。</p>
-<h2 id=迁移仓库到-gitea>迁移仓库到 Gitea</h2>
-<p>Gitea 自带<strong>迁移外部仓库</strong>的功能，但我一直导入失败，提示<strong>没有导入本地仓库的权限</strong>。后来只能将本地的仓库推送到Gitea，不过效果是一样的。</p>
-<ol>
-<li>
-<p>首先在Gitea中新建一个同名的仓库，复制仓库的git链接。</p>
-</li>
-<li>
-<p>修改本地仓库的<code>origin</code></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git remote origin set-url http://localhost:3000/user/myrepo.git
-</code></pre></div><p>或者直接修改<code>.git/config</code>文件中的<code>origin</code> url。</p>
-</li>
-<li>
-<p>推送本地仓库到Gitea</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git push origin main
-</code></pre></div><p>静静等待推送完成，然后刷新gitea的仓库页面，就可以看到所有的提交记录了。</p>
-</li>
-</ol>
-<h2 id=启用-ssh>启用 SSH</h2>
-<p>编辑 <code>D:\gitea\custom\conf\app.ini</code>，在<code>[server]</code>部分新增一项配置</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=color:#66d9ef>[server]</span>
-<span style=color:#a6e22e>START_SSH_SERVER</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>true</span>
-</code></pre></div><p>保存后，在服务中重启 gitea 即可。</p>
-<p>在gitea的账号管理中新增SSH密钥，然后就可以使用ssh的方式管理账户所拥有的仓库了。</p>
-<h2 id=最后>最后</h2>
-<p>总的来看，Gitea的配置十分简单，基本上下载后就可以使用，没有其它的依赖，gitblit则需要安装java运行环境，界面十分漂亮，功能也比较完善，自用完全没有问题。</p>
-</div>
-<footer class=post-footer>
-<div class=post-tags>
-<i class="fas fa-tags"></i>
+&nbsp;</div></header><div class=post-text><h2 id=前言>前言</h2><p>今天偶然看到一个新的开源的git服务软件<a href=https://gitea.io/>Gitea</a>，一看到界面，瞬间就爱了，因为之前我自己用的是<a href=http://gitblit.github.io/gitblit/>gitblit</a>，界面比较简单，主要是用来管理公司的一些小项目。今天看到Gitea之后，就决定迁移到过去，简单折腾了一下，配置起来比gitblit要简单一些，但界面却更加漂亮了，总体上看起来比较像github，并且还支持主题系统，很合我的胃口。</p><h2 id=下载二进制包>下载二进制包</h2><p>首先去下载对应系统的二进制包，可以去<a href=https://github.com/go-gitea/gitea/releases>github</a>或者<a href=https://dl.gitea.io/gitea>官网</a>下载最新的发布版本。</p><p>我是在windows下配置的，所以选择下载windows版的可执行程序。</p><h2 id=开启服务>开启服务</h2><p>下载后不需要安装，直接就能运行，但直接运行的话会有一个控制台显示在桌面，所以可以考虑将程序作为一个系统服务在后台运行。</p><ol><li><p>由于不需要安装，可以直接将下载的可执行程序放在自己想要安装的目录，eg: <code>D:\gitea\gitea.exe</code></p></li><li><p>以<strong>管理员方式</strong>打开<code>cmd</code>或者<code>powershell</code>，执行命令：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>sc create gitea start<span style=color:#f92672>=</span> auto binPath<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;\&#34;D:\gitea\gitea.exe\&#34; web --config \&#34;D:\gitea\custom\conf\app.ini\&#34;&#34;</span>
+</span></span></code></pre></div></li><li><p>打开系统的服务管理界面，找到<code>gitea</code>，此时是<strong>已停止</strong>状态，按下鼠标右键，在弹出的菜单选择<strong>开始</strong>，然后可以看到状态变为<strong>正在启动</strong>。</p></li><li><p>打开浏览器访问 <a href=http://localhost:3000>http://localhost:3000</a>，应该就能看到Gitea的界面了，点击页面上的<strong>探索</strong>（explore），还需要进行一些配置才能正常运行，数据库可以直接使用<code>sqlite</code>，这样就不需要再安装其它的数据库了，然后就是一些目录配置，根据需要选择目录就行。</p></li><li><p>最后可以创建管理员账号，也可以不用设置，完成安装后第一个注册的账号会自动成为管理员。</p></li></ol><p>到这里安装和配置就完成了，此时再看服务中的<code>gitea</code>的状态，已经变为<strong>正在运行</strong>。</p><h2 id=迁移仓库到-gitea>迁移仓库到 Gitea</h2><p>Gitea 自带<strong>迁移外部仓库</strong>的功能，但我一直导入失败，提示<strong>没有导入本地仓库的权限</strong>。后来只能将本地的仓库推送到Gitea，不过效果是一样的。</p><ol><li><p>首先在Gitea中新建一个同名的仓库，复制仓库的git链接。</p></li><li><p>修改本地仓库的<code>origin</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ git remote origin set-url http://localhost:3000/user/myrepo.git
+</span></span></code></pre></div><p>或者直接修改<code>.git/config</code>文件中的<code>origin</code> url。</p></li><li><p>推送本地仓库到Gitea</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ git push origin main
+</span></span></code></pre></div><p>静静等待推送完成，然后刷新gitea的仓库页面，就可以看到所有的提交记录了。</p></li></ol><h2 id=启用-ssh>启用 SSH</h2><p>编辑 <code>D:\gitea\custom\conf\app.ini</code>，在<code>[server]</code>部分新增一项配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[server]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>START_SSH_SERVER</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>true</span>
+</span></span></code></pre></div><p>保存后，在服务中重启 gitea 即可。</p><p>在gitea的账号管理中新增SSH密钥，然后就可以使用ssh的方式管理账户所拥有的仓库了。</p><h2 id=最后>最后</h2><p>总的来看，Gitea的配置十分简单，基本上下载后就可以使用，没有其它的依赖，gitblit则需要安装java运行环境，界面十分漂亮，功能也比较完善，自用完全没有问题。</p></div><footer class=post-footer><div class=post-tags><i class="fas fa-tags"></i>
 <a href=/tags/git>git</a>
-&nbsp;
-</div>
-<div class=related-posts>
-<h4>Related Posts</h4>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84git%E5%91%BD%E4%BB%A4/>一些常用的git命令</a>
-<br>
-</div>
-</footer>
-<div class=comments>
-<div class=comments>
-<div class="comments-item comments-disqus">
-<div id=disqus_thread></div>
-<script>window.addEventListener("load",()=>{(function(){var a=document,b=a.createElement("script");b.src="https://kira.disqus.com/embed.js",b.setAttribute("data-timestamp",+new Date),(a.head||a.body).appendChild(b)})()})</script>
-<noscript>Please enable JavaScript to view the
-<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a>
-</noscript>
-</div>
-<div class="comments-item comments-valine">
-<div id=vcomments></div>
-<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+&nbsp;</div><div class=related-posts><h4>Related Posts</h4><i class="fas fa-paperclip"></i>
+<a href=/posts/%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84git%E5%91%BD%E4%BB%A4/>一些常用的git命令</a><br></div></footer><div class=comments><div class=comments><div class="comments-item comments-disqus"><div id=disqus_thread></div><script>window.addEventListener("load",()=>{(function(){var e=document,t=e.createElement("script");t.src="https://kira.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()})</script><noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><div class="comments-item comments-valine"><div id=vcomments></div><script src=//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js></script>
 <script src=//unpkg.com/valine/dist/Valine.min.js></script>
-<script type=text/javascript>new Valine({el:'#vcomments',highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,recordIP:!0})</script>
-<script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($('html, body, article').animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script>
-</div>
-</div>
-</div>
-</article>
-<div class=foot>
-&copy; 2019 - 2022 &#183;
-<a href=/> kira's 博客 </a> &#183;
+<script type=text/javascript>new Valine({el:"#vcomments",highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,serverURLs:null,recordIP:!0})</script><script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($("html, body, article").animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script></div></div></div></article><div class=foot>&copy; 2019 - 2022 &#183;
+<a href=/>kira's 博客</a> &#183;
 Theme <a href=https://github.com/RainerChiang/simpleness>Simpleness</a> Powered by <a href=https://gohugo.io/>Hugo</a> &#183;
-<a href=#><i class="fas fa-chevron-up"></i></a>
-</div>
-</body>
-<script src=/js/lazyload.min.js></script>
-<script>var lazyImage=new LazyLoad({container:document.getElementById('article')})</script>
-</html>
+<a href=#><i class="fas fa-chevron-up"></i></a></div></body><script src=/js/lazyload.min.js></script>
+<script>var lazyImage=new LazyLoad({container:document.getElementById("article")})</script></html>

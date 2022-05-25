@@ -1,152 +1,40 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.1">
-<title> WSL libcuda.so.1 is not a symbolic link 的解决方法 | kira's 博客 </title>
-<meta name=description content="kira's blog">
-<link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css>
-<link rel=canonical href=https://kira-96.github.io/posts/WSL-libcuda.so.1-is-not-a-symbolic-link-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/>
-<link rel=alternate type=application/rss+xml href title="kira's 博客">
-<link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet>
-<meta name=theme-color content="#ffffff">
-<meta name=msapplication-TileColor content="#da532c">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-title content="WSL libcuda.so.1 is not a symbolic link 的解决方法">
-<link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png>
-<link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png>
-<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico>
-<link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png>
-<link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png>
-<link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png>
-<link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css>
-<script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script>
-</head>
-<body class=container>
-<nav class=navigation>
-<div class=nav-left>
-<div class="nav-item nav-title">
-<a href=https://kira-96.github.io/> kira's 博客</a>
-</div>
-<div class="nav-item nav-menu">
-<a href=/> Home</a>
-<a href=/notes/> Notes</a>
-</div>
-</div>
-<div class="nav-item nav-right fontawesome">
-<a href=https://github.com/kira-96/ target=_blank>
-<i title=GitHub class="fab fa-github"></i>
-</a>
-<a href=https://kira-96.github.io/index.xml target=_blank>
-<i title=RSS class="fas fa-rss"></i>
-</a>
-</div>
-</nav>
-<article class=post>
-<header class=post-header>
-<h1 style=text-align:center>WSL libcuda.so.1 is not a symbolic link 的解决方法</h1>
-<div class=post-metadata>
-<time datetime=2022-02-09T08:48:30+08:00>February 09, 2022</time> &nbsp;
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.99.1"><title>WSL libcuda.so.1 is not a symbolic link 的解决方法 | kira's 博客</title><meta name=description content="kira's blog"><link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css><link rel=canonical href=https://kira-96.github.io/posts/WSL-libcuda.so.1-is-not-a-symbolic-link-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/><link rel=alternate type=application/rss+xml href title="kira's 博客"><link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-title content="WSL libcuda.so.1 is not a symbolic link 的解决方法"><link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png><link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png><link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico><link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png><link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png><link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png><link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css><script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script></head><body class=container><nav class=navigation><div class=nav-left><div class="nav-item nav-title"><a href=https://kira-96.github.io/>kira's 博客</a></div><div class="nav-item nav-menu"><a href=/>Home</a>
+<a href=/notes/>Notes</a></div></div><div class="nav-item nav-right fontawesome"><a href=https://github.com/kira-96/ target=_blank><i title=GitHub class="fab fa-github"></i></a>
+<a href=https://kira-96.github.io/index.xml target=_blank><i title=RSS class="fas fa-rss"></i></a></div></nav><article class=post><header class=post-header><h1 style=text-align:center>WSL libcuda.so.1 is not a symbolic link 的解决方法</h1><div class=post-metadata><time datetime=2022-02-09T08:48:30+08:00>February 09, 2022</time> &nbsp;
 <i class="far fa-eye"></i>
-<span id=/posts/WSL-libcuda.so.1-is-not-a-symbolic-link-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/ class=leancloud_visitors data-flag-title="WSL libcuda.so.1 is not a symbolic link 的解决方法">
-<span class=leancloud-visitors-count> </span>
-</span> &nbsp;
+<span id=/posts/WSL-libcuda.so.1-is-not-a-symbolic-link-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/ class=leancloud_visitors data-flag-title="WSL libcuda.so.1 is not a symbolic link 的解决方法"><span class=leancloud-visitors-count></span></span>&nbsp;
 <i class="far fa-clock"></i>
 1 min
 51 s
-&nbsp;
-</div>
-</header>
-<div class=post-text>
-<h2 id=问题描述>问题描述</h2>
-<p>在使用 WSL 更新软件包的时候经常会遇到这样一个报错</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link
-</code></pre></div><p>意思是说 <code>/usr/lib/wsl/lib/libcuda.so.1</code> 不是一个符号链接。</p>
-<h2 id=问题分析>问题分析</h2>
-<p>通过名字可以判断这应该是nVidia显卡驱动相关的库，进入 <code>/usr/lib/wsl/lib/</code> 目录，可以看到有 <code>libcuda.so</code>、<code>libcuda.so.1</code>、<code>libcuda.so.1.1</code> 三个文件，都是文件形式，而通过报错我们知道 <code>libcuda.so</code>、<code>libcuda.so.1</code> 应该是符号链接文件。</p>
-<p>它们关系应该是：</p>
-<p>libcuda.so -> libcuda.so.1 -> libcuda.so.1.1</p>
-<p>知道原因就好解决了，把 <code>libcuda.so</code>、<code>libcuda.so.1</code> 删掉，再重新创建符号链接就可以了。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>ubuntu@dell:/usr/lib/wsl/lib$ sudo rm libcuda.so
-rm: 无法删除 <span style=color:#e6db74>&#39;libcuda.so&#39;</span>: 只读文件系统
-</code></pre></div><p>很遗憾，这样是不行的。最后经过多方查找，终于找到了解决方案。</p>
-<h2 id=解决方法>解决方法</h2>
-<p>解决方法就是上面的方法，但不是在 WSL 中操作。</p>
-<p>使用管理员权限执行 cmd 命令:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell>C:&gt;cd C:\Windows\System32\lxss\lib
-C:\Windows\System32\lxss\lib&gt;del /s /q <span style=color:#e6db74>&#34;libcuda.so&#34;</span>
-C:\Windows\System32\lxss\lib&gt;del /s /q <span style=color:#e6db74>&#34;libcuda.so.1&#34;</span>
-C:\Windows\System32\lxss\lib&gt;mklink libcuda.so.1 libcuda.so.1.1
-C:\Windows\System32\lxss\lib&gt;mklink libcuda.so libcuda.so.1
-</code></pre></div><p>或者在Powershell中执行：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell>cd C:\Windows\System32\lxss\lib
-rm libcuda.so
-rm libcuda.so.1
-wsl -e /bin/bash
-ln -s libcuda.so.1.1 libcuda.so.1
-ln -s libcuda.so.1.1 libcuda.so
-</code></pre></div><p>然后在 wsl 中执行:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ sudo ldconfig
-</code></pre></div><p><strong>参考</strong></p>
-<ul>
-<li><a href=https://blog.kiyoko.io/2022/01/17/ldconfig-usr-lib-wsl-lib-libcuda-so-1-is-not-a-symbolic-link/>ldconfig: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link</a></li>
-<li><a href=https://github.com/microsoft/WSL/issues/5548>libcuda.so.1 is not a symbolic link #5548</a></li>
-</ul>
-</div>
-<footer class=post-footer>
-<div class=post-tags>
-<i class="fas fa-tags"></i>
+&nbsp;</div></header><div class=post-text><h2 id=问题描述>问题描述</h2><p>在使用 WSL 更新软件包的时候经常会遇到这样一个报错</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link
+</span></span></code></pre></div><p>意思是说 <code>/usr/lib/wsl/lib/libcuda.so.1</code> 不是一个符号链接。</p><h2 id=问题分析>问题分析</h2><p>通过名字可以判断这应该是nVidia显卡驱动相关的库，进入 <code>/usr/lib/wsl/lib/</code> 目录，可以看到有 <code>libcuda.so</code>、<code>libcuda.so.1</code>、<code>libcuda.so.1.1</code> 三个文件，都是文件形式，而通过报错我们知道 <code>libcuda.so</code>、<code>libcuda.so.1</code> 应该是符号链接文件。</p><p>它们关系应该是：</p><p>libcuda.so -> libcuda.so.1 -> libcuda.so.1.1</p><p>知道原因就好解决了，把 <code>libcuda.so</code>、<code>libcuda.so.1</code> 删掉，再重新创建符号链接就可以了。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>ubuntu@dell:/usr/lib/wsl/lib$ sudo rm libcuda.so
+</span></span><span style=display:flex><span>rm: 无法删除 <span style=color:#e6db74>&#39;libcuda.so&#39;</span>: 只读文件系统
+</span></span></code></pre></div><p>很遗憾，这样是不行的。最后经过多方查找，终于找到了解决方案。</p><h2 id=解决方法>解决方法</h2><p>解决方法就是上面的方法，但不是在 WSL 中操作。</p><p>使用管理员权限执行 cmd 命令:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span>C:&gt;cd C:\Windows\System32\lxss\lib
+</span></span><span style=display:flex><span>C:\Windows\System32\lxss\lib&gt;del /s /q <span style=color:#e6db74>&#34;libcuda.so&#34;</span>
+</span></span><span style=display:flex><span>C:\Windows\System32\lxss\lib&gt;del /s /q <span style=color:#e6db74>&#34;libcuda.so.1&#34;</span>
+</span></span><span style=display:flex><span>C:\Windows\System32\lxss\lib&gt;mklink libcuda.so.1 libcuda.so.1.1
+</span></span><span style=display:flex><span>C:\Windows\System32\lxss\lib&gt;mklink libcuda.so libcuda.so.1
+</span></span></code></pre></div><p>或者在Powershell中执行：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span>cd C:\Windows\System32\lxss\lib
+</span></span><span style=display:flex><span>rm libcuda.so
+</span></span><span style=display:flex><span>rm libcuda.so.1
+</span></span><span style=display:flex><span>wsl -e /bin/bash
+</span></span><span style=display:flex><span>ln -s libcuda.so.1.1 libcuda.so.1
+</span></span><span style=display:flex><span>ln -s libcuda.so.1.1 libcuda.so
+</span></span></code></pre></div><p>然后在 wsl 中执行:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ sudo ldconfig
+</span></span></code></pre></div><p><strong>参考</strong></p><ul><li><a href=https://blog.kiyoko.io/2022/01/17/ldconfig-usr-lib-wsl-lib-libcuda-so-1-is-not-a-symbolic-link/>ldconfig: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link</a></li><li><a href=https://github.com/microsoft/WSL/issues/5548>libcuda.so.1 is not a symbolic link #5548</a></li></ul></div><footer class=post-footer><div class=post-tags><i class="fas fa-tags"></i>
 <a href=/tags/Linux>Linux</a>
 &nbsp;
 <a href=/tags/WSL>WSL</a>
-&nbsp;
-</div>
-<div class=related-posts>
-<h4>Related Posts</h4>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/%E5%BC%80%E5%A7%8B%E4%B8%80%E4%BB%BD%E6%96%B0%E5%B7%A5%E4%BD%9C/>开始一份新工作</a>
-<br>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/>三维图形矩阵变换</a>
-<br>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85-Power-Shell-%E5%B9%B6%E7%94%A8-oh-my-posh-%E7%BE%8E%E5%8C%96/>在树莓派上安装 Power Shell 并用 oh-my-posh 美化</a>
-<br>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/>个人常用软件分享</a>
-<br>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/%E5%A5%BD%E7%94%A8%E7%9A%84-Markdown-%E7%BC%96%E8%BE%91%E5%99%A8/>好用的 Markdown 编辑器 - 全平台</a>
-<br>
-</div>
-</footer>
-<div class=comments>
-<div class=comments>
-<div class="comments-item comments-disqus">
-<div id=disqus_thread></div>
-<script>window.addEventListener("load",()=>{(function(){var a=document,b=a.createElement("script");b.src="https://kira.disqus.com/embed.js",b.setAttribute("data-timestamp",+new Date),(a.head||a.body).appendChild(b)})()})</script>
-<noscript>Please enable JavaScript to view the
-<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a>
-</noscript>
-</div>
-<div class="comments-item comments-valine">
-<div id=vcomments></div>
-<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+&nbsp;</div><div class=related-posts><h4>Related Posts</h4><i class="fas fa-paperclip"></i>
+<a href=/posts/%E5%BC%80%E5%A7%8B%E4%B8%80%E4%BB%BD%E6%96%B0%E5%B7%A5%E4%BD%9C/>开始一份新工作</a><br><i class="fas fa-paperclip"></i>
+<a href=/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/>三维图形矩阵变换</a><br><i class="fas fa-paperclip"></i>
+<a href=/posts/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85-Power-Shell-%E5%B9%B6%E7%94%A8-oh-my-posh-%E7%BE%8E%E5%8C%96/>在树莓派上安装 Power Shell 并用 oh-my-posh 美化</a><br><i class="fas fa-paperclip"></i>
+<a href=/posts/%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/>个人常用软件分享</a><br><i class="fas fa-paperclip"></i>
+<a href=/posts/%E5%A5%BD%E7%94%A8%E7%9A%84-Markdown-%E7%BC%96%E8%BE%91%E5%99%A8/>好用的 Markdown 编辑器 - 全平台</a><br></div></footer><div class=comments><div class=comments><div class="comments-item comments-disqus"><div id=disqus_thread></div><script>window.addEventListener("load",()=>{(function(){var e=document,t=e.createElement("script");t.src="https://kira.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()})</script><noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><div class="comments-item comments-valine"><div id=vcomments></div><script src=//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js></script>
 <script src=//unpkg.com/valine/dist/Valine.min.js></script>
-<script type=text/javascript>new Valine({el:'#vcomments',highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,recordIP:!0})</script>
-<script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($('html, body, article').animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script>
-</div>
-</div>
-</div>
-</article>
-<div class=foot>
-&copy; 2019 - 2022 &#183;
-<a href=/> kira's 博客 </a> &#183;
+<script type=text/javascript>new Valine({el:"#vcomments",highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,serverURLs:null,recordIP:!0})</script><script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($("html, body, article").animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script></div></div></div></article><div class=foot>&copy; 2019 - 2022 &#183;
+<a href=/>kira's 博客</a> &#183;
 Theme <a href=https://github.com/RainerChiang/simpleness>Simpleness</a> Powered by <a href=https://gohugo.io/>Hugo</a> &#183;
-<a href=#><i class="fas fa-chevron-up"></i></a>
-</div>
-</body>
-<script src=/js/lazyload.min.js></script>
-<script>var lazyImage=new LazyLoad({container:document.getElementById('article')})</script>
-</html>
+<a href=#><i class="fas fa-chevron-up"></i></a></div></body><script src=/js/lazyload.min.js></script>
+<script>var lazyImage=new LazyLoad({container:document.getElementById("article")})</script></html>

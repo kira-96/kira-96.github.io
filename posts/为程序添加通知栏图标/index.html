@@ -1,203 +1,99 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.1">
-<title> 为程序添加通知栏图标 | kira's 博客 </title>
-<meta name=description content="WPF 添加通知栏图标">
-<link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css>
-<link rel=canonical href=https://kira-96.github.io/posts/%E4%B8%BA%E7%A8%8B%E5%BA%8F%E6%B7%BB%E5%8A%A0%E9%80%9A%E7%9F%A5%E6%A0%8F%E5%9B%BE%E6%A0%87/>
-<link rel=alternate type=application/rss+xml href title="kira's 博客">
-<link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet>
-<meta name=theme-color content="#ffffff">
-<meta name=msapplication-TileColor content="#da532c">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-title content="为程序添加通知栏图标">
-<link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png>
-<link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png>
-<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico>
-<link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png>
-<link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png>
-<link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png>
-<link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css>
-<script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script>
-</head>
-<body class=container>
-<nav class=navigation>
-<div class=nav-left>
-<div class="nav-item nav-title">
-<a href=https://kira-96.github.io/> kira's 博客</a>
-</div>
-<div class="nav-item nav-menu">
-<a href=/> Home</a>
-<a href=/notes/> Notes</a>
-</div>
-</div>
-<div class="nav-item nav-right fontawesome">
-<a href=https://github.com/kira-96/ target=_blank>
-<i title=GitHub class="fab fa-github"></i>
-</a>
-<a href=https://kira-96.github.io/index.xml target=_blank>
-<i title=RSS class="fas fa-rss"></i>
-</a>
-</div>
-</nav>
-<article class=post>
-<header class=post-header>
-<h1 style=text-align:center>为程序添加通知栏图标</h1>
-<div class=post-metadata>
-<time datetime=2020-03-25T10:43:36+08:00>March 25, 2020</time> &nbsp;
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.99.1"><title>为程序添加通知栏图标 | kira's 博客</title><meta name=description content="WPF 添加通知栏图标"><link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css><link rel=canonical href=https://kira-96.github.io/posts/%E4%B8%BA%E7%A8%8B%E5%BA%8F%E6%B7%BB%E5%8A%A0%E9%80%9A%E7%9F%A5%E6%A0%8F%E5%9B%BE%E6%A0%87/><link rel=alternate type=application/rss+xml href title="kira's 博客"><link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-title content="为程序添加通知栏图标"><link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png><link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png><link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico><link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png><link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png><link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png><link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css><script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script></head><body class=container><nav class=navigation><div class=nav-left><div class="nav-item nav-title"><a href=https://kira-96.github.io/>kira's 博客</a></div><div class="nav-item nav-menu"><a href=/>Home</a>
+<a href=/notes/>Notes</a></div></div><div class="nav-item nav-right fontawesome"><a href=https://github.com/kira-96/ target=_blank><i title=GitHub class="fab fa-github"></i></a>
+<a href=https://kira-96.github.io/index.xml target=_blank><i title=RSS class="fas fa-rss"></i></a></div></nav><article class=post><header class=post-header><h1 style=text-align:center>为程序添加通知栏图标</h1><div class=post-metadata><time datetime=2020-03-25T10:43:36+08:00>March 25, 2020</time> &nbsp;
 <i class="far fa-eye"></i>
-<span id=/posts/%E4%B8%BA%E7%A8%8B%E5%BA%8F%E6%B7%BB%E5%8A%A0%E9%80%9A%E7%9F%A5%E6%A0%8F%E5%9B%BE%E6%A0%87/ class=leancloud_visitors data-flag-title=为程序添加通知栏图标>
-<span class=leancloud-visitors-count> </span>
-</span> &nbsp;
+<span id=/posts/%E4%B8%BA%E7%A8%8B%E5%BA%8F%E6%B7%BB%E5%8A%A0%E9%80%9A%E7%9F%A5%E6%A0%8F%E5%9B%BE%E6%A0%87/ class=leancloud_visitors data-flag-title=为程序添加通知栏图标><span class=leancloud-visitors-count></span></span>&nbsp;
 <i class="far fa-clock"></i>
 3 min
 48 s
 &nbsp;
 <i class="fas fa-folder"></i>
 <a href=/categories/%E7%BC%96%E7%A8%8B>编程</a>
-&nbsp;
-</div>
-</header>
-<div class=post-text>
-<h2 id=前言>前言</h2>
-<p>经常看到其它程序在最小化或者窗口隐藏后依旧会在通知栏显示一个托盘图标，像微信、QQ之类的，即使主窗口不显示，程序并不会退出，依旧可以通过托盘图标进行操作。
-那么怎样为自己的程序添加一个托盘图标呢？这次就来讲一讲。</p>
-<h2 id=实现c>实现（C#）</h2>
-<p>首先，为项目添加引用<code>System.Windows.Forms</code>。</p>
-<p>这里以WPF为例：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#75715e>// 主窗口的后台代码
-</span><span style=color:#75715e>// MainWindow.xaml.cs
-</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> System.Windows;
-<span style=color:#66d9ef>using</span> System.Windows.Forms;
-
-<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>partial</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MainWindow</span> : Window
-{
-    <span style=color:#66d9ef>private</span> NotifyIcon notifyIcon;  <span style=color:#75715e>// 托盘图标
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// 托盘菜单
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> System.Windows.Controls.ContextMenu trayIconContextMenu;
-
-    <span style=color:#66d9ef>public</span> MainWindow()
-    {
-        InitializeComponent();
-        InitializeTrayIcon();
-    }
-
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> InitializeTrayIcon()
-    {
-        notifyIcon = <span style=color:#66d9ef>new</span> NotifyIcon()
-        {
-            Visible = <span style=color:#66d9ef>true</span>,
-            Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name,
-            <span style=color:#75715e>// 使用嵌入的资源
-</span><span style=color:#75715e></span>            Icon = <span style=color:#66d9ef>new</span> System.Drawing.Icon(
-                System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(<span style=color:#e6db74>&#34;AppNamespace.icon.ico&#34;</span>),
-                System.Windows.Forms.SystemInformation.SmallIconSize)
-        };
-
-        notifyIcon.MouseClick += TrayIconMouseClick;
-        <span style=color:#75715e>// notifyIcon.MouseDoubleClick += TrayIconMouseDoubleClick;
-</span><span style=color:#75715e></span>
-        trayIconContextMenu = (System.Windows.Controls.ContextMenu)FindResource(<span style=color:#e6db74>&#34;TrayIconContextMenu&#34;</span>);
-    }
-
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> Window_Deactivated(<span style=color:#66d9ef>object</span> s, System.EventArgs e)
-    {
-        trayIconContextMenu.IsOpen = <span style=color:#66d9ef>false</span>;
-    }
-
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> TrayIconMouseClick(<span style=color:#66d9ef>object</span> s, MouseEventArgs e)
-    {
-        <span style=color:#66d9ef>if</span> (e.Button == MouseButtons.Right)
-        {
-            <span style=color:#75715e>// Open the Notify icon context menu
-</span><span style=color:#75715e></span>            trayIconContextMenu.IsOpen = <span style=color:#66d9ef>true</span>;
-
-            <span style=color:#75715e>// Required to close the Tray icon when Deactivated is called
-</span><span style=color:#75715e></span>            <span style=color:#75715e>// See: http://copycodetheory.blogspot.be/2012/07/notify-icon-in-wpf-applications.html
-</span><span style=color:#75715e></span>            Activate();
-        }
-    }
-}
-</code></pre></div><p>需要注意的是<code>NotifyIcon</code>的<code>Icon</code>属性必须设置，否则就不能显示托盘图标。而且图标必须是<code>.ico</code>格式，其它格式<code>png</code>，<code>jpg</code>等都是不行的。
-我这里是使用的嵌入的资源，也可以使用文件路径的方式：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>Icon = <span style=color:#66d9ef>new</span> System.Drawing.Icon(<span style=color:#e6db74>&#34;icon.ico&#34;</span>);
-</code></pre></div><p>上面代码也没有使用<code>NotifyIcon</code>的<code>ContextMenu</code>属性，而是使用的WPF中的<code>ContextMenu</code>，直接在鼠标右键单击托盘图标的时候将<code>trayIconContextMenu</code>显示出来。</p>
-<p>下面是<code>trayIconContextMenu</code>的定义：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#75715e>&lt;!-- MainWindow.xaml --&gt;</span>
-<span style=color:#f92672>&lt;Window.Resources&gt;</span>
-    <span style=color:#f92672>&lt;ContextMenu</span> <span style=color:#a6e22e>x:Key=</span><span style=color:#e6db74>&#34;TrayIconContextMenu&#34;</span> <span style=color:#a6e22e>Placement=</span><span style=color:#e6db74>&#34;MousePoint&#34;</span><span style=color:#f92672>&gt;</span>
-        <span style=color:#f92672>&lt;MenuItem</span> <span style=color:#a6e22e>Header=</span><span style=color:#e6db74>&#34;Show Window&#34;</span> <span style=color:#a6e22e>ToolTip=</span><span style=color:#e6db74>&#34;show main window&#34;</span> <span style=color:#a6e22e>Click=</span><span style=color:#e6db74>&#34;MenuItemShowClick&#34;</span><span style=color:#f92672>&gt;</span>
-            <span style=color:#f92672>&lt;MenuItem.Icon&gt;</span>
-                <span style=color:#f92672>&lt;Image</span> <span style=color:#a6e22e>Source=</span><span style=color:#e6db74>&#34;pack://application:,,,/Icons/window.png&#34;</span> <span style=color:#f92672>/&gt;</span>
-            <span style=color:#f92672>&lt;/MenuItem.Icon&gt;</span>
-        <span style=color:#f92672>&lt;/MenuItem&gt;</span>
-        <span style=color:#f92672>&lt;Separator</span> <span style=color:#f92672>/&gt;</span>
-        <span style=color:#f92672>&lt;MenuItem</span> <span style=color:#a6e22e>Header=</span><span style=color:#e6db74>&#34;Exit&#34;</span> <span style=color:#a6e22e>ToolTip=</span><span style=color:#e6db74>&#34;exit&#34;</span> <span style=color:#a6e22e>Click=</span><span style=color:#e6db74>&#34;MenuItemExitClick&#34;</span><span style=color:#f92672>&gt;</span>
-            <span style=color:#f92672>&lt;MenuItem.Icon&gt;</span>
-                <span style=color:#f92672>&lt;Image</span> <span style=color:#a6e22e>Source=</span><span style=color:#e6db74>&#34;pack://application:,,,/Icons/exit.png&#34;</span> <span style=color:#f92672>/&gt;</span>
-            <span style=color:#f92672>&lt;/MenuItem.Icon&gt;</span>
-        <span style=color:#f92672>&lt;/MenuItem&gt;</span>
-    <span style=color:#f92672>&lt;/ContextMenu&gt;</span>
-<span style=color:#f92672>&lt;/Window.Resources&gt;</span>
-</code></pre></div><p>通过上面的代码就可以为应用程序添加一个系统托盘图标了。</p>
-<p>系统托盘图标还有一个功能就是可以在通知栏显示通知。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>notifyIcon.ShowBalloonTip(<span style=color:#ae81ff>0</span>, <span style=color:#e6db74>&#34;消息&#34;</span>, <span style=color:#e6db74>&#34;程序正在运行&#34;</span>, ToolTipIcon.Info);
-</code></pre></div><p>第一个参数是显示超时，不过现在已经没用了。</p>
-<blockquote>
-<p>timeout: 气球状提示应显示的时间段，以毫秒为单位。从 Windows Vista 开始，此参数已被否决。 通知显示时间现在基于系统的辅助功能设置。</p>
-</blockquote>
-<p><code>BalloonTip</code>在<strong>Win7</strong>上显示为气球状提示，在<strong>Win10</strong>上显示为Toast通知。</p>
-<h2 id=其它>其它</h2>
-<p>经过本人测试，<code>NotifyIcon</code>在控制台程序上也是可以使用的，遗憾的是一部分功能不能正常使用。
-<code>BalloonTip</code>可以正常显示。但菜单是无法使用的，因为不能触发鼠标事件。</p>
-</div>
-<footer class=post-footer>
-<div class=post-tags>
-<i class="fas fa-tags"></i>
+&nbsp;</div></header><div class=post-text><h2 id=前言>前言</h2><p>经常看到其它程序在最小化或者窗口隐藏后依旧会在通知栏显示一个托盘图标，像微信、QQ之类的，即使主窗口不显示，程序并不会退出，依旧可以通过托盘图标进行操作。
+那么怎样为自己的程序添加一个托盘图标呢？这次就来讲一讲。</p><h2 id=实现c>实现（C#）</h2><p>首先，为项目添加引用<code>System.Windows.Forms</code>。</p><p>这里以WPF为例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#75715e>// 主窗口的后台代码</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// MainWindow.xaml.cs</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Windows;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Windows.Forms;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>partial</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MainWindow</span> : Window
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> NotifyIcon notifyIcon;  <span style=color:#75715e>// 托盘图标</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 托盘菜单</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> System.Windows.Controls.ContextMenu trayIconContextMenu;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> MainWindow()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        InitializeComponent();
+</span></span><span style=display:flex><span>        InitializeTrayIcon();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> InitializeTrayIcon()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        notifyIcon = <span style=color:#66d9ef>new</span> NotifyIcon()
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Visible = <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>            Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name,
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 使用嵌入的资源</span>
+</span></span><span style=display:flex><span>            Icon = <span style=color:#66d9ef>new</span> System.Drawing.Icon(
+</span></span><span style=display:flex><span>                System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(<span style=color:#e6db74>&#34;AppNamespace.icon.ico&#34;</span>),
+</span></span><span style=display:flex><span>                System.Windows.Forms.SystemInformation.SmallIconSize)
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        notifyIcon.MouseClick += TrayIconMouseClick;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// notifyIcon.MouseDoubleClick += TrayIconMouseDoubleClick;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        trayIconContextMenu = (System.Windows.Controls.ContextMenu)FindResource(<span style=color:#e6db74>&#34;TrayIconContextMenu&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> Window_Deactivated(<span style=color:#66d9ef>object</span> s, System.EventArgs e)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        trayIconContextMenu.IsOpen = <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> TrayIconMouseClick(<span style=color:#66d9ef>object</span> s, MouseEventArgs e)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (e.Button == MouseButtons.Right)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Open the Notify icon context menu</span>
+</span></span><span style=display:flex><span>            trayIconContextMenu.IsOpen = <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Required to close the Tray icon when Deactivated is called</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// See: http://copycodetheory.blogspot.be/2012/07/notify-icon-in-wpf-applications.html</span>
+</span></span><span style=display:flex><span>            Activate();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>需要注意的是<code>NotifyIcon</code>的<code>Icon</code>属性必须设置，否则就不能显示托盘图标。而且图标必须是<code>.ico</code>格式，其它格式<code>png</code>，<code>jpg</code>等都是不行的。
+我这里是使用的嵌入的资源，也可以使用文件路径的方式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span>Icon = <span style=color:#66d9ef>new</span> System.Drawing.Icon(<span style=color:#e6db74>&#34;icon.ico&#34;</span>);
+</span></span></code></pre></div><p>上面代码也没有使用<code>NotifyIcon</code>的<code>ContextMenu</code>属性，而是使用的WPF中的<code>ContextMenu</code>，直接在鼠标右键单击托盘图标的时候将<code>trayIconContextMenu</code>显示出来。</p><p>下面是<code>trayIconContextMenu</code>的定义：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#75715e>&lt;!-- MainWindow.xaml --&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;Window.Resources&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;ContextMenu</span> <span style=color:#a6e22e>x:Key=</span><span style=color:#e6db74>&#34;TrayIconContextMenu&#34;</span> <span style=color:#a6e22e>Placement=</span><span style=color:#e6db74>&#34;MousePoint&#34;</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;MenuItem</span> <span style=color:#a6e22e>Header=</span><span style=color:#e6db74>&#34;Show Window&#34;</span> <span style=color:#a6e22e>ToolTip=</span><span style=color:#e6db74>&#34;show main window&#34;</span> <span style=color:#a6e22e>Click=</span><span style=color:#e6db74>&#34;MenuItemShowClick&#34;</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&lt;MenuItem.Icon&gt;</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>&lt;Image</span> <span style=color:#a6e22e>Source=</span><span style=color:#e6db74>&#34;pack://application:,,,/Icons/window.png&#34;</span> <span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&lt;/MenuItem.Icon&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;/MenuItem&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;Separator</span> <span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;MenuItem</span> <span style=color:#a6e22e>Header=</span><span style=color:#e6db74>&#34;Exit&#34;</span> <span style=color:#a6e22e>ToolTip=</span><span style=color:#e6db74>&#34;exit&#34;</span> <span style=color:#a6e22e>Click=</span><span style=color:#e6db74>&#34;MenuItemExitClick&#34;</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&lt;MenuItem.Icon&gt;</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>&lt;Image</span> <span style=color:#a6e22e>Source=</span><span style=color:#e6db74>&#34;pack://application:,,,/Icons/exit.png&#34;</span> <span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&lt;/MenuItem.Icon&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;/MenuItem&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/ContextMenu&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/Window.Resources&gt;</span>
+</span></span></code></pre></div><p>通过上面的代码就可以为应用程序添加一个系统托盘图标了。</p><p>系统托盘图标还有一个功能就是可以在通知栏显示通知。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span>notifyIcon.ShowBalloonTip(<span style=color:#ae81ff>0</span>, <span style=color:#e6db74>&#34;消息&#34;</span>, <span style=color:#e6db74>&#34;程序正在运行&#34;</span>, ToolTipIcon.Info);
+</span></span></code></pre></div><p>第一个参数是显示超时，不过现在已经没用了。</p><blockquote><p>timeout: 气球状提示应显示的时间段，以毫秒为单位。从 Windows Vista 开始，此参数已被否决。 通知显示时间现在基于系统的辅助功能设置。</p></blockquote><p><code>BalloonTip</code>在<strong>Win7</strong>上显示为气球状提示，在<strong>Win10</strong>上显示为Toast通知。</p><h2 id=其它>其它</h2><p>经过本人测试，<code>NotifyIcon</code>在控制台程序上也是可以使用的，遗憾的是一部分功能不能正常使用。
+<code>BalloonTip</code>可以正常显示。但菜单是无法使用的，因为不能触发鼠标事件。</p></div><footer class=post-footer><div class=post-tags><i class="fas fa-tags"></i>
 <a href=/tags/WPF>WPF</a>
-&nbsp;
-</div>
-<div class=related-posts>
-<h4>Related Posts</h4>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/>应用程序单例模式</a>
-<br>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/WPF-%E8%8E%B7%E5%8F%96%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/>WPF 获取命令行参数</a>
-<br>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/Stylet-%E6%A1%86%E6%9E%B6%E4%BD%93%E9%AA%8C/>Stylet 框架体验</a>
-<br>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/>WPF和MFC进程间传递数据</a>
-<br>
-<i class="fas fa-paperclip"></i>
-<a href=/posts/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/>WPF如何处理Windows消息</a>
-<br>
-</div>
-</footer>
-<div class=comments>
-<div class=comments>
-<div class="comments-item comments-valine">
-<div id=vcomments></div>
-<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+&nbsp;</div><div class=related-posts><h4>Related Posts</h4><i class="fas fa-paperclip"></i>
+<a href=/posts/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/>应用程序单例模式</a><br><i class="fas fa-paperclip"></i>
+<a href=/posts/WPF-%E8%8E%B7%E5%8F%96%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/>WPF 获取命令行参数</a><br><i class="fas fa-paperclip"></i>
+<a href=/posts/Stylet-%E6%A1%86%E6%9E%B6%E4%BD%93%E9%AA%8C/>Stylet 框架体验</a><br><i class="fas fa-paperclip"></i>
+<a href=/posts/WPF%E5%92%8CMFC%E8%BF%9B%E7%A8%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/>WPF和MFC进程间传递数据</a><br><i class="fas fa-paperclip"></i>
+<a href=/posts/WPF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86Windows%E6%B6%88%E6%81%AF/>WPF如何处理Windows消息</a><br></div></footer><div class=comments><div class=comments><div class="comments-item comments-valine"><div id=vcomments></div><script src=//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js></script>
 <script src=//unpkg.com/valine/dist/Valine.min.js></script>
-<script type=text/javascript>new Valine({el:'#vcomments',highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,recordIP:!0})</script>
-<script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($('html, body, article').animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script>
-</div>
-</div>
-</div>
-</article>
-<div class=foot>
-&copy; 2019 - 2022 &#183;
-<a href=/> kira's 博客 </a> &#183;
+<script type=text/javascript>new Valine({el:"#vcomments",highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,serverURLs:null,recordIP:!0})</script><script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($("html, body, article").animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script></div></div></div></article><div class=foot>&copy; 2019 - 2022 &#183;
+<a href=/>kira's 博客</a> &#183;
 Theme <a href=https://github.com/RainerChiang/simpleness>Simpleness</a> Powered by <a href=https://gohugo.io/>Hugo</a> &#183;
-<a href=#><i class="fas fa-chevron-up"></i></a>
-</div>
-</body>
-<script src=/js/lazyload.min.js></script>
-<script>var lazyImage=new LazyLoad({container:document.getElementById('article')})</script>
-</html>
+<a href=#><i class="fas fa-chevron-up"></i></a></div></body><script src=/js/lazyload.min.js></script>
+<script>var lazyImage=new LazyLoad({container:document.getElementById("article")})</script></html>

@@ -1,169 +1,61 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.1">
-<title> 交叉编译适用于 iMX6UL 的 x11vnc | kira's 博客 </title>
-<meta name=description content="kira's blog">
-<link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css>
-<link rel=canonical href=https://kira-96.github.io/posts/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8E-iMX6UL-%E7%9A%84-x11vnc/>
-<link rel=alternate type=application/rss+xml href title="kira's 博客">
-<link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet>
-<meta name=theme-color content="#ffffff">
-<meta name=msapplication-TileColor content="#da532c">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-title content="交叉编译适用于 iMX6UL 的 x11vnc">
-<link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png>
-<link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png>
-<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico>
-<link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png>
-<link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png>
-<link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png>
-<link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css>
-<script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script>
-</head>
-<body class=container>
-<nav class=navigation>
-<div class=nav-left>
-<div class="nav-item nav-title">
-<a href=https://kira-96.github.io/> kira's 博客</a>
-</div>
-<div class="nav-item nav-menu">
-<a href=/> Home</a>
-<a href=/notes/> Notes</a>
-</div>
-</div>
-<div class="nav-item nav-right fontawesome">
-<a href=https://github.com/kira-96/ target=_blank>
-<i title=GitHub class="fab fa-github"></i>
-</a>
-<a href=https://kira-96.github.io/index.xml target=_blank>
-<i title=RSS class="fas fa-rss"></i>
-</a>
-</div>
-</nav>
-<article class=post>
-<header class=post-header>
-<h1 style=text-align:center>交叉编译适用于 iMX6UL 的 x11vnc</h1>
-<div class=post-metadata>
-<time datetime=2022-02-06T11:06:12+08:00>February 06, 2022</time> &nbsp;
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.99.1"><title>交叉编译适用于 iMX6UL 的 x11vnc | kira's 博客</title><meta name=description content="kira's blog"><link rel=stylesheet href=https://kira-96.github.io/css/simpleness.css><link rel=canonical href=https://kira-96.github.io/posts/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8E-iMX6UL-%E7%9A%84-x11vnc/><link rel=alternate type=application/rss+xml href title="kira's 博客"><link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css rel=stylesheet><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-title content="交叉编译适用于 iMX6UL 的 x11vnc"><link rel=apple-touch-icon sizes=152x152 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-152x152.png><link rel=apple-touch-icon sizes=180x180 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png><link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico><link rel=icon sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png><link rel=icon sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png><link rel=icon sizes=96x96 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-96x96.png><link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css><script defer src=https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script></head><body class=container><nav class=navigation><div class=nav-left><div class="nav-item nav-title"><a href=https://kira-96.github.io/>kira's 博客</a></div><div class="nav-item nav-menu"><a href=/>Home</a>
+<a href=/notes/>Notes</a></div></div><div class="nav-item nav-right fontawesome"><a href=https://github.com/kira-96/ target=_blank><i title=GitHub class="fab fa-github"></i></a>
+<a href=https://kira-96.github.io/index.xml target=_blank><i title=RSS class="fas fa-rss"></i></a></div></nav><article class=post><header class=post-header><h1 style=text-align:center>交叉编译适用于 iMX6UL 的 x11vnc</h1><div class=post-metadata><time datetime=2022-02-06T11:06:12+08:00>February 06, 2022</time> &nbsp;
 <i class="far fa-eye"></i>
-<span id=/posts/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8E-iMX6UL-%E7%9A%84-x11vnc/ class=leancloud_visitors data-flag-title="交叉编译适用于 iMX6UL 的 x11vnc">
-<span class=leancloud-visitors-count> </span>
-</span> &nbsp;
+<span id=/posts/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8E-iMX6UL-%E7%9A%84-x11vnc/ class=leancloud_visitors data-flag-title="交叉编译适用于 iMX6UL 的 x11vnc"><span class=leancloud-visitors-count></span></span>&nbsp;
 <i class="far fa-clock"></i>
 4 min
 29 s
-&nbsp;
-</div>
-</header>
-<div class=post-text>
-<h2 id=前言>前言</h2>
-<p>由于这半年来一直在做嵌入式Linux系统软件开发工作，所以经常和嵌入式设备打交道，最早接触的嵌入式Linux应该就是树莓派了，而我的树莓派一般也不接屏幕，基本上都使用VNC远程连接，所以就想着能不能把VNC也移植到嵌入式设备上，最后找到了<code>x11vnc</code>。</p>
-<p>VNC（虚拟网络计算）是一种非常有用的网络图形协议（应用程序在一台计算机上运行，但在另一台计算机上显示其窗口），但与X不同，查看端非常简单，不保持任何状态。它是一种远程帧缓冲区（RFB）协议。</p>
-<p>x11vnc允许用户通过任何VNC viewer远程查看并与real X显示器（即与物理监视器、键盘和鼠标相对应的显示器）交互。</p>
-<h2 id=准备工作>准备工作</h2>
-<p>需要先用git克隆下面两个仓库，<code>libvncserver</code>和<code>x11vnc</code>。
-<code>x11vnc</code>是基于<code>libvncserver</code>的服务端程序。</p>
-<ul>
-<li><a href=https://github.com/LibVNC/libvncserver.git>GitHub - LibVNC/libvncserver: LibVNCServer/LibVNCClient are cross-platform C libraries that allow you to easily implement VNC server or client functionality in your program.</a></li>
-<li><a href=https://github.com/LibVNC/x11vnc.git>GitHub - LibVNC/x11vnc: a VNC server for real X displays</a></li>
-</ul>
-<h2 id=编译-libvncserver>编译 libvncserver</h2>
-<p>编译x11vnc需要libvncserver，libvncserver按照 <a href=https://github.com/LibVNC/libvncserver/blob/master/README.md>README</a> 编译即可</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>mkdir build
-cd build
-cmake ..
-cmake --build .
-</code></pre></div><p>编译完成后将build文件夹下生成的.so文件复制到 <code>sysroot</code></p>
-<p>例：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># 复制 .so 文件</span>
-$ sudo cp ./libvncclient.so* /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib/
-<span style=color:#75715e># 复制 pkgconfig 文件</span>
-$ sudo cp ./libvnc*.pc /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib/pkgconfig/
-<span style=color:#75715e># 复制头文件</span>
-$ sudo cp -r ../rfb /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/include/
-$ sudo cp ./rfb/rfbconfig.h /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/include/rfb/
-</code></pre></div><h2 id=编译-x11vnc>编译 x11vnc</h2>
-<p>x11vnc 需要使用 autoconf 和 automake 生成 configure 和 makefile</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ cd x11vnc-master
-<span style=color:#75715e># 使用aclocal工具生成aclocal.m4</span>
-$ aclocal
-<span style=color:#75715e># 使用autoconf工具生成configure文件</span>
-$ autoconf
-<span style=color:#75715e># 使用autoheader工具生成config.h.in文件</span>
-$ autoheader
-<span style=color:#75715e># 使用automake生成Makefile.in文件</span>
-$ automake --add-missing
-<span style=color:#75715e># configure 配置交叉编译，如果libvncserver没有正确编译安装，这里会提示找不到libvncserver</span>
-$ ./configure CC<span style=color:#f92672>=</span>arm-poky-linux-gnueabi-gcc AR<span style=color:#f92672>=</span>arm-poky-linux-gnueabi-ar AS<span style=color:#f92672>=</span>arm-poky-linux-gnueabi-as LD<span style=color:#f92672>=</span>arm-poky-linux-gnueabi-ld --host<span style=color:#f92672>=</span>arm-poky-linux --prefix<span style=color:#f92672>=</span>/home/ubuntu/ CFLAGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-march=armv7ve -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi&#34;</span>
-<span style=color:#75715e># 编译安装</span>
-$ make install
-</code></pre></div><p>安装完成后在 <code>/home/ubuntu/</code> （configure 步骤设置的 &ndash;prefix）目录下出现了<code>bin</code>和 <code>share</code>两个目录，<code>bin</code>目录下的就是 x11vnc 的可执行文件。</p>
-<h2 id=安装运行>安装运行</h2>
-<p>将 libvncserver 编译得到的 *.so 文件和 x11vnc 可执行文件复制到开发板即可。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># 复制可执行文件</span>
-$ scp -r /home/ubuntu/bin root@192.168.10.7:~/
-<span style=color:#75715e># 复制 libvncserver</span>
-$ scp /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib/libvnc*.so.0.9.13 root@192.168.10.7:/usr/lib/
-</code></pre></div><p>ssh登录开发板</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># 创建符号链接</span>
-root@imx6ulevk:~# ln -s /usr/lib/libvncclient.so.0.9.13 /usr/lib/libvncclient.so.1
-root@imx6ulevk:~# ln -s /usr/lib/libvncclient.so.1 /usr/lib/libvncclient.so
-root@imx6ulevk:~# ln -s /usr/lib/libvncserver.so.0.9.13 /usr/lib/libvncserver.so.1
-root@imx6ulevk:~# ln -s /usr/lib/libvncserver.so.1 /usr/lib/libvncserver.so
-<span style=color:#75715e># 重命名文件夹</span>
-root@imx6ulevk:~# mv ~/bin ~/x11vnc 
-root@imx6ulevk:~# cd ~/x11vnc
-root@imx6ulevk:~# chmod +x ./x11vnc
-<span style=color:#75715e># 运行 x11vnc</span>
-<span style=color:#75715e># x11vnc -display :0</span>
-root@imx6ulevk:~# ./x11vnc
-</code></pre></div><p>然后在电脑上启动 <a href=https://www.realvnc.com/en/connect/download/viewer/>VNC Viewer</a>, 输入开发板的ip地址就可以通过远程桌面访问设备了。</p>
-<p>实际运行效果如图</p>
-<p><img src=https://s2.loli.net/2022/02/06/IiSnRUGJ4MA9FQx.png alt=Snipaste_2022-01-28_12-31-30.png></p>
-<p><strong>参考</strong></p>
-<ul>
-<li><a href=https://blog.csdn.net/gulansheng/article/details/42683809>autoconf / automake工具使用介绍</a></li>
-<li><a href=https://blog.csdn.net/wanvan/article/details/86506718>给imx6嵌入式平台移植x11vnc搭建远程控制环境</a></li>
-</ul>
-</div>
-<footer class=post-footer>
-<div class=post-tags>
-<i class="fas fa-tags"></i>
+&nbsp;</div></header><div class=post-text><h2 id=前言>前言</h2><p>由于这半年来一直在做嵌入式Linux系统软件开发工作，所以经常和嵌入式设备打交道，最早接触的嵌入式Linux应该就是树莓派了，而我的树莓派一般也不接屏幕，基本上都使用VNC远程连接，所以就想着能不能把VNC也移植到嵌入式设备上，最后找到了<code>x11vnc</code>。</p><p>VNC（虚拟网络计算）是一种非常有用的网络图形协议（应用程序在一台计算机上运行，但在另一台计算机上显示其窗口），但与X不同，查看端非常简单，不保持任何状态。它是一种远程帧缓冲区（RFB）协议。</p><p>x11vnc允许用户通过任何VNC viewer远程查看并与real X显示器（即与物理监视器、键盘和鼠标相对应的显示器）交互。</p><h2 id=准备工作>准备工作</h2><p>需要先用git克隆下面两个仓库，<code>libvncserver</code>和<code>x11vnc</code>。
+<code>x11vnc</code>是基于<code>libvncserver</code>的服务端程序。</p><ul><li><a href=https://github.com/LibVNC/libvncserver.git>GitHub - LibVNC/libvncserver: LibVNCServer/LibVNCClient are cross-platform C libraries that allow you to easily implement VNC server or client functionality in your program.</a></li><li><a href=https://github.com/LibVNC/x11vnc.git>GitHub - LibVNC/x11vnc: a VNC server for real X displays</a></li></ul><h2 id=编译-libvncserver>编译 libvncserver</h2><p>编译x11vnc需要libvncserver，libvncserver按照 <a href=https://github.com/LibVNC/libvncserver/blob/master/README.md>README</a> 编译即可</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>mkdir build
+</span></span><span style=display:flex><span>cd build
+</span></span><span style=display:flex><span>cmake ..
+</span></span><span style=display:flex><span>cmake --build .
+</span></span></code></pre></div><p>编译完成后将build文件夹下生成的.so文件复制到 <code>sysroot</code></p><p>例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># 复制 .so 文件</span>
+</span></span><span style=display:flex><span>$ sudo cp ./libvncclient.so* /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib/
+</span></span><span style=display:flex><span><span style=color:#75715e># 复制 pkgconfig 文件</span>
+</span></span><span style=display:flex><span>$ sudo cp ./libvnc*.pc /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib/pkgconfig/
+</span></span><span style=display:flex><span><span style=color:#75715e># 复制头文件</span>
+</span></span><span style=display:flex><span>$ sudo cp -r ../rfb /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/include/
+</span></span><span style=display:flex><span>$ sudo cp ./rfb/rfbconfig.h /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/include/rfb/
+</span></span></code></pre></div><h2 id=编译-x11vnc>编译 x11vnc</h2><p>x11vnc 需要使用 autoconf 和 automake 生成 configure 和 makefile</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ cd x11vnc-master
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用aclocal工具生成aclocal.m4</span>
+</span></span><span style=display:flex><span>$ aclocal
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用autoconf工具生成configure文件</span>
+</span></span><span style=display:flex><span>$ autoconf
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用autoheader工具生成config.h.in文件</span>
+</span></span><span style=display:flex><span>$ autoheader
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用automake生成Makefile.in文件</span>
+</span></span><span style=display:flex><span>$ automake --add-missing
+</span></span><span style=display:flex><span><span style=color:#75715e># configure 配置交叉编译，如果libvncserver没有正确编译安装，这里会提示找不到libvncserver</span>
+</span></span><span style=display:flex><span>$ ./configure CC<span style=color:#f92672>=</span>arm-poky-linux-gnueabi-gcc AR<span style=color:#f92672>=</span>arm-poky-linux-gnueabi-ar AS<span style=color:#f92672>=</span>arm-poky-linux-gnueabi-as LD<span style=color:#f92672>=</span>arm-poky-linux-gnueabi-ld --host<span style=color:#f92672>=</span>arm-poky-linux --prefix<span style=color:#f92672>=</span>/home/ubuntu/ CFLAGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-march=armv7ve -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a7 --sysroot=/opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 编译安装</span>
+</span></span><span style=display:flex><span>$ make install
+</span></span></code></pre></div><p>安装完成后在 <code>/home/ubuntu/</code> （configure 步骤设置的 &ndash;prefix）目录下出现了<code>bin</code>和 <code>share</code>两个目录，<code>bin</code>目录下的就是 x11vnc 的可执行文件。</p><h2 id=安装运行>安装运行</h2><p>将 libvncserver 编译得到的 *.so 文件和 x11vnc 可执行文件复制到开发板即可。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># 复制可执行文件</span>
+</span></span><span style=display:flex><span>$ scp -r /home/ubuntu/bin root@192.168.10.7:~/
+</span></span><span style=display:flex><span><span style=color:#75715e># 复制 libvncserver</span>
+</span></span><span style=display:flex><span>$ scp /opt/fsl-imx-x11/4.1.15-2.0.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib/libvnc*.so.0.9.13 root@192.168.10.7:/usr/lib/
+</span></span></code></pre></div><p>ssh登录开发板</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># 创建符号链接</span>
+</span></span><span style=display:flex><span>root@imx6ulevk:~# ln -s /usr/lib/libvncclient.so.0.9.13 /usr/lib/libvncclient.so.1
+</span></span><span style=display:flex><span>root@imx6ulevk:~# ln -s /usr/lib/libvncclient.so.1 /usr/lib/libvncclient.so
+</span></span><span style=display:flex><span>root@imx6ulevk:~# ln -s /usr/lib/libvncserver.so.0.9.13 /usr/lib/libvncserver.so.1
+</span></span><span style=display:flex><span>root@imx6ulevk:~# ln -s /usr/lib/libvncserver.so.1 /usr/lib/libvncserver.so
+</span></span><span style=display:flex><span><span style=color:#75715e># 重命名文件夹</span>
+</span></span><span style=display:flex><span>root@imx6ulevk:~# mv ~/bin ~/x11vnc 
+</span></span><span style=display:flex><span>root@imx6ulevk:~# cd ~/x11vnc
+</span></span><span style=display:flex><span>root@imx6ulevk:~# chmod +x ./x11vnc
+</span></span><span style=display:flex><span><span style=color:#75715e># 运行 x11vnc</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># x11vnc -display :0</span>
+</span></span><span style=display:flex><span>root@imx6ulevk:~# ./x11vnc
+</span></span></code></pre></div><p>然后在电脑上启动 <a href=https://www.realvnc.com/en/connect/download/viewer/>VNC Viewer</a>, 输入开发板的ip地址就可以通过远程桌面访问设备了。</p><p>实际运行效果如图</p><p><img src=https://s2.loli.net/2022/02/06/IiSnRUGJ4MA9FQx.png alt=Snipaste_2022-01-28_12-31-30.png></p><p><strong>参考</strong></p><ul><li><a href=https://blog.csdn.net/gulansheng/article/details/42683809>autoconf / automake工具使用介绍</a></li><li><a href=https://blog.csdn.net/wanvan/article/details/86506718>给imx6嵌入式平台移植x11vnc搭建远程控制环境</a></li></ul></div><footer class=post-footer><div class=post-tags><i class="fas fa-tags"></i>
 <a href=/tags/Linux>Linux</a>
 &nbsp;
 <a href=/tags/VNC>VNC</a>
-&nbsp;
-</div>
-</footer>
-<div class=comments>
-<div class=comments>
-<div class="comments-item comments-disqus">
-<div id=disqus_thread></div>
-<script>window.addEventListener("load",()=>{(function(){var a=document,b=a.createElement("script");b.src="https://kira.disqus.com/embed.js",b.setAttribute("data-timestamp",+new Date),(a.head||a.body).appendChild(b)})()})</script>
-<noscript>Please enable JavaScript to view the
-<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a>
-</noscript>
-</div>
-<div class="comments-item comments-valine">
-<div id=vcomments></div>
-<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+&nbsp;</div></footer><div class=comments><div class=comments><div class="comments-item comments-disqus"><div id=disqus_thread></div><script>window.addEventListener("load",()=>{(function(){var e=document,t=e.createElement("script");t.src="https://kira.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()})</script><noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></div><div class="comments-item comments-valine"><div id=vcomments></div><script src=//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js></script>
 <script src=//unpkg.com/valine/dist/Valine.min.js></script>
-<script type=text/javascript>new Valine({el:'#vcomments',highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,recordIP:!0})</script>
-<script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($('html, body, article').animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script>
-</div>
-</div>
-</div>
-</article>
-<div class=foot>
-&copy; 2019 - 2022 &#183;
-<a href=/> kira's 博客 </a> &#183;
+<script type=text/javascript>new Valine({el:"#vcomments",highlight:!1,lang:"zh-CN",appId:"X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz",appKey:"ljO0GYMaeqs5KWK2vCtk1Ii8",placeholder:"在这里写下你的留言丨支持 Markdown 语法",requiredFields:["nick","mail"],avatar:"mp",visitor:!0,serverURLs:null,recordIP:!0})</script><script>if(window.location.hash)var checkExist=setInterval(function(){$(window.location.hash).length&&($("html, body, article").animate({scrollTop:$(window.location.hash).offset().top-90},1e3),clearInterval(checkExist))},100)</script></div></div></div></article><div class=foot>&copy; 2019 - 2022 &#183;
+<a href=/>kira's 博客</a> &#183;
 Theme <a href=https://github.com/RainerChiang/simpleness>Simpleness</a> Powered by <a href=https://gohugo.io/>Hugo</a> &#183;
-<a href=#><i class="fas fa-chevron-up"></i></a>
-</div>
-</body>
-<script src=/js/lazyload.min.js></script>
-<script>var lazyImage=new LazyLoad({container:document.getElementById('article')})</script>
-</html>
+<a href=#><i class="fas fa-chevron-up"></i></a></div></body><script src=/js/lazyload.min.js></script>
+<script>var lazyImage=new LazyLoad({container:document.getElementById("article")})</script></html>
