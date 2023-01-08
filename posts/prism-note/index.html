@@ -1,0 +1,752 @@
+<!doctype html><html lang=zh dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Prism note | kira's 博客</title><meta name=keywords content="WPF,Prism"><meta name=description content="Prism学习笔记"><meta name=author content><link rel=canonical href=https://kira-96.github.io/posts/prism-note/><link crossorigin=anonymous href=/assets/css/stylesheet.bccfefac377bc340f06c260aed1bddf49a4354816d7c570d6aac75a997986c95.css integrity="sha256-vM/vrDd7w0DwbCYK7Rvd9JpDVIFtfFcNaqx1qZeYbJU=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png><link rel=apple-touch-icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png><link rel=mask-icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-76x76.png><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json><script src=https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script><meta property="og:title" content="Prism note"><meta property="og:description" content="Prism学习笔记"><meta property="og:type" content="article"><meta property="og:url" content="https://kira-96.github.io/posts/prism-note/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-09-04T09:10:00+08:00"><meta property="article:modified_time" content="2020-09-04T09:10:00+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Prism note"><meta name=twitter:description content="Prism学习笔记"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://kira-96.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Prism note","item":"https://kira-96.github.io/posts/prism-note/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Prism note","name":"Prism note","description":"Prism学习笔记","keywords":["WPF","Prism"],"articleBody":"简介 Prism是一个用于WPF、Xamarin Forms、WinUI等的MVVM框架，刚刚学习，这里只是个人总结的一些知识点笔记。\nIoC IContainerProvider\n1 2 3 4 protected override Window CreateShell() { return Container.Resolve\u003cMainWindow\u003e(); } 1 2 3 4 5 6 public void OnInitialized(IContainerProvider containerProvider) { var regionManager = containerProvider.Resolve\u003cIRegionManager\u003e(); var viewA = containerProvider.Resolve\u003cViewA\u003e(); ... } IContainerRegistry\n1 2 3 4 5 6 7 8 9 // App.xaml.cs protected override void RegisterTypes(IContainerRegistry containerRegistry) { containerRegistry.Register\u003cIApplicationCommands, ApplicationCommands\u003e(); containerRegistry.RegisterDialog\u003cNotificationDialog, NotificationDialogViewModel\u003e(); containerRegistry.RegisterForNavigation\u003cPage1\u003e(); containerRegistry.RegisterForNavigation\u003cPage2\u003e(); ... } Module IModule\n1 2 3 4 5 6 7 8 9 10 public class SimpleModule : IModule { public void OnInitialized(IContainerProvider containerProvider) { } public void RegisterTypes(IContainerRegistry containerRegistry) { } } 使用App.config加载模块\n1 2 3 4 5 6 7 8 9 10 11 12 \u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e ","wordCount":"1338","inLanguage":"zh","datePublished":"2020-09-04T09:10:00+08:00","dateModified":"2020-09-04T09:10:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kira-96.github.io/posts/prism-note/"},"publisher":{"@type":"Organization","name":"kira's 博客","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://kira-96.github.io/ accesskey=h title="kira's 博客 (Alt + H)">kira's 博客</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://kira-96.github.io/ title=主页><span>主页</span></a></li><li><a href=https://kira-96.github.io/notes/ title=笔记><span>笔记</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://kira-96.github.io/>主页</a>&nbsp;»&nbsp;<a href=https://kira-96.github.io/posts/>Posts</a></div><h1 class=post-title>Prism note</h1><div class=post-description>Prism学习笔记</div><div class=post-meta><span title='2020-09-04 09:10:00 +0800 +0800'>九月 4, 2020</span>&nbsp;·&nbsp;3 分钟&nbsp;·&nbsp;1338 字&nbsp;|&nbsp;<a href=https://github.com/kira-96/kira-96.github.io/tree/main/content/posts/ rel="noopener noreferrer" target=_blank>编辑</a></div></header><div class=post-content><h2 id=简介>简介<a hidden class=anchor aria-hidden=true href=#简介>#</a></h2><p><a href=https://github.com/PrismLibrary/Prism>Prism</a>是一个用于WPF、Xamarin Forms、WinUI等的MVVM框架，刚刚学习，这里只是个人总结的一些知识点笔记。</p><h2 id=ioc>IoC<a hidden class=anchor aria-hidden=true href=#ioc>#</a></h2><p><strong><code>IContainerProvider</code></strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>protected</span> <span class=k>override</span> <span class=n>Window</span> <span class=n>CreateShell</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Container</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>MainWindow</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>void</span> <span class=n>OnInitialized</span><span class=p>(</span><span class=n>IContainerProvider</span> <span class=n>containerProvider</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>regionManager</span> <span class=p>=</span> <span class=n>containerProvider</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>IRegionManager</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>viewA</span> <span class=p>=</span> <span class=n>containerProvider</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>ViewA</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong><code>IContainerRegistry</code></strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// App.xaml.cs</span>
+</span></span><span class=line><span class=cl><span class=k>protected</span> <span class=k>override</span> <span class=k>void</span> <span class=n>RegisterTypes</span><span class=p>(</span><span class=n>IContainerRegistry</span> <span class=n>containerRegistry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>containerRegistry</span><span class=p>.</span><span class=n>Register</span><span class=p>&lt;</span><span class=n>IApplicationCommands</span><span class=p>,</span> <span class=n>ApplicationCommands</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=n>containerRegistry</span><span class=p>.</span><span class=n>RegisterDialog</span><span class=p>&lt;</span><span class=n>NotificationDialog</span><span class=p>,</span> <span class=n>NotificationDialogViewModel</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=n>containerRegistry</span><span class=p>.</span><span class=n>RegisterForNavigation</span><span class=p>&lt;</span><span class=n>Page1</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=n>containerRegistry</span><span class=p>.</span><span class=n>RegisterForNavigation</span><span class=p>&lt;</span><span class=n>Page2</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=module>Module<a hidden class=anchor aria-hidden=true href=#module>#</a></h2><p><strong><code>IModule</code></strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>SimpleModule</span> <span class=p>:</span> <span class=n>IModule</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnInitialized</span><span class=p>(</span><span class=n>IContainerProvider</span> <span class=n>containerProvider</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>RegisterTypes</span><span class=p>(</span><span class=n>IContainerRegistry</span> <span class=n>containerRegistry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>使用App.config加载模块</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=c>&lt;!-- App.config --&gt;</span>
+</span></span><span class=line><span class=cl><span class=cp>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;configuration&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;configSections&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;section</span> <span class=na>name=</span><span class=s>&#34;modules&#34;</span> <span class=na>type=</span><span class=s>&#34;Prism.Modularity.ModulesConfigurationSection, Prism.Wpf&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;/configSections&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;startup&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;/startup&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;modules&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;module</span> <span class=na>assemblyFile=</span><span class=s>&#34;Simple.dll&#34;</span> <span class=na>moduleType=</span><span class=s>&#34;Simple.SimpleModule, Simple, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null&#34;</span> <span class=na>moduleName=</span><span class=s>&#34;SimpleModule&#34;</span> <span class=na>startupLoaded=</span><span class=s>&#34;True&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;/modules&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/configuration&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// App.xaml.cs</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>partial</span> <span class=k>class</span> <span class=nc>App</span> <span class=p>:</span> <span class=n>PrismApplication</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>protected</span> <span class=k>override</span> <span class=n>IModuleCatalog</span> <span class=n>CreateModuleCatalog</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>new</span> <span class=n>ConfigurationModuleCatalog</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>直接引用加载模块</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// App.xaml.cs</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>partial</span> <span class=k>class</span> <span class=nc>App</span> <span class=p>:</span> <span class=n>PrismApplication</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>protected</span> <span class=k>override</span> <span class=k>void</span> <span class=n>ConfigureModuleCatalog</span><span class=p>(</span><span class=n>IModuleCatalog</span> <span class=n>moduleCatalog</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>moduleCatalog</span><span class=p>.</span><span class=n>AddModule</span><span class=p>&lt;</span><span class=n>SimpleModule</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>指定模块文件夹</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// App.xaml.cs</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>partial</span> <span class=k>class</span> <span class=nc>App</span> <span class=p>:</span> <span class=n>PrismApplication</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>protected</span> <span class=k>override</span> <span class=n>IModuleCatalog</span> <span class=n>CreateModuleCatalog</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>new</span> <span class=n>DirectoryModuleCatalog</span><span class=p>()</span> <span class=p>{</span> <span class=n>ModulePath</span> <span class=p>=</span> <span class=s>@&#34;.\Modules&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>使用<code>ModuleCatalog</code>加载模块</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;m:ModuleCatalog</span> <span class=na>xmlns=</span><span class=s>&#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&#34;</span>
+</span></span><span class=line><span class=cl>                 <span class=na>xmlns:x=</span><span class=s>&#34;http://schemas.microsoft.com/winfx/2006/xaml&#34;</span>
+</span></span><span class=line><span class=cl>                 <span class=na>xmlns:m=</span><span class=s>&#34;clr-namespace:Prism.Modularity;assembly=Prism.Wpf&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;m:ModuleInfo</span> <span class=na>ModuleName=</span><span class=s>&#34;Simple&#34;</span>
+</span></span><span class=line><span class=cl>                  <span class=na>ModuleType=</span><span class=s>&#34;Simple.SimpleModule, Simple, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/m:ModuleCatalog&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// App.xaml.cs</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>partial</span> <span class=k>class</span> <span class=nc>App</span> <span class=p>:</span> <span class=n>PrismApplication</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>protected</span> <span class=k>override</span> <span class=n>IModuleCatalog</span> <span class=n>CreateModuleCatalog</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>ModuleCatalog</span><span class=p>.</span><span class=n>CreateFromXaml</span><span class=p>(</span><span class=k>new</span> <span class=n>Uri</span><span class=p>(</span><span class=s>&#34;/Modules;component/ModuleCatalog.xaml&#34;</span><span class=p>,</span> <span class=n>UriKind</span><span class=p>.</span><span class=n>Relative</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=command>Command<a hidden class=anchor aria-hidden=true href=#command>#</a></h2><p><strong><code>DelegateCommand</code></strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=n>DelegateCommand</span> <span class=n>ExecuteDelegateCommand</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=n>DelegateCommand</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>ExecuteGenericDelegateCommand</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=n>DelegateCommand</span> <span class=n>DelegateCommandObservesProperty</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=n>DelegateCommand</span> <span class=n>DelegateCommandObservesCanExecute</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>ExecuteDelegateCommand</span> <span class=p>=</span> <span class=k>new</span> <span class=n>DelegateCommand</span><span class=p>(</span><span class=n>Execute</span><span class=p>,</span> <span class=n>CanExecute</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DelegateCommandObservesProperty</span> <span class=p>=</span> <span class=k>new</span> <span class=n>DelegateCommand</span><span class=p>(</span><span class=n>Execute</span><span class=p>,</span> <span class=n>CanExecute</span><span class=p>).</span><span class=n>ObservesProperty</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=n>IsEnabled</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DelegateCommandObservesCanExecute</span> <span class=p>=</span> <span class=k>new</span> <span class=n>DelegateCommand</span><span class=p>(</span><span class=n>Execute</span><span class=p>).</span><span class=n>ObservesCanExecute</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=n>IsEnabled</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>ExecuteGenericDelegateCommand</span> <span class=p>=</span> <span class=k>new</span> <span class=n>DelegateCommand</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;(</span><span class=n>ExecuteGeneric</span><span class=p>).</span><span class=n>ObservesCanExecute</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=n>IsEnabled</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong><code>CompositeCommand</code></strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=n>CompositeCommand</span> <span class=n>SampleCommand</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=p>}</span> <span class=p>=</span> <span class=k>new</span> <span class=n>CompositeCommand</span><span class=p>(</span><span class=k>true</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DelegateCommand</span> <span class=n>UpdateCommand</span> <span class=p>=</span> <span class=k>new</span> <span class=n>DelegateCommand</span><span class=p>(</span><span class=n>Update</span><span class=p>).</span><span class=n>ObservesCanExecute</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=n>CanUpdate</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>SampleCommand</span><span class=p>.</span><span class=n>RegisterCommand</span><span class=p>(</span><span class=n>UpdateCommand</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>private</span> <span class=k>void</span> <span class=n>OnIsActiveChanged</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>UpdateCommand</span><span class=p>.</span><span class=n>IsActive</span> <span class=p>=</span> <span class=n>IsActive</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>IsActiveChanged</span><span class=p>?.</span><span class=n>Invoke</span><span class=p>(</span><span class=k>this</span><span class=p>,</span> <span class=k>new</span> <span class=n>EventArgs</span><span class=p>());</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Event To Command</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;i:Interaction.Triggers&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;i:EventTrigger</span> <span class=na>EventName=</span><span class=s>&#34;SelectionChanged&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;prism:InvokeCommandAction</span> <span class=na>Command=</span><span class=s>&#34;{Binding PersonSelectedCommand}&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=na>CommandParameter=</span><span class=s>&#34;{Binding ElementName=ListOfPerson, Path=SelectedItem}&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/i:EventTrigger&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/i:Interaction.Triggers&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=bindablebase>BindableBase<a hidden class=anchor aria-hidden=true href=#bindablebase>#</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>ViewAViewModel</span> <span class=p>:</span> <span class=n>BindableBase</span><span class=p>,</span> <span class=n>IActiveAware</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=viewmodellocator>ViewModelLocator<a hidden class=anchor aria-hidden=true href=#viewmodellocator>#</a></h2><p><strong>AutoWireViewModel</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;Window</span> <span class=na>x:Class=</span><span class=s>&#34;Demo.Views.MainWindow&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=err>...</span>
+</span></span><span class=line><span class=cl>    <span class=na>xmlns:prism=</span><span class=s>&#34;http://prismlibrary.com/&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=na>prism:ViewModelLocator.AutoWireViewModel=</span><span class=s>&#34;True&#34;</span><span class=nt>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>更改命名约定</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// App.xaml.cs</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>partial</span> <span class=k>class</span> <span class=nc>App</span> <span class=p>:</span> <span class=n>PrismApplication</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>protected</span> <span class=k>override</span> <span class=k>void</span> <span class=n>ConfigureViewModelLocator</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>base</span><span class=p>.</span><span class=n>ConfigureViewModelLocator</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>ViewModelLocationProvider</span><span class=p>.</span><span class=n>SetDefaultViewTypeToViewModelTypeResolver</span><span class=p>((</span><span class=n>viewType</span><span class=p>)</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=kt>var</span> <span class=n>viewName</span> <span class=p>=</span> <span class=n>viewType</span><span class=p>.</span><span class=n>FullName</span><span class=p>.</span><span class=n>Replace</span><span class=p>(</span><span class=s>&#34;.ViewModels.&#34;</span><span class=p>,</span> <span class=s>&#34;.CustomNamespace.&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=kt>var</span> <span class=n>viewAssemblyName</span> <span class=p>=</span> <span class=n>viewType</span><span class=p>.</span><span class=n>GetTypeInfo</span><span class=p>().</span><span class=n>Assembly</span><span class=p>.</span><span class=n>FullName</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=kt>var</span> <span class=n>viewModelName</span> <span class=p>=</span> <span class=s>$&#34;{viewName}ViewModel, {viewAssemblyName}&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>Type</span><span class=p>.</span><span class=n>GetType</span><span class=p>(</span><span class=n>viewModelName</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>自定义ViewModel注册</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// App.xaml.cs</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>partial</span> <span class=k>class</span> <span class=nc>App</span> <span class=p>:</span> <span class=n>PrismApplication</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>protected</span> <span class=k>override</span> <span class=k>void</span> <span class=n>ConfigureViewModelLocator</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>base</span><span class=p>.</span><span class=n>ConfigureViewModelLocator</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// type / type</span>
+</span></span><span class=line><span class=cl>        <span class=n>ViewModelLocationProvider</span><span class=p>.</span><span class=n>Register</span><span class=p>(</span><span class=k>typeof</span><span class=p>(</span><span class=n>MainWindow</span><span class=p>).</span><span class=n>ToString</span><span class=p>(),</span> <span class=k>typeof</span><span class=p>(</span><span class=n>CustomViewModel</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// type / factory</span>
+</span></span><span class=line><span class=cl>        <span class=n>ViewModelLocationProvider</span><span class=p>.</span><span class=n>Register</span><span class=p>(</span><span class=k>typeof</span><span class=p>(</span><span class=n>MainWindow</span><span class=p>).</span><span class=n>ToString</span><span class=p>(),</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=n>Container</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>CustomViewModel</span><span class=p>&gt;());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// generic factory</span>
+</span></span><span class=line><span class=cl>        <span class=n>ViewModelLocationProvider</span><span class=p>.</span><span class=n>Register</span><span class=p>&lt;</span><span class=n>MainWindow</span><span class=p>&gt;(()</span> <span class=p>=&gt;</span> <span class=n>Container</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>CustomViewModel</span><span class=p>&gt;());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// generic type</span>
+</span></span><span class=line><span class=cl>        <span class=n>ViewModelLocationProvider</span><span class=p>.</span><span class=n>Register</span><span class=p>&lt;</span><span class=n>MainWindow</span><span class=p>,</span> <span class=n>CustomViewModel</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=eventaggregator>EventAggregator<a hidden class=anchor aria-hidden=true href=#eventaggregator>#</a></h2><p><strong><code>IEventAggragator</code></strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>interface</span> <span class=nc>IEventAggregator</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>TEventType</span> <span class=n>GetEvent</span><span class=p>&lt;</span><span class=n>TEventType</span><span class=p>&gt;()</span> <span class=k>where</span> <span class=n>TEventType</span> <span class=p>:</span> <span class=n>EventBase</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>创建消息事件类</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>SimpleMessageEvent</span> <span class=p>:</span> <span class=n>PubSubEvent</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>订阅事件</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>private</span> <span class=k>readonly</span> <span class=n>IEventAggregator</span> <span class=n>eventAggregator</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=n>MainPageViewModel</span><span class=p>(</span><span class=n>IEventAggregator</span> <span class=n>ea</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>eventAggregator</span> <span class=p>=</span> <span class=n>ea</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>ea</span><span class=p>.</span><span class=n>GetEvent</span><span class=p>&lt;</span><span class=n>SimpleMessageEvent</span><span class=p>&gt;().</span><span class=n>Subscribe</span><span class=p>(</span><span class=n>ShowMessage</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Subscribing on the UI Thread</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// ea.GetEvent&lt;SimpleMessageEvent&gt;().Subscribe(ShowMessage, ThreadOption.UIThread);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>void</span> <span class=n>ShowMessage</span><span class=p>(</span><span class=kt>string</span> <span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// TODO</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>发布消息</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=n>eventAggregator</span><span class=p>.</span><span class=n>GetEvent</span><span class=p>&lt;</span><span class=n>SimpleMessageEvent</span><span class=p>&gt;().</span><span class=n>Publish</span><span class=p>(</span><span class=s>&#34;Hello!&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>筛选订阅</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=n>ea</span><span class=p>.</span><span class=n>GetEvent</span><span class=p>&lt;</span><span class=n>SimpleMessageEvent</span><span class=p>&gt;().</span><span class=n>Subscribe</span><span class=p>(</span><span class=n>ShowMessage</span><span class=p>,</span> <span class=n>ThreadOption</span><span class=p>.</span><span class=n>UIThread</span><span class=p>,</span> <span class=n>keepSubscriberReferenceAlive</span><span class=p>,</span> <span class=n>x</span> <span class=p>=&gt;</span> <span class=n>x</span><span class=p>.</span><span class=n>Contains</span><span class=p>(</span><span class=s>&#34; &#34;</span><span class=p>));</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>取消订阅</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=n>eventAggregator</span><span class=p>.</span><span class=n>GetEvent</span><span class=p>&lt;</span><span class=n>SimpleMessageEvent</span><span class=p>&gt;().</span><span class=n>Unsubscribe</span><span class=p>(</span><span class=n>ShowMessage</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=regionmanager>RegionManager<a hidden class=anchor aria-hidden=true href=#regionmanager>#</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;Window</span> <span class=na>x:Class=</span><span class=s>&#34;Regions.Views.MainWindow&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=na>xmlns=</span><span class=s>&#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=na>xmlns:x=</span><span class=s>&#34;http://schemas.microsoft.com/winfx/2006/xaml&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=na>xmlns:prism=</span><span class=s>&#34;http://prismlibrary.com/&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=na>Title=</span><span class=s>&#34;Shell&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;Grid&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;ContentControl</span> <span class=na>prism:RegionManager.RegionName=</span><span class=s>&#34;ContentRegion&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/Grid&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/Window&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// IContainerProvider containerProvider</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>regionManager</span> <span class=p>=</span> <span class=n>containerProvider</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>IRegionManager</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl><span class=n>regionManager</span><span class=p>.</span><span class=n>RegisterViewWithRegion</span><span class=p>(</span><span class=s>&#34;ContentRegion&#34;</span><span class=p>,</span> <span class=k>typeof</span><span class=p>(</span><span class=n>ViewA</span><span class=p>));</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// IContainerProvider containerProvider</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>regionManager</span> <span class=p>=</span> <span class=n>containerProvider</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>IRegionManager</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>region</span> <span class=p>=</span> <span class=n>regionManager</span><span class=p>.</span><span class=n>Regions</span><span class=p>[</span><span class=s>&#34;ContentRegion&#34;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>region</span><span class=p>.</span><span class=n>Add</span><span class=p>(</span><span class=n>containerProvider</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>ViewA</span><span class=p>&gt;());</span>
+</span></span><span class=line><span class=cl><span class=n>region</span><span class=p>.</span><span class=n>Add</span><span class=p>(</span><span class=n>containerProvider</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>ViewB</span><span class=p>&gt;());</span>
+</span></span><span class=line><span class=cl><span class=n>region</span><span class=p>.</span><span class=n>Add</span><span class=p>(</span><span class=n>containerProvider</span><span class=p>.</span><span class=n>Resolve</span><span class=p>&lt;</span><span class=n>ViewC</span><span class=p>&gt;());</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=regionnavigation>RegionNavigation<a hidden class=anchor aria-hidden=true href=#regionnavigation>#</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// IRegionManager regionManager</span>
+</span></span><span class=line><span class=cl><span class=n>regionManager</span><span class=p>.</span><span class=n>RequestNavigate</span><span class=p>(</span><span class=n>regionName</span><span class=p>:</span> <span class=s>&#34;NavigateRegion&#34;</span><span class=p>,</span> <span class=n>source</span><span class=p>:</span> <span class=s>&#34;Page1&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Navigation Callback</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// IRegionManager regionManager</span>
+</span></span><span class=line><span class=cl><span class=n>regionManager</span><span class=p>.</span><span class=n>RequestNavigate</span><span class=p>(</span><span class=n>regionName</span><span class=p>:</span> <span class=s>&#34;NavigateRegion&#34;</span><span class=p>,</span> <span class=n>source</span><span class=p>:</span> <span class=s>&#34;Page1&#34;</span><span class=p>,</span> <span class=n>navigationCallback</span><span class=p>:</span> <span class=n>NavigationComplete</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>private</span> <span class=k>void</span> <span class=n>NavigationComplete</span><span class=p>(</span><span class=n>NavigationResult</span> <span class=n>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>dialogService</span><span class=p>.</span><span class=n>ShowDialog</span><span class=p>(</span><span class=s>&#34;NotificationDialog&#34;</span><span class=p>,</span> <span class=k>new</span> <span class=n>DialogParameters</span><span class=p>(</span><span class=s>$&#34;message=Navigate to {result.Context.Uri} complete.&#34;</span><span class=p>),</span> <span class=k>null</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Navigation Parameters</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kt>var</span> <span class=n>parameters</span> <span class=p>=</span> <span class=k>new</span> <span class=n>NavigationParameters</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span> <span class=s>&#34;content&#34;</span><span class=p>,</span> <span class=s>&#34;Hello!&#34;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=c1>// IRegionManager regionManager</span>
+</span></span><span class=line><span class=cl><span class=n>regionManager</span><span class=p>.</span><span class=n>RequestNavigate</span><span class=p>(</span><span class=n>regionName</span><span class=p>:</span> <span class=s>&#34;NavigateRegion&#34;</span><span class=p>,</span> <span class=n>source</span><span class=p>:</span> <span class=s>&#34;Page1&#34;</span><span class=p>,</span> <span class=n>navigationParameters</span><span class=p>:</span> <span class=n>parameters</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>INavigationAware</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Page1ViewModel</span> <span class=p>:</span> <span class=n>BindableBase</span><span class=p>,</span> <span class=n>INavigationAware</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>bool</span> <span class=n>IsNavigationTarget</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnNavigatedFrom</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnNavigatedTo</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>navigationContext</span><span class=p>.</span><span class=n>Parameters</span><span class=p>[</span><span class=s>&#34;content&#34;</span><span class=p>]</span> <span class=k>is</span> <span class=kt>string</span> <span class=n>content</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// TODO</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>IConfirmNavigationRequest</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Page1ViewModel</span> <span class=p>:</span> <span class=n>BindableBase</span><span class=p>,</span> <span class=n>IConfirmNavigationRequest</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>ConfirmNavigationRequest</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>,</span> <span class=n>Action</span><span class=p>&lt;</span><span class=kt>bool</span><span class=p>&gt;</span> <span class=n>continuationCallback</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>bool</span> <span class=n>result</span> <span class=p>=</span> <span class=k>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>ButtonResult</span> <span class=n>buttonResult</span> <span class=p>=</span> <span class=n>ButtonResult</span><span class=p>.</span><span class=n>None</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>dialogService</span><span class=p>.</span><span class=n>ShowDialog</span><span class=p>(</span><span class=s>&#34;NotificationDialog&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=k>new</span> <span class=n>DialogParameters</span><span class=p>(</span><span class=s>$&#34;message=Do you to navigate?&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=n>res</span> <span class=p>=&gt;</span> <span class=p>{</span> <span class=n>buttonResult</span> <span class=p>=</span> <span class=n>res</span><span class=p>.</span><span class=n>Result</span><span class=p>;</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>buttonResult</span> <span class=p>!=</span> <span class=n>ButtonResult</span><span class=p>.</span><span class=n>OK</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>result</span> <span class=p>=</span> <span class=k>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>continuationCallback</span><span class=p>(</span><span class=n>result</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>IRegionMemberLifetime</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Page1ViewModel</span> <span class=p>:</span> <span class=n>BindableBase</span><span class=p>,</span> <span class=n>INavigationAware</span><span class=p>,</span> <span class=n>IRegionMemberLifetime</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>bool</span> <span class=n>KeepAlive</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>get</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=k>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>bool</span> <span class=n>IsNavigationTarget</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnNavigatedFrom</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnNavigatedTo</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Navigation Journal</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Page1ViewModel</span> <span class=p>:</span> <span class=n>BindableBase</span><span class=p>,</span> <span class=n>INavigationAware</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=n>IRegionNavigationJournal</span> <span class=n>journal</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>DelegateCommand</span> <span class=n>GoForwardCommand</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>DelegateCommand</span> <span class=n>GoBackCommand</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>Page1ViewModel</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>GoForwardCommand</span> <span class=p>=</span> <span class=k>new</span> <span class=n>DelegateCommand</span><span class=p>(</span><span class=n>GoForward</span><span class=p>,</span> <span class=n>CanGoForward</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>GoBackCommand</span> <span class=p>=</span> <span class=k>new</span> <span class=n>DelegateCommand</span><span class=p>(</span><span class=n>GoBack</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>bool</span> <span class=n>IsNavigationTarget</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnNavigatedFrom</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnNavigatedTo</span><span class=p>(</span><span class=n>NavigationContext</span> <span class=n>navigationContext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>journal</span> <span class=p>=</span> <span class=n>navigationContext</span><span class=p>.</span><span class=n>NavigationService</span><span class=p>.</span><span class=n>Journal</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>GoForwardCommand</span><span class=p>.</span><span class=n>RaiseCanExecuteChanged</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=kt>bool</span> <span class=n>CanGoForward</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>journal</span> <span class=p>!=</span> <span class=k>null</span> <span class=p>&amp;&amp;</span> <span class=n>journal</span><span class=p>.</span><span class=n>CanGoForward</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=k>void</span> <span class=n>GoForward</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>journal</span><span class=p>?.</span><span class=n>GoForward</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=k>void</span> <span class=n>GoBack</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>journal</span><span class=p>?.</span><span class=n>GoBack</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=dialogservice>DialogService<a hidden class=anchor aria-hidden=true href=#dialogservice>#</a></h2><p>See DOC. <a href=https://prismlibrary.com/docs/wpf/dialog-service.html>Dialog Service</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// DialogServiceModule.cs</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>void</span> <span class=n>RegisterTypes</span><span class=p>(</span><span class=n>IContainerRegistry</span> <span class=n>containerRegistry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>containerRegistry</span><span class=p>.</span><span class=n>RegisterDialog</span><span class=p>&lt;</span><span class=n>NotificationDialog</span><span class=p>,</span> <span class=n>NotificationDialogViewModel</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// containerRegistry.RegisterDialogWindow&lt;MyRibbonWindow&gt;();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=c1>// viewmodel</span>
+</span></span><span class=line><span class=cl><span class=k>private</span> <span class=k>readonly</span> <span class=n>IDialogService</span> <span class=n>dialogService</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=n>MainViewModel</span><span class=p>(</span><span class=n>IDialogService</span> <span class=n>dialogService</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=n>dialogService</span> <span class=p>=</span> <span class=n>dialogService</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>private</span> <span class=k>void</span> <span class=n>NavigationComplete</span><span class=p>(</span><span class=n>NavigationResult</span> <span class=n>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Show Dialog with parameters.</span>
+</span></span><span class=line><span class=cl>    <span class=n>dialogService</span><span class=p>.</span><span class=n>ShowDialog</span><span class=p>(</span><span class=s>&#34;NotificationDialog&#34;</span><span class=p>,</span> <span class=k>new</span> <span class=n>DialogParameters</span><span class=p>(</span><span class=s>$&#34;message=Navigate to {result.Context.Uri} complete.&#34;</span><span class=p>),</span> <span class=k>null</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考>参考<a hidden class=anchor aria-hidden=true href=#参考>#</a></h2><ul><li><a href=https://prismlibrary.com/docs/index.html>Documentation</a></li><li><a href=https://github.com/PrismLibrary/Prism-Samples-Wpf>Prism-Samples-Wpf</a></li></ul></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/wpf/>WPF</a></li><li><a href=https://kira-96.github.io/tags/prism/>Prism</a></li></ul><nav class=paginav><a class=prev href=https://kira-96.github.io/Inno-Setup-Chinese-Simplified-Translation/><span class=title>« 上一页</span><br><span>Inno Setup 简体中文语言包</span></a>
+<a class=next href=https://kira-96.github.io/posts/inno-setup-6.1.0-%E6%96%B0%E5%A2%9E%E7%9A%84%E5%8A%9F%E8%83%BD%E4%BD%93%E9%AA%8C/><span class=title>下一页 »</span><br><span>Inno Setup 6.1.0 新增的功能体验</span></a></nav></footer></article></main><footer class=footer><span>© 2019-2023 <a href=/>kira</a> ·</span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
