@@ -1,59 +1,102 @@
 baseURL = "https://kira-96.github.io/"
-languageCode = "zh-cn"
+defaultContentLanguage = "zh"
+languageCode = "zh"
 title = "kira's 博客"
-author = "kira-96"
-copyright = "[kira-96](/) &#183; Theme [Simpleness](https://github.com/RainerChiang/simpleness)|Powered by [Hugo](https://gohugo.io/)"
+author = "kira"
+copyright = "© 2019-2023 [kira](/) &#183;"
 
-theme = "simpleness"
+theme = "PaperMod"
 
 enableInlineShortcodes = true
 enableEmoji = true
-
-## 保持分类的原始名字（false会做转小写处理）
-preserveTaxonomyNames = true
-## 是否禁止URL Path转小写
-disablePathToLower = true
-## 自动检测是否包含中文/日文/韩文，建议设置为true
-hasCJKLanguage = true
-
-[params]
-  lazyImage = true
-  enableMathJax = false # enable it in Front Matter
-  enableReadingTime = true
-  favicon = "favicon.ico"
-  startyear = "2019"
-  showmonth = true
-  # slogan = "always make it happen"
-  description = "kira's blog"
-  disqus = "kira"
-
-[params.valine]
-  enable = true
-  lang = 'zh-CN'
-  appId = 'X8gbfFnXlzbwF0YQQ91rSogz-gzGzoHsz'
-  appKey = 'ljO0GYMaeqs5KWK2vCtk1Ii8'
-  placeholder = '在这里写下你的留言丨支持 Markdown 语法'
-  requiredFields = ['nick', 'mail']
-  recordIP = true
-  avatar = 'mp'
-  visitor = true
-  enableHeaderVisitor = true
-  enableQQ = true
-  debug = false
+enableRobotsTXT = true
+buildDrafts = true
+buildFuture = false
+buildExpired = false
+pygmentsUseClasses = true
+# paginate = 5
 
 [menu]
   [[menu.main]]
-  name = "Home"
+  name = "主页"
   url = "/"
   weight = 1
   [[menu.main]]
-  name = "Notes"
+  name = "笔记"
   url = "/notes/"
   weight = 2
 
-[social]
-  github = "https://github.com/kira-96/"
-  rss = "index.xml"
+[params]
+  description = "kira's blog"
+  favicon = "favicon.ico"
+  lazyImage = true
+  defaultTheme = "auto" # dark, light
+  disableThemeToggle = false
+
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  comments = true
+  hidemeta = false
+  hideSummary = false
+  showtoc = false
+  tocopen = false
+
+# home-info mode
+[params.homeInfoParams]
+  Title = "kira✨博客🎐"
+  Content = "欢迎来到我的博客🎉"
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/kira-96/"
+[[params.socialIcons]]
+  name = "Rss"
+  url = "index.xml"
+
+[params.cover]
+  hidden = true # hide everywhere but not in structured data
+  hiddenInList = true # hide on list pages and home
+  hiddenInSingle = true # hide on single page
+
+[params.editPost]
+  URL = "https://github.com/kira-96/kira-96.github.io/tree/main/content/posts/"
+  Text = "编辑" # edit text
+  appendFilePath = false # to append file path to Edit link
+
+[params.assets]
+  # disableHLJS = true # to disable highlight.js
+  # disableFingerprinting = true
+  favicon = "https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico"
+  favicon16x16 = "https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png"
+  favicon32x32 = "https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png"
+  apple_touch_icon = "https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png"
+  safari_pinned_tab = "https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-76x76.png"
+  theme_color = "#2e2e33"
+  msapplication_TileColor = "#2e2e33"
+
+# profile-mode
+[params.profileMode]
+  enabled = false # needs to be explicitly set
+  title = "kira's 博客"
+  subtitle = "欢迎来到我的博客"
+  imageUrl = "https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-120x120.png"
+  imageWidth = 120
+  imageHeight = 120
+  imageTitle = ""
+  [[params.profileMode.buttons]]
+  name = "主页"
+  url = "posts"
+  [[params.profileMode.buttons]]
+  name = "笔记"
+  url = "notes"
 
 # doc: https://gohugo.io/getting-started/configuration-markup#highlight
 # syntax style: https://xyproto.github.io/splash/docs/longer/all.html
@@ -63,8 +106,8 @@ hasCJKLanguage = true
     guessSyntax = false
     hl_Lines = ""
     lineNoStart = 1
-    lineNos = false
+    lineNos = true
     lineNumbersInTable = true
-    noClasses = true
+    noClasses = false
     style = "monokai" # github, dracula, vim, monokai
     tabWidth = 4

@@ -12,10 +12,16 @@ Use [Hugo](https://gohugo.io/) & theme [Simpleness](https://github.com/RainerChi
 $ git clone --recurse-submodules https://github.com/kira-96/kira-96.github.io.git
 ```
 
+### Build
+
+``` bash
+$ hugo -D server
+```
+
 ### Update Theme
 
 ``` bash
-$ git submodule update --remote themes/simpleness
+$ git submodule update --remote themes/PaperMod
 ```
 
 ### New draft
