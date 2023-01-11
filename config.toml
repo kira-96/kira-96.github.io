@@ -98,6 +98,13 @@ pygmentsUseClasses = true
   name = "笔记"
   url = "notes"
 
+# utterances
+[params.utterances]
+  enabled = true
+  repo = "kira-96/kira-96.github.io"
+  issueTerm = "pathname"
+  theme = "github-light"
+
 # doc: https://gohugo.io/getting-started/configuration-markup#highlight
 # syntax style: https://xyproto.github.io/splash/docs/longer/all.html
 [markup]

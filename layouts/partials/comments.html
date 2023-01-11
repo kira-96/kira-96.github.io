@@ -1,0 +1,12 @@
+{{- /* Comments area start */ -}}
+{{- /* to add comments read => https://gohugo.io/content-management/comments/ */ -}}
+{{- if site.Params.utterances.enabled }}
+<script src="https://utteranc.es/client.js"
+        repo="{{ site.Params.utterances.repo }}"
+        issue-term="{{ site.Params.utterances.issueTerm }}"
+        theme="{{ site.Params.utterances.theme }}"
+        crossorigin="anonymous"
+        async>
+</script>
+{{- end }}
+{{- /* Comments area end */ -}}
