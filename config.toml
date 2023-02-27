@@ -1,7 +1,7 @@
 baseURL = "https://kira-96.github.io/"
 defaultContentLanguage = "zh"
 languageCode = "zh"
-title = "kira's 博客"
+title = "kiraの博客"
 author = "kira"
 copyright = "© 2019-2023 [kira](/) &#183;"
 
@@ -51,12 +51,15 @@ pygmentsUseClasses = true
 
 # home-info mode
 [params.homeInfoParams]
-  Title = "kira✨博客🎐"
+  Title = "✨kiraの博客🎐"
   Content = "欢迎来到我的博客🎉"
 
 [[params.socialIcons]]
   name = "github"
   url = "https://github.com/kira-96/"
+[[params.socialIcons]]
+  name = "bilibili"
+  url = "https://space.bilibili.com/9258847"
 [[params.socialIcons]]
   name = "Rss"
   url = "index.xml"
