@@ -46,7 +46,7 @@ TestJsonDeseClass des =
 
 那么如果不想序列化/反序列化某个成员变量呢？
 
-``` csharp {5}
+``` csharp
 using Newtonsoft.Json;
 
 public class TestJsonDeseClass
@@ -62,7 +62,7 @@ public class TestJsonDeseClass
 
 如果JSON字符串中的属性名字和定义的类中的成员名字不一样怎么办呢？怎样才能正确的给成员变量赋值呢？
 
-```csharp {5}
+```csharp
 using Newtonsoft.Json;
 
 public class TestJsonDeseClass
@@ -80,7 +80,7 @@ public class TestJsonDeseClass
 
 当然这样也是可以的，不过需要我们给类添加构造方法，在构造方法中对成员赋值，不能再使用默认的构造方法，因为默认的构造方法不会对成员赋值，而外部也无法对成员赋值。在添加了构造方法后，Json.NET会自动调用类的构造方法。
 
-``` csharp {9}
+``` csharp
 using Newtonsoft.Json;
 
 public class TestJsonDeseClass
@@ -101,7 +101,7 @@ public class TestJsonDeseClass
 
 如果把上面的构造方法改成下面这个样子
 
-``` csharp {1}
+``` csharp
 public TestJsonDeseClass(Guid guid, string message)
 {
     MessageGuid = guid;
@@ -113,7 +113,7 @@ public TestJsonDeseClass(Guid guid, string message)
 
 那么，最后一个问题，如果我的类有多个构造方法，我怎样告诉Json.NET应该用哪一个呢？
 
-``` csharp {13}
+``` csharp
 using Newtonsoft.Json;
 
 public class TestJsonDeseClass

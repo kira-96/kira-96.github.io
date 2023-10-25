@@ -23,7 +23,7 @@ using System.IO.Pipes;
 
 **创建管道**
 
-``` csharp {7,9}
+``` csharp
 PipeSecurity security = new PipeSecurity();  // 管道权限
 // 设置规则，只有用户admin可以对管道进行读写，其它用户无权访问
 security.AddAccessRule(new PipeAccessRule("admin", PipeAccessRights.ReadWrite, AccessControlType.Allow));
@@ -51,7 +51,7 @@ server.WaitForConnection();  // 阻塞方式
 server.BeginWaitForConnection(new AsyncCallback(WaitConnectionCallback), server);  // 非阻塞方式
 ```
 
-``` csharp {4,52-54}
+``` csharp
 private void WaitConnectionCallback(IAsyncResult asyncResult)
 {
     NamedPipeServerStream server = asyncResult.AsyncState as NamedPipeServerStream;
@@ -134,7 +134,7 @@ NamedPipeClientStream client = new NamedPipeClientStream(
 client.Connect();  // 阻塞方式
 ```
 
-``` csharp {6}
+``` csharp
 Task.Run(() =>
 {
     int bytesToRead;

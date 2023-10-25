@@ -24,7 +24,7 @@ categories: ["技术"]
 
 将需要复用的IO添加到`pinctrl_hog`节点，例：
 
-``` c {13-18}
+``` c
 /* kernel/arch/arm64/boot/dts/freescale/OK8MP-C.dts */
 &iomuxc {
 	pinctrl-names = "default";
