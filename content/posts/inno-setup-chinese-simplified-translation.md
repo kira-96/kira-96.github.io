@@ -25,7 +25,7 @@ url: "Inno-Setup-Chinese-Simplified-Translation"
 
   如果你是通过新建脚本的方式创建脚本，在**Languages**选项勾选**Chinese Simplified**即可：
 
-  ![wizard](https://cdn.staticaly.com/gh/kira-96/Inno-Setup-Chinese-Simplified-Translation/main/Wizard.png)
+  ![wizard](https://cdn.jsdelivr.net/gh/kira-96/Inno-Setup-Chinese-Simplified-Translation@main/Wizard.png)
 
   如果你需要在现有脚本中添加简体中文支持
   直接在你的脚本的`[Languages]`部分添加下面一行即可

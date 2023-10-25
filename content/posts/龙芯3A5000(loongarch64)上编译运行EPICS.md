@@ -14,7 +14,7 @@ categories: ["EPICS"]
 
 这次使用的是龙博特龙芯3A5000电脑主机。
 
-![Loongson-3A5000-HV](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/2023-02-01_12-58-17.png)
+![Loongson-3A5000-HV](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_12-58-17.png)
 
 虽然EPICS官方并没有适配`loongarch`和`mips64`，无法做到开箱即用，但只要有gcc、g++、make、perl这些工具，理论上就能编译运行EPICS，在开始编译前，确保你的设备上已经装好了这些工具。
 
@@ -45,13 +45,13 @@ $ cd /usr/local/epics/base-7.0.7/
 $ make
 ```
 
-![3A5000编译错误](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/2023-02-01_13-04-33.png)
+![3A5000编译错误](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_13-04-33.png)
 
 不出所料，果然失败了，输出的错误和在3A4000上编译时的错误也有一些不同。
 
 下面是在3A4000上编译时输出的错误：
 
-![3A4000编译错误](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/localhost-usr-local-epics-base-7.0.7.png)
+![3A4000编译错误](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/localhost-usr-local-epics-base-7.0.7.png)
 
 下面一行报错是差不多的，在`loongarch64`上编译却多了上面一行报错，意思就是没有识别出`loongarch64`架构。
 
@@ -67,7 +67,7 @@ $ vi ./src/tools/EpicsHostArch.pl
 
 既然识别不了`loongarch64`，那我们就手动添加一行，让它可以识别就行了，即使看不太懂上面的脚本也没关系，看个半懂就行了。
 
-![Architecture](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/2023-02-01_13-32-04.png)
+![Architecture](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_13-32-04.png)
 
 我们在如图的光标位置添加一行内容，来让它可以识别`loongarch64`架构。
 
@@ -77,7 +77,7 @@ return 'linux-loongarch64'  if m/^loongarch64-linux/;
 
 此时我们再执行一下`make`命令。
 
-![3A5000编译错误](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/2023-02-01_13-32-44.png)
+![3A5000编译错误](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_13-32-44.png)
 
 可以看到，现在已经可以识别出`loongarch64-linux`了，报错和在3A4000上编译时也基本一样了。
 
@@ -201,7 +201,7 @@ $ make -j8
 
 编译完后查看编译输出目录`bin/linux-loongarch64/`。
 
-![编译输出目录](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/2023-02-01_14-09-04.png)
+![编译输出目录](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_14-09-04.png)
 
 ## 添加到PATH
 
@@ -256,7 +256,7 @@ $ . .bashrc
 
 在终端执行`softIoc`。
 
-![softIoc](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/2023-02-01_14-13-20.png)
+![softIoc](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_14-13-20.png)
 
 运行正常，大功告成！
 

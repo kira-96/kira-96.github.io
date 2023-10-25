@@ -171,9 +171,9 @@ export QE_ARCHIVE_LIST="http://192.168.1.2:17665/mgmt/bpl"
 export EPICS_CA_ADDR_LIST="192.168.1.2:5732 192.168.1.3:6666"
 ```
 
-![关于QEGui](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/2023-05-04_11-05-23.png)
+![关于QEGui](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-05-04_11-05-23.png)
 
-![QE控件](https://cdn.staticaly.com/gh/kira-96/Picture/main/blog/images/2023-05-04_11-04-19.png)
+![QE控件](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-05-04_11-04-19.png)
 
 ## 参考链接
 - [EPICS Qt at GitHub](https://qtepics.github.io)
