@@ -1,5 +1,6 @@
 # hugo
 hugo.exe
+.hugo_build.lock
 
 # Build dist dir
 public/
