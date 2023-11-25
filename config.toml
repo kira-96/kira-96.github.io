@@ -25,6 +25,15 @@ pygmentsUseClasses = true
   name = "笔记"
   url = "/notes/"
   weight = 2
+  [[menu.main]]
+  name = "存档"
+  url = "/archives/"
+  [[menu.main]]
+  name = "搜索"
+  url = "/search/"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
 [params]
   description = "kira's blog"
@@ -100,6 +109,12 @@ pygmentsUseClasses = true
   [[params.profileMode.buttons]]
   name = "笔记"
   url = "notes"
+  [[params.profileMode.buttons]]
+  name = "存档"
+  url = "archives"
+  [[params.profileMode.buttons]]
+  name = "搜索"
+  url = "search"
 
 # utterances
 [params.utterances]
