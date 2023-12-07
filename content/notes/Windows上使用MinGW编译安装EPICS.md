@@ -1,6 +1,7 @@
 ---
 title: "Windows上使用MinGW编译安装EPICS"
 date: 2023-11-29T18:57:02+08:00
+lastmod: 2023-12-07T09:43:50+08:00
 draft: true
 tags: ["EPICS"]
 keywords: ["EPICS"]
@@ -17,6 +18,8 @@ categories: ["EPICS"]
 这里使用MinGW环境编译EPICS，不使用MSVC编译器。
 
 ## 安装 Strawberry Perl
+
+这里选择 [Strawberry Perl 5.32.1.1](https://strawberryperl.com/release-notes/5.32.1.1-64bit.html)。经测试`base-7.0.7`可正常编译，后续版本的perl编译会报错。
 
 直接安装即可，需要注意的是，安装路径不能有空格和中文，最好放在盘符的根目录下。  
 例：`D:\Strawberry`
@@ -35,18 +38,17 @@ D:\Strawberry\perl\bin
 
 ```shell
 > perl -v
-Locale 'Chinese (Simplified)_China.936' is unsupported, and may crash the interpreter.
 
-This is perl 5, version 38, subversion 0 (v5.38.0) built for MSWin32-x64-multi-thread
+This is perl 5, version 32, subversion 1 (v5.32.1) built for MSWin32-x64-multi-thread
 
-Copyright 1987-2023, Larry Wall
+Copyright 1987-2021, Larry Wall
 
 Perl may be copied only under the terms of either the Artistic License or the
 GNU General Public License, which may be found in the Perl 5 source kit.
 
 Complete documentation for Perl, including FAQ lists, should be found on
 this system using "man perl" or "perldoc perl".  If you have access to the
-Internet, point your browser at https://www.perl.org/, the Perl Home Page.
+Internet, point your browser at http://www.perl.org/, the Perl Home Page.
 ```
 
 ## 编译安装EPICS Base
