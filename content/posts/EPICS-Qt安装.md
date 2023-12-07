@@ -1,6 +1,7 @@
 ---
 title: "EPICS Qt安装"
 date: 2023-05-04T15:06:56+08:00
+lastmod: 2023-12-07T15:57:05+08:00
 draft: false
 description: Linux上编译安装EPICS Qt
 tags: ["linux", "EPICS", "Qt", "龙芯"]
@@ -132,20 +133,6 @@ make
 - 编译`qegui`
 `$HOME/QtEpics/qegui/qeguiApp/project/QEGuiApp.pro`
 
-*编译过程中可能会遇到一些问题*，汇总如下：
-
-- 找不到Qwt的头文件
-  > 解决办法: 修改qeframework/qeframeworkSup/project/common/common.pri
-  ```diff
-   INCLUDEPATH += $$PWD
-  +INCLUDEPATH += $$(QWT_INCLUDE_PATH)
-  ```
-- 找不到QEFramework的头文件
-  > 解决办法: 修改对应项目的项目文件
-  ```diff
-  +INCLUDEPATH += $$(QE_FRAMEWORK)/include
-  ```
-
 最后将编译生成的文件复制到以下位置，例：
 
 ```sh
@@ -174,6 +161,45 @@ export EPICS_CA_ADDR_LIST="192.168.1.2:5732 192.168.1.3:6666"
 ![关于QEGui](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-05-04_11-05-23.png)
 
 ![QE控件](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-05-04_11-04-19.png)
+
+## 问题汇总
+
+*编译过程中可能会遇到一些问题*
+
+- 找不到Qwt的头文件
+  > 解决办法: 修改qeframework/qeframeworkSup/project/common/common.pri
+  ```diff
+   INCLUDEPATH += $$PWD
+  +INCLUDEPATH += $$(QWT_INCLUDE_PATH)
+  ```
+- 找不到QEFramework的头文件
+  > 解决办法: 修改对应项目的项目文件
+  ```diff
+  +INCLUDEPATH += $$(QE_FRAMEWORK)/include
+  ```
+
+*Windows上编译踩坑*
+
+> 我这里使用的是MinGW编译器，仅供参考。Windows编译安装EPICS，可以参考我的[笔记](../../notes/windows上使用mingw编译安装epics/)。
+
+- ACAI编译报错，这个是由于平台函数的差异导致的报错。
+  > 我已经提交了修复补丁，参考 [fix build error on windows](https://github.com/andrewstarritt/acai/pull/2)。
+
+- 编译google protobuf
+
+  网上有很多关于windows编译google protobuf的文章。请自行搜索解决。
+
+- Windows上运行程序
+  
+  将编译过程中生成的DLL全部复制到`qegui`程序目录下，大致汇总一下有：
+
+  `qwt.dll`，`libprotobuf.dll`，`acai.dll`，`QEFramework.dll`，**`archapplData.dll`**（这个是在Windows上才会生成，在`qeframework\archapplDataSup\src\O.windows-x64-mingw\`目录下可以找到）
+
+  EPICS相关的DLL:
+
+  `ca.dll`，`Com.dll`，`nt.dll`，`pvAccess.dll`，`pvData.dll`
+
+  以及Qt相关的DLL。
 
 ## 参考链接
 - [EPICS Qt at GitHub](https://qtepics.github.io)
