@@ -195,6 +195,8 @@ export EPICS_CA_ADDR_LIST="192.168.1.2:5732 192.168.1.3:6666"
 
   `qwt.dll`，`libprotobuf.dll`，`acai.dll`，`QEFramework.dll`，**`archapplData.dll`**（这个是在Windows上才会生成，在`qeframework\archapplDataSup\src\O.windows-x64-mingw\`目录下可以找到）
 
+  `designer/QEPlugin.dll`，这个也很重要，不然`qegui`加载`.ui`文件会显示空白。
+
   EPICS相关的DLL:
 
   `ca.dll`，`Com.dll`，`nt.dll`，`pvAccess.dll`，`pvData.dll`
