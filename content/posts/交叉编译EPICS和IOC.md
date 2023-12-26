@@ -133,6 +133,7 @@ base
 │   └─ linux-loongarch64
 ├─ db
 ├─ dbd
+├─ include (可选)
 └─ lib
     └─ linux-loongarch64
 ```
@@ -155,9 +156,13 @@ epics>
 $ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/base/lib/linux-loongarch64
 ```
 
+> ※ include 目录不是EPICS运行必需的，但如果要基于EPICS进行开发，可能需要用到EPICS的头文件。
+
+例如：[交叉编译 ACAI](../../notes/cross-compiling-acai/)
+
 ## 编译 IOC
 
-前面已经讲了，我么需要在构建主机上交叉编译IOC，具体步骤和直接创建编译IOC基本一样。
+前面已经讲了，我们需要在构建主机上交叉编译IOC，具体步骤和直接创建编译IOC基本一样。
 
 ``` shell
 $ cd ~
