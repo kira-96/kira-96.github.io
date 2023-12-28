@@ -1,7 +1,7 @@
 ---
 title: "EPICS Qt安装"
 date: 2023-05-04T15:06:56+08:00
-lastmod: 2023-12-07T15:57:05+08:00
+lastmod: 2023-12-28T09:25:36+08:00
 draft: false
 description: Linux上编译安装EPICS Qt
 tags: ["linux", "EPICS", "Qt", "龙芯"]
@@ -178,16 +178,33 @@ export EPICS_CA_ADDR_LIST="192.168.1.2:5732 192.168.1.3:6666"
   +INCLUDEPATH += $$(QE_FRAMEWORK)/include
   ```
 
-*Windows上编译踩坑*
+***Windows上编译踩坑***
 
 > 我这里使用的是MinGW编译器，仅供参考。Windows编译安装EPICS，可以参考我的[笔记](../../notes/windows上使用mingw编译安装epics/)。
 
 - ACAI编译报错，这个是由于平台函数的差异导致的报错。
   > 我已经提交了修复补丁，参考 [fix build error on windows](https://github.com/andrewstarritt/acai/pull/2)。
 
-- 编译google protobuf
+- 编译 google protobuf
 
   网上有很多关于windows编译google protobuf的文章。请自行搜索解决。
+
+- 编译 QEFramework
+
+  这里需要修改`configure/RELEASE.local`，示例：
+
+``` shell
+EPICS_HOST_ARCH=windows-x64-mingw
+EPICS_BASE=C:\Users\YourName\.epics\base-7.0.8
+ACAI=D:\source\acai
+QE_FRAMEWORK=D:\source\qeframework
+QE_PVACCESS_SUPPORT=YES
+QE_ARCHAPPL_SUPPORT=YES
+PROTOBUF_INCLUDE_PATH=D:\source\protobuf-3.21.12\src
+PROTOBUF_LIB_DIR=D:\source\protobuf-3.21.12\build
+QWT_INCLUDE_PATH=D:\source\qwt-6.2.0\src
+QWT_ROOT=D:\source\build-qwt-Desktop_Qt_5_15_2_MinGW_64_bit-Release
+```
 
 - Windows上运行程序
   
