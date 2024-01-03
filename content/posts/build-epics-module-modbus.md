@@ -1,6 +1,7 @@
 ---
 title: "EPICS的MODBUS模块的编译和使用"
 date: 2024-01-02T14:38:38+08:00
+lastmod: 2024-01-03T08:52:53+08:00
 draft: false
 description: 交叉编译EPICS的MODBUS模块
 tags: ["linux", "EPICS", "龙芯"]
@@ -24,8 +25,8 @@ Modbus 提供对以下 4 种类型的数据的访问：
 |:---:|:---:|:---:|:---:|
 |离散输入|1bit|只读|这种类型的数据可以由 I/O 系统提供。|
 |线圈|1bit|读写|此类数据可由应用程序更改。|
-|输入寄存器|16位 word|只读|这种类型的数据可以由 I/O 系统提供。|
-|保持寄存器|16位 word|读写|此类数据可由应用程序更改。|
+|输入寄存器|16位字(2字节)|只读|这种类型的数据可以由 I/O 系统提供。|
+|保持寄存器|16位字(2字节)|读写|此类数据可由应用程序更改。|
 
 Modbus 通信由从 Modbus 客户端发送到 Modbus 服务器的请求消息组成。服务器使用响应消息进行回复。Modbus 请求消息包含：
 
@@ -51,7 +52,7 @@ Modbus读取操作仅限于传输125个16位字或2000 bit。Modbus写入操作�
 
 ## 编译MODBUS模块
 
-### 可能使用到的模块下载地址
+### 使用到的模块下载地址
 
 - [epics-base - (launchpad.net)](https://git.launchpad.net/epics-base) / [epics-base/epics-base](https://github.com/epics-base/epics-base) / [EPICS Base (anl.gov)](https://epics.anl.gov/base/index.php)
 
@@ -67,7 +68,7 @@ Modbus读取操作仅限于传输125个16位字或2000 bit。Modbus写入操作�
 
 - [sequencer](https://www-csr.bessy.de/control/SoftDist/sequencer/repo/branch-2-2.git/) / [Download and Installation — EPICS Sequencer Version 2.2 (bessy.de)](https://www-csr.bessy.de/control/SoftDist/sequencer/Installation.html)
 
-需要先安装好EPICS base.
+**以下步骤需要先安装好EPICS Base.**
 
 ### 编译 SSCAN（可选）
 
@@ -77,11 +78,11 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-# EPICS_HOST_ARCH=linux-loongarch64
+EPICS_HOST_ARCH=linux-loongarch64
 # EPICS Base路径（示例）
-# EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
+EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
-# SUPPORT=/home/ubuntu/loongson/modules
+SUPPORT=/home/ubuntu/loongson/modules
 
 # 直接编译
 # make
@@ -97,13 +98,13 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-# EPICS_HOST_ARCH=linux-loongarch64
+EPICS_HOST_ARCH=linux-loongarch64
 # EPICS Base路径（示例）
-# EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
+EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
-# SUPPORT=/home/ubuntu/loongson/modules
+SUPPORT=/home/ubuntu/loongson/modules
 # SSCAN模块路径
-# SSCAN=$(SUPPORT)/sscan
+SSCAN=$(SUPPORT)/sscan
 
 # 直接编译
 # make
@@ -119,15 +120,15 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-# EPICS_HOST_ARCH=linux-loongarch64
+EPICS_HOST_ARCH=linux-loongarch64
 # EPICS Base路径（示例）
-# EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
+EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
-# SUPPORT=/home/ubuntu/loongson/modules
+SUPPORT=/home/ubuntu/loongson/modules
 # SSCAN模块路径
-# SSCAN=$(SUPPORT)/sscan
+SSCAN=$(SUPPORT)/sscan
 # CALC模块路径
-# CALC=$(SUPPORT)/calc
+CALC=$(SUPPORT)/calc
 
 # 直接编译
 # make
@@ -143,13 +144,13 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-# EPICS_HOST_ARCH=linux-loongarch64
+EPICS_HOST_ARCH=linux-loongarch64
 # EPICS Base路径（示例）
-# EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
+EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
-# SUPPORT=/home/ubuntu/loongson/modules
+SUPPORT=/home/ubuntu/loongson/modules
 # ASYN模块路径
-# SSCAN=$(SUPPORT)/asyn
+ASYN=$(SUPPORT)/asyn
 
 # 直接编译
 # make
@@ -157,7 +158,7 @@ vi configure/RELEASE.local
 make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
 ```
 
-编译完成后，可以看到`bin\<EPICS_HOST_ARCH>`路径下生成了`modbusApp`可执行程序，它就是与Mosbus设备通信的主程序了。
+编译完成后，可以看到`bin\<EPICS_HOST_ARCH>`路径下生成了可执行程序`modbusApp`，它就是与Modbus设备通信的主程序了。
 
 ## 使用 MODBUS 程序
 
@@ -167,6 +168,9 @@ make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-li
 - 用于使用模板解析数据的`.substitutions`文件
 
 这里给出示例并做简要说明。
+
+`envPaths`文件：用于配置程序运行时的环境变量路径。  
+这里需要配置好`base`、`asyn`、`modbus`模块的路径。
 
 ``` shell
 # envPaths
@@ -179,8 +183,6 @@ epicsEnvSet("MODBUS","/root/modules/modbus")
 epicsEnvSet("EPICS_BASE","/root/base")
 # epicsEnvSet("EPICS_CAS_SERVER_PORT", 9001)
 ```
-
-这里需要配置好`base`、`asyn`、`modbus`模块的路径。
 
 ``` shell
 # AMSAMOTION.cmd
@@ -200,11 +202,29 @@ modbusApp_registerRecordDeviceDriver(pdbbase)
 drvAsynIPPortConfigure("AMSAMOTION","192.168.xxx.xxx:502",0,0,1)
 #asynSetOption("AMSAMOTION",0, "disconnectOnReadTimeout", "Y")
 
+# MODBUS RTU配置
+#drvAsynSerialPortConfigure(const char *portName, 
+#                           const char *ttyName, 
+#                           unsigned int priority,
+#                           int noAutoConnect,
+#                           int noProcessEos);
+
+# drvAsynSerialPortConfigure("Koyo1", "/dev/ttyS1", 0, 0, 0)
+# asynSetOption("Koyo1",0,"baud","38400")
+# asynSetOption("Koyo1",0,"parity","none")
+# asynSetOption("Koyo1",0,"bits","8")
+# asynSetOption("Koyo1",0,"stop","1")
+
+# Modbus ASCII 还需配置其他项
+# asynOctetSetOutputEos("Koyo1",0,"\r\n")
+# asynOctetSetInputEos("Koyo1",0,"\r\n")
+
 # 超时设置
 #modbusInterposeConfig(const char *portName,
 #                      modbusLinkType linkType,
 #                      int timeoutMsec,
 #                      int writeDelayMsec)
+# Modbus Link Type: 0 = TCP/IP，1 = RTU，2 = ASCII
 modbusInterposeConfig("AMSAMOTION",0,5000,0)
 
 # 读取/写入配置
@@ -334,3 +354,4 @@ chmod +x AMSAMOTION.cmd
 
 - [Overview of Modbus](https://epics-modbus.readthedocs.io/en/latest/overview.html)
 - [Creating a modbus port driver](https://epics-modbus.readthedocs.io/en/latest/creating_driver.html)
+- [EPICS Process Database Concepts](https://docs.epics-controls.org/en/latest/process-database/EPICS_Process_Database_Concepts.html)
