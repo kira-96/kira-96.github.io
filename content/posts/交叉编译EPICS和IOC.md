@@ -1,6 +1,7 @@
 ---
 title: "交叉编译EPICS和IOC"
 date: 2023-12-12T16:26:35+08:00
+lastmod: 2024-01-18T17:40:26+08:00
 draft: false
 description: Linux交叉编译EPICS
 tags: ["linux", "EPICS", "龙芯"]
@@ -28,13 +29,13 @@ categories: ["EPICS"]
 
 在[龙芯3A5000(loongarch64)上编译运行EPICS](../龙芯3a5000loongarch64上编译运行epics/)中我已经详细讲解了如何在龙架构上编译EPICS，这次，需要在原来对源码修改的基础上，再增加对交叉编译的支持。
 
-添加`configure/os/CONFIG.linux-x86_64.linux-loongarch64`
+添加`configure/os/CONFIG.linux-x86_64.linux-la64`
 
 ``` shell
-# CONFIG.linux-x86_64.linux-loongarch64
+# CONFIG.linux-x86_64.linux-la64
 #
 # Definitions for linux-x86_64 host - linux-loongarch64 target builds
-# Sites may override these in CONFIG_SITE.linux-x86_64.linux-loongarch64
+# Sites may override these in CONFIG_SITE.linux-x86_64.linux-la64
 #-------------------------------------------------------
 
 VALID_BUILDS = Ioc Command
@@ -60,10 +61,10 @@ STATIC_LDLIBS_YES= -Wl,-Bdynamic
 STATIC_LDLIBS_NO=
 ```
 
-添加`configure/os/CONFIG_SITE.linux-x86_64.linux-loongarch64`
+添加`configure/os/CONFIG_SITE.linux-x86_64.linux-la64`
 
 ``` shell
-# CONFIG_SITE.linux-x86_64.linux-loongarch64
+# CONFIG_SITE.linux-x86_64.linux-la64
 #
 # Site specific definitions for linux-x86_64 host - linux-loongarch64 target builds
 #-------------------------------------------------------
@@ -73,7 +74,7 @@ GNU_TARGET = loongarch64-linux-gnu
 
 # Set GNU tools install path
 # Examples is the installation at the APS:
-GNU_DIR = /opt/toolchain-loongarch64-linux-gnu-gcc8-host-x86_64-2022-07-18
+GNU_DIR = /opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.2
 
 # If cross-building shared libraries and the paths on the target machine are
 # different than on the build host, you should uncomment the lines below to
@@ -85,13 +86,13 @@ GNU_DIR = /opt/toolchain-loongarch64-linux-gnu-gcc8-host-x86_64-2022-07-18
 #PRODDIR_RPATH_LDFLAGS_YES_NO =
 # However it is usually simpler to set STATIC_BUILD=YES here and not
 # try to use shared libraries at all when cross-building, like this:
-STATIC_BUILD=YES
-SHARED_LIBRARIES=NO
+#STATIC_BUILD=YES
+#SHARED_LIBRARIES=NO
 
 # To use libreadline, point this to its install prefix
 #READLINE_DIR = $(GNU_DIR)
-#READLINE_DIR = /tools/cross/linux-x86.linux-arm/readline
-# See CONFIG_SITE.Common.linux-arm for other COMMANDLINE_LIBRARY values
+#READLINE_DIR = /tools/cross/linux-x86.linux-la64/readline
+# See CONFIG_SITE.Common.linux-la64 for other COMMANDLINE_LIBRARY values
 #COMMANDLINE_LIBRARY = READLINE
 ```
 
@@ -108,20 +109,20 @@ SHARED_LIBRARIES=NO
 新增`configure/CONFIG_SITE.local`，或者直接修改`configure/CONFIG_SITE`（不推荐）。
 
 ``` shell
-CROSS_COMPILER_TARGET_ARCHS=linux-loongarch64
+CROSS_COMPILER_TARGET_ARCHS=linux-la64
 ```
 
 最后，进行编译即可。（确保构建系统上有make和perl，应该都有吧。）
 
 ``` shell
 # 到源码目录下
-$ cd ~/loongson/base-7.0.7
+$ cd ~/loongson/base-7.0.8
 $ make -j8
 ```
 
 等待编译完成即可。
 
-编译完成后，可以看到`bin`和`lib`目录下，都有`linux-loongarch64`、`linux-x86_64`两个目录，其中`linux-loongarch64`目录下就是我们要在开发板上运行的EPICS工具包了。`linux-x86_64`目录下的则是编译生成的本机的EPICS工具包，待会儿我们还会用到。
+编译完成后，可以看到`bin`和`lib`目录下，都有`linux-la64`、`linux-x86_64`两个目录，其中`linux-la64`目录下就是我们要在开发板上运行的EPICS工具包了。`linux-x86_64`目录下的则是编译生成的本机的EPICS工具包，待会儿我们还会用到。
 
 由于开发板的存储空间很小，只有几百兆，所以，我们只能单独将龙架构的内容下载到板子上。
 
@@ -130,19 +131,19 @@ $ make -j8
 ```
 base
 ├─ bin
-│   └─ linux-loongarch64
+│   └─ linux-la64
 ├─ db
 ├─ dbd
 ├─ include (可选)
 └─ lib
-    └─ linux-loongarch64
+    └─ linux-la64
 ```
 
 将目录中的内容全部打包下载到开发板即可。
 
 ``` shell
 # 在开发板上运行
-$ cd base/bin/linux-loongarch64
+$ cd base/bin/linux-la64
 # 运行软IOC测试
 $ ./softIoc
 epics> 
@@ -153,7 +154,7 @@ epics>
 如下（根据实际情况修改路径）：
 
 ``` shell
-$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/base/lib/linux-loongarch64
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/base/lib/linux-la64
 ```
 
 > ※ include 目录不是EPICS运行必需的，但如果要基于EPICS进行开发，可能需要用到EPICS的头文件。
@@ -170,13 +171,13 @@ $ cd ~
 $ mkdir test
 $ cd test/
 # 替换成自己编译EPICS的目录，注意是使用linux-x86_64目录下的脚本
-$ ~/loongson/base-7.0.7/bin/linux-x86_64/makeBaseApp.pl -t example test
-$ ~/loongson/base-7.0.7/bin/linux-x86_64/makeBaseApp.pl -i -t example test
+$ ~/loongson/base-7.0.8/bin/linux-x86_64/makeBaseApp.pl -t example test
+$ ~/loongson/base-7.0.8/bin/linux-x86_64/makeBaseApp.pl -i -t example test
 
 The following target architectures are available in base:
-    linux-loongarch64
+    linux-la64
     linux-x86_64
-What architecture do you want to use? linux-loongarch64
+What architecture do you want to use? linux-la64
 The following applications are available:
     test
 What application should the IOC(s) boot?
@@ -184,7 +185,7 @@ The default uses the IOC's name, even if not listed above.
 Application name? test
 ```
 
-**这里唯一多的步骤就是选择目标架构，输入`linux-loongarch64`即可。**
+**这里唯一多的步骤就是选择目标架构，输入`linux-la64`即可。**
 
 然后修改编译设置，这里就不用生成动态库了，直接使用静态编译。
 
@@ -218,7 +219,7 @@ $ make
 ```
 test
 ├─ bin
-│   └─ linux-loongarch64
+│   └─ linux-la64
 ├─ db
 ├─ dbd
 └─ iocBoot
@@ -233,7 +234,7 @@ test
 epicsEnvSet("IOC","ioctest")
 epicsEnvSet("TOP","/root/test")
 epicsEnvSet("EPICS_BASE","/root/base")
-epicsEnvSet("EPICS_HOST_ARCH","linux-loongarch64")
+epicsEnvSet("EPICS_HOST_ARCH","linux-la64")
 ```
 
 最后在开发板上运行IOC。
@@ -245,12 +246,12 @@ $ cd ~/test/iocBoot/ioctest
 $ chmod +x st.cmd
 $ ./st.cmd
 
-#!../../bin/linux-loongarch64/test
+#!../../bin/linux-la64/test
 < envPaths
 epicsEnvSet("IOC","ioctest")
 epicsEnvSet("TOP","/root/test")
 epicsEnvSet("EPICS_BASE","/root/base")
-epicsEnvSet("EPICS_HOST_ARCH","linux-loongarch64")
+epicsEnvSet("EPICS_HOST_ARCH","linux-la64")
 cd "/root/test"
 ## Register all support components
 dbLoadDatabase "dbd/test.dbd"
@@ -265,8 +266,8 @@ cd "/root/test/iocBoot/ioctest"
 iocInit
 Starting iocInit
 ############################################################################
-## EPICS R7.0.7
-## Rev. 2023-12-12T14:06+0800
+## EPICS R7.0.8
+## Rev. 2023-12-30T14:06+0800
 ## Rev. Date build date/time:
 ############################################################################
 iocRun: All initialization complete

@@ -1,6 +1,7 @@
 ---
 title: "龙芯3A5000(loongarch64)上编译运行EPICS"
 date: 2023-02-01T15:51:40+08:00
+lastmod: 2024-01-18T17:40:26+08:00
 draft: false
 description: 在龙芯3A5000(loongarch64)上编译运行EPICS
 tags: ["linux", "EPICS", "龙芯"]
@@ -67,12 +68,12 @@ $ vi ./src/tools/EpicsHostArch.pl
 
 既然识别不了`loongarch64`，那我们就手动添加一行，让它可以识别就行了，即使看不太懂上面的脚本也没关系，看个半懂就行了。
 
-![Architecture](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_13-32-04.png)
+![Architecture](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2024-01-18_16-26-41.png)
 
 我们在如图的光标位置添加一行内容，来让它可以识别`loongarch64`架构。
 
 ``` perl
-return 'linux-loongarch64'  if m/^loongarch64-linux/;
+return 'linux-la64'  if m/^loongarch64-linux/;
 ```
 
 此时我们再执行一下`make`命令。
@@ -81,98 +82,139 @@ return 'linux-loongarch64'  if m/^loongarch64-linux/;
 
 可以看到，现在已经可以识别出`loongarch64-linux`了，报错和在3A4000上编译时也基本一样了。
 
-> 以下步骤同样适用于在3A4000（mips64）上编译EPICS，只需要将`loongarch64`全部替换为`mips64`
+> 以下步骤同样适用于在3A4000（mips64）上编译EPICS，只需要将`la64`全部替换为`mips64`
 
 剩下的报错就是，没有找到对应的编译配置项，我们同样可以仿照已经做了适配的架构来改写，直接按照下面步骤来就可以了。
 
-1. 添加 CONFIG.Common.linux-loongarch64
+1. 添加 CONFIG.Common.linux-la64
 
 ``` shell
 $ cd configure/os/
-# 添加 CONFIG.Common.linux-loongarch64
-$ cp CONFIG.Common.linux-aarch64 CONFIG.Common.linux-loongarch64
-$ vi CONFIG.Common.linux-loongarch64
+# 添加 CONFIG.Common.linux-la64
+$ cp CONFIG.Common.linux-aarch64 CONFIG.Common.linux-la64
+$ vi CONFIG.Common.linux-la64
 ```
 
 修改成如下内容：
 
 ``` shell
-# CONFIG.Common.linux-loongarch64
+# CONFIG.Common.linux-la64
 #
 # Definitions for linux-loongarch64 target builds
-# Override these settings in CONFIG_SITE.Common.linux-loongarch64
+# Override these settings in CONFIG_SITE.Common.linux-la64
 #-------------------------------------------------------
 
 # Include definitions common to all Linux targets
 include $(CONFIG)/os/CONFIG.Common.linuxCommon
 
-ARCH_CLASS = loongarch64
+ARCH_CLASS = loongarch
 ```
 
-2. 添加 CONFIG.linux-loongarch64.Common
+2. 添加 CONFIG.linux-la64.Common
 
 ``` shell
-# 添加 CONFIG.linux-loongarch64.Common
-$ cp CONFIG.linux-aarch64.Common CONFIG.linux-loongarch64.Common
-$ vi CONFIG.linux-loongarch64.Common
+# 添加 CONFIG.linux-la64.Common
+$ cp CONFIG.linux-aarch64.Common CONFIG.linux-la64.Common
+$ vi CONFIG.linux-la64.Common
 ```
 
 修改成如下内容(内容没有变化，可以不修改)：
 
 ``` shell
-# CONFIG.linux-loongarch64.Common
+# CONFIG.linux-la64.Common
 #
 # Definitions for linux-loongarch64 host builds
-# Sites may override these definitions in CONFIG_SITE.linux-loongarch64.Common
+# Sites may override these definitions in CONFIG_SITE.linux-la64.Common
 #-------------------------------------------------------
 
-#Include definitions common to unix hosts
+# Include definitions common to unix hosts
 include $(CONFIG)/os/CONFIG.UnixCommon.Common
 ```
 
-3. 添加 CONFIG.linux-loongarch64.linux-loongarch64
+3. 添加 CONFIG.linux-la64.linux-la64
 
 ``` shell
-# 添加 CONFIG.linux-loongarch64.linux-loongarch64
-$ cp CONFIG.linux-aarch64.linux-aarch64 CONFIG.linux-loongarch64.linux-loongarch64
-$ vi CONFIG.linux-loongarch64.linux-loongarch64
+# 添加 CONFIG.linux-la64.linux-la64
+$ cp CONFIG.linux-aarch64.linux-aarch64 CONFIG.linux-la64.linux-la64
+$ vi CONFIG.linux-la64.linux-la64
 ```
 
 修改成如下内容(内容没有变化，可以不修改)：
 
 ``` shell
-# CONFIG.linux-loongarch64.linux-loongarch64
+# CONFIG.linux-la64.linux-la64
 #
 # Definitions for native linux-loongarch64 builds
-# Override these definitions in CONFIG_SITE.linux-loongarch64.linux-loongarch64
+# Override these definitions in CONFIG_SITE.linux-la64.linux-la64
 #-------------------------------------------------------
 
 # Include common gnu compiler definitions
 include $(CONFIG)/CONFIG.gnuCommon
 ```
 
-4. 添加 CONFIG_SITE.Common.linux-loongarch64
+4. 添加 CONFIG_SITE.Common.linux-la64
 
 ``` shell
-# 添加 CONFIG_SITE.Common.linux-loongarch64
-$ cp CONFIG_SITE.Common.linux-aarch64 CONFIG_SITE.Common.linux-loongarch64
-$ vi CONFIG_SITE.Common.linux-loongarch64
+# 添加 CONFIG_SITE.Common.linux-la64
+$ cp CONFIG_SITE.Common.linux-aarch64 CONFIG_SITE.Common.linux-la64
+$ vi CONFIG_SITE.Common.linux-la64
 ```
 
 内容没有变化，可以不修改。
 
-5. 添加 CONFIG_SITE.linux-loongarch64.linux-loongarch64
+``` shell
+# CONFIG_SITE.Common.linux-la64
+#
+# Site Specific definitions for all linux-loongarch64 targets
+#-------------------------------------------------------
+
+# NOTE for SHARED_LIBRARIES: In most cases if this is set to YES the
+# shared libraries will be found automatically.  However if the .so
+# files are installed at a different path to their compile-time path
+# then in order to be found at runtime do one of these:
+# a) LD_LIBRARY_PATH must include the full absolute pathname to
+#    $(INSTALL_LOCATION)/lib/$(EPICS_HOST_ARCH) when invoking base
+#    executables.
+# b) Add the runtime path to SHRLIB_DEPLIB_DIRS and PROD_DEPLIB_DIRS, which 
+#    will add the named directory to the list contained in the executables.
+# c) Add the runtime path to /etc/ld.so.conf and run ldconfig
+#    to inform the system of the shared library location.
+
+# Depending on your version of Linux you'll want one of the following
+# lines to enable command-line editing and history in iocsh.  If you're
+# not sure which, start with the top one and work downwards until the
+# build doesn't fail to link the readline library.  If none of them work,
+# comment them all out to build without readline support.
+
+# No other libraries needed (recent Fedora, Ubuntu etc.):
+#COMMANDLINE_LIBRARY = READLINE
+
+# Needs -lncurses (RHEL 5 etc.):
+#COMMANDLINE_LIBRARY = READLINE_NCURSES
+
+# Needs -lcurses (older versions)
+#COMMANDLINE_LIBRARY = READLINE_CURSES
+
+
+# WARNING: Variables that are set in $(CONFIG)/CONFIG.gnuCommon cannot be
+# overridden in this file for native builds, e.g. variables such as
+#    OPT_CFLAGS_YES, WARN_CFLAGS, SHRLIB_LDFLAGS
+# They must be set in CONFIG_SITE.linux-la64.linux-la64 or for
+# cross-builds in CONFIG_SITE.<host-arch>.linux-la64 instead.
+```
+
+5. 添加 CONFIG_SITE.linux-la64.linux-la64
 
 ``` shell
-# 添加 CONFIG_SITE.linux-loongarch64.linux-loongarch64
-$ cp CONFIG_SITE.linux-aarch64.linux-aarch64 CONFIG_SITE.linux-loongarch64.linux-loongarch64
-$ vi CONFIG_SITE.linux-loongarch64.linux-loongarch64
+# 添加 CONFIG_SITE.linux-la64.linux-la64
+$ cp CONFIG_SITE.linux-aarch64.linux-aarch64 CONFIG_SITE.linux-la64.linux-la64
+$ vi CONFIG_SITE.linux-la64.linux-la64
 ```
 
 修改成如下内容：
 
 ``` shell
-# CONFIG_SITE.linux-loongarch64.linux-loongarch64
+# CONFIG_SITE.linux-la64.linux-la64
 #
 # Site specific definitions for native linux-loongarch64 builds
 #-------------------------------------------------------
@@ -199,9 +241,9 @@ $ make -j8
 
 接下来就静静等待编译完成。
 
-编译完后查看编译输出目录`bin/linux-loongarch64/`。
+编译完后查看编译输出目录`bin/linux-la64/`。
 
-![编译输出目录](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_14-09-04.png)
+![编译输出目录](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2024-01-18_16-37-18.png)
 
 ## 添加到PATH
 
@@ -220,13 +262,16 @@ $ vi env
 ``` shell
 #!/bin/sh
 # EPICS base shell setup
+export EPICS_BASE="/usr/local/epics/base-7.0.7"
+export EPICS_HOST_ARCH=linux-la64
+
 # affix colons on either side of $PATH to simplify matching
 case ":${PATH}:" in
-    *:"/usr/local/epics/base-7.0.7/bin/linux-loongarch64":*)
+    *:"${EPICS_BASE}/bin/${EPICS_HOST_ARCH}":*)
         ;;
     *)
         # Prepending path in case a system-installed epics needs to be overridden
-        export PATH="/usr/local/epics/base-7.0.7/bin/linux-loongarch64:$PATH"
+        export PATH="${EPICS_BASE}/bin/${EPICS_HOST_ARCH}:$PATH"
         ;;
 esac
 ```
