@@ -1,9 +1,9 @@
 baseURL = "https://kira-96.github.io/"
 defaultContentLanguage = "zh"
 languageCode = "zh"
-title = "kiraの博客"
+title = "✨kiraの博客"
 author = "kira"
-copyright = "© 2019-2024 [kira](/) &#183;"
+copyright = "Copyright © 2019-2024 [kira's blog](/) &#183;"
 
 theme = "PaperMod"
 
@@ -18,18 +18,18 @@ pygmentsUseClasses = true
 
 [menu]
   [[menu.main]]
-  name = "主页"
+  name = "🏠主页"
   url = "/"
   weight = 1
   [[menu.main]]
-  name = "笔记"
+  name = "📓笔记"
   url = "/notes/"
   weight = 2
   [[menu.main]]
-  name = "存档"
+  name = "🗃️存档"
   url = "/archives/"
   [[menu.main]]
-  name = "搜索"
+  name = "🔍️搜索"
   url = "/search/"
 
 [outputs]
@@ -49,14 +49,16 @@ pygmentsUseClasses = true
   ShowCodeCopyButtons = true
   ShowWordCount = true
   ShowRssButtonInSectionTermList = true
-  UseHugoToc = true
+  ShowLastMod = true
   disableSpecial1stPost = false
   disableScrollToTop = false
   comments = true
   hidemeta = false
   hideSummary = false
-  showtoc = false
-  tocopen = false
+
+  ShowToc = true
+  TocOpen = true
+  UseHugoToc = false
 
 # home-info mode
 [params.homeInfoParams]
@@ -80,7 +82,7 @@ pygmentsUseClasses = true
 
 [params.editPost]
   URL = "https://github.com/kira-96/kira-96.github.io/tree/main/content/posts/"
-  Text = "编辑" # edit text
+  Text = "✏️编辑" # edit text
   appendFilePath = false # to append file path to Edit link
 
 [params.assets]
