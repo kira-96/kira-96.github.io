@@ -43,7 +43,7 @@ dls ethercat是由英国钻石光源开发的用于 EPICS 控制系统 EtherCAT 
 
 如果你使用的是其他开发套件，请按照开发手册安装配置好环境。
 
-## 编译 IgH EtherCAT Master
+## 编译 `IgH EtherCAT Master`
 
 ### 打补丁
 
@@ -149,7 +149,7 @@ sudo apt install raspberrypi-kernel-headers
 
 *内核的编译步骤请根据开发板的用户手册完成。*
 
-**最好再给内核打上 PREEMPT_RT 补丁。**
+**最好再给内核打上 `PREEMPT_RT` 补丁。**
 
 ``` shell
 # 解压内核源码
@@ -173,9 +173,9 @@ make uImage
 make modules
 ```
 
-### 编译 EtherCAT Master 驱动
+### 编译 `EtherCAT Master` 驱动
 
-**源码一定要下载stable-1.5分支的，其他版本我也没有测试！**
+**源码一定要下载 *stable-1.5* 分支的，其他版本我也没有测试！**
 
 ``` shell
 cd ethercat-stable-1.5/
@@ -231,11 +231,11 @@ __install_dir
     └─ bash-completion/ (bash自动补全)
 ```
 
-## 编译 EPICS ethercat 模块
+## 编译 **EPICS** `ethercat` 模块
 
-**以下步骤需要先安装好EPICS Base!**
+**以下步骤需要先安装好EPICS `Base`!**
 
-### 编译 asyn
+### 编译 `asyn`
 
 ``` shell
 cd asyn
@@ -259,7 +259,7 @@ SUPPORT=/home/ubuntu/loongson/modules
 make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
 ```
 
-### 编译 autosave
+### 编译 `autosave`
 
 ``` shell
 cd autosave
@@ -279,7 +279,7 @@ SUPPORT=/home/ubuntu/loongson/modules
 make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
 ```
 
-### 编译 busy
+### 编译 `busy`
 
 ``` shell
 cd busy
@@ -305,13 +305,13 @@ BUSY=$(SUPPORT)/busy
 make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
 ```
 
-### 编译 ethercat
+### 编译 `ethercat`
 
 这一步可以说是最麻烦，问题最多的。编译出什么问题都需要去找到相应的`Makefile`修改。
 
 首先需要安装所需的包。但我们实际上并不需要用这个软件包，我们只需要它的头文件。
 
-相应的动态库(.so)文件，我们则需要从开发板系统中拷贝出来，无法直接用编译电脑的动态库。
+**软件依赖的动态库(.so)文件，我们则需要从开发板系统中拷贝出来，无法直接用编译电脑的动态库。**
 
 ``` shell
 cd ethercat-master/
@@ -372,13 +372,14 @@ vi 3rd/include/libxml2/libxml/xmlversion.h
 # 将 #if 1 改为 #if 0
 ```
 
-``` c
+``` diff
 /**
  * LIBXML_ICU_ENABLED:
  *
  * Whether icu support is available
  */
-#if 0
+- #if 0
++ #if 1
 #define LIBXML_ICU_ENABLED
 #endif
 ```
@@ -467,7 +468,7 @@ USR_SYS_LIBS += xml2
 
 由于`ethercat-master`的源码原本是为`x86_64`架构编写的，编译到`LoongArch`架构的设备上运行可能会出现一些奇怪的错误。
 
-例如，在运行`slaveinfo`时会出现`Segmentation fault`错误，通常是**空指针**导致内存访问出错。
+例如，在运行`slaveinfo`时会出现`Segmentation fault`错误，而这通常是**空指针**导致内存访问出错。
 
 原因分析：
 
@@ -535,7 +536,7 @@ char *get_slave_list_filename(const char *program_path)
 }
 ```
 
-而在`get_slave_list_filename`函数中，只处理了`get_root_dir_index`返回正常时的情况。当`get_root_dir_index`返回`-1`时，`slave_list_filename`始终为`NULL`，这就导致后续操作出错。
+而在`get_slave_list_filename`函数中，只处理了`get_root_dir_index`正常返回的情况。当`get_root_dir_index`返回`-1`时，`slave_list_filename`始终为`NULL`，这就导致后续操作出错。
 
 其实这个问题直接把程序放到`bin/linux-x86_64`目录下运行就可以了，不过既然找到了问题，索性就改一改。
 
@@ -637,7 +638,7 @@ ethercat-master
 │   └─ linux-la64
 ├─ db
 ├─ dbd
-├─ lib
+└─ lib
     └─ linux-la64
 ```
 
