@@ -1,7 +1,7 @@
 ---
 title: "龙芯开发板移植 IgH EtherCAT Master"
 date: 2024-02-23T12:54:31+08:00
-lastmod: 2024-02-28T13:05:54+08:00
+lastmod: 2024-02-28T18:56:32+08:00
 draft: false
 description: 龙芯2K0500开发板移植EtherCAT主站程序和EPICS EtherCAT模块
 tags: ["linux", "EPICS", "龙芯"]
@@ -386,7 +386,7 @@ vi 3rd/include/libxml2/libxml/xmlversion.h
 做好上面的准备工作，还需要修改源码中的路径配置，然后才能正常编译。  
 下面都是我踩坑留下的记录。
 
-1. 修改 configure/RELEASE
+1. 修改 `configure/RELEASE`
 
 ``` shell
 cd ethercat-master/
@@ -408,7 +408,7 @@ EPICS_HOST_ARCH=linux-la64
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 ```
 
-2. 修改 ethercatApp/scannerSrc/Makefile
+2. 修改 `ethercatApp/scannerSrc/Makefile`
 
 ``` shell
 cd ethercat-master/
@@ -438,7 +438,7 @@ serialtool_INCLUDES += -I$(ETHERLAB)/master
 get-slave-revisions_INCLUDES += -I$(ETHERLAB)/master
 ```
 
-3. 修改 ethercatApp/src/Makefile，与上面类似。
+3. 修改 `ethercatApp/src/Makefile`，与上面类似。
 
 ``` shell
 cd ethercat-master/
@@ -463,7 +463,131 @@ USR_LDFLAGS += -L$(TOP)/3rd/lib -Wl,-rpath=$(TOP)/3rd/lib
 USR_SYS_LIBS += xml2
 ```
 
-4. 编译
+4. 修改源码
+
+由于`ethercat-master`的源码原本是为`x86_64`架构编写的，编译到`LoongArch`架构的设备上运行可能会出现一些奇怪的错误。
+
+例如，在运行`slaveinfo`时会出现`Segmentation fault`错误，通常是**空指针**导致内存访问出错。
+
+原因分析：
+
+`slaveinfo`在运行时会根据程序自己的路径寻找`slave-types.txt`文件，问题就出在这里。来看源码 `ethercatApp/scannerSrc/slave-list-path.c`。
+
+``` c
+// ethercatApp/scannerSrc/slave-list-path.c
+
+int get_root_dir_index(const char *program_name)
+{
+    // Search for the binary path
+    char binary_dir[] = "bin/linux-x86_64/";
+
+    // Find the binary path in the program path and return the pointer
+    char *found = strstr(program_name, binary_dir);
+
+    // Handle the case where it is not found
+    if (found == NULL)
+    {
+        return -1;
+    }
+    
+    // Calculate the difference in the pointers to get the index
+    return found - program_name;
+}
+```
+
+这个`get_root_dir_index`函数是用于计算当前程序(`slaveinfo`)所在的**根**目录。这里向上查找的路径为`bin/linux-x86_64`，当然不能找到`LoongArch`的目录`bin/linux-la64`了。所以，此函数只在路径为`bin/linux-x86_64/slaveinfo`时才能正常运行，其它情况都返回`-1`。（第一次见到这样写的，真无语了……）
+
+``` c
+//  ethercatApp/scannerSrc/slave-list-path.c
+
+char *get_slave_list_filename(const char *program_path)
+{
+    char relative_path[] = "etc/scripts/slave-types.txt";
+    char *slave_list_filename = NULL;
+
+    // Get absolute path of application
+    char *real_path = calloc(PATH_MAX, sizeof(char));
+    get_app_path(program_path, real_path);
+
+    // Get root directory
+    int root_dir_index = get_root_dir_index(real_path);
+    if (root_dir_index != -1)
+    {
+        slave_list_filename = calloc(root_dir_index + strlen(relative_path) + 1, sizeof(char));
+        strncpy(slave_list_filename, real_path, root_dir_index);
+    }
+
+    // Append relative path
+    strcat(slave_list_filename, relative_path);
+
+    // Check file
+    struct stat fstat;
+    int result = stat(slave_list_filename, &fstat);
+    if (result)
+    {
+        printf("Could not find slave list file at %s\n", slave_list_filename);
+    }
+
+    // Cleanup
+    free(real_path);
+
+    return slave_list_filename;
+}
+```
+
+而在`get_slave_list_filename`函数中，只处理了`get_root_dir_index`返回正常时的情况。当`get_root_dir_index`返回`-1`时，`slave_list_filename`始终为`NULL`，这就导致后续操作出错。
+
+其实这个问题直接把程序放到`bin/linux-x86_64`目录下运行就可以了，不过既然找到了问题，索性就改一改。
+
+现在已经知道了出错的地方，该如何修改呢？这里我本着尽量少改动源码的原则，在`get_root_dir_index`查找**根**目录出错时，直接使用当前目录。
+
+``` diff
+char *get_slave_list_filename(const char *program_path)
+{
+    char relative_path[] = "etc/scripts/slave-types.txt";
+    char *slave_list_filename = NULL;
+
+    // Get absolute path of application
+    char *real_path = calloc(PATH_MAX, sizeof(char));
+    get_app_path(program_path, real_path);
+
+    // Get root directory
+    int root_dir_index = get_root_dir_index(real_path);
+    if (root_dir_index != -1)
+    {
+        slave_list_filename = calloc(root_dir_index + strlen(relative_path) + 1, sizeof(char));
+        strncpy(slave_list_filename, real_path, root_dir_index);
+    }
++    else
++    {
++        slave_list_filename = calloc(PATH_MAX, sizeof(char));
++        if (NULL != getcwd(slave_list_filename, PATH_MAX))
++        {
++            strcat(slave_list_filename, "/");
++        }
++    }
+
+    // Append relative path
+    strcat(slave_list_filename, relative_path);
+
+    // Check file
+    struct stat fstat;
+    int result = stat(slave_list_filename, &fstat);
+    if (result)
+    {
+        printf("Could not find slave list file at %s\n", slave_list_filename);
+    }
+
+    // Cleanup
+    free(real_path);
+
+    return slave_list_filename;
+}
+```
+
+目前只发现了这个问题，希望后面没有坑了。
+
+5. 编译
 
 最后终于可以开始编译了。
 
@@ -474,7 +598,7 @@ make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-li
 ```
 
 到这里，编译过程还可能会出错，不过已经可以编译出我们所需要的东西了。  
-最终编译得到`scanner`程序就可以了。
+最终编译得到`scanner`、`slaveinfo`程序就可以了。
 
 以下是我编译时的输出：
 
@@ -482,11 +606,15 @@ make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-li
 ...
 Installing library ../../../lib/linux-la64/libscannerlib.a
 ...
+Installing created executable ../../../bin/linux-la64/serialtool
+Installing created executable ../../../bin/linux-la64/get-slave-revisions
 Installing created executable ../../../bin/linux-la64/scanner
+Installing created executable ../../../bin/linux-la64/slaveinfo
 Installing created executable ../../../bin/linux-la64/parsertest
 ...
 Installing shared library ../../../lib/linux-la64/libecAsyn.so
 Installing library ../../../lib/linux-la64/libecAsyn.a
+Installing created executable ../../../bin/linux-la64/parsertest
 ...
 Installing template file ../../../db/EK1100.template
 ...
@@ -653,9 +781,9 @@ fi
 # check for modules to replace
 for MODULE in ${DEVICE_MODULES}; do
     ECMODULE=ec_${MODULE}
-    if ! ${MODINFO} "${ECMODULE}" > /dev/null; then
-        continue # ec_* module not found
-    fi
+-    if ! ${MODINFO} "${ECMODULE}" > /dev/null; then
+-        continue # ec_* module not found
+-    fi
     if [ "${MODULE}" != "generic" ]; then
         if ${LSMOD} | grep "^${MODULE} " > /dev/null; then
             if ! ${RMMOD} "${MODULE}"; then
@@ -690,6 +818,11 @@ IP=/bin/ip
 + ETHERCAT=/usr/bin/ethercat
 + MODULE_DIR=/root/modules
 
+#------------------------------------------------------------------------------
+
+- ETHERCAT_CONFIG=/home/loongson/__install_dir/etc/ethercat.conf
++ ETHERCAT_CONFIG=/etc/ethercat.conf
+
 start)
 
 ...
@@ -703,7 +836,22 @@ fi
 
 LOADED_MODULES=ec_master
 
-...
+# check for modules to replace
+for MODULE in ${DEVICE_MODULES}; do
+    ECMODULE=ec_${MODULE}
+-    if ! ${MODINFO} "${ECMODULE}" > /dev/null; then
+-        continue # ec_* module not found
+-    fi
+
+    if [ "${MODULE}" != "generic" ] && [ "${MODULE}" != "ccat" ]; then
+        # unload standard module and check if unloading was successful
+        ${RMMOD} "${MODULE}" 2> /dev/null || true
+        if ${LSMOD} | grep "^${MODULE} " > /dev/null; then
+            # could not unload module
+            ${RMMOD} ${LOADED_MODULES}
+            exit 1
+        fi
+    fi
 
 -    if ! ${MODPROBE} ${MODPROBE_FLAGS} "${ECMODULE}"; then
 +    if ! ${INSMOD} "${MODULE_DIR}/${ECMODULE}.ko"; then
