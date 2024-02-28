@@ -1,7 +1,8 @@
 ---
 title: "龙芯开发板移植 IgH EtherCAT Master"
 date: 2024-02-23T12:54:31+08:00
-draft: true
+lastmod: 2024-02-28T13:05:54+08:00
+draft: false
 description: 龙芯2K0500开发板移植EtherCAT主站程序和EPICS EtherCAT模块
 tags: ["linux", "EPICS", "龙芯"]
 keywords: ["linux", "EPICS", "EtherCAT", "龙芯"]
@@ -18,7 +19,7 @@ dls ethercat是由英国钻石光源开发的用于 EPICS 控制系统 EtherCAT 
 
 运行开发板：龙芯2K0500金龙开发板
 
-内核版本：5.10.0-lsgd
+内核版本：Linux 5.10.0-rt20.lsgd #2 PREEMPT_RT
 
 ## 相关软件包下载地址
 
@@ -33,6 +34,8 @@ dls ethercat是由英国钻石光源开发的用于 EPICS 控制系统 EtherCAT 
 - [dls-controls/ethercat: EPICS support to read/write to ethercat based hardware](https://github.com/dls-controls/ethercat)
 
 - [IgH EtherCAT Master for Linux](https://gitlab.com/etherlab.org/ethercat/-/tree/stable-1.5)
+
+- [PREEMPT RT patch](https://mirrors.tuna.tsinghua.edu.cn/kernel/projects/rt/)
 
 ## 配置交叉编译环境
 
@@ -146,11 +149,18 @@ sudo apt install raspberrypi-kernel-headers
 
 *内核的编译步骤请根据开发板的用户手册完成。*
 
+**最好再给内核打上 PREEMPT_RT 补丁。**
+
 ``` shell
 # 解压内核源码
 tar -xvf linux-5.10-2k500-src-f45937d-build.20230721100738.tar.gz
 # linux-5.10-2k500-cbd-src
 cd linux-5.10-2k500-cbd-src/
+
+# 为内核打上实时补丁（可选）
+# patch -p1 < patch-5.10-rt17.patch
+patch -p1 < patch-5.10.1-rt20.patch
+
 # 配置交叉编译器
 ./set_env.sh
 
@@ -519,7 +529,7 @@ author:         Florian Pose <fp@igh-essen.com>
 srcversion:     848BB80F1C588A2FDA42EDB
 depends:        ec_master
 name:           ec_generic
-vermagic:       5.10.0.lsgd preempt mod_unload modversions LOONGARCH 64BIT
+vermagic:       5.10.0-rt20.lsgd preempt_rt mod_unload modversions LOONGARCH 64BIT
 [root@LS-GD modules]# insmod ec_master.ko
 [root@LS-GD modules]# insmod ec_generic.ko
 [root@LS-GD modules]# lsmod
@@ -591,7 +601,209 @@ Send bug reports to fp@igh.de.
 usage: scanner [-m master_index] [-s] [-q] scanner.xml socket_path
 ```
 
-可以看到，驱动程序和主程序都能在开发板上运行，说明已经编译完成了。至于具体如何使用，下次再讲吧。
+可以看到，驱动程序和主程序都能在开发板上运行，说明已经编译完成了。
+
+## 安装EtherCAT主站到开发板系统
+
+首先将编译好的`EtherCAT Master`下载到开发板系统，然后将各个目录下的文件放到相应的系统目录下。（这里我还以`__install_dir`的目录结构为例。）
+
+|原文件/目录|系统文件/目录|
+|:---|:---|
+|bin/ethercat|/usr/bin/ethercat|
+|etc/init.d/ethercat|/etc/init.d/ethercat|
+|etc/sysconfig/ethercat|/etc/sysconfig/ethercat|
+|etc/ethercat.conf|/etc/ethercat.conf|
+|include/| - |
+|lib/libethercat.so*|/usr/lib/libethercat.so*|
+|modules/|/lib/modules/5.10.0-rt20.lsgd/|
+|sbin/ethercatctl|/sbin/ethercatctl|
+|share/bash-completion/|usr/share/bash-completion/|
+
+> 注意：如果系统目录存在`/lib/modules/{内核版本}`目录，则可以将`modules`目录下的`ec_master.ko`和`ec_generic.ko`复制到该目录下，然后在终端执行`depmod`命令。否则，可以按照下面的步骤做相应修改。
+
+例如，将`modules`下的驱动文件放到开发板文件系统的`/root/modules/`目录下。
+
+修改`/etc/init.d/ethercat`和`/sbin/ethercatctl`脚本文件。
+
+例：`/etc/init.d/ethercat`
+
+``` diff
+LSMOD=/sbin/lsmod
+MODPROBE=/sbin/modprobe
++ INSMOD=/sbin/insmod
+RMMOD=/sbin/rmmod
+MODINFO=/sbin/modinfo
+- ETHERCAT=/home/loongson/__install_dir/bin/ethercat
++ ETHERCAT=/usr/bin/ethercat
+MASTER_ARGS=
++ MODULE_DIR=/root/modules
+
+start)
+    echo -n "Starting EtherCAT master 1.5.2 "
+
+...
+
+# load master module
+- if ! ${MODPROBE} ${MODPROBE_FLAGS} ec_master "${MASTER_ARGS}" \
++ if ! ${INSMOD} ${MODULE_DIR}/ec_master.ko "${MASTER_ARGS}" \
+        main_devices="${DEVICES}" backup_devices="${BACKUPS}"; then
+    exit_fail
+fi
+
+# check for modules to replace
+for MODULE in ${DEVICE_MODULES}; do
+    ECMODULE=ec_${MODULE}
+    if ! ${MODINFO} "${ECMODULE}" > /dev/null; then
+        continue # ec_* module not found
+    fi
+    if [ "${MODULE}" != "generic" ]; then
+        if ${LSMOD} | grep "^${MODULE} " > /dev/null; then
+            if ! ${RMMOD} "${MODULE}"; then
+                exit_fail
+            fi
+        fi
+    fi
+-    if ! ${MODPROBE} ${MODPROBE_FLAGS} "${ECMODULE}"; then
++    if ! ${INSMOD} "${MODULE_DIR}/${ECMODULE}.ko"; then
+        if [ "${MODULE}" != "generic" ]; then
+            ${MODPROBE} ${MODPROBE_FLAGS} "${MODULE}" # try to restore
+        fi
+        exit_fail
+    fi
+done
+
+exit_success
+;;
+```
+
+例：`/sbin/ethercatctl`
+
+``` diff
+LSMOD=/sbin/lsmod
+MODPROBE=/sbin/modprobe
++ INSMOD=/sbin/insmod
+RMMOD=/sbin/rmmod
+MODINFO=/sbin/modinfo
+IP=/bin/ip
+
+- ETHERCAT=/home/loongson/__install_dir/bin/ethercat
++ ETHERCAT=/usr/bin/ethercat
++ MODULE_DIR=/root/modules
+
+start)
+
+...
+
+# load master module
+- if ! ${MODPROBE} ${MODPROBE_FLAGS} ec_master \
++ if ! ${INSMOD} ${MODULE_DIR}/ec_master.ko \
+        main_devices="${DEVICES}" backup_devices="${BACKUPS}"; then
+    exit 1
+fi
+
+LOADED_MODULES=ec_master
+
+...
+
+-    if ! ${MODPROBE} ${MODPROBE_FLAGS} "${ECMODULE}"; then
++    if ! ${INSMOD} "${MODULE_DIR}/${ECMODULE}.ko"; then
+        if [ "${MODULE}" != "generic" ] && [ "${MODULE}" != "ccat" ]; then
+            ${MODPROBE} ${MODPROBE_FLAGS} "${MODULE}" # try to restore
+        fi
+        ${RMMOD} ${LOADED_MODULES}
+        exit 1
+    fi
+
+    LOADED_MODULES="${ECMODULE} ${LOADED_MODULES}"
+done
+
+exit 0
+;;
+```
+
+**修改`EtherCAT Master`配置文件。**
+
+例：`/etc/sysconfig/ethercat`和`/etc/ethercat.conf`
+
+``` shell
+MASTER0_DEVICE="00:11:22:33:44:55"
+#MASTER1_DEVICE=""
+
+#MASTER0_BACKUP=""
+
+DEVICE_MODULES="generic"
+```
+
+`MASTER<X>_DEVICE`配置网卡的物理地址（MAC），可通过`ifconfig`命令查看。  
+`DEVICE_MODULES`配置使用的模块名称，这里仅使用通用网卡驱动`generic`。
+
+## 运行`EtherCAT Master`
+
+- 启动`EtherCAT`主站程序。
+
+  ``` shell
+  /etc/init.d/ethercat start
+  # 或者
+  /sbin/ethercatctl start
+  ```
+
+  如果一切正常，可以看到`/dev`目录下有`EtherCAT0`设备文件。
+
+- 查看主站信息
+
+  ``` shell
+  [root@LS-GD ~]# ethercat master
+  Master0
+  Phase: Idle
+  Active: no
+  Slaves: 1
+  Ethernet devices:
+    Main: 00:11:22:33:44:55 (attached)
+      Link: UP
+      Tx frames:   370862
+      Tx bytes:    22319896
+      Rx frames:   370861
+      Rx bytes:    22319836
+      Tx errors:   0
+      Tx frame rate [1/s]:    125    125    125
+      Tx rate [KByte/s]:      7.3    7.3    7.3
+      Rx frame rate [1/s]:    125    125    125
+      Rx rate [KByte/s]:      7.3    7.3    7.3
+    Common:
+      Tx frames:   1108336
+      Tx bytes:    66704720
+      Rx frames:   1108307
+      Rx bytes:    66702980
+      Lost frames: 29
+      Tx frame rate [1/s]:    125    125    125
+      Tx rate [KByte/s]:      7.3    7.3    7.3
+      Rx frame rate [1/s]:    125    125    125
+      Rx rate [KByte/s]:      7.3    7.3    7.3
+      Loss rate [1/s]:          0      0      0
+      Frame loss [%]:         0.0    0.0    0.0
+  Distributed clocks:
+    Reference clock:   Slave 0
+    DC reference time: 0
+    Application time:  0
+                       2000-01-01 00:00:00.000000000
+  ```
+
+- 查看从站设备
+
+  ``` shell
+  [root@LS-GD ~]# ethercat slaves
+  0  0:0  PREOP  +  XB6-EC0002(Modules/Slots and MDP)
+  ```
+
+- 生成从站信息XML文件
+
+  ``` shell
+  [root@LS-GD ~]# ethercat xml > scanner.xml
+  ```
+
+- 其他`ethercat`命令
+
+  使用`ethercat -h`命令查看其他命令的使用方法。
 
 ## 参考
 

@@ -1,7 +1,7 @@
 ---
 title: "龙芯3A5000(loongarch64)上编译运行EPICS"
 date: 2023-02-01T15:51:40+08:00
-lastmod: 2024-01-18T17:40:26+08:00
+lastmod: 2024-02-28T10:30:26+08:00
 draft: false
 description: 在龙芯3A5000(loongarch64)上编译运行EPICS
 tags: ["linux", "EPICS", "龙芯"]
@@ -100,7 +100,7 @@ $ vi CONFIG.Common.linux-la64
 ``` shell
 # CONFIG.Common.linux-la64
 #
-# Definitions for linux-loongarch64 target builds
+# Definitions for linux-la64 target builds
 # Override these settings in CONFIG_SITE.Common.linux-la64
 #-------------------------------------------------------
 
@@ -108,6 +108,9 @@ $ vi CONFIG.Common.linux-la64
 include $(CONFIG)/os/CONFIG.Common.linuxCommon
 
 ARCH_CLASS = loongarch
+
+ARCH_DEP_CFLAGS = $(GNU_ARCH_CFLAGS) $(GNU_TUNE_CFLAGS)
+ARCH_DEP_CFLAGS += $(GNU_DEP_CFLAGS)
 ```
 
 2. 添加 CONFIG.linux-la64.Common
@@ -123,7 +126,7 @@ $ vi CONFIG.linux-la64.Common
 ``` shell
 # CONFIG.linux-la64.Common
 #
-# Definitions for linux-loongarch64 host builds
+# Definitions for linux-la64 host builds
 # Sites may override these definitions in CONFIG_SITE.linux-la64.Common
 #-------------------------------------------------------
 
@@ -144,7 +147,7 @@ $ vi CONFIG.linux-la64.linux-la64
 ``` shell
 # CONFIG.linux-la64.linux-la64
 #
-# Definitions for native linux-loongarch64 builds
+# Definitions for native linux-la64 builds
 # Override these definitions in CONFIG_SITE.linux-la64.linux-la64
 #-------------------------------------------------------
 
@@ -160,12 +163,12 @@ $ cp CONFIG_SITE.Common.linux-aarch64 CONFIG_SITE.Common.linux-la64
 $ vi CONFIG_SITE.Common.linux-la64
 ```
 
-内容没有变化，可以不修改。
+修改成如下内容。
 
 ``` shell
 # CONFIG_SITE.Common.linux-la64
 #
-# Site Specific definitions for all linux-loongarch64 targets
+# Site Specific definitions for all linux-la64 targets
 #-------------------------------------------------------
 
 # NOTE for SHARED_LIBRARIES: In most cases if this is set to YES the
@@ -195,12 +198,22 @@ $ vi CONFIG_SITE.Common.linux-la64
 # Needs -lcurses (older versions)
 #COMMANDLINE_LIBRARY = READLINE_CURSES
 
+# Readline is broken or you don't want use it:
+#COMMANDLINE_LIBRARY = EPICS
+
 
 # WARNING: Variables that are set in $(CONFIG)/CONFIG.gnuCommon cannot be
 # overridden in this file for native builds, e.g. variables such as
 #    OPT_CFLAGS_YES, WARN_CFLAGS, SHRLIB_LDFLAGS
 # They must be set in CONFIG_SITE.linux-la64.linux-la64 or for
 # cross-builds in CONFIG_SITE.<host-arch>.linux-la64 instead.
+
+# Tune GNU compiler output for a specific cpu-type
+# (e.g. loongarch64, la264, la364, la464 etc.)
+GNU_ARCH_CFLAGS = -march=loongarch64
+GNU_TUNE_CFLAGS = -mtune=loongarch64
+# Enable soft-float feature (e.g. none, 32, 64)
+GNU_DEP_CFLAGS = -mfpu=none
 ```
 
 5. 添加 CONFIG_SITE.linux-la64.linux-la64
@@ -216,7 +229,7 @@ $ vi CONFIG_SITE.linux-la64.linux-la64
 ``` shell
 # CONFIG_SITE.linux-la64.linux-la64
 #
-# Site specific definitions for native linux-loongarch64 builds
+# Site specific definitions for native linux-la64 builds
 #-------------------------------------------------------
 
 # It makes sense to include debugging symbols even in optimized builds

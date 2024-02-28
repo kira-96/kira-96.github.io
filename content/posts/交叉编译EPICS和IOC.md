@@ -1,7 +1,7 @@
 ---
 title: "交叉编译EPICS和IOC"
 date: 2023-12-12T16:26:35+08:00
-lastmod: 2024-01-18T17:40:26+08:00
+lastmod: 2024-02-28T10:50:56+08:00
 draft: false
 description: Linux交叉编译EPICS
 tags: ["linux", "EPICS", "龙芯"]
@@ -34,7 +34,7 @@ categories: ["EPICS"]
 ``` shell
 # CONFIG.linux-x86_64.linux-la64
 #
-# Definitions for linux-x86_64 host - linux-loongarch64 target builds
+# Definitions for linux-x86_64 host - linux-la64 target builds
 # Sites may override these in CONFIG_SITE.linux-x86_64.linux-la64
 #-------------------------------------------------------
 
@@ -66,7 +66,7 @@ STATIC_LDLIBS_NO=
 ``` shell
 # CONFIG_SITE.linux-x86_64.linux-la64
 #
-# Site specific definitions for linux-x86_64 host - linux-loongarch64 target builds
+# Site specific definitions for linux-x86_64 host - linux-la64 target builds
 #-------------------------------------------------------
 
 # Set GNU crosscompiler target name
