@@ -1,7 +1,7 @@
 ---
 title: "龙芯开发板移植 IgH EtherCAT Master"
 date: 2024-02-23T12:54:31+08:00
-lastmod: 2024-02-28T18:56:32+08:00
+lastmod: 2024-03-08T19:16:36+08:00
 draft: false
 description: 龙芯2K0500开发板移植EtherCAT主站程序和EPICS EtherCAT模块
 tags: ["linux", "EPICS", "龙芯"]
@@ -11,7 +11,7 @@ categories: ["EPICS"]
 
 ## 前言
 
-IgH EtherCAT Master是一个开源的EtherCAT主站驱动程序，用于管理EtherCAT从站设备，支持Linux操作系统，工控上使用的比较多。
+IgH EtherCAT Master 是一个开源的EtherCAT主站驱动程序，用于管理EtherCAT从站设备，支持Linux操作系统，工控上使用的比较多。
 
 dls ethercat是由英国钻石光源开发的用于 EPICS 控制系统 EtherCAT 设备的支持程序，基于 IgH Master 主站程序开发，实现对 EtherCAT 总线设备的读写。
 
@@ -43,7 +43,9 @@ dls ethercat是由英国钻石光源开发的用于 EPICS 控制系统 EtherCAT 
 
 如果你使用的是其他开发套件，请按照开发手册安装配置好环境。
 
-## 编译 `IgH EtherCAT Master`
+## 编译 IgH EtherCAT Master
+
+**源码一定要下载 *stable-1.5* 分支的，其他版本我也没有测试！**
 
 ### 打补丁
 
@@ -173,9 +175,7 @@ make uImage
 make modules
 ```
 
-### 编译 `EtherCAT Master` 驱动
-
-**源码一定要下载 *stable-1.5* 分支的，其他版本我也没有测试！**
+### 编译 EtherCAT Master 驱动
 
 ``` shell
 cd ethercat-stable-1.5/
@@ -231,11 +231,11 @@ __install_dir
     └─ bash-completion/ (bash自动补全)
 ```
 
-## 编译 **EPICS** `ethercat` 模块
+## 编译 **EPICS** ethercat 模块
 
-**以下步骤需要先安装好EPICS `Base`!**
+**以下步骤需要先安装好EPICS Base!**
 
-### 编译 `asyn`
+### 编译 asyn
 
 ``` shell
 cd asyn
@@ -259,7 +259,7 @@ SUPPORT=/home/ubuntu/loongson/modules
 make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
 ```
 
-### 编译 `autosave`
+### 编译 autosave
 
 ``` shell
 cd autosave
@@ -279,7 +279,7 @@ SUPPORT=/home/ubuntu/loongson/modules
 make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
 ```
 
-### 编译 `busy`
+### 编译 busy
 
 ``` shell
 cd busy
@@ -305,7 +305,7 @@ BUSY=$(SUPPORT)/busy
 make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
 ```
 
-### 编译 `ethercat`
+### 编译 ethercat
 
 这一步可以说是最麻烦，问题最多的。编译出什么问题都需要去找到相应的`Makefile`修改。
 
@@ -344,7 +344,7 @@ ln -s libz.so.1.2.11 libz.so.1
 ln -s libz.so.1 libz.so
 ```
 
-然后需要修改一下`libxml2`的头文件，不然编译的时候会报错。
+然后需要修改一下*libxml2*的头文件，不然编译的时候会报错。
 
 报错信息：
 
@@ -387,7 +387,7 @@ vi 3rd/include/libxml2/libxml/xmlversion.h
 做好上面的准备工作，还需要修改源码中的路径配置，然后才能正常编译。  
 下面都是我踩坑留下的记录。
 
-1. 修改 `configure/RELEASE`
+1. 修改 *configure/RELEASE*
 
 ``` shell
 cd ethercat-master/
@@ -409,7 +409,7 @@ EPICS_HOST_ARCH=linux-la64
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 ```
 
-2. 修改 `ethercatApp/scannerSrc/Makefile`
+2. 修改 *ethercatApp/scannerSrc/Makefile*
 
 ``` shell
 cd ethercat-master/
@@ -439,7 +439,7 @@ serialtool_INCLUDES += -I$(ETHERLAB)/master
 get-slave-revisions_INCLUDES += -I$(ETHERLAB)/master
 ```
 
-3. 修改 `ethercatApp/src/Makefile`，与上面类似。
+3. 修改 *ethercatApp/src/Makefile*，与上面类似。
 
 ``` shell
 cd ethercat-master/
@@ -646,7 +646,7 @@ ethercat-master
 
 将整理好的文件下载到开发板后，我们测试运行一下。
 
-测试安装 EtherCAT 主站驱动程序。
+测试安装 **EtherCAT** 主站驱动程序。
 
 ``` shell
 [root@LS-GD modules]# modinfo ec_generic.ko
@@ -732,7 +732,7 @@ usage: scanner [-m master_index] [-s] [-q] scanner.xml socket_path
 
 可以看到，驱动程序和主程序都能在开发板上运行，说明已经编译完成了。
 
-## 安装EtherCAT主站到开发板系统
+## 安装 EtherCAT 主站到开发板系统
 
 首先将编译好的`EtherCAT Master`下载到开发板系统，然后将各个目录下的文件放到相应的系统目录下。（这里我还以`__install_dir`的目录结构为例。）
 
@@ -870,7 +870,7 @@ exit 0
 ;;
 ```
 
-**修改`EtherCAT Master`配置文件。**
+**修改 EtherCAT Master 配置文件。**
 
 例：`/etc/sysconfig/ethercat`和`/etc/ethercat.conf`
 
@@ -886,7 +886,7 @@ DEVICE_MODULES="generic"
 `MASTER<X>_DEVICE`配置网卡的物理地址（MAC），可通过`ifconfig`命令查看。  
 `DEVICE_MODULES`配置使用的模块名称，这里仅使用通用网卡驱动`generic`。
 
-## 运行`EtherCAT Master`
+## 运行 EtherCAT Master
 
 - 启动`EtherCAT`主站程序。
 
