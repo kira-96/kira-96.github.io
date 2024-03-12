@@ -1,7 +1,7 @@
 ---
 title: "龙芯开发板移植 IgH EtherCAT Master"
 date: 2024-02-23T12:54:31+08:00
-lastmod: 2024-03-08T19:16:36+08:00
+lastmod: 2024-03-12T15:57:25+08:00
 draft: false
 description: 龙芯2K0500开发板移植EtherCAT主站程序和EPICS EtherCAT模块
 tags: ["linux", "EPICS", "龙芯"]
@@ -19,7 +19,7 @@ dls ethercat是由英国钻石光源开发的用于 EPICS 控制系统 EtherCAT 
 
 运行开发板：龙芯2K0500金龙开发板
 
-内核版本：Linux 5.10.0-rt20.lsgd #2 PREEMPT_RT
+内核版本：Linux LS-GD 5.10.0-rt17.lsgd #1 PREEMPT_RT
 
 ## 相关软件包下载地址
 
@@ -160,8 +160,7 @@ tar -xvf linux-5.10-2k500-src-f45937d-build.20230721100738.tar.gz
 cd linux-5.10-2k500-cbd-src/
 
 # 为内核打上实时补丁（可选）
-# patch -p1 < patch-5.10-rt17.patch
-patch -p1 < patch-5.10.1-rt20.patch
+patch -p1 < patch-5.10-rt17.patch
 
 # 配置交叉编译器
 ./set_env.sh
@@ -309,7 +308,9 @@ make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-li
 
 这一步可以说是最麻烦，问题最多的。编译出什么问题都需要去找到相应的`Makefile`修改。
 
-首先需要安装所需的包。但我们实际上并不需要用这个软件包，我们只需要它的头文件。
+> 由于该软件包已经长时间无人维护，建议使用我[修改过的版本](https://github.com/kira-96/epics-ethercat)。
+
+首先需要安装所需的包*libxml2-dev*。但我们实际上并不需要用这个软件包，我们只需要它的头文件。
 
 **软件依赖的动态库(.so)文件，我们则需要从开发板系统中拷贝出来，无法直接用编译电脑的动态库。**
 
@@ -658,7 +659,7 @@ author:         Florian Pose <fp@igh-essen.com>
 srcversion:     848BB80F1C588A2FDA42EDB
 depends:        ec_master
 name:           ec_generic
-vermagic:       5.10.0-rt20.lsgd preempt_rt mod_unload modversions LOONGARCH 64BIT
+vermagic:       5.10.0-rt17.lsgd preempt_rt mod_unload modversions LOONGARCH 64BIT
 [root@LS-GD modules]# insmod ec_master.ko
 [root@LS-GD modules]# insmod ec_generic.ko
 [root@LS-GD modules]# lsmod
@@ -744,7 +745,7 @@ usage: scanner [-m master_index] [-s] [-q] scanner.xml socket_path
 |etc/ethercat.conf|/etc/ethercat.conf|
 |include/| - |
 |lib/libethercat.so*|/usr/lib/libethercat.so*|
-|modules/|/lib/modules/5.10.0-rt20.lsgd/|
+|modules/|/lib/modules/5.10.0-rt17.lsgd/|
 |sbin/ethercatctl|/sbin/ethercatctl|
 |share/bash-completion/|usr/share/bash-completion/|
 
