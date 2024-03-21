@@ -747,7 +747,7 @@ usage: scanner [-m master_index] [-s] [-q] scanner.xml socket_path
 |lib/libethercat.so*|/usr/lib/libethercat.so*|
 |modules/|/lib/modules/5.10.0-rt17.lsgd/|
 |sbin/ethercatctl|/sbin/ethercatctl|
-|share/bash-completion/|usr/share/bash-completion/|
+|share/bash-completion/|/usr/share/bash-completion/|
 
 > 注意：如果系统目录存在`/lib/modules/{内核版本}`目录，则可以将`modules`目录下的`ec_master.ko`和`ec_generic.ko`复制到该目录下，然后在终端执行`depmod`命令。否则，可以按照下面的步骤做相应修改。
 

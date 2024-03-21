@@ -1,7 +1,7 @@
 ---
 title: "EPICS Qt安装"
 date: 2023-05-04T15:06:56+08:00
-lastmod: 2023-12-28T09:25:36+08:00
+lastmod: 2024-03-21T13:27:36+08:00
 draft: false
 description: Linux上编译安装EPICS Qt
 tags: ["linux", "EPICS", "Qt", "龙芯"]
@@ -99,7 +99,7 @@ git clone https://github.com/qtepics/qegui.git
 在开始编译前，需要先配置一些环境变量（根据自己的实际情况设置）。具体可以参考 [EPICS Qt Environment Variables](https://qtepics.github.io/environment_variables.html)
 
 ```sh
-export EPICS_HOST_ARCH=linux-loongarch64
+export EPICS_HOST_ARCH=linux-la64
 export EPICS_BASE=/usr/local/epics/base-7.0.7
 export ACAI=/usr/local/epics/modules/acai
 export QWT_INCLUDE_PATH=/usr/include/qwt
@@ -120,7 +120,7 @@ cd ~/QtEpics/qeframework/archapplDataSup/
 make
 ```
 
-编译完成后，可以看到`~/QtEpics/qeframework/lib/linux-loongarch64`目录下有`libarchapplData.a`、`libarchapplData.so`两个文件。
+编译完成后，可以看到`~/QtEpics/qeframework/lib/linux-la64`目录下有`libarchapplData.a`、`libarchapplData.so`两个文件。
 
 然后依次编译 `qeframework` `qeplugin` `qegui`。EPICS Qt文档说明需要修改`configure/RELEASE`文件，但我这里修改后似乎没有生效，可能是使用了Qt Creator的原因，只能通过上面的环境变量设置。
 
@@ -136,15 +136,15 @@ make
 最后将编译生成的文件复制到以下位置，例：
 
 ```sh
-sudo cp ~/QtEpics/qeframework/lib/linux-loongarch64/libarchapplData.so /usr/lib/loongarch64-linux-gnu/
-sudo cp ~/QtEpics/qeframework/lib/linux-loongarch64/libQEFramework.so /usr/lib/loongarch64-linux-gnu/
-sudo cp ~/QtEpics/qeframework/lib/linux-loongarch64/designer/libQEPlugin.so /usr/lib/loongarch64-linux-gnu/qt5/plugins/designer/
+sudo cp ~/QtEpics/qeframework/lib/linux-la64/libarchapplData.so /usr/lib/loongarch64-linux-gnu/
+sudo cp ~/QtEpics/qeframework/lib/linux-la64/libQEFramework.so /usr/lib/loongarch64-linux-gnu/
+sudo cp ~/QtEpics/qeframework/lib/linux-la64/designer/libQEPlugin.so /usr/lib/loongarch64-linux-gnu/qt5/plugins/designer/
 ```
 
 运行`QEGuiApp`
 
 ```sh
-cd ~/epics/qtepics/qegui/bin/linux-loongarch64
+cd ~/epics/qtepics/qegui/bin/linux-la64
 ./qegui
 ```
 
