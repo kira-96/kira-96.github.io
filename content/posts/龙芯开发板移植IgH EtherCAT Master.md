@@ -242,7 +242,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -266,7 +266,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -286,7 +286,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -405,7 +405,7 @@ ASYN=$(SUPPORT)/asyn
 BUSY=$(SUPPORT)/busy
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 ```
@@ -497,7 +497,7 @@ int get_root_dir_index(const char *program_name)
 }
 ```
 
-这个`get_root_dir_index`函数是用于计算当前程序(`slaveinfo`)所在的**根**目录。这里向上查找的路径为`bin/linux-x86_64`，当然不能找到`LoongArch`的目录`bin/linux-la64`了。所以，此函数只在路径为`bin/linux-x86_64/slaveinfo`时才能正常运行，其它情况都返回`-1`。（第一次见到这样写的，真无语了……）
+这个`get_root_dir_index`函数是用于计算当前程序(`slaveinfo`)所在的**根**目录。这里向上查找的路径为`bin/linux-x86_64`，当然不能找到`LoongArch`的目录`bin/linux-loong64`了。所以，此函数只在路径为`bin/linux-x86_64/slaveinfo`时才能正常运行，其它情况都返回`-1`。（第一次见到这样写的，真无语了……）
 
 ``` c
 //  ethercatApp/scannerSrc/slave-list-path.c
@@ -606,17 +606,17 @@ make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-li
 
 ``` shell
 ...
-Installing library ../../../lib/linux-la64/libscannerlib.a
+Installing library ../../../lib/linux-loong64/libscannerlib.a
 ...
-Installing created executable ../../../bin/linux-la64/serialtool
-Installing created executable ../../../bin/linux-la64/get-slave-revisions
-Installing created executable ../../../bin/linux-la64/scanner
-Installing created executable ../../../bin/linux-la64/slaveinfo
-Installing created executable ../../../bin/linux-la64/parsertest
+Installing created executable ../../../bin/linux-loong64/serialtool
+Installing created executable ../../../bin/linux-loong64/get-slave-revisions
+Installing created executable ../../../bin/linux-loong64/scanner
+Installing created executable ../../../bin/linux-loong64/slaveinfo
+Installing created executable ../../../bin/linux-loong64/parsertest
 ...
-Installing shared library ../../../lib/linux-la64/libecAsyn.so
-Installing library ../../../lib/linux-la64/libecAsyn.a
-Installing created executable ../../../bin/linux-la64/parsertest
+Installing shared library ../../../lib/linux-loong64/libecAsyn.so
+Installing library ../../../lib/linux-loong64/libecAsyn.a
+Installing created executable ../../../bin/linux-loong64/parsertest
 ...
 Installing template file ../../../db/EK1100.template
 ...
@@ -636,11 +636,11 @@ make: *** [/usr/local/epics/base-7.0.8/configure/RULES_DIRS:85：ethercatApp.ins
 ```
 ethercat-master
 ├─ bin
-│   └─ linux-la64
+│   └─ linux-loong64
 ├─ db
 ├─ dbd
 └─ lib
-    └─ linux-la64
+    └─ linux-loong64
 ```
 
 ## 测试运行
@@ -726,8 +726,8 @@ Send bug reports to fp@igh.de.
 测试`scanner`主程序。
 
 ``` shell
-[root@LS-GD linux-la64]# chmod +x scanner
-[root@LS-GD linux-la64]# ./scanner
+[root@LS-GD linux-loong64]# chmod +x scanner
+[root@LS-GD linux-loong64]# ./scanner
 usage: scanner [-m master_index] [-s] [-q] scanner.xml socket_path
 ```
 

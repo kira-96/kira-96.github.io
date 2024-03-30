@@ -78,7 +78,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -98,7 +98,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -120,7 +120,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -144,7 +144,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）

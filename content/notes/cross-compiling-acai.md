@@ -24,10 +24,10 @@ EPICS Qt依赖ACAI提供的Channel Access接口。
 
 *这里依旧以龙芯架构为例。*
 
-EPICS base 编译完成后，可以看到`bin`目录下有`linux-la64`、`linux-x86_64`两个目录，`linux-x86_64`目录下比`linux-la64`目录多出了许多`perl`脚本，我们需要把这些脚本复制到龙架构的目录下，下面编译需要用到。
+EPICS base 编译完成后，可以看到`bin`目录下有`linux-loong64`、`linux-x86_64`两个目录，`linux-x86_64`目录下比`linux-loong64`目录多出了许多`perl`脚本，我们需要把这些脚本复制到龙架构的目录下，下面编译需要用到。
 
 ``` shell
-$ cp ./bin/linux-x86_64/*.pl ./bin/linux-la64/
+$ cp ./bin/linux-x86_64/*.pl ./bin/linux-loong64/
 ```
 
 ## 编译
@@ -41,7 +41,7 @@ cd acai
 vi configure/RELEASE.local
 
 # 修改交叉编译的目标架构，和EPICS base中保持一致
-EPICS_HOST_ARCH=linux-la64
+EPICS_HOST_ARCH=linux-loong64
 # 修改EPICS_BASE路径，例：
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 
@@ -49,4 +49,4 @@ make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-li
 # 等待编译完成
 ```
 
-编译完成后可以在`lib/linux-la64/`目录下找到`libacai.so`。
+编译完成后可以在`lib/linux-loong64/`目录下找到`libacai.so`。

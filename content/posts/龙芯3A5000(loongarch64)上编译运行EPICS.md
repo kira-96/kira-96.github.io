@@ -1,9 +1,9 @@
 ---
-title: "龙芯3A5000(loongarch64)上编译运行EPICS"
+title: "龙芯3A5000(LoongArch64)上编译运行EPICS"
 date: 2023-02-01T15:51:40+08:00
 lastmod: 2024-02-28T10:30:26+08:00
 draft: false
-description: 在龙芯3A5000(loongarch64)上编译运行EPICS
+description: 在龙芯3A5000(LoongArch64)上编译运行EPICS
 tags: ["linux", "EPICS", "龙芯"]
 keywords: ["linux", "EPICS", "龙芯"]
 categories: ["EPICS"]
@@ -18,6 +18,8 @@ categories: ["EPICS"]
 ![Loongson-3A5000-HV](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2023-02-01_12-58-17.png)
 
 虽然EPICS官方并没有适配`loongarch`和`mips64`，无法做到开箱即用，但只要有gcc、g++、make、perl这些工具，理论上就能编译运行EPICS，在开始编译前，确保你的设备上已经装好了这些工具。
+
+关于如何称呼「龙架构」，龙芯社区也有一些讨论。最初我直接使用`loongarch64`，后来也使用过`la64`作为简写，直到我看到[如何称呼龙架构？](https://areweloongyet.com/docs/loong-or-loongarch/)，我觉得有必要和社区保持一致，后续统一使用 **`loong64`** 作为架构标识。
 
 ## 下载 base
 
@@ -68,12 +70,44 @@ $ vi ./src/tools/EpicsHostArch.pl
 
 既然识别不了`loongarch64`，那我们就手动添加一行，让它可以识别就行了，即使看不太懂上面的脚本也没关系，看个半懂就行了。
 
-![Architecture](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2024-01-18_16-26-41.png)
-
-我们在如图的光标位置添加一行内容，来让它可以识别`loongarch64`架构。
-
 ``` perl
-return 'linux-la64'  if m/^loongarch64-linux/;
+sub HostArch {
+    my $arch = $Config{archname};
+    for ($arch) {
+        return 'linux-x86_64'   if m/^x86_64-linux/;
+        return 'linux-x86'      if m/^i[3-6]86-linux/;
+        return 'linux-arm'      if m/^arm-linux/;
+        return 'linux-aarch64'  if m/^aarch64-linux/;
+        return 'linux-ppc64'    if m/^powerpc64-linux/;
+        return 'linux-loong64'  if m/^loongarch64-linux/;
+        return 'windows-x64'    if m/^MSWin32-x64/;
+        return 'win32-x86'      if m/^MSWin32-x86/;
+        return "cygwin-x86_64"  if m/^x86_64-cygwin/;
+        return "cygwin-x86"     if m/^i[3-6]86-cygwin/;
+        return 'solaris-sparc'  if m/^sun4-solaris/;
+        return 'solaris-x86'    if m/^i86pc-solaris/;
+
+        my ($kernel, $hostname, $release, $version, $cpu) = uname;
+        if (m/^darwin/) {
+            for ($cpu) {
+                return 'darwin-x86'     if m/^x86_64/;
+                return 'darwin-aarch64' if m/^arm64/;
+            }
+            die "$0: macOS CPU type '$cpu' not recognized\n";
+        }
+
+        die "$0: Architecture '$arch' not recognized\n";
+    }
+}
+```
+
+我们在上面位置添加一行内容，来让它可以识别`loongarch64`架构。
+
+``` diff
+  return 'linux-aarch64'  if m/^aarch64-linux/;
+  return 'linux-ppc64'    if m/^powerpc64-linux/;
++ return 'linux-loong64'  if m/^loongarch64-linux/;
+  return 'windows-x64'    if m/^MSWin32-x64/;
 ```
 
 此时我们再执行一下`make`命令。
@@ -82,26 +116,26 @@ return 'linux-la64'  if m/^loongarch64-linux/;
 
 可以看到，现在已经可以识别出`loongarch64-linux`了，报错和在3A4000上编译时也基本一样了。
 
-> 以下步骤同样适用于在3A4000（mips64）上编译EPICS，只需要将`la64`全部替换为`mips64`
+> 以下步骤同样适用于在3A4000（mips64）上编译EPICS，只需要将`loong64`全部替换为`mips64`
 
 剩下的报错就是，没有找到对应的编译配置项，我们同样可以仿照已经做了适配的架构来改写，直接按照下面步骤来就可以了。
 
-1. 添加 CONFIG.Common.linux-la64
+1. 添加 CONFIG.Common.linux-loong64
 
 ``` shell
 $ cd configure/os/
-# 添加 CONFIG.Common.linux-la64
-$ cp CONFIG.Common.linux-aarch64 CONFIG.Common.linux-la64
-$ vi CONFIG.Common.linux-la64
+# 添加 CONFIG.Common.linux-loong64
+$ cp CONFIG.Common.linux-aarch64 CONFIG.Common.linux-loong64
+$ vi CONFIG.Common.linux-loong64
 ```
 
 修改成如下内容：
 
 ``` shell
-# CONFIG.Common.linux-la64
+# CONFIG.Common.linux-loong64
 #
-# Definitions for linux-la64 target builds
-# Override these settings in CONFIG_SITE.Common.linux-la64
+# Definitions for linux-loong64 target builds
+# Override these settings in CONFIG_SITE.Common.linux-loong64
 #-------------------------------------------------------
 
 # Include definitions common to all Linux targets
@@ -113,62 +147,62 @@ ARCH_DEP_CFLAGS = $(GNU_ARCH_CFLAGS) $(GNU_TUNE_CFLAGS)
 ARCH_DEP_CFLAGS += $(GNU_DEP_CFLAGS)
 ```
 
-2. 添加 CONFIG.linux-la64.Common
+2. 添加 CONFIG.linux-loong64.Common
 
 ``` shell
-# 添加 CONFIG.linux-la64.Common
-$ cp CONFIG.linux-aarch64.Common CONFIG.linux-la64.Common
-$ vi CONFIG.linux-la64.Common
+# 添加 CONFIG.linux-loong64.Common
+$ cp CONFIG.linux-aarch64.Common CONFIG.linux-loong64.Common
+$ vi CONFIG.linux-loong64.Common
 ```
 
 修改成如下内容(内容没有变化，可以不修改)：
 
 ``` shell
-# CONFIG.linux-la64.Common
+# CONFIG.linux-loong64.Common
 #
-# Definitions for linux-la64 host builds
-# Sites may override these definitions in CONFIG_SITE.linux-la64.Common
+# Definitions for linux-loong64 host builds
+# Sites may override these definitions in CONFIG_SITE.linux-loong64.Common
 #-------------------------------------------------------
 
 # Include definitions common to unix hosts
 include $(CONFIG)/os/CONFIG.UnixCommon.Common
 ```
 
-3. 添加 CONFIG.linux-la64.linux-la64
+3. 添加 CONFIG.linux-loong64.linux-loong64
 
 ``` shell
-# 添加 CONFIG.linux-la64.linux-la64
-$ cp CONFIG.linux-aarch64.linux-aarch64 CONFIG.linux-la64.linux-la64
-$ vi CONFIG.linux-la64.linux-la64
+# 添加 CONFIG.linux-loong64.linux-loong64
+$ cp CONFIG.linux-aarch64.linux-aarch64 CONFIG.linux-loong64.linux-loong64
+$ vi CONFIG.linux-loong64.linux-loong64
 ```
 
 修改成如下内容(内容没有变化，可以不修改)：
 
 ``` shell
-# CONFIG.linux-la64.linux-la64
+# CONFIG.linux-loong64.linux-loong64
 #
-# Definitions for native linux-la64 builds
-# Override these definitions in CONFIG_SITE.linux-la64.linux-la64
+# Definitions for native linux-loong64 builds
+# Override these definitions in CONFIG_SITE.linux-loong64.linux-loong64
 #-------------------------------------------------------
 
 # Include common gnu compiler definitions
 include $(CONFIG)/CONFIG.gnuCommon
 ```
 
-4. 添加 CONFIG_SITE.Common.linux-la64
+4. 添加 CONFIG_SITE.Common.linux-loong64
 
 ``` shell
-# 添加 CONFIG_SITE.Common.linux-la64
-$ cp CONFIG_SITE.Common.linux-aarch64 CONFIG_SITE.Common.linux-la64
-$ vi CONFIG_SITE.Common.linux-la64
+# 添加 CONFIG_SITE.Common.linux-loong64
+$ cp CONFIG_SITE.Common.linux-aarch64 CONFIG_SITE.Common.linux-loong64
+$ vi CONFIG_SITE.Common.linux-loong64
 ```
 
 修改成如下内容。
 
 ``` shell
-# CONFIG_SITE.Common.linux-la64
+# CONFIG_SITE.Common.linux-loong64
 #
-# Site Specific definitions for all linux-la64 targets
+# Site Specific definitions for all linux-loong64 targets
 #-------------------------------------------------------
 
 # NOTE for SHARED_LIBRARIES: In most cases if this is set to YES the
@@ -205,8 +239,8 @@ $ vi CONFIG_SITE.Common.linux-la64
 # WARNING: Variables that are set in $(CONFIG)/CONFIG.gnuCommon cannot be
 # overridden in this file for native builds, e.g. variables such as
 #    OPT_CFLAGS_YES, WARN_CFLAGS, SHRLIB_LDFLAGS
-# They must be set in CONFIG_SITE.linux-la64.linux-la64 or for
-# cross-builds in CONFIG_SITE.<host-arch>.linux-la64 instead.
+# They must be set in CONFIG_SITE.linux-loong64.linux-loong64 or for
+# cross-builds in CONFIG_SITE.<host-arch>.linux-loong64 instead.
 
 # Tune GNU compiler output for a specific cpu-type
 # (e.g. loongarch64, la264, la364, la464 etc.)
@@ -216,20 +250,20 @@ GNU_TUNE_CFLAGS = -mtune=loongarch64
 GNU_DEP_CFLAGS = -mfpu=none
 ```
 
-5. 添加 CONFIG_SITE.linux-la64.linux-la64
+5. 添加 CONFIG_SITE.linux-loong64.linux-loong64
 
 ``` shell
-# 添加 CONFIG_SITE.linux-la64.linux-la64
-$ cp CONFIG_SITE.linux-aarch64.linux-aarch64 CONFIG_SITE.linux-la64.linux-la64
-$ vi CONFIG_SITE.linux-la64.linux-la64
+# 添加 CONFIG_SITE.linux-loong64.linux-loong64
+$ cp CONFIG_SITE.linux-aarch64.linux-aarch64 CONFIG_SITE.linux-loong64.linux-loong64
+$ vi CONFIG_SITE.linux-loong64.linux-loong64
 ```
 
 修改成如下内容：
 
 ``` shell
-# CONFIG_SITE.linux-la64.linux-la64
+# CONFIG_SITE.linux-loong64.linux-loong64
 #
-# Site specific definitions for native linux-la64 builds
+# Site specific definitions for native linux-loong64 builds
 #-------------------------------------------------------
 
 # It makes sense to include debugging symbols even in optimized builds
@@ -254,7 +288,7 @@ $ make -j8
 
 接下来就静静等待编译完成。
 
-编译完后查看编译输出目录`bin/linux-la64/`。
+编译完后查看编译输出目录`bin/linux-loong64/`（截图比较旧）。
 
 ![编译输出目录](https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/2024-01-18_16-37-18.png)
 
@@ -276,7 +310,7 @@ $ vi env
 #!/bin/sh
 # EPICS base shell setup
 export EPICS_BASE="/usr/local/epics/base-7.0.7"
-export EPICS_HOST_ARCH=linux-la64
+export EPICS_HOST_ARCH=linux-loong64
 
 # affix colons on either side of $PATH to simplify matching
 case ":${PATH}:" in

@@ -142,7 +142,7 @@ $ makeBaseApp.pl -t example test
 $ makeBaseApp.pl -i -t example test
 
 The following target architectures are available in base:
-    linux-la64
+    linux-loong64
     linux-x86_64
 What architecture do you want to use? linux-x86_64
 The following applications are available:
