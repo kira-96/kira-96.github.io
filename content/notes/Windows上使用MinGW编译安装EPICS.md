@@ -1,7 +1,7 @@
 ---
 title: "Windows上使用MinGW编译安装EPICS"
 date: 2023-11-29T18:57:02+08:00
-lastmod: 2023-12-07T09:43:50+08:00
+lastmod: 2024-05-29T14:52:04+08:00
 draft: true
 tags: ["EPICS"]
 keywords: ["EPICS"]
@@ -19,7 +19,7 @@ categories: ["EPICS"]
 
 ## 安装 Strawberry Perl
 
-这里选择 [Strawberry Perl 5.32.1.1](https://strawberryperl.com/release-notes/5.32.1.1-64bit.html)。经测试`base-7.0.7`可正常编译，后续版本的perl编译会报错。
+这里选择 [Strawberry Perl 5.38.2.1](https://strawberryperl.com/release-notes/5.38.2.1-64bit.html)。
 
 直接安装即可，需要注意的是，安装路径不能有空格和中文，最好放在盘符的根目录下。  
 例：`D:\Strawberry`
@@ -39,17 +39,23 @@ D:\Strawberry\perl\bin
 ```shell
 > perl -v
 
-This is perl 5, version 32, subversion 1 (v5.32.1) built for MSWin32-x64-multi-thread
+This is perl 5, version 38, subversion 2 (v5.38.2) built for MSWin32-x64-multi-thread
 
-Copyright 1987-2021, Larry Wall
+Copyright 1987-2023, Larry Wall
 
 Perl may be copied only under the terms of either the Artistic License or the
 GNU General Public License, which may be found in the Perl 5 source kit.
 
 Complete documentation for Perl, including FAQ lists, should be found on
 this system using "man perl" or "perldoc perl".  If you have access to the
-Internet, point your browser at http://www.perl.org/, the Perl Home Page.
+Internet, point your browser at https://www.perl.org/, the Perl Home Page.
 ```
+
+注意：perl 5.32.1.1 之后的版本可能会提示
+
+*Locale 'Chinese (Simplified)_China.936' is unsupported, and may crash the interpreter.*
+
+需要设置环境变量`LC_ALL=C`。
 
 ## 编译安装EPICS Base
 
@@ -70,19 +76,31 @@ set _epics_host_arch=windows-x64-mingw
 rem The install location of EPICS Base (pathname).  If nonempty and
 rem _auto_path_append is yes, it will be used to add the host architecture
 rem bin directory to PATH.
-set _epics_base=C:\EPICS\base-7.0.7
+set _epics_base=C:\EPICS\base-7.0.8
 
 rem Set the environment for Microsoft Visual Studio
 rem 使用 rem 注释掉下面一行
 rem call "%_visual_studio_home%\VC\Auxiliary\Build\vcvarsall.bat" x64
 ```
 
-注意，编译需要使用命令行工具`cmd`，不能用`powershell`。
+**注意，编译需要使用命令行工具`cmd`，不能用`powershell`。**
+
+**注意，这里使用的是 perl 自带的编译工具，如果要使用其他版本的MinGW，则需要自行配置环境变量。**
+
+比如这里使用 MinGW 12.2.0，则需要设置环境变量。
 
 ```bat
-cd base-7.0.7
+set Path=C:\WINDOWS;C:\WINDOWS\System32;C:\WINDOWS\System32\Wbem;D:\Strawberry\perl\bin;D:\Tools\mingw1220_64\bin;D:\Tools\mingw1220_64\libexec\gcc\x86_64-w64-mingw32\12.2.0
+```
+
+```bat
+cd base-7.0.8
 .\startup\windows.bat
+# 根据使用的编译工具执行命令
+# perl 环境的make命名为gmake
 gmake -j16
+
+# mingw32-make -j16
 ```
 
 等待编译完成。  
