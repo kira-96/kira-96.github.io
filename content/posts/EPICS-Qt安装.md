@@ -1,7 +1,7 @@
 ---
 title: "EPICS Qt安装"
 date: 2023-05-04T15:06:56+08:00
-lastmod: 2024-03-21T13:27:36+08:00
+lastmod: 2024-06-07T14:51:36+08:00
 draft: false
 description: Linux上编译安装EPICS Qt
 tags: ["linux", "EPICS", "Qt", "龙芯"]
@@ -33,6 +33,8 @@ sudo apt install libqt5svg5-dev
 ## 安装QWT
 
 Qt EPICS推荐使用Qwt 6.1.4，如果在Ubuntu 20.04上直接通过终端安装也是这个版本。我使用Qwt 6.2.0编译，也是没有问题的，这里以Qwt 6.2.0为例。
+
+> 最新测试：Qwt 6.3.0也可以用 ~
 
 先下载Qwt的源码 [下载Qwt-6.2.0](https://sourceforge.net/projects/qwt/files/qwt/6.2.0/qwt-6.2.0.tar.bz2/download)。
 下载完成后解压
@@ -70,7 +72,7 @@ git clone https://github.com/andrewstarritt/acai.git
 cd acai
 vi configure/RELEASE.local
 # 修改EPICS_BASE路径，例：
-# EPICS_BASE=/usr/local/epics/base-7.0.7
+# EPICS_BASE=/usr/local/epics/base-7.0.8
 make -j8
 # 等待编译完成
 ```
@@ -100,7 +102,7 @@ git clone https://github.com/qtepics/qegui.git
 
 ```sh
 export EPICS_HOST_ARCH=linux-loong64
-export EPICS_BASE=/usr/local/epics/base-7.0.7
+export EPICS_BASE=/usr/local/epics/base-7.0.8
 export ACAI=/usr/local/epics/modules/acai
 export QWT_INCLUDE_PATH=/usr/include/qwt
 export QWT_ROOT=/usr/lib/loongarch64-linux-gnu
@@ -133,9 +135,10 @@ make
 - 编译`qegui`
 `$HOME/QtEpics/qegui/qeguiApp/project/QEGuiApp.pro`
 
-最后将编译生成的文件复制到以下位置，例：
+最后将编译生成的文件复制到系统目录，示例：
 
 ```sh
+sudo cp /usr/local/epics/modules/acai/lib/linux-loong64/libacai.so* /usr/lib/loongarch64-linux-gnu/
 sudo cp ~/QtEpics/qeframework/lib/linux-loong64/libarchapplData.so /usr/lib/loongarch64-linux-gnu/
 sudo cp ~/QtEpics/qeframework/lib/linux-loong64/libQEFramework.so /usr/lib/loongarch64-linux-gnu/
 sudo cp ~/QtEpics/qeframework/lib/linux-loong64/designer/libQEPlugin.so /usr/lib/loongarch64-linux-gnu/qt5/plugins/designer/
@@ -202,8 +205,8 @@ QE_PVACCESS_SUPPORT=YES
 QE_ARCHAPPL_SUPPORT=YES
 PROTOBUF_INCLUDE_PATH=D:\source\protobuf-3.21.12\src
 PROTOBUF_LIB_DIR=D:\source\protobuf-3.21.12\build
-QWT_INCLUDE_PATH=D:\source\qwt-6.2.0\src
-QWT_ROOT=D:\source\build-qwt-Desktop_Qt_5_15_2_MinGW_64_bit-Release
+QWT_INCLUDE_PATH=D:\source\qwt-6.3.0\src
+QWT_ROOT=D:\source\qwt-6.3.0\build\Desktop_Qt_5_15_14_MinGW_64_bit-Release
 ```
 
 - Windows上运行程序
