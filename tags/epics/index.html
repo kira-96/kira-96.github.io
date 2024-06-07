@@ -65,10 +65,11 @@ EPICS Qt是一个基于Qt的分层框架，使用Channel Access （CA） and PV 
 安装EPICS 这里不再写具体步骤了，总之就是非常简单，下载、解压、编译即可。具体步骤可以参考以前的文章。
 安装Qt 直接使用终端安装Qt
 1 2 3 4 5 sudo apt update sudo apt install qtbase5-dev qt5-qmake qtcreator sudo apt install qtdeclarative5-dev qttools5-dev # 安装Qt Svg库，编译QWT时需要用到 sudo apt install libqt5svg5-dev 安装QWT Qt EPICS推荐使用Qwt 6.1.4，如果在Ubuntu 20.04上直接通过终端安装也是这个版本。我使用Qwt 6.2.0编译，也是没有问题的，这里以Qwt 6.2.0为例。
+最新测试：Qwt 6.3.0也可以用 ~
 先下载Qwt的源码 下载Qwt-6.2.0。 下载完成后解压
 1 2 3 4 # 解压tar.bz2 tar -jxvf qwt-6.2.0.tar.bz2 # 解压zip unzip qwt-6.2.0.zip 解压完成后编译Qwt，使用QtCreator或者在终端使用qmake都可以。
 然后手动将编译生成的文件复制到以下位置，例：
-1 2 3 4 5 6 7 # 复制编译生成的qwt sudo cp -r build-qwt-unknown-Release/lib/* /usr/lib/loongarch64-linux-gnu/ # 复制编译生成的designer插件 sudo cp build-qwt-unknown-Release/designer/plugins/designer/libqwt_designer_plugin....</p></div><footer class=entry-footer><span title='2023-05-04 15:06:56 +0800 +0800'>五月 4, 2023</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;342 字</footer><a class=entry-link aria-label="post link to EPICS Qt安装" href=https://kira-96.github.io/posts/epics-qt%E5%AE%89%E8%A3%85/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2 class=entry-hint-parent>龙芯3A5000(LoongArch64)上编译运行EPICS</h2></header><div class=entry-content><p>前言 之前尝试过在龙芯3A4000上编译运行EPICS，由于3A4000还是mips64指令集，而3A5000则是龙芯的自主指令集loongarch64，适配起来步骤也会有所不同。
+1 2 3 4 5 6 7 # 复制编译生成的qwt sudo cp -r build-qwt-unknown-Release/lib/* /usr/lib/loongarch64-linux-gnu/ # 复制编译生成的designer插件 sudo cp build-qwt-unknown-Release/designer/plugins/designer/libqwt_designer_plugin....</p></div><footer class=entry-footer><span title='2023-05-04 15:06:56 +0800 +0800'>五月 4, 2023</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;350 字</footer><a class=entry-link aria-label="post link to EPICS Qt安装" href=https://kira-96.github.io/posts/epics-qt%E5%AE%89%E8%A3%85/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2 class=entry-hint-parent>龙芯3A5000(LoongArch64)上编译运行EPICS</h2></header><div class=entry-content><p>前言 之前尝试过在龙芯3A4000上编译运行EPICS，由于3A4000还是mips64指令集，而3A5000则是龙芯的自主指令集loongarch64，适配起来步骤也会有所不同。
 这次使用的是龙博特龙芯3A5000电脑主机。
 虽然EPICS官方并没有适配loongarch和mips64，无法做到开箱即用，但只要有gcc、g++、make、perl这些工具，理论上就能编译运行EPICS，在开始编译前，确保你的设备上已经装好了这些工具。
 关于如何称呼「龙架构」，龙芯社区也有一些讨论。最初我直接使用loongarch64，后来也使用过la64作为简写，直到我看到如何称呼龙架构？，我觉得有必要和社区保持一致，后续统一使用 loong64 作为架构标识。
