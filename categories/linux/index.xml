@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Linux on ✨kiraの博客</title><link>https://kira-96.github.io/categories/linux/</link><description>Recent content in Linux on ✨kiraの博客</description><generator>Hugo -- gohugo.io</generator><language>zh</language><copyright>Copyright © 2019-2024 [kira's blog](/) &amp;#183;</copyright><lastBuildDate>Fri, 03 Feb 2023 11:34:14 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>weston桌面系统截屏方法</title><link>https://kira-96.github.io/notes/weston-screenshot/</link><pubDate>Fri, 03 Feb 2023 11:34:14 +0800</pubDate><guid>https://kira-96.github.io/notes/weston-screenshot/</guid><description>使用weston-screenshooter
-但必须启用weston桌面--debug选项，否则会出现以下错误：
-1 2 3 [root@RK356X:/]# weston-screenshooter [02:41:05.145] libwayland: error in client communication (pid 776) weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled 以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ...... # Uncomment to disable mirror mode # unset WESTON_DRM_MIRROR export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run} export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland} weston --tty=2 --debug --idle-time=0&amp;amp; { # Wait for weston ready while [ !</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Linux on ✨kiraの博客</title><link>https://kira-96.github.io/categories/linux/</link><description>Recent content in Linux on ✨kiraの博客</description><generator>Hugo -- gohugo.io</generator><language>zh</language><copyright>Copyright © 2019-2024 [kira's blog](/) &amp;#183;</copyright><lastBuildDate>Fri, 03 Feb 2023 11:34:14 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>weston桌面系统截屏方法</title><link>https://kira-96.github.io/notes/weston-screenshot/</link><pubDate>Fri, 03 Feb 2023 11:34:14 +0800</pubDate><guid>https://kira-96.github.io/notes/weston-screenshot/</guid><description>&lt;p>使用&lt;code>weston-screenshooter&lt;/code>&lt;/p>
+&lt;p>但必须启用weston桌面&lt;code>--debug&lt;/code>选项，否则会出现以下错误：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>root@RK356X:/&lt;span class="o">]&lt;/span>&lt;span class="c1"># weston-screenshooter&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>02:41:05.145&lt;span class="o">]&lt;/span> libwayland: error in client communication &lt;span class="o">(&lt;/span>pid 776&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>以RK3568开发板，buildroot系统为例，修改&lt;code>/etc/init.d/S50launcher&lt;/code>，找到weston所在行，添加&lt;code>--debug&lt;/code>选项。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">......
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Uncomment to disable mirror mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># unset WESTON_DRM_MIRROR&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="k">:-&lt;/span>&lt;span class="p">/var/run&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">QT_QPA_PLATFORM&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">QT_QPA_PLATFORM&lt;/span>&lt;span class="k">:-&lt;/span>&lt;span class="nv">wayland&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">weston --tty&lt;span class="o">=&lt;/span>&lt;span class="m">2&lt;/span> --debug --idle-time&lt;span class="o">=&lt;/span>0&lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Wait for weston ready&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> ! -e &lt;span class="si">${&lt;/span>&lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="si">}&lt;/span>/wayland-0 &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep .1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /usr/bin/QLauncher &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>&lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">......
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>forlinx开发板使用的yocto系统也类似，修改&lt;code>/lib/systemd/system/weston.service&lt;/code>，在weston后添加&lt;code>--debug&lt;/code>选项。&lt;/p></description></item></channel></rss>

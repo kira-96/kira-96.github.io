@@ -1,15 +1,165 @@
 <!doctype html><html lang=zh dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>weston桌面系统截屏方法 | ✨kiraの博客</title>
 <meta name=keywords content="linux,weston"><meta name=description content="使用weston-screenshooter
 但必须启用weston桌面--debug选项，否则会出现以下错误：
-1 2 3 [root@RK356X:/]# weston-screenshooter [02:41:05.145] libwayland: error in client communication (pid 776) weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled 以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ...... # Uncomment to disable mirror mode # unset WESTON_DRM_MIRROR export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run} export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland} weston --tty=2 --debug --idle-time=0& { # Wait for weston ready while [ !"><meta name=author content><link rel=canonical href=https://kira-96.github.io/notes/weston-screenshot/><link crossorigin=anonymous href=/assets/css/stylesheet.3885277a87a498ed2522e7ff68054e29ab8db4095b653379837d1193311cfcc9.css integrity="sha256-OIUneoekmO0lIuf/aAVOKauNtAlbZTN5g30RkzEc/Mk=" rel="preload stylesheet" as=style><link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png><link rel=apple-touch-icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png><link rel=mask-icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-76x76.png><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh href=https://kira-96.github.io/notes/weston-screenshot/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json><script src=https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><meta property="og:title" content="weston桌面系统截屏方法"><meta property="og:description" content="使用weston-screenshooter
+
+
+1
+2
+3
+
+
+[root@RK356X:/]# weston-screenshooter
+[02:41:05.145] libwayland: error in client communication (pid 776)
+weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled
+
+
+以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。
+
+
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+
+
+......
+# Uncomment to disable mirror mode
+# unset WESTON_DRM_MIRROR
+
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run}
+export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland}
+
+weston --tty=2 --debug --idle-time=0&
+{
+    # Wait for weston ready
+    while [ ! -e ${XDG_RUNTIME_DIR}/wayland-0 ]; do
+        sleep .1
+    done
+    /usr/bin/QLauncher &
+}&
+......
+
+
+forlinx开发板使用的yocto系统也类似，修改/lib/systemd/system/weston.service，在weston后添加--debug选项。"><meta name=author content><link rel=canonical href=https://kira-96.github.io/notes/weston-screenshot/><link crossorigin=anonymous href=/assets/css/stylesheet.3885277a87a498ed2522e7ff68054e29ab8db4095b653379837d1193311cfcc9.css integrity="sha256-OIUneoekmO0lIuf/aAVOKauNtAlbZTN5g30RkzEc/Mk=" rel="preload stylesheet" as=style><link rel=icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon-32x32.png><link rel=apple-touch-icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-180x180.png><link rel=mask-icon href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/icons/apple-icon-76x76.png><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh href=https://kira-96.github.io/notes/weston-screenshot/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><link rel=manifest href=https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/manifest.json><script src=https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js></script><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><meta property="og:title" content="weston桌面系统截屏方法"><meta property="og:description" content="使用weston-screenshooter
 但必须启用weston桌面--debug选项，否则会出现以下错误：
-1 2 3 [root@RK356X:/]# weston-screenshooter [02:41:05.145] libwayland: error in client communication (pid 776) weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled 以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ...... # Uncomment to disable mirror mode # unset WESTON_DRM_MIRROR export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run} export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland} weston --tty=2 --debug --idle-time=0& { # Wait for weston ready while [ !"><meta property="og:type" content="article"><meta property="og:url" content="https://kira-96.github.io/notes/weston-screenshot/"><meta property="article:section" content="notes"><meta property="article:published_time" content="2023-02-03T11:34:14+08:00"><meta property="article:modified_time" content="2023-02-03T11:34:14+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="weston桌面系统截屏方法"><meta name=twitter:description content="使用weston-screenshooter
+
+
+1
+2
+3
+
+
+[root@RK356X:/]# weston-screenshooter
+[02:41:05.145] libwayland: error in client communication (pid 776)
+weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled
+
+
+以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。
+
+
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+
+
+......
+# Uncomment to disable mirror mode
+# unset WESTON_DRM_MIRROR
+
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run}
+export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland}
+
+weston --tty=2 --debug --idle-time=0&
+{
+    # Wait for weston ready
+    while [ ! -e ${XDG_RUNTIME_DIR}/wayland-0 ]; do
+        sleep .1
+    done
+    /usr/bin/QLauncher &
+}&
+......
+
+
+forlinx开发板使用的yocto系统也类似，修改/lib/systemd/system/weston.service，在weston后添加--debug选项。"><meta property="og:type" content="article"><meta property="og:url" content="https://kira-96.github.io/notes/weston-screenshot/"><meta property="article:section" content="notes"><meta property="article:published_time" content="2023-02-03T11:34:14+08:00"><meta property="article:modified_time" content="2023-02-03T11:34:14+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="weston桌面系统截屏方法"><meta name=twitter:description content="使用weston-screenshooter
 但必须启用weston桌面--debug选项，否则会出现以下错误：
-1 2 3 [root@RK356X:/]# weston-screenshooter [02:41:05.145] libwayland: error in client communication (pid 776) weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled 以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ...... # Uncomment to disable mirror mode # unset WESTON_DRM_MIRROR export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run} export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland} weston --tty=2 --debug --idle-time=0& { # Wait for weston ready while [ !"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Notes","item":"https://kira-96.github.io/notes/"},{"@type":"ListItem","position":2,"name":"weston桌面系统截屏方法","item":"https://kira-96.github.io/notes/weston-screenshot/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"weston桌面系统截屏方法","name":"weston桌面系统截屏方法","description":"使用weston-screenshooter\n但必须启用weston桌面--debug选项，否则会出现以下错误：\n1 2 3 [root@RK356X:/]# weston-screenshooter [02:41:05.145] libwayland: error in client communication (pid 776) weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled 以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ...... # Uncomment to disable mirror mode # unset WESTON_DRM_MIRROR export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run} export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland} weston --tty=2 --debug --idle-time=0\u0026amp; { # Wait for weston ready while [ !","keywords":["linux","weston"],"articleBody":"使用weston-screenshooter\n但必须启用weston桌面--debug选项，否则会出现以下错误：\n1 2 3 [root@RK356X:/]# weston-screenshooter [02:41:05.145] libwayland: error in client communication (pid 776) weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled 以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ...... # Uncomment to disable mirror mode # unset WESTON_DRM_MIRROR export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run} export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland} weston --tty=2 --debug --idle-time=0\u0026 { # Wait for weston ready while [ ! -e ${XDG_RUNTIME_DIR}/wayland-0 ]; do sleep .1 done /usr/bin/QLauncher \u0026 }\u0026 ...... forlinx开发板使用的yocto系统也类似，修改/lib/systemd/system/weston.service，在weston后添加--debug选项。\n1 2 3 $ vi /lib/systemd/system/weston.service # 修改如下 # ExecStart=/usr/bin/weston --debug --log=${XDG_RUNTIME_DIR}/weston.log $OPTARGS 然后重启系统，之后就可以使用weston-screenshooter截取屏幕了。\n链接\nwayland-project/weston weston.ini配置文件 ","wordCount":"100","inLanguage":"zh","datePublished":"2023-02-03T11:34:14+08:00","dateModified":"2023-02-03T11:34:14+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kira-96.github.io/notes/weston-screenshot/"},"publisher":{"@type":"Organization","name":"✨kiraの博客","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://kira-96.github.io/ accesskey=h title="✨kiraの博客 (Alt + H)">✨kiraの博客</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://kira-96.github.io/ title=🏠主页><span>🏠主页</span></a></li><li><a href=https://kira-96.github.io/notes/ title=📓笔记><span>📓笔记</span></a></li><li><a href=https://kira-96.github.io/search/ title=🔍️搜索><span>🔍️搜索</span></a></li><li><a href=https://kira-96.github.io/archives/ title=🗃️存档><span>🗃️存档</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://kira-96.github.io/>主页</a>&nbsp;»&nbsp;<a href=https://kira-96.github.io/notes/>Notes</a></div><h1 class="post-title entry-hint-parent">weston桌面系统截屏方法
-<span class=entry-hint title=Draft><svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentcolor"><path d="M160-410v-60h3e2v60H160zm0-165v-60h470v60H160zm0-165v-60h470v60H160zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22-4.5 22.5T862.09-380L643-160H520zm3e2-263-37-37 37 37zM580-220h38l121-122-18-19-19-18-122 121v38zm141-141-19-18 37 37-18-19z"/></svg></span></h1><div class=post-meta><span title='2023-02-03 11:34:14 +0800 +0800'>二月 3, 2023</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;100 字&nbsp;|&nbsp;<a href=https://github.com/kira-96/kira-96.github.io/tree/main/content/posts/ rel="noopener noreferrer" target=_blank>✏️编辑</a></div></header><div class=post-content><p>使用<code>weston-screenshooter</code></p><p>但必须启用weston桌面<code>--debug</code>选项，否则会出现以下错误：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+
+
+1
+2
+3
+
+
+[root@RK356X:/]# weston-screenshooter
+[02:41:05.145] libwayland: error in client communication (pid 776)
+weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled
+
+
+以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。
+
+
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+
+
+......
+# Uncomment to disable mirror mode
+# unset WESTON_DRM_MIRROR
+
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run}
+export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland}
+
+weston --tty=2 --debug --idle-time=0&
+{
+    # Wait for weston ready
+    while [ ! -e ${XDG_RUNTIME_DIR}/wayland-0 ]; do
+        sleep .1
+    done
+    /usr/bin/QLauncher &
+}&
+......
+
+
+forlinx开发板使用的yocto系统也类似，修改/lib/systemd/system/weston.service，在weston后添加--debug选项。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Notes","item":"https://kira-96.github.io/notes/"},{"@type":"ListItem","position":2,"name":"weston桌面系统截屏方法","item":"https://kira-96.github.io/notes/weston-screenshot/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"weston桌面系统截屏方法","name":"weston桌面系统截屏方法","description":"使用weston-screenshooter\n但必须启用weston桌面--debug选项，否则会出现以下错误：\n1 2 3 [root@RK356X:/]# weston-screenshooter [02:41:05.145] libwayland: error in client communication (pid 776) weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled 以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ...... # Uncomment to disable mirror mode # unset WESTON_DRM_MIRROR export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run} export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland} weston --tty=2 --debug --idle-time=0\u0026amp; { # Wait for weston ready while [ ! -e ${XDG_RUNTIME_DIR}/wayland-0 ]; do sleep .1 done /usr/bin/QLauncher \u0026amp; }\u0026amp; ...... forlinx开发板使用的yocto系统也类似，修改/lib/systemd/system/weston.service，在weston后添加--debug选项。\n","keywords":["linux","weston"],"articleBody":"使用weston-screenshooter\n但必须启用weston桌面--debug选项，否则会出现以下错误：\n1 2 3 [root@RK356X:/]# weston-screenshooter [02:41:05.145] libwayland: error in client communication (pid 776) weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled 以RK3568开发板，buildroot系统为例，修改/etc/init.d/S50launcher，找到weston所在行，添加--debug选项。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ...... # Uncomment to disable mirror mode # unset WESTON_DRM_MIRROR export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/var/run} export QT_QPA_PLATFORM=${QT_QPA_PLATFORM:-wayland} weston --tty=2 --debug --idle-time=0\u0026 { # Wait for weston ready while [ ! -e ${XDG_RUNTIME_DIR}/wayland-0 ]; do sleep .1 done /usr/bin/QLauncher \u0026 }\u0026 ...... forlinx开发板使用的yocto系统也类似，修改/lib/systemd/system/weston.service，在weston后添加--debug选项。\n1 2 3 $ vi /lib/systemd/system/weston.service # 修改如下 # ExecStart=/usr/bin/weston --debug --log=${XDG_RUNTIME_DIR}/weston.log $OPTARGS 然后重启系统，之后就可以使用weston-screenshooter截取屏幕了。\n链接\nwayland-project/weston weston.ini配置文件 ","wordCount":"100","inLanguage":"zh","datePublished":"2023-02-03T11:34:14+08:00","dateModified":"2023-02-03T11:34:14+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kira-96.github.io/notes/weston-screenshot/"},"publisher":{"@type":"Organization","name":"✨kiraの博客","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/kira-96/kira-96.github.io@gh-pages/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://kira-96.github.io/ accesskey=h title="✨kiraの博客 (Alt + H)">✨kiraの博客</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://kira-96.github.io/ title=🏠主页><span>🏠主页</span></a></li><li><a href=https://kira-96.github.io/notes/ title=📓笔记><span>📓笔记</span></a></li><li><a href=https://kira-96.github.io/search/ title=🔍️搜索><span>🔍️搜索</span></a></li><li><a href=https://kira-96.github.io/archives/ title=🗃️存档><span>🗃️存档</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://kira-96.github.io/>主页</a>&nbsp;»&nbsp;<a href=https://kira-96.github.io/notes/>Notes</a></div><h1 class="post-title entry-hint-parent">weston桌面系统截屏方法
+<span class=entry-hint title=Draft><svg height="35" viewBox="0 -960 960 960" fill="currentcolor"><path d="M160-410v-60h3e2v60H160zm0-165v-60h470v60H160zm0-165v-60h470v60H160zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22-4.5 22.5T862.09-380L643-160H520zm3e2-263-37-37 37 37zM580-220h38l121-122-18-19-19-18-122 121v38zm141-141-19-18 37 37-18-19z"/></svg></span></h1><div class=post-meta><span title='2023-02-03 11:34:14 +0800 +0800'>二月 3, 2023</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;100 字&nbsp;|&nbsp;<a href=https://github.com/kira-96/kira-96.github.io/tree/main/content/posts/ rel="noopener noreferrer" target=_blank>✏️编辑</a></div></header><div class=post-content><p>使用<code>weston-screenshooter</code></p><p>但必须启用weston桌面<code>--debug</code>选项，否则会出现以下错误：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>root@RK356X:/<span class=o>]</span><span class=c1># weston-screenshooter</span>
@@ -56,5 +206,5 @@
 </span></span></code></pre></td></tr></table></div></div><p>然后重启系统，之后就可以使用<code>weston-screenshooter</code>截取屏幕了。</p><p><strong>链接</strong></p><ul><li><a href=https://github.com/wayland-project/weston>wayland-project/weston</a></li><li><a href=https://zhuanlan.zhihu.com/p/396168706>weston.ini配置文件</a></li></ul></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/linux/>Linux</a></li></ul></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>Copyright © 2019-2024 <a href=/>kira&rsquo;s blog</a> ·</span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
