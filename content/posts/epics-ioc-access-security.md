@@ -166,7 +166,7 @@ touch accessSecurity.acf
 ``` c
 UAG(read) {deepin}
 UAG(write) {deepin}
-HAG(hosts) {LAPTOP-CTDCXXXX}
+HAG(hosts) {LAPTOP-CTDCXXXX, 172.19.176.1}
 
 ASG(DEFAULT) {
 	RULE(1,READ)
@@ -188,7 +188,7 @@ ASG(deepin) {
 
 稍微解释一下：  
 创建了两个**用户访问组**（UAG），名称为read和write，两个用户访问组都只包含用户*deepin*。  
-创建了一个**主机访问组**（HAG），名称为hosts，包含主机名*LAPTOP-CTDCXXXX*。  
+创建了一个**主机访问组**（HAG），名称为hosts，包含主机名*LAPTOP-CTDCXXXX*和一个IP地址。  
 创建了默认（DEFAULT）**访问安全组**（ASG），不限制读取（READ）权限，只有hosts主机访问组的用户拥有写入（WRITE）权限。  
 创建了**访问安全组**（ASG），名称为deepin，hosts主机访问组所包含主机上的deepin用户才拥有读取（READ）和写入（WRITE）权限。
 
@@ -240,6 +240,8 @@ vi st.cmd
   #- Run this to trace the stages of iocInit
   #-traceIocInit
 
++ #- Set asCheckClientIP=1 to translate hostnames into IPs
++ var asCheckClientIP 1
 + asSetFilename("${TOP}/iocBoot/${IOC}/accessSecurity.acf")
 
   cd "${TOP}/iocBoot/${IOC}"

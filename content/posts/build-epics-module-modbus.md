@@ -78,7 +78,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-loong64
+# EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -87,7 +87,8 @@ SUPPORT=/home/ubuntu/loongson/modules
 # 直接编译
 # make
 # 交叉编译（示例）
-make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+# make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+make
 ```
 
 ### 编译 CALC（可选）
@@ -98,7 +99,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-loong64
+# EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -109,7 +110,8 @@ SSCAN=$(SUPPORT)/sscan
 # 直接编译
 # make
 # 交叉编译（示例）
-make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+# make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+make
 ```
 
 ### 编译 asyn（必需）
@@ -120,7 +122,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-loong64
+# EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -133,7 +135,8 @@ CALC=$(SUPPORT)/calc
 # 直接编译
 # make
 # 交叉编译（示例）
-make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+# make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+make
 ```
 
 ### 编译 modbus
@@ -144,7 +147,7 @@ touch configure/RELEASE.local
 vi configure/RELEASE.local
 
 # 修改成和EPICS Base一样的架构
-EPICS_HOST_ARCH=linux-loong64
+# EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
@@ -155,7 +158,8 @@ ASYN=$(SUPPORT)/asyn
 # 直接编译
 # make
 # 交叉编译（示例）
-make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+# make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+make
 ```
 
 编译完成后，可以看到`bin\<EPICS_HOST_ARCH>`路径下生成了可执行程序`modbusApp`，它就是与Modbus设备通信的主程序了。

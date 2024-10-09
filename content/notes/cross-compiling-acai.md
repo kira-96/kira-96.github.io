@@ -41,11 +41,12 @@ cd acai
 vi configure/RELEASE.local
 
 # 修改交叉编译的目标架构，和EPICS base中保持一致
-EPICS_HOST_ARCH=linux-loong64
+# EPICS_HOST_ARCH=linux-loong64
 # 修改EPICS_BASE路径，例：
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 
-make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+# make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++
+make
 # 等待编译完成
 ```
 
