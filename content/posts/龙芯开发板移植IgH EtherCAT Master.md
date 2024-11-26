@@ -1,7 +1,7 @@
 ---
 title: "龙芯开发板移植 IgH EtherCAT Master"
 date: 2024-02-23T12:54:31+08:00
-lastmod: 2024-03-12T15:57:25+08:00
+lastmod: 2024-11-26T09:12:50+08:00
 draft: false
 description: 龙芯2K0500开发板移植EtherCAT主站程序和EPICS EtherCAT模块
 tags: ["linux", "EPICS", "龙芯"]
@@ -47,7 +47,7 @@ dls ethercat是由英国钻石光源开发的用于 EPICS 控制系统 EtherCAT 
 
 **源码一定要下载 *stable-1.5* 分支的，其他版本我也没有测试！**
 
-### 打补丁
+### ~~打补丁~~(此步骤可以跳过)
 
 ``` shell
 # 先将补丁复制到ethercat驱动源码下
@@ -183,8 +183,11 @@ cd ethercat-stable-1.5/
 # 这里需要注意是否出现报错，需要安装 autoconf、pkg-config 等工具
 
 # 执行configure
-# --host 指定程序运行的主机架构
-# --with-linux-dir 指定源码目录
+# `--host` 指定程序运行的主机架构
+# `--with-linux-dir` Linux内核源码
+# `--with-devices` 冗余接口需要 > 1
+# `--enable-hrtimer` 使用高分辨率定时器让主状态机在发送帧之间休眠
+# `--enable-wildcards` 允许使用0xffffff作为供应商ID和产品代码的通配符
 # 如果是安装的linux-headers，通常在 /usr/src/linux-headers-xxx
 # 如果直接使用内核源码，则必须通过上述编译步骤！
 # --prefix 指定安装目录
