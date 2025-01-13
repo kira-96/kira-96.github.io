@@ -211,7 +211,7 @@ make all modules
 # 复制生成的主程序
 cp tool/ethercat /path/to/__install_dir/bin/
 # 复制生成的驱动程序
-cp device/ec_generic.ko /path/to/__install_dir/modules/
+cp devices/ec_generic.ko /path/to/__install_dir/modules/
 cp master/ec_master.ko /path/to/__install_dir/modules/
 ```
 
@@ -591,6 +591,35 @@ char *get_slave_list_filename(const char *program_path)
 ```
 
 目前只发现了这个问题，希望后面没有坑了。
+
+修改`scanner.c`，不再引用`liberror.h`，这样就不需要修改`IgH EtherCAT`驱动源码了。
+
+``` diff
+#include "unpack.h"
+#include "simulation.h"
+#include "version.h"
+- #include "liberror.h"
+
+@@ -290,8 +297,6 @@ void cyclic_task(void * usr)
+        nslaves++;
+    }
+
+-    /* suppress errors to stderr */
+-    ecrt_err_to_stderr = 0;
+
+    while(1)
+    {
+        rtMessageQueueReceive(scanner->workq, msg, scanner->max_message);
+@@ -500,7 +505,7 @@ void cyclic_task(void * usr)
+            {
+                if (error_to_console)
+                {
+-                    fprintf(stderr,"etherlab library error: %s", ecrt_errstring);
++                    fprintf(stderr,"etherlab library error: %d", slave_info_status);
+                    error_to_console = FALSE;
+                }
+            }
+```
 
 5. 编译
 
