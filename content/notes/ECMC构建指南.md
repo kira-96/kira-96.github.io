@@ -13,6 +13,7 @@ categories: ["EPICS"]
 * [epics-base/epics-base: The C/C++ core of the EPICS Base control system toolkit](https://github.com/epics-base/epics-base)
 * [epics-modules/ecmc: EPICS Support for EtherCAT Motion Controller (ECMC) and Generic IO Controller](https://github.com/epics-modules/ecmc)
 * [paulscherrerinstitute/exprtk-ecmc: ESS Customized exprtk : C++ Mathematical Expression Parsing And Evaluation Library](https://github.com/paulscherrerinstitute/exprtk-ecmc)
+* [paulscherrerinstitute/ecmccfg: Module to handle configuration scripts for EtherCATMotion Controller (ECMC)](https://github.com/paulscherrerinstitute/ecmccfg)
 * [epics-modules/asyn: EPICS module for driver and device support](https://github.com/epics-modules/asyn)
 * [EuropeanSpallationSource/motor: APS BCDA synApps module: motor](https://github.com/EuropeanSpallationSource/motor)
 * [pantor/ruckig: Motion Generation for Robots and Machines. ](https://github.com/pantor/ruckig)
@@ -256,6 +257,8 @@ EPICS_BASE=/home/ubuntu/epics/base-7.0.8.1
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
 MOTOR=$(SUPPORT)/motor
+# 添加QSRV2支持
+PVXS=$(SUPPORT)/pvxs
 # 指定交叉编译架构
 EPICS_HOST_ARCH=linux-loong64
 ```
@@ -315,11 +318,28 @@ ecmcIoc_LIBS += ecmc
 + ecmcIoc_LIBS += motor
 ecmcIoc_LIBS += exprtkSupport
 
++ ecmcIoc_DBD += asyn.dbd
++ ecmcIoc_DBD += motorSupport.dbd
+
 ecmcIoc_SRCS += ecmcIoc_registerRecordDeviceDriver.cpp
 
 # Build the main IOC entry point on workstation OSs.
 ecmcIoc_SRCS_DEFAULT += ecmcIocMain.cpp
 ecmcIoc_SRCS_vxWorks += -nil-
+
++ # Link PVXS if available
++ ifdef PVXS_MAJOR_VERSION
++     ecmcIoc_LIBS += pvxsIoc pvxs
++     ecmcIoc_DBD += pvxsIoc.dbd
++ else
++ # Link QSRV (pvAccess Server) if available
++ ifdef EPICS_QSRV_MAJOR_VERSION
++     ecmcIoc_LIBS += qsrv
++     ecmcIoc_LIBS += $(EPICS_BASE_PVA_CORE_LIBS)
++     ecmcIoc_DBD += PVAServerRegister.dbd
++     ecmcIoc_DBD += qsrv.dbd
++ endif
++ endif
 
 # Finally link to the EPICS Base libraries
 ecmcIoc_LIBS += $(EPICS_BASE_IOC_LIBS)
@@ -331,6 +351,7 @@ include $(TOP)/configure/RULES
 ```
 
 编译的时候需要指定使用`c++17`的标准，不然有一些语法不支持，应该是`ruckig`库比较新。
+
 添加`CPPFLAGS=-std=c++17`
 
 ``` sh
@@ -340,3 +361,92 @@ LD=loongarch64-linux-gnu-ld \
 CC=loongarch64-linux-gnu-gcc \
 CCC=loongarch64-linux-gnu-g++ -j4
 ```
+
+## 使用方法
+
+主要使用`ecmccfg`软件包提供的预编写脚本进行`EtherCAT`主站、从站配置。
+
+修改IOC环境变量配置`iocBoot/iocExample/envPaths`：
+``` sh
+epicsEnvSet("IOC", "iocExample")
+epicsEnvSet("TOP", "../..")
+epicsEnvSet("SUPPORT", "/root/epics-modules")
+epicsEnvSet("ASYN", "${SUPPORT}/asyn")
+epicsEnvSet("ECMC", "${SUPPORT}/ecmc")
+```
+
+修改启动脚本`iocBoot/iocExample/st.cmd`：
+``` sh
+#!../../bin/linux-loong64/ecmcIoc
+
+< envPaths
+
+cd "${TOP}"
+
+## Register all support components
+dbLoadDatabase "dbd/ecmcIoc.dbd"
+ecmcIoc_registerRecordDeviceDriver pdbbase
+
+## Load record instances
+#dbLoadRecords("db/xxx.db","user=${USER}")
+
+# ecmccfg路径配置
+epicsEnvSet "ecmccfg_DIR", "${ECMC}/scripts/"
+epicsEnvSet "ecmccfg_DB", "${ECMC}/db/"
+epicsEnvSet "ECMC_CONFIG_ROOT", "${ecmccfg_DIR}"
+epicsEnvSet "ECMC_CONFIG_DB", "${ecmccfg_DB}"
+epicsEnvSet "SCRIPTEXEC", "iocshLoad"
+
+#- 初始化
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}initAll.cmd", "SM_MOTOR_PORT=MCU1,SM_ASYN_PORT=MC_CPU1,SM_PREFIX=${IOC}:"
+# EtherCAT主站号
+epicsEnvSet "MASTER_ID", 0
+# 扫描频率，默认 1000
+epicsEnvSet "EC_RATE", 100
+
+#-
+#-------------------------------------------------------------------------------
+# Set EtherCAT frequency (defaults to 1000)
+ecmcConfigOrDie "Cfg.SetSampleRate(${EC_RATE=1000})"
+#-
+#- Set current EtherCAT sample rate
+#- Note: Not the same as ECMC_SAMPLE_RATE_MS which is for record update
+epicsEnvSet "ECMC_EC_SAMPLE_RATE", ${EC_RATE=1000}
+ecmcEpicsEnvSetCalc("ECMC_EC_SAMPLE_RATE_MS", 1000/${ECMC_EC_SAMPLE_RATE=1000})
+
+# Update records in 10ms (100Hz) for FULL MODE and in EC_RATE for DAQ mode
+ecmcEpicsEnvSetCalcTernary(ECMC_SAMPLE_RATE_MS, "'${ECMC_MODE=FULL}'=='DAQ'","${ECMC_EC_SAMPLE_RATE_MS}","10")
+epicsEnvSet(ECMC_SAMPLE_RATE_MS_ORIGINAL, ${ECMC_SAMPLE_RATE_MS})
+
+#- define naming convention script
+#epicsEnvSet "ECMC_P_SCRIPT", "${NAMING=mXsXXX}"
+
+#- Set master
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
+epicsEnvSet "ECMC_EC_MASTER_ID", ${MASTER_ID=0}
+
+#- Add slaves
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=0, HW_DESC=EK1100"
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=1, HW_DESC=EL4024"
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=2, HW_DESC=EL2624"
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=3, HW_DESC=EL3742"
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=4, HW_DESC=EK1110"
+
+#- Apply hardware configuration
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyConfig.cmd"
+#- Activate
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}setAppMode.cmd"
+
+cd "${TOP}/iocBoot/${IOC}"
+iocInit
+
+## Start any sequence programs
+#seq sncxxx,"user=${USER}"
+```
+
+* `ecmcXXxxxx.cmd`：从站配置脚本
+* `ecmcXXxxxx.substitutions`：记录(records)
+
+*参考链接*
+* [ESS EPICS Environment (e3) — ESS EPICS Environment (e3) documentation](https://e3pages.readthedocs.io/en/latest/index.html)
+* [ecmccfg 手册](https://paulscherrerinstitute.github.io/ecmccfg/)

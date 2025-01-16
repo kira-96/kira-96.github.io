@@ -180,7 +180,7 @@ make modules
 cd ethercat-stable-1.5/
 # to create the configure script, if downloaded from the repo
 ./bootstrap
-# 这里需要注意是否出现报错，需要安装 autoconf、pkg-config 等工具
+# 这里需要注意是否出现报错，需要安装 autoconf、libtool、pkg-config 等工具
 
 # 执行configure
 # `--host` 指定程序运行的主机架构
