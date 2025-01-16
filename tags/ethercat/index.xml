@@ -3,6 +3,7 @@
 &lt;li>&lt;a href="https://github.com/epics-base/epics-base">epics-base/epics-base: The C/C++ core of the EPICS Base control system toolkit&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/epics-modules/ecmc">epics-modules/ecmc: EPICS Support for EtherCAT Motion Controller (ECMC) and Generic IO Controller&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/paulscherrerinstitute/exprtk-ecmc">paulscherrerinstitute/exprtk-ecmc: ESS Customized exprtk : C++ Mathematical Expression Parsing And Evaluation Library&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/paulscherrerinstitute/ecmccfg">paulscherrerinstitute/ecmccfg: Module to handle configuration scripts for EtherCATMotion Controller (ECMC)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/epics-modules/asyn">epics-modules/asyn: EPICS module for driver and device support&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/EuropeanSpallationSource/motor">EuropeanSpallationSource/motor: APS BCDA synApps module: motor&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/pantor/ruckig">pantor/ruckig: Motion Generation for Robots and Machines. &lt;/a>&lt;/li>
