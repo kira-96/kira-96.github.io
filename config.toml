@@ -138,3 +138,8 @@ pygmentsUseClasses = true
     noClasses = false
     style = "monokai" # github, dracula, vim, monokai
     tabWidth = 4
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      hardWraps = false
+      unsafe = true
+      xhtml = false
