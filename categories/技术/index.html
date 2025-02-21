@@ -9,7 +9,6 @@ default-state：默认状态，on/off。
 linux,default-trigger：设置LED的触发器。backlight-背光灯，heartbeat-心跳灯，timer-定时，default-on-默认开状态，disk-activity-硬盘状态，gpio，none。
 用户空间下的LED操作 注意：以下操作都需要root权限！
 用户空间下的GPIO文件系统接口在/sys/class/leds/{label}目录下。
-LED节点有以下属性可以配置：
 ...</p></div><footer class=entry-footer><span title='2023-11-11 15:45:11 +0800 +0800'>十一月 11, 2023</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;185 字</footer><a class=entry-link aria-label="post link to Linux LED子系统" href=https://kira-96.github.io/posts/linux-led%E5%AD%90%E7%B3%BB%E7%BB%9F/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2 class=entry-hint-parent>龙芯2K500开发板上实现的呼吸灯效果</h2></header><div class=entry-content><p>前言 本来这篇文章应该在上周就写完的，不过突然被安排出差，一直忙到了现在，终于可以静下心来做些其它事情。
 之前和龙芯3A5000主机一起送过来的还有一块龙芯2K500的迷你开发板，整个板子不到巴掌大小。之前只是简单做了上电启动，这次拿到了比较完整的开发资料，可以尝试为开发板编写一些程序了。
 由于暂时没有屏幕，只能先试着做一些其它的事情，如通信和IO控制，其中最简单，最基础的就是LED灯的控制。然后我就发现，这个板子居然有一颗可以调节亮度的LED灯！没错，之前做的LED控制都只能进行开关操作，而可以调节亮度，意味着可以做出更多的显示效果，这次我就做了一个呼吸灯的效果。
@@ -34,7 +33,7 @@ LED节点有以下属性可以配置：
 在此之前，有必要再了解一下GPIO的概念。
 “通用输入/输出”（GPIO）是一种灵活的软件控制数字信号。它们由多种芯片提供，对于使用嵌入式和定制硬件的Linux开发人员来说很熟悉。每个GPIO代表一个连接到特定引脚的位，即球栅阵列（BGA）封装上的“球”。电路板示意图显示了哪些外部硬件连接到哪些GPIO。驱动程序可以通用地编写，以便板设置代码将这样的引脚配置数据传递给驱动程序。
 A “General Purpose Input/Output” (GPIO) is a flexible software-controlled digital signal. They are provided from many kinds of chip, and are familiar to Linux developers working with embedded and custom hardware. Each GPIO represents a bit connected to a particular pin, or “ball” on Ball Grid Array (BGA) packages. Board schematics show which external hardware connects to which GPIOs. Drivers can be written generically, so that board setup code passes such pin configuration data to drivers.
-...</p></div><footer class=entry-footer><span title='2023-01-12 13:33:37 +0800 +0800'>一月 12, 2023</span>&nbsp;·&nbsp;3 分钟&nbsp;·&nbsp;498 字</footer><a class=entry-link aria-label="post link to Linux GPIO 操作其一" href=https://kira-96.github.io/posts/linux-gpio%E6%93%8D%E4%BD%9C%E5%85%B6%E4%B8%80/></a></article></main><footer class=footer><span>Copyright © 2019-2024 <a href=/>kira&rsquo;s blog</a> ·</span> ·
+...</p></div><footer class=entry-footer><span title='2023-01-12 13:33:37 +0800 +0800'>一月 12, 2023</span>&nbsp;·&nbsp;3 分钟&nbsp;·&nbsp;498 字</footer><a class=entry-link aria-label="post link to Linux GPIO 操作其一" href=https://kira-96.github.io/posts/linux-gpio%E6%93%8D%E4%BD%9C%E5%85%B6%E4%B8%80/></a></article></main><footer class=footer><span>Copyright © 2019-2025 <a href=/>kira&rsquo;s blog</a> ·</span> ·
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
