@@ -1,7 +1,7 @@
 ---
 title: "QML控件访问EPICS过程变量的思路"
 date: 2025-02-20T16:27:36+08:00
-lastmod: 2025-03-13T10:24:25+08:00
+lastmod: 2025-03-17T08:53:34+08:00
 draft: false
 description: 自定义QML控件访问EPICS过程变量的思路
 tags: ["EPICS", "Qt"]
@@ -178,10 +178,14 @@ void QPvInt::setPvName(const QString &pvname)
 
 void QPvInt::setValue(const QVariant &value)
 {
+    if (!m_write_access) {
+        return;
+    }
+
     if (value != m_value) {
         bool ok = false;
         int val = value.toInt(&ok);
-        if (ok && !m_caobject.isNull() && m_caobject->getChannelIsConnected()) {
+        if (ok) {
             m_caobject->writeIntegerValue(val);
         }
     }
