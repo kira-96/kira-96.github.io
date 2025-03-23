@@ -1,7 +1,7 @@
 ---
 title: "Qt5编写Qt Quick2插件"
 date: 2025-03-13T10:23:47+08:00
-lastmod: 2025-03-17T08:53:56+08:00
+lastmod: 2025-03-23T10:55:52+08:00
 draft: false
 description: 使用Qt5编写Qt Quick2插件遇到的问题记录
 tags: ["Qt", "QML"]
@@ -166,7 +166,6 @@ QT += core qml quick
 CONFIG += plugin c++11
 # CONFIG += qmltypes
 
-TARGET = $$qtLibraryTarget($$TARGET)
 # 插件的URI
 uri = com.mycompany.qmlcomponents
 
@@ -177,8 +176,10 @@ QML_IMPORT_NAME = $$uri
 QML_IMPORT_MAJOR_VERSION = 1
 QML_IMPORT_MINOR_VERSION = 0
 # 生成插件的路径
-DESTDIR = imports/$$replace(QML_IMPORT_NAME, \., /)
+DESTDIR = imports/$$replace(QML_IMPORT_NAME, \., $$QMAKE_DIR_SEP)
 QMLTYPES_FILENAME = $$DESTDIR/plugins.qmltypes
+
+TARGET = $$qtLibraryTarget($$TARGET)
 
 HEADERS += ...
 SOURCES += ...
