@@ -3,6 +3,7 @@ title: "ecmc构建指南"
 date: 2024-11-26T08:56:34+08:00
 lastmod: 2024-11-26T08:56:34+08:00
 draft: true
+searchHidden: true
 tags: ["EPICS", "EtherCAT"]
 keywords: ["EPICS", "EtherCAT"]
 categories: ["EPICS"]

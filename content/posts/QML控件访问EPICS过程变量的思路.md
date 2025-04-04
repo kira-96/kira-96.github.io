@@ -4,6 +4,7 @@ date: 2025-02-20T16:27:36+08:00
 lastmod: 2025-03-17T08:53:34+08:00
 draft: false
 description: 自定义QML控件访问EPICS过程变量的思路
+searchHidden: true
 tags: ["EPICS", "Qt"]
 keywords: ["EPICS", "Qt"]
 categories: ["EPICS"]
@@ -150,7 +151,7 @@ public Q_SLOTS:
 };
 ```
 
-``` cpp
+```cpp {linenos=inline, hl_lines=["17-22"]}
 /* qpvint.cpp */
 QPvInt::QPvInt(QObject *parent)
     : QPvObject{parent}

@@ -1,7 +1,6 @@
 ---
 title: "Linux CPU核心隔离"
 date: 2025-03-13T14:59:45+08:00
-lastmod: 2025-03-23T10:56:28+08:00
 draft: true
 description: Linux CPU核心隔离技术
 tags: ["linux"]
@@ -42,7 +41,7 @@ taskset -a -c 1,2 ./st.cmd
 taskset -cp <core_list> <pid>
 ```
 
-**IgH EtherCAT驱动设置CPU亲和性**
+{{< collapse summary="IgH EtherCAT驱动设置CPU亲和性" >}}
 
 在脚本中添加启动参数`run_on_cpu=?`，例：
 
@@ -60,7 +59,9 @@ fi
 ...
 ```
 
-**设置ECMC线程的CPU亲和性**
+{{</ collapse >}}
+
+{{< collapse summary="设置ECMC线程的CPU亲和性" >}}
 
 ``` shell
 #- go active (create ecmc_rt)
@@ -79,6 +80,8 @@ afterInit "epicsThreadSetAffinity cbLow 6"
 `cbLow` 在 `iocInit` 创建，因此`epicsThreadSetAffinity`必须使用`afterInit`命令执行。
 
 还可以使用 EPICS 模块 *MCoreUtils* 中的工具设置CPU亲和性。
+
+{{</ collapse >}}
 
 **参考**
 

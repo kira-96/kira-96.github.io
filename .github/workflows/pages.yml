@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      HUGO_ENV: production
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
@@ -18,13 +20,13 @@ jobs:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
-          # extended: true
+          extended: true
 
       - name: Build
-        run: hugo -D --minify
+        run: hugo -D --enableGitInfo --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
