@@ -3,7 +3,7 @@ defaultContentLanguage = "zh"
 languageCode = "zh"
 title = "✨kiraの博客"
 author = "kira"
-copyright = "© 2019-2025 [kira's blog](/)"
+copyright = "© 2019-2025 [kira's blog](/) · LICENSED under [CC-BY-4.0](https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE)"
 
 theme = "PaperMod"
 
