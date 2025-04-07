@@ -1,0 +1,113 @@
+/* 代码块容器 */
+.mac-codeblock {
+    position: relative;
+    background: #282a36;
+    border-radius: 8px;
+    margin: 1.5em 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* 标题栏 */
+.mac-titlebar {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: transparent;
+    border-radius: 8px 8px 0 0;
+}
+
+.mac-left-group,
+.mac-right-group {
+    display: flex;
+    flex: 0 0 80px;
+    gap: 8px;
+}
+
+.mac-left-group {
+    justify-content: flex-start;
+}
+
+.mac-right-group {
+    justify-content: flex-end;
+}
+
+.mac-close, .mac-minimize, .mac-expand {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.mac-close { background: #ff5f56; }
+.mac-minimize { background: #ffbd2e; }
+.mac-expand { background: #27c93f; }
+
+.mac-close:hover, 
+.mac-minimize:hover, 
+.mac-expand:hover {
+    filter: brightness(1.5);
+    cursor: pointer;
+}
+
+.mac-title {
+    flex: 1;
+    max-width: 60%;
+    color: #a0a0a0;
+    font-size: 0.85em;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mac-title:hover {
+    overflow: visible;
+    white-space: normal;
+    /* background: rgba(0,0,0,0.8); */
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* 代码内容 */
+.mac-content {
+    overflow-x: auto;
+    margin: -10px 0 -10px 0;
+    position: relative;
+    transition: height 0.3s ease-out, opacity 0.2s ease;
+}
+
+.mac-content.folded {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin: 0;
+}
+
+.fold-button {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.fold-button.folded {
+    transform: rotate(180deg);
+}
+
+.fold-button:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    /* transform: rotate(180deg); */
+}
+
+@media screen and (max-width: 340px) {
+    .mac-title {
+        max-width: 50%;
+        font-size: 0.75em;
+    }
+}

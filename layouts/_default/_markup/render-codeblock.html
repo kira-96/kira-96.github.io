@@ -1,0 +1,26 @@
+{{- $title := .Attributes.title | default .Type -}}
+
+<div class="mac-codeblock">
+  <!-- 顶部标题栏 -->
+  <div class="mac-titlebar">
+    <!-- 左侧控制按钮 -->
+    <div class="mac-left-group">
+      <span class="mac-close"></span>
+      <span class="mac-minimize"></span>
+      <span class="mac-expand"></span>
+    </div>
+    
+    <!-- 中间语言标签 -->
+    <div class="mac-title" title="{{ $title }}">{{ $title }}</div>
+    
+    <!-- 右侧功能按钮 -->
+    <div class="mac-right-group">
+      <button class="fold-button">&#9660;</button>
+    </div>
+  </div>
+  
+  <!-- 代码内容 -->
+  <div class="mac-content">
+    {{- highlight .Inner .Type -}}
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{{- /* Footer custom content area start */ -}}
+<script>
+    document.querySelectorAll('.fold-button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const codeblock = e.target.closest('.mac-codeblock');
+            const content = codeblock.querySelector('.mac-content');
+            content.classList.toggle('folded');
+            btn.classList.toggle('folded');
+        });
+    });
+</script>
+{{- /* Footer custom content area end */ -}}
