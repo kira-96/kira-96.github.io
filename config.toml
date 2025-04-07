@@ -147,3 +147,7 @@ pygmentsUseClasses = true
       hardWraps = false
       unsafe = true
       xhtml = false
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true

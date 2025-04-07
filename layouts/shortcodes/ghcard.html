@@ -1,0 +1,23 @@
+{{ $baseURL := .Site.Params.githubStatsBaseURL | default "https://github-readme-stats.vercel.app" }}
+{{ $theme := .Get "theme" | default "default_repocard" }}
+<div class="ghcard">
+  <a href="https://github.com/{{ .Get "username"}}/{{ .Get "repo" }}" style="transition: none;background-image: none;border-bottom: none; display: block;">
+    <img align="center" src="{{ $baseURL }}/api/pin/?username={{ .Get "username" }}&amp;repo={{ .Get "repo" }}&amp;theme={{ .Get "theme" }}" alt="{{ .Get "repo" }}" style="width: 100%;" />
+  </a> 
+</div>
+<style>
+  .ghcard {
+    width: 100%;
+    margin-bottom: 20px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  @media (min-width: 769px) {
+    .ghcard {
+      width: calc(50% - 10px);
+    }
+    .ghcard:nth-child(odd) {
+      margin-right: 100px;
+    }
+  }
+</style>

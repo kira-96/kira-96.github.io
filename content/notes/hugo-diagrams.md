@@ -117,9 +117,19 @@ xychart-beta
     line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
 ```
 
+支持区块引用
+
+> [!NOTE]
+> Do not approach or handle without protective gear.
+
+> [!WARNING]+ Radiation hazard
+> Do not approach or handle without protective gear.
+
 **参考**
 
 - [Diagrams | Hugo](https://gohugo.io/content-management/diagrams/)
 - [Hugo博客添加mermaid作图](https://www.sulvblog.cn/posts/blog/hugo_mermaid/)
 - [Render ASCII art as SVG diagrams](https://github.com/bep/goat)
 - [Mermaid 入门文档](https://mermaid.nodejs.cn/intro/)
+- [Blockquote render hooks](https://gohugo.io/render-hooks/blockquotes/)
+- [Hugo博客添加GitHub风格的Alert块引用](https://tom2almighty.github.io/hugo-blog-diary/posts/hugo-alert-blockquote/)
