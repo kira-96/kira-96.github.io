@@ -61,7 +61,7 @@ make
 
   添加`devgpio`的模块位置
 
-  ``` Makefile
+  ``` shell { title="configure/RELEASE" }
   SUPPORT=/home/ubuntu/epics/epics-modules
   DEVGPIO=$(SUPPORT)/epics-devgpio
   ```
@@ -82,7 +82,7 @@ make
 
   例：添加`exampleApp/Db/gpio.db`
 
-  ``` js
+  ``` json { title="Db/gpio.db" }
   record(bo, "${IOC}:GPIO:IO39:OUT"） {
     field(DESC, "GPIO 39 output")
     field(DTYP, "devgpio")
@@ -103,7 +103,7 @@ make
 
   修改`exampleApp/Db/Makefile`
 
-  ``` Makefile
+  ``` Makefile { title="Db/Makefile" }
   # 添加编写的db
   DB += gpio.db
   ```
@@ -112,7 +112,7 @@ make
 
   例：修改`iocBoot/iocexample/st.cmd`
 
-  ``` shell
+  ``` shell { title="st.cmd" }
   # 设置gpio设备，示例：
   GpioChip "/dev/gpiochip0"
   # 加载db

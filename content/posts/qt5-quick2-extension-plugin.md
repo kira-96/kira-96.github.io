@@ -21,8 +21,7 @@ categories: ["Qt"]
 
 例如，我新建了一个叫做`Test`的插件库，项目会自动创建一个`TestPlugin`的类，这个类继承自`QQmlExtensionPlugin`，我们需要重写它的两个虚函数。
 
-``` cpp
-/* testplugin.h */
+``` cpp { title="testplugin.h" }
 #include <QQmlExtensionPlugin>
 
 class TestPlugin : public QQmlExtensionPlugin
@@ -36,8 +35,7 @@ public:
 };
 ```
 
-``` cpp
-/* testplugin.cpp */
+``` cpp { title="testplugin.cpp" }
 #include "testplugin.h"
 #include "myitem.h"
 #include <qqml.h>
@@ -56,8 +54,7 @@ void TestPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 
 其中，`MyItem`就是我们自定义的控件。简单看一下示例代码：
 
-``` cpp
-/*myitem.h*/
+``` cpp { title="myitem.h" }
 #include <QtQuick/QQuickPaintedItem>
 
 class MyItem : public QQuickPaintedItem
@@ -76,8 +73,7 @@ public:
 
 使用这种方式也可以注册继承自`QObject`的类。例如：
 
-``` cpp
-/* myobject.h */
+``` cpp { title="myobject.h" }
 class MyObject : public QObject
 {
     Q_OBJECT
@@ -89,8 +85,7 @@ public:
 
 然后在`Plugin`类中进行注册：
 
-``` cpp
-/* testplugin.cpp */
+``` cpp { title="testplugin.cpp" }
 void TestPlugin::registerTypes(const char *uri)
 {
     // @uri com.mycompany.qmlcomponents
@@ -103,8 +98,7 @@ void TestPlugin::registerTypes(const char *uri)
 
 QML插件库当然也可以封装`.qml`的自定义插件。例如：
 
-``` qml
-/* MyLabel.qml */
+``` qml { title="MyLabel.qml" }
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
@@ -121,8 +115,7 @@ Label {
 
 把自定义的qml控件添加到资源文件，然后可以在`Plugin`类中进行注册。
 
-``` cpp
-/* testplugin.cpp */
+``` cpp { title="testplugin.cpp" }
 void TestPlugin::registerTypes(const char *uri)
 {
     // @uri com.mycompany.qmlcomponents
@@ -139,7 +132,7 @@ void TestPlugin::registerTypes(const char *uri)
 
 `qmldir`文件用于QML插件模块管理，描述了qml插件的基本信息。示例：
 
-``` shell
+``` shell { title="qmldir" }
 module com.mycompany.qmlcomponents
 plugin testplugin
 classname TestPlugin
@@ -157,7 +150,7 @@ depends QtQuick.Controls 2.12
 
 下面是我的一个项目配置，包含插件信息配置，和**生成元数据的自定义命令**。
 
-``` shell
+``` shell { title="TestPlugin.pro" }
 ## TestPlugin.pro
 
 TEMPLATE = lib
@@ -233,8 +226,7 @@ POST_TARGETDEPS += qmltypes
 
 1. 确保插件目录中包含以下几个文件：testplugin.so、plugins.qmltypes、qmldir。
 2. 将插件目录添加到Qml Emgine的导入目录列表：
-  ``` cpp
-  /* main.cpp */
+  ``` cpp { title="main.cpp" }
   QGuiApplication app(argc, argv);
   QQmlApplicationEngine engine(&app);
   ...
@@ -243,8 +235,7 @@ POST_TARGETDEPS += qmltypes
   engine.load(url);
   ```
 3. 在qml中导入、使用自定义控件
-  ``` qml
-  /* main.qml */
+  ``` qml { title="main.qml" }
   import com.mycompany.qmlcomponents 1.0
 
   Window {
@@ -270,8 +261,7 @@ POST_TARGETDEPS += qmltypes
 
 这里需要对静态函数做一下封装。例如，我定义了一个静态函数：
 
-``` cpp
-/* myutils.h */
+``` cpp { title="myutils.h" }
 class MyUtils
 {
 public:
@@ -284,9 +274,7 @@ public:
 
 这里需要定义一个插件的Helper类，然后在插件里面注册这个类，在这个类里面实现静态函数调用。例如：
 
-``` cpp
-/* testpluginhelper.h */
-#include <QObject>
+``` cpp { title="testplugin.cpp" }
 #include "myutils.h"
 
 class TestPluginHelper : public QObject
@@ -298,10 +286,9 @@ public:
         MyUtils::myFunc();
     }
 };
-```
 
-``` cpp
-/* testplugin.cpp */
+#include "testplugin.moc"
+
 void TestPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
     QQmlExtensionPlugin::initializeEngine(engine, uri);

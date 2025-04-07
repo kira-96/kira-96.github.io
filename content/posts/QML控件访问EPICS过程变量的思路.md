@@ -40,8 +40,7 @@ Qt EPICS 框架提供了`QCaObject`类访问EPICS过程变量，但该类几乎�
 
 **QPvObject类的定义**
 
-``` cpp
-/* qpvobject.h */
+``` cpp { title="qpvobject.h" }
 class QPvObject : public QObject
 {
     Q_OBJECT
@@ -136,8 +135,7 @@ protected:
 
 例如：整数类型的过程变量
 
-``` cpp
-/* qpvint.h */
+``` cpp { title="qpvint.h" }
 class QPvInt : public QPvObject
 {
     Q_OBJECT
@@ -151,8 +149,7 @@ public Q_SLOTS:
 };
 ```
 
-```cpp {linenos=inline, hl_lines=["17-22"]}
-/* qpvint.cpp */
+```cpp {title="qpvint.cpp", linenos=inline, hl_lines=["16-21"]}
 QPvInt::QPvInt(QObject *parent)
     : QPvObject{parent}
 {}
@@ -197,8 +194,8 @@ void QPvInt::setValue(const QVariant &value)
 
 然后需要注册自定义的数据类型，才能在QML中使用。
 
-``` cpp
-qmlRegisterUncreatableType<QPvObject>(uri, MAJOR, MINOR, "QPvObject", "Not creatable as it is an abstract class");
+``` cpp { title="main.cpp" }
+qmlRegisterUncreatableType<QPvObject>(uri, 1, 0, "QPvObject", "Not creatable as it is an abstract class");
 qmlRegisterType<QPvInt>("com.example.epics", 1, 0, "QPvInt");
 qmlRegisterType<QPvDouble>("com.example.epics", 1, 0, "QPvDouble");
 qmlRegisterType<QPvString>("com.example.epics", 1, 0, "QPvString");
@@ -208,8 +205,7 @@ qmlRegisterType<QPvString>("com.example.epics", 1, 0, "QPvString");
 
 这里自定义了*Label*控件，可以自动更新EPICS过程变量的值，根据严重等级自动改变控件背景色。控件声明了`pvName`属性，用户在使用时需要填写此项才可以连接到EPICS过程变量。
 
-``` qml
-/* PvLabel.qml */
+``` qml { title="PvLabel.qml" }
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import com.example.epics 1.0
@@ -267,8 +263,7 @@ Label {
 
 **使用自定义控件**
 
-``` qml
-/* main.qml */
+``` qml { title="main.qml" }
 import QtQuick 2.15
 import QtQuick.Window 2.15
 // 导入自定义控件
@@ -305,8 +300,7 @@ Window {
 
 最后，定义程序启动时加载的qml文件路径即可。
 
-``` cpp
-/* main.cpp */
+``` cpp { title="main.cpp " }
 QQmlApplicationEngine engine;
 // 定义qml文件的路径或通过 argv 参数传入
 const QUrl url("./main.qml");

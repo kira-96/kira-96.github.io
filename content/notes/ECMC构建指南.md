@@ -40,15 +40,11 @@ categories: ["EPICS"]
 ### motor
 
 配置如下：
-``` sh
-# CONFIG_SITE.local
-
+``` shell { title="configure/CONFIG_SITE.local" }
 # Uncomment the following line to build iocs in motor/modules/motorVendor/iocs
 BUILD_IOCS = YES
 ```
-``` sh
-# RELEASE.local
-
+``` shell { title="configure/RELEASE.local" }
 EPICS_BASE=/path/to/epics/base-7.0.8.1
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
@@ -63,20 +59,19 @@ ASYN=$(SUPPORT)/asyn
 
 配置交叉编译工具链
 
-``` cmake
-# toolchain
+``` cmake { title="toolchain.cmake" }
 set(CMAKE_C_COMPILER "loongarch64-linux-gnu-gcc")
 set(CMAKE_CXX_COMPILER "loongarch64-linux-gnu-g++")
 ```
 
 编译步骤
 
-``` sh
+``` shell
 # 新建编译目录
 mkdir build
 cd build
 # 交叉编译
-cmake -DCMAKE_TOOLCHAIN_FILE=toolchain -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_TOOLCHAIN_FILE=toolchain.cmake -DCMAKE_BUILD_TYPE=Release ..
 make
 ```
 ### ecmc
@@ -85,9 +80,7 @@ make
 
 配置如下：
 
-``` sh
-# configure/RELEASE.local
-
+``` shell { title="configure/RELEASE.local" }
 EPICS_BASE=/path/to/epics/base-7.0.8.1
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
@@ -98,7 +91,7 @@ EPICS_HOST_ARCH=linux-loong64
 
 修改`devEcmcSup/Makefile`
 
-``` diff
+``` diff { title="devEcmcSup/Makefile" }
 #************************************************************************
 # Copyright (c) 2019 European Spallation Source ERIC
 # ecmc is distributed subject to a Software License Agreement found
@@ -245,7 +238,7 @@ gitversion.c:
 
 修改`devEcmcSup/motion/ecmcTrajectoryS.h`
 
-``` diff
+``` diff { title="devEcmcSup/motion/ecmcTrajectoryS.h" }
 #include "ecmcecmcTrajectoryBase.h"
 - #include <ruckig.hpp>
 + #include <ruckig/ruckig.hpp>
@@ -253,9 +246,7 @@ gitversion.c:
 
 修改`ecmcExampleTop/configure/RELEASE.local`
 
-``` sh
-# `ecmcExampleTop/configure/RELEASE.local`
-
+``` shell { title="ecmcExampleTop/configure/RELEASE.local" }
 EPICS_BASE=/home/ubuntu/epics/base-7.0.8.1
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
@@ -357,7 +348,7 @@ include $(TOP)/configure/RULES
 
 添加`CPPFLAGS=-std=c++17`
 
-``` sh
+``` shell
 # 执行交叉编译
 make CPPFLAGS=-std=c++17 \
 LD=loongarch64-linux-gnu-ld \
@@ -370,7 +361,7 @@ CCC=loongarch64-linux-gnu-g++ -j4
 主要使用`ecmccfg`软件包提供的预编写脚本进行`EtherCAT`主站、从站配置。
 
 修改IOC环境变量配置`iocBoot/iocExample/envPaths`：
-``` sh
+``` shell { title="envPaths" }
 epicsEnvSet("IOC", "iocExample")
 epicsEnvSet("TOP", "../..")
 epicsEnvSet("SUPPORT", "/root/epics-modules")
@@ -379,7 +370,7 @@ epicsEnvSet("ECMC", "${SUPPORT}/ecmc")
 ```
 
 修改启动脚本`iocBoot/iocExample/st.cmd`：
-``` sh
+``` shell { title="st.cmd" }
 #!../../bin/linux-loong64/ecmcIoc
 
 < envPaths

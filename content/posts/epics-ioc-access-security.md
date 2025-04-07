@@ -39,7 +39,7 @@ categories: ["EPICS"]
 
 必须启动脚本在的`iocInit`之前包含以下命令：
 
-``` c
+``` c { title="st.cmd" }
 asSetFilename("/full/path/to/accessSecurityFile")
 /* 下面是一个可选命令 */
 /* 使用宏替换 */
@@ -61,7 +61,7 @@ asSetSubstitutions("var1=sub1,var2=sub2,...")
 
 **简单示例**
 
-``` c
+``` c { title="accessSecurityFile.acf" }
 UAG(uag) {user1,user2}
 HAG(hag) {host1,host2}
 ASG(DEFAULT) {
@@ -85,7 +85,7 @@ ASG(DEFAULT) {
 
 元素`<name>`、`<user>`、`<host>`、`<pvname>`和`<calculation>`可以是带引号或不带引号的字符串。
 
-``` c
+``` c { title="accessSecurityFile.acf" }
 UAG(<name>) [{ <user> [, <user> ...] }]
 ...
 HAG(<name>) [{ <host> [, <host> ...] }]
@@ -163,7 +163,7 @@ touch accessSecurity.acf
 
 修改配置文件内容，示例：
 
-``` c
+``` c { title="accessSecurityFile.acf" }
 UAG(read) {deepin}
 UAG(write) {deepin}
 HAG(hosts) {LAPTOP-CTDCXXXX, 172.19.176.1}

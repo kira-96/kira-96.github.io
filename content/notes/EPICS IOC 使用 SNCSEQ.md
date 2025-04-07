@@ -10,8 +10,7 @@ categories: ["EPICS"]
 ---
 
 IOC 配置`SNCSEQ`：
-``` toml
-# example/configure/RELEASE.local
+``` shell { title="configure/RELEASE.local" }
 EPICS_BASE = /path/to/your/build/of/epics-base
 SUPPORT = ${EPICS_BASE}/../epics-modules
 PVXS = ${SUPPORT}/pvxs
@@ -20,7 +19,7 @@ SNCSEQ = ${SUPPORT}/sequencer
 ```
 
 example工程中相关的代码：
-``` cpp
+``` Makefile
 # example/iocExampleApp/src/Makefile
 ...
 
@@ -50,9 +49,7 @@ endif
 ...
 ```
 
-``` cpp
-# sncExample.dbd
-
+``` shell { title="sncExample.dbd" }
 # The name below is derived from the name of the SNL program
 # inside the source file, not from its filename. Here the
 # program is called sncExample, but is compiled in both the
@@ -60,15 +57,11 @@ endif
 registrar(sncExampleRegistrar)
 ```
 
-``` cpp
-# sncProgram.st
-
+``` cpp { title="sncProgram.st" }
 #include "../sncExample.stt"
 ```
 
-``` python
-# sncExample.stt
-
+``` python { title="sncExample.stt" }
 program sncExample
 double v;
 assign v to "{user}:aiExample";
@@ -94,7 +87,7 @@ ss ss1 {
 ```
 
 修改启动脚本，在`IOC`启动时运行SNL程序：
-``` sh
+``` shell { title="st.cmd" }
 ...
 
 ## Start any sequence programs
@@ -102,12 +95,12 @@ seq sncExample, "user=$(USER)"
 ```
 
 编译：
-``` sh
+``` shell
 make -j 8
 ```
 
 此时查看`example/dbd/iocExample.dbd`，应该可以看到：
-``` cpp
+``` cpp { title="dbd/iocExample.dbd" }
 ...
 registrar(sncExampleRegistrar)
 ...

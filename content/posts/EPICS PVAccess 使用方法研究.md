@@ -42,7 +42,7 @@ PVAccess 默认端口：5076
 
 使用`softIocPVA`软件。
 
-``` cpp
+``` cpp { title="shell" }
 cat <<EOF > p2pexample.db
 record(calc, "p2p:example:counter") {
     field(INPA, "p2p:example:counter")
@@ -56,7 +56,7 @@ EOF
 ## 添加 QSRV 到 IOC
 如果使用EPICS V7创建IOC，那么可以看到程序已经默认添加了**QSRV**到IOC中。如：
 
-``` cpp
+``` Makefile
 # example/iocExampleApp/src/Makefile
 
 # Link QSRV (pvAccess Server) if available
@@ -93,7 +93,7 @@ make -C pvxs/bundle libevent # implies .$(EPICS_HOST_ARCH)
 ```
 ※ 交叉编译`libevent`（可选）：
 修改 *bundle/Makefile*：
-``` cpp
+``` Makefile { title="bundle/Makefile" }
 ifneq (,$(filter linux-%,$(EPICS_HOST_ARCH)))
 # cross mingw hosted on linux
 CMAKE_TOOLCHAIN_windows-x64-mingw ?= x86_64-w64-mingw32
@@ -103,7 +103,7 @@ endif
 ```
 
 *linux-loong64.cmake*
-``` python
+``` cmake { title="linux-loong64.cmake" }
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR AMD64)
 set(CMAKE_C_COMPILER loongarch64-linux-gnu-gcc)
@@ -138,7 +138,7 @@ EOF
 ```
 
 将`pvxs`和`pvxsIoc`作为依赖库添加到IOC：
-``` cpp
+``` Makefile
 # example/iocExampleApp/src/Makefile
 
 # Link PVXS if available
@@ -179,7 +179,7 @@ QSRV将所有“单个”PV呈现为符合规范类型`NTScalar`、`NTScalarArra
 组定义可以在多个记录中拆分，参考example/iocExampleApp/Db/circle.db，或者包含在单独的JSON文件中，参考[JSON reference](https://epics-base.github.io/pvxs/qgroup.html#json-reference)。
 
 拆分写法：
-``` json
+``` json { title="records.db" }
 record(ai, "rec:X") {
     info(Q:group, {
         "grp:name": {
@@ -197,7 +197,7 @@ record(ai, "rec:Y") {
 ```
 
 JSON文件写法：
-``` json
+``` json { title="some.db" }
 # Store in some .db
 record(ai, "rec:X") {}
 record(ai, "rec:Y") {}
@@ -223,14 +223,14 @@ dbLoadGroup "db/some.json", "user=root"
 PVA 链接 [JSON schema](https://epics-base.github.io/pvxs/pvalink-schema-0.json)。
 
 例：
-``` json
+``` json { title="records.db" }
 record(longin, "tgt") {}
 record(longin, "src") {
     field(INP, {pva:{pv:"tgt"}})
 }
 ```
 或：
-``` json
+``` json { title="records.db" }
 record(longout, "src") {
     field(INP, {pva:{
         pv:"target:pv",

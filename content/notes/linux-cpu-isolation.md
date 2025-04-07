@@ -23,9 +23,7 @@ CPU隔离主要是为了确保关键进程获得更高的性能，减少干扰�
 
 **通过GRUB配置**
 
-``` sh
-# /etc/default/grub
-
+``` shell { title="/etc/default/grub" }
 # 添加isolcpus参数
 GRUB_CMDLINE_LINUX="isolcpus=1,2 nohz_full=1,2 rcu_nocbs=1,2"
 ```
@@ -34,7 +32,7 @@ GRUB_CMDLINE_LINUX="isolcpus=1,2 nohz_full=1,2 rcu_nocbs=1,2"
 
 **设置进程CPU亲和性**
 
-``` sh
+``` shell
 # 启动时绑定到核心 1,2
 taskset -a -c 1,2 ./st.cmd
 # 修改运行中进程的 CPU 亲和性
@@ -45,7 +43,7 @@ taskset -cp <core_list> <pid>
 
 在脚本中添加启动参数`run_on_cpu=?`，例：
 
-``` shell
+``` shell { title="/sbin/ethercatctl" }
 ## /sbin/ethercatctl
 
 ...
@@ -63,7 +61,7 @@ fi
 
 {{< collapse summary="设置ECMC线程的CPU亲和性" >}}
 
-``` shell
+``` shell { title="st.cmd" }
 #- go active (create ecmc_rt)
 ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
 
@@ -73,7 +71,7 @@ epicsThreadSetAffinity ecmc_rt 5
 
 进一步的调优可将其他 CPU 密集型线程移动到专用内核，例如：EPICS 线程 `cbLow`。
 
-``` shell
+``` shell { title="st.cmd" }
 afterInit "epicsThreadSetAffinity cbLow 6"
 ```
 
