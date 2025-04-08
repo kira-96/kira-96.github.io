@@ -1,0 +1,28 @@
+/* 悬浮动画 */
+/* 左上角logo悬浮动画 */
+.logo a:hover {
+    transition: 0.15s;
+    color: grey;
+  }
+/* 首页icon悬浮动画 */
+svg:hover {
+    transition: 0.15s;
+    transform: scaleX(1.1) scaleY(1.1);
+}
+.social-icons a svg:hover{
+    color: #ffbb3d !important;
+}
+/* 模式切换按钮悬浮动画 */
+#moon:hover {
+    transition: 0.15s;
+    color: deepskyblue;
+}
+#sun:hover {
+    transition: 0.15s;
+    color: gold;
+}
+/* 菜单栏文字悬浮动画 */
+#menu a:hover {
+    transition: 0.15s;
+    color: grey;
+}
