@@ -1,9 +1,9 @@
 ---
 title: "EPICS的MODBUS模块的编译和使用"
 date: 2024-01-02T14:38:38+08:00
-lastmod: 2024-01-03T08:52:53+08:00
+lastmod: 2025-04-09T09:55:50+08:00
 draft: false
-description: 交叉编译EPICS的MODBUS模块
+description: 编译EPICS的MODBUS模块和使用示例
 tags: ["linux", "EPICS", "龙芯"]
 keywords: ["linux", "EPICS", "龙芯"]
 categories: ["EPICS"]
@@ -55,35 +55,27 @@ Modbus读取操作仅限于传输125个16位字或2000 bit。Modbus写入操作�
 ### 使用到的模块下载地址
 
 - [epics-base - (launchpad.net)](https://git.launchpad.net/epics-base) / [epics-base/epics-base](https://github.com/epics-base/epics-base) / [EPICS Base (anl.gov)](https://epics.anl.gov/base/index.php)
-
 - [epics-modules/asyn: EPICS module for driver and device support](https://github.com/epics-modules/asyn)
-
 - [epics-modules/modbus: EPICS support for communication with Programmable Logic Controllers (PLCs) and other devices via the Modbus protocol over TCP, serial RTU, and serial ASCII links ](https://github.com/epics-modules/modbus)
-
 - [epics-modules/sscan: APS BCDA synApps module: sscan](https://github.com/epics-modules/sscan)
-
 - [epics-modules/calc: APS BCDA synApps module: calc](https://github.com/epics-modules/calc)
-
 - [epics-modules/ipac: IPAC Carrier and Communication Module Drivers](https://github.com/epics-modules/ipac)
-
 - [sequencer](https://www-csr.bessy.de/control/SoftDist/sequencer/repo/branch-2-2.git/) / [Download and Installation — EPICS Sequencer Version 2.2 (bessy.de)](https://www-csr.bessy.de/control/SoftDist/sequencer/Installation.html)
 
 **以下步骤需要先安装好EPICS Base.**
 
 ### 编译 SSCAN（可选）
 
-``` shell
-cd sscan
-touch configure/RELEASE.local
-vi configure/RELEASE.local
-
+``` shell { title="configure/RELEASE.local" }
 # 修改成和EPICS Base一样的架构
 # EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
-SUPPORT=/home/ubuntu/loongson/modules
+SUPPORT=$(EPICS_BASE)/../modules
+```
 
+``` shell
 # 直接编译
 # make
 # 交叉编译（示例）
@@ -93,20 +85,18 @@ make
 
 ### 编译 CALC（可选）
 
-``` shell
-cd calc
-touch configure/RELEASE.local
-vi configure/RELEASE.local
-
+``` shell { title="configure/RELEASE.local" }
 # 修改成和EPICS Base一样的架构
 # EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
-SUPPORT=/home/ubuntu/loongson/modules
+SUPPORT=$(EPICS_BASE)/../modules
 # SSCAN模块路径
 SSCAN=$(SUPPORT)/sscan
+```
 
+``` shell
 # 直接编译
 # make
 # 交叉编译（示例）
@@ -116,22 +106,20 @@ make
 
 ### 编译 asyn（必需）
 
-``` shell
-cd asyn
-touch configure/RELEASE.local
-vi configure/RELEASE.local
-
+``` shell { title="configure/RELEASE.local" }
 # 修改成和EPICS Base一样的架构
 # EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
-SUPPORT=/home/ubuntu/loongson/modules
+SUPPORT=$(EPICS_BASE)/../modules
 # SSCAN模块路径
 SSCAN=$(SUPPORT)/sscan
 # CALC模块路径
 CALC=$(SUPPORT)/calc
+```
 
+``` shell
 # 直接编译
 # make
 # 交叉编译（示例）
@@ -141,20 +129,18 @@ make
 
 ### 编译 modbus
 
-``` shell
-cd modbus
-touch configure/RELEASE.local
-vi configure/RELEASE.local
-
+``` shell { title="configure/RELEASE.local" }
 # 修改成和EPICS Base一样的架构
 # EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
 EPICS_BASE=/home/ubuntu/loongson/base-7.0.8
 # 放置EPICS模块的路径（示例）
-SUPPORT=/home/ubuntu/loongson/modules
+SUPPORT=$(EPICS_BASE)/../modules
 # ASYN模块路径
 ASYN=$(SUPPORT)/asyn
+```
 
+``` shell
 # 直接编译
 # make
 # 交叉编译（示例）
@@ -166,7 +152,7 @@ make
 
 ## 使用 MODBUS 程序
 
-在Modbus模块的`iocBoot\iocTest`目录下，可以看到很多示例程序。这里总结一下，我们使用时主要需要编写两部分内容。
+在Modbus模块的`iocBoot/iocTest`目录下，可以看到很多示例程序。这里总结一下，我们使用时主要需要编写两部分内容。
 
 - 用于配置设备连接和通信的`.cmd`文件
 - 用于使用模板解析数据的`.substitutions`文件
@@ -176,11 +162,9 @@ make
 `envPaths`文件：用于配置程序运行时的环境变量路径。  
 这里需要配置好`base`、`asyn`、`modbus`模块的路径。
 
-``` shell
-# envPaths
-
+``` shell { title="envPaths" }
 epicsEnvSet("IOC","app")
-epicsEnvSet("TOP","..")
+epicsEnvSet("TOP","../..")
 epicsEnvSet("SUPPORT","/root/modules")
 epicsEnvSet("ASYN","/root/modules/asyn")
 epicsEnvSet("MODBUS","/root/modules/modbus")
@@ -188,8 +172,8 @@ epicsEnvSet("EPICS_BASE","/root/base")
 # epicsEnvSet("EPICS_CAS_SERVER_PORT", 9001)
 ```
 
-``` shell
-# AMSAMOTION.cmd
+``` shell { title="AMSAMOTION.cmd", hl_lines=["5-6",15,25] }
+#!../../bin/linux-loong64/modbusApp
 
 < envPaths
 
@@ -266,9 +250,7 @@ dbLoadTemplate("AMSAMOTION.substitutions")
 iocInit
 ```
 
-``` shell
-# AMSAMOTION.substitutions
-
+``` shell { title="AMSAMOTION.substitutions" }
 # asyn record for the underlying asyn octet port
 file "$(ASYN)/db/asynRecord.db" { pattern
 {P,             R,            PORT,         ADDR,   IMAX,    OMAX}
@@ -344,7 +326,7 @@ file "$(TOP)/db/bo_bit.template" { pattern
 或者在`.cmd`文件第一行添加下面一行：
 
 ``` shell
-#!../bin/<EPICS_HOST_ARCH>/modbusApp
+#!../../bin/<EPICS_HOST_ARCH>/modbusApp
 ```
 
 然后直接执行`.cmd`脚本。
