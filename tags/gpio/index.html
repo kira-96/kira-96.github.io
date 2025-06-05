@@ -10,7 +10,7 @@ Version 2 of this device support uses the new V2 ABI for GPIO character device (
 如果你使用的是旧版的linxu内核，可能需要使用R1-0-6。
 交叉编译时gpio.h的路径：${SDKTARGETSYSROOT}/usr/include/linux/gpio.h
 编译步骤：
-shell ▼ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 cd epics-devgpio touch configure/RELEASE.local vi configure/RELEASE.local # 修改成和EPICS Base一样的架构 # EPICS_HOST_ARCH=linux-loong64 # EPICS Base路径（示例） EPICS_BASE=/home/ubuntu/epics/base-7.0.8.1 # 直接编译 # make # 交叉编译（示例） # make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++ make 使用GPIO的设备支持库 为IOC程序添加GPIO设备支持，和其他设备支持程序使用方法一样。
+shell ▼ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 cd epics-devgpio touch configure/RELEASE.local vi configure/RELEASE.local # 修改成和EPICS Base一样的架构 # EPICS_HOST_ARCH=linux-loong64 # EPICS Base路径（示例） EPICS_BASE=/path/to/epics/base-7.0.8.1 # 直接编译 # make # 交叉编译（示例） # make LD=loongarch64-linux-gnu-ld CC=loongarch64-linux-gnu-gcc CCC=loongarch64-linux-gnu-g++ make 使用GPIO的设备支持库 为IOC程序添加GPIO设备支持，和其他设备支持程序使用方法一样。
 ...</p></div><footer class=entry-footer><span title='2024-12-02 09:45:59 +0800 +0800'>十二月 2, 2024</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;326 字</footer><a class=entry-link aria-label="post link to EPICS IOC GPIO设备支持的使用" href=https://kira-96.github.io/posts/epics-ioc-gpio-device-support/></a></article></main><footer class=footer><span>© 2019-2025 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
