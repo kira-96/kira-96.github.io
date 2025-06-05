@@ -42,7 +42,7 @@ vi configure/RELEASE.local
 # 修改成和EPICS Base一样的架构
 # EPICS_HOST_ARCH=linux-loong64
 # EPICS Base路径（示例）
-EPICS_BASE=/home/ubuntu/epics/base-7.0.8.1
+EPICS_BASE=/path/to/epics/base-7.0.8.1
 
 # 直接编译
 # make
@@ -62,7 +62,7 @@ make
   添加`devgpio`的模块位置
 
   ``` shell { title="configure/RELEASE" }
-  SUPPORT=/home/ubuntu/epics/epics-modules
+  SUPPORT=/path/to/epics/epics-modules
   DEVGPIO=$(SUPPORT)/epics-devgpio
   ```
 
@@ -83,7 +83,7 @@ make
   例：添加`exampleApp/Db/gpio.db`
 
   ``` json { title="Db/gpio.db" }
-  record(bo, "${IOC}:GPIO:IO39:OUT"） {
+  record(bo, "${IOC}:GPIO:IO39:OUT") {
     field(DESC, "GPIO 39 output")
     field(DTYP, "devgpio")
     field(OUT, "@39")
@@ -91,7 +91,7 @@ make
     field(ONAM, "ON")
   }
 
-  record(bi, "${IOC}:GPIO:IO38:IN"） {
+  record(bi, "${IOC}:GPIO:IO38:IN") {
     field(DESC, "GPIO 38 input")
     field(DTYP, "devgpio")
     field(INP, "@38 both")
@@ -138,23 +138,23 @@ cd iocBoot/iocexample
 输入模式：
 
 ``` shell
-> camonitor iocsysStats:GPIO:IO38:IN
-iocsysStats:GPIO:IO38:IN       <undefined> OFF UDF INVALID
-iocsysStats:GPIO:IO38:IN       2024-12-02 11:21:05.738442 ON
-iocsysStats:GPIO:IO38:IN       2024-12-02 11:21:13.115063 OFF
-iocsysStats:GPIO:IO38:IN       2024-12-02 11:21:48.090581 ON
-iocsysStats:GPIO:IO38:IN       2024-12-02 11:21:51.567303 OFF
+> camonitor iocexample:GPIO:IO38:IN
+iocexample:GPIO:IO38:IN       <undefined> OFF UDF INVALID
+iocexample:GPIO:IO38:IN       2024-12-02 11:21:05.738442 ON
+iocexample:GPIO:IO38:IN       2024-12-02 11:21:13.115063 OFF
+iocexample:GPIO:IO38:IN       2024-12-02 11:21:48.090581 ON
+iocexample:GPIO:IO38:IN       2024-12-02 11:21:51.567303 OFF
 ```
 
 输出模式：
 
 ``` shell
-> caput iocsysStats:GPIO:IO39:OUT 1
-Old : iocsysStats:GPIO:IO39:OUT      OFF
-New : iocsysStats:GPIO:IO39:OUT      ON
-> caput iocsysStats:GPIO:IO39:OUT 0
-Old : iocsysStats:GPIO:IO39:OUT      ON
-New : iocsysStats:GPIO:IO39:OUT      OFF
+> caput iocexample:GPIO:IO39:OUT 1
+Old : iocexample:GPIO:IO39:OUT      OFF
+New : iocexample:GPIO:IO39:OUT      ON
+> caput iocexample:GPIO:IO39:OUT 0
+Old : iocexample:GPIO:IO39:OUT      ON
+New : iocexample:GPIO:IO39:OUT      OFF
 ```
 
 ## 关于`record`的编写
