@@ -14,7 +14,7 @@
     position: relative;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
+    padding: 4px 8px;
     background: transparent;
     border-radius: 8px 8px 0 0;
 }
@@ -44,8 +44,8 @@
 .mac-minimize { background: #ffbd2e; }
 .mac-expand { background: #27c93f; }
 
-.mac-close:hover, 
-.mac-minimize:hover, 
+.mac-close:hover,
+.mac-minimize:hover,
 .mac-expand:hover {
     filter: brightness(1.5);
     cursor: pointer;
@@ -90,6 +90,7 @@
     border: none;
     color: #a0a0a0;
     cursor: pointer;
+    font-size: 0.85em;
     padding: 2px 6px;
     border-radius: 4px;
     transition: all 0.2s ease;
