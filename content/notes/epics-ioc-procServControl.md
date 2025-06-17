@@ -89,12 +89,54 @@ make -j
 
 ### procServ
 
+#### 构建
+
+``` shell
+autoreconf -fi
+# 配置交叉编译器
+./configure --host=loongarch64-linux-gnu CC=loongarch64-linux-gnu-gcc --disable-doc
+# 编译
+make -j
+```
+
+编译完成应该可以看到当前目录生成了`procServ`可执行程序。
+
+#### 使用EPICS构建系统
+
+``` shell
+mkdir procServ && cd procServ
+EPICS_HOST_ARCH=`${EPICS_BASE}/startup/EpicsHostArch`
+${EPICS_BASE}/bin/${EPICS_HOST_ARCH}/makeBaseApp.pl -t example dummy
+rm -rf dummyApp
+
+git clone https://github.com/ralphlange/procServ.git procServApp
+
+cat > configure/RELEASE.local << EOF
+EPICS_BASE=${EPICS_BASE}
+EOF
+
+cd procServApp
+
+# 修改源码
+# 具体见下面 **修改procServ源码**
+
+make
+./configure --with-epics-top=.. --disable-doc
+# 编译
+make -j
+```
+
+编译完成可以看到`procServ/bin/${EPICS_HOST_ARCH}`目录生成了`procServ`可执行程序。
+
+**修改procServ源码**
+
 1. 修改`procServ.cc`：
+
 ``` diff { title="procServ.cc" }
-index c8d04a2..7cd25f9 100644
+index c8d04a2..385f788 100644
 --- a/procServ.cc
 +++ b/procServ.cc
-@@ -65,7 +65,8 @@ int    connectionNo;             // Total number of connections
+@@ -65,7 +65,7 @@ int    connectionNo;             // Total number of connections
  char   *ignChars = NULL;         // Characters to ignore
  char   killChar = 0x18;          // Kill command character (default: ^X)
  char   toggleRestartChar = 0x14; // Toggle autorestart character (default: ^T)
@@ -105,16 +147,20 @@ index c8d04a2..7cd25f9 100644
  int    killSig = SIGKILL;        // Kill signal (default: SIGKILL)
 ```
 
-2. 编译
-``` shell
-autoreconf -fi
-# 配置交叉编译器
-./configure --host=loongarch64-linux-gnu CC=loongarch64-linux-gnu-gcc --disable-doc
-# 编译
-make -j
-```
+2. 修改`Makefile.Epics.in`：
 
-编译完成应该可以看到当前目录生成了`procServ`可执行程序。
+``` diff { title="Makefile.Epics.in" }
+index ef6073c..85336f9 100644
+--- a/Makefile.Epics.in
++++ b/Makefile.Epics.in
+@@ -17,6 +17,7 @@ procServ_OBJS = @LIBOBJS@
+
+ USR_CXXFLAGS += @DEFS@
+ procServ_SYS_LIBS += $(subst -l,,@LIBS@)
++procServ_SYS_LIBS += util
+
+ include $(TOP)/configure/RULES
+```
 
 ## 在 IOC 中使用 procServControl
 
