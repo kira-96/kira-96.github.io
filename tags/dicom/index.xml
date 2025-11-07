@@ -1,34 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>DICOM on ✨kiraの博客</title><link>https://kira-96.github.io/tags/dicom/</link><description>Recent content in DICOM on ✨kiraの博客</description><generator>Hugo -- 0.147.8</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Thu, 20 May 2021 09:25:12 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/dicom/index.xml" rel="self" type="application/rss+xml"/><item><title>Calculate Spacing Between Slices</title><link>https://kira-96.github.io/notes/calculate-spacing-between-slices/</link><pubDate>Fri, 30 Apr 2021 10:26:13 +0800</pubDate><guid>https://kira-96.github.io/notes/calculate-spacing-between-slices/</guid><description>&lt;p>计算切片间距的方法：&lt;/p>
-&lt;p>对于CT扫描出的断层图像，没有存储&lt;strong>Spacing Between Slices&lt;/strong>信息，但可以利用位置信息计算得到。&lt;/p>
-&lt;p>需要先读取相邻两层切片的位置信息，假设为&lt;code>pos1&lt;/code>和&lt;code>pos2&lt;/code>，然后计算两个位置的距离即为切片间距。&lt;/p></description></item><item><title>Running Dcm4chee Arc Light on Docker</title><link>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</link><pubDate>Wed, 03 Feb 2021 09:26:58 +0800</pubDate><guid>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</guid><description>&lt;p>首先需要&lt;a href="https://docs.docker.com/get-docker/">安装Docker&lt;/a>&lt;/p>
-&lt;p>安装完成后，拉取以下3个仓库&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="bash">bash&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ docker pull dcm4che/postgres-dcm4chee:13.1-23
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ docker pull dcm4che/dcm4chee-arc-psql:5.23.1&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Docker命令行依次启动上面3个服务，不过比较麻烦，也容易出错，另一种是直接使用Docker Copmose，相对来说要简单很多。这里就直接使用 Docker Compose的方式。&lt;/p></description></item><item><title>Private Dicom Element</title><link>https://kira-96.github.io/notes/private-dicom-element/</link><pubDate>Thu, 21 Jan 2021 15:31:46 +0800</pubDate><guid>https://kira-96.github.io/notes/private-dicom-element/</guid><description>&lt;p>&lt;strong>规则&lt;/strong>&lt;/p>
-&lt;p>私有 Tag (gggg, xxxx)&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>Group number (gggg) 必须为奇数 (odd)，并且 (0001, xxxx)，(0003, xxxx)，(0005, xxxx)，(0007, xxxx)，(FFFF, xxxx) 不允许使用。&lt;/p></description></item><item><title>DICOM图像像素相关Tag说明</title><link>https://kira-96.github.io/posts/dicom%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3tag%E8%AF%B4%E6%98%8E/</link><pubDate>Mon, 15 Jun 2020 10:30:00 +0800</pubDate><guid>https://kira-96.github.io/posts/dicom%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3tag%E8%AF%B4%E6%98%8E/</guid><description>DICOM图像相关</description></item><item><title>三维图形矩阵变换</title><link>https://kira-96.github.io/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/</link><pubDate>Tue, 05 May 2020 13:30:10 +0800</pubDate><guid>https://kira-96.github.io/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/</guid><description>DICOM图像方位相关</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>DICOM on ✨kiraの博客</title><link>https://kira-96.github.io/tags/dicom/</link><description>Recent content in DICOM on ✨kiraの博客</description><generator>Hugo -- 0.152.2</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Thu, 20 May 2021 09:25:12 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/dicom/index.xml" rel="self" type="application/rss+xml"/><item><title>Calculate Spacing Between Slices</title><link>https://kira-96.github.io/notes/calculate-spacing-between-slices/</link><pubDate>Fri, 30 Apr 2021 10:26:13 +0800</pubDate><guid>https://kira-96.github.io/notes/calculate-spacing-between-slices/</guid><description>&lt;p&gt;计算切片间距的方法：&lt;/p&gt;
+&lt;p&gt;对于CT扫描出的断层图像，没有存储&lt;strong&gt;Spacing Between Slices&lt;/strong&gt;信息，但可以利用位置信息计算得到。&lt;/p&gt;
+&lt;p&gt;需要先读取相邻两层切片的位置信息，假设为&lt;code&gt;pos1&lt;/code&gt;和&lt;code&gt;pos2&lt;/code&gt;，然后计算两个位置的距离即为切片间距。&lt;/p&gt;</description></item><item><title>Running Dcm4chee Arc Light on Docker</title><link>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</link><pubDate>Wed, 03 Feb 2021 09:26:58 +0800</pubDate><guid>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</guid><description>&lt;p&gt;首先需要&lt;a href="https://docs.docker.com/get-docker/"&gt;安装Docker&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后，拉取以下3个仓库&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="bash"&gt;bash&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ docker pull dcm4che/postgres-dcm4chee:13.1-23
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ docker pull dcm4che/dcm4chee-arc-psql:5.23.1&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Docker命令行依次启动上面3个服务，不过比较麻烦，也容易出错，另一种是直接使用Docker Copmose，相对来说要简单很多。这里就直接使用 Docker Compose的方式。&lt;/p&gt;</description></item><item><title>Private Dicom Element</title><link>https://kira-96.github.io/notes/private-dicom-element/</link><pubDate>Thu, 21 Jan 2021 15:31:46 +0800</pubDate><guid>https://kira-96.github.io/notes/private-dicom-element/</guid><description>&lt;p&gt;&lt;strong&gt;规则&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;私有 Tag (gggg, xxxx)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Group number (gggg) 必须为奇数 (odd)，并且 (0001, xxxx)，(0003, xxxx)，(0005, xxxx)，(0007, xxxx)，(FFFF, xxxx) 不允许使用。&lt;/p&gt;</description></item><item><title>DICOM图像像素相关Tag说明</title><link>https://kira-96.github.io/posts/dicom%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3tag%E8%AF%B4%E6%98%8E/</link><pubDate>Mon, 15 Jun 2020 10:30:00 +0800</pubDate><guid>https://kira-96.github.io/posts/dicom%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3tag%E8%AF%B4%E6%98%8E/</guid><description>DICOM图像相关</description></item><item><title>三维图形矩阵变换</title><link>https://kira-96.github.io/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/</link><pubDate>Tue, 05 May 2020 13:30:10 +0800</pubDate><guid>https://kira-96.github.io/posts/%E4%B8%89%E7%BB%B4%E5%9B%BE%E5%BD%A2%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/</guid><description>DICOM图像方位相关</description></item></channel></rss>

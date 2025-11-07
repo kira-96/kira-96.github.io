@@ -1,311 +1,311 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Notes on ✨kiraの博客</title><link>https://kira-96.github.io/notes/</link><description>Recent content in Notes on ✨kiraの博客</description><generator>Hugo -- 0.147.8</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Tue, 17 Jun 2025 11:21:08 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>EPICS IOC 使用 ProcServControl</title><link>https://kira-96.github.io/notes/epics-ioc-procservcontrol/</link><pubDate>Tue, 03 Jun 2025 09:58:47 +0800</pubDate><guid>https://kira-96.github.io/notes/epics-ioc-procservcontrol/</guid><description>EPICS IOC 使用 ProcServControl 过程记录</description></item><item><title>Linux CPU核心隔离</title><link>https://kira-96.github.io/notes/linux-cpu-isolation/</link><pubDate>Thu, 13 Mar 2025 14:59:45 +0800</pubDate><guid>https://kira-96.github.io/notes/linux-cpu-isolation/</guid><description>Linux CPU核心隔离技术</description></item><item><title>EPICS IOC 使用 SNCSEQ</title><link>https://kira-96.github.io/notes/epics-ioc-%E4%BD%BF%E7%94%A8-sncseq/</link><pubDate>Mon, 13 Jan 2025 10:45:01 +0800</pubDate><guid>https://kira-96.github.io/notes/epics-ioc-%E4%BD%BF%E7%94%A8-sncseq/</guid><description>EPICS IOC 使用 SNCSEQ 过程记录</description></item><item><title>ecmc构建指南</title><link>https://kira-96.github.io/notes/ecmc%E6%9E%84%E5%BB%BA%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 26 Nov 2024 08:56:34 +0800</pubDate><guid>https://kira-96.github.io/notes/ecmc%E6%9E%84%E5%BB%BA%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="软件包">软件包&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/epics-base/epics-base">epics-base/epics-base: The C/C++ core of the EPICS Base control system toolkit&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/epics-modules/ecmc">epics-modules/ecmc: EPICS Support for EtherCAT Motion Controller (ECMC) and Generic IO Controller&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/paulscherrerinstitute/exprtk-ecmc">paulscherrerinstitute/exprtk-ecmc: ESS Customized exprtk : C++ Mathematical Expression Parsing And Evaluation Library&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/paulscherrerinstitute/ecmccfg">paulscherrerinstitute/ecmccfg: Module to handle configuration scripts for EtherCATMotion Controller (ECMC)&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/epics-modules/asyn">epics-modules/asyn: EPICS module for driver and device support&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/EuropeanSpallationSource/motor">EuropeanSpallationSource/motor: APS BCDA synApps module: motor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/pantor/ruckig">pantor/ruckig: Motion Generation for Robots and Machines. &lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://gitlab.com/etherlab.org/ethercat">EtherLab / EtherCAT Master · GitLab&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="构建顺序">构建顺序&lt;/h2>
-&lt;ol>
-&lt;li>epics-base&lt;/li>
-&lt;li>asyn&lt;/li>
-&lt;li>motor&lt;/li>
-&lt;li>etherlab&lt;/li>
-&lt;li>ruckig&lt;/li>
-&lt;li>ecmc&lt;/li>
-&lt;/ol>
-&lt;h3 id="epics-base">epics-base&lt;/h3>
-&lt;p>正常交叉编译。&lt;/p></description></item><item><title>Hugo Diagrams</title><link>https://kira-96.github.io/notes/hugo-diagrams/</link><pubDate>Tue, 30 Jan 2024 09:45:30 +0800</pubDate><guid>https://kira-96.github.io/notes/hugo-diagrams/</guid><description>在Hugo中使用示意图</description></item><item><title>交叉编译 ACAI</title><link>https://kira-96.github.io/notes/cross-compiling-acai/</link><pubDate>Tue, 26 Dec 2023 19:31:56 +0800</pubDate><guid>https://kira-96.github.io/notes/cross-compiling-acai/</guid><description>交叉编译 ACAI</description></item><item><title>Windows上使用MinGW编译安装EPICS</title><link>https://kira-96.github.io/notes/windows%E4%B8%8A%E4%BD%BF%E7%94%A8mingw%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85epics/</link><pubDate>Wed, 29 Nov 2023 18:57:02 +0800</pubDate><guid>https://kira-96.github.io/notes/windows%E4%B8%8A%E4%BD%BF%E7%94%A8mingw%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85epics/</guid><description>&lt;h2 id="需要使用的软件">需要使用的软件&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://strawberryperl.com/">Strawberry Perl for Windows&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://epics.anl.gov/base/index.php">EPICS Base&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>编译Base需要有gcc、g++、make、perl这些工具，但其实我们只需要安装&lt;code>Strawberry Perl&lt;/code>就可以了，安装完成后就有了&lt;code>MinGW&lt;/code>的编译环境，足够编译安装EPICS了。&lt;/p>
-&lt;p>这里使用MinGW环境编译EPICS，不使用MSVC编译器。&lt;/p>
-&lt;h2 id="安装-strawberry-perl">安装 Strawberry Perl&lt;/h2>
-&lt;p>这里选择 &lt;a href="https://strawberryperl.com/release-notes/5.38.2.1-64bit.html">Strawberry Perl 5.38.2.1&lt;/a>。&lt;/p>
-&lt;p>直接安装即可，需要注意的是，安装路径不能有空格和中文，最好放在盘符的根目录下。&lt;br>
-例：&lt;code>D:\Strawberry&lt;/code>&lt;/p>
-&lt;p>安装完成后检查&lt;strong>系统环境变量&lt;/strong>，查看系统&lt;code>Path&lt;/code>环境变量是否有&lt;code>Strawberry Perl&lt;/code>的路径。没有则手动添加，以安装在D盘为例。&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="shell">shell&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">D:&lt;span class="se">\S&lt;/span>trawberry&lt;span class="se">\c\b&lt;/span>in
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">D:&lt;span class="se">\S&lt;/span>trawberry&lt;span class="se">\p&lt;/span>erl&lt;span class="se">\s&lt;/span>ite&lt;span class="se">\b&lt;/span>in
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">D:&lt;span class="se">\S&lt;/span>trawberry&lt;span class="se">\p&lt;/span>erl&lt;span class="se">\b&lt;/span>in&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>其中&lt;code>D:\Strawberry\c\bin&lt;/code>就是MinGW环境的路径。&lt;/p>
-&lt;p>查看&lt;code>Perl&lt;/code>版本，检查一下是不是装好了。&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="shell">shell&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&amp;gt; perl -v
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">This is perl 5, version 38, subversion &lt;span class="m">2&lt;/span> &lt;span class="o">(&lt;/span>v5.38.2&lt;span class="o">)&lt;/span> built &lt;span class="k">for&lt;/span> MSWin32-x64-multi-thread
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Copyright 1987-2023, Larry Wall
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Perl may be copied only under the terms of either the Artistic License or the
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GNU General Public License, which may be found in the Perl &lt;span class="m">5&lt;/span> &lt;span class="nb">source&lt;/span> kit.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Complete documentation &lt;span class="k">for&lt;/span> Perl, including FAQ lists, should be found on
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">this system using &lt;span class="s2">&amp;#34;man perl&amp;#34;&lt;/span> or &lt;span class="s2">&amp;#34;perldoc perl&amp;#34;&lt;/span>. If you have access to the
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Internet, point your browser at https://www.perl.org/, the Perl Home Page.&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>注意：perl 5.32.1.1 之后的版本可能会提示&lt;/p></description></item><item><title>weston桌面系统截屏方法</title><link>https://kira-96.github.io/notes/weston-screenshot/</link><pubDate>Fri, 03 Feb 2023 11:34:14 +0800</pubDate><guid>https://kira-96.github.io/notes/weston-screenshot/</guid><description>&lt;p>使用&lt;code>weston-screenshooter&lt;/code>&lt;/p>
-&lt;p>但必须启用weston桌面&lt;code>--debug&lt;/code>选项，否则会出现以下错误：&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="shell">shell&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>root@RK356X:/&lt;span class="o">]&lt;/span>&lt;span class="c1"># weston-screenshooter&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>02:41:05.145&lt;span class="o">]&lt;/span> libwayland: error in client communication &lt;span class="o">(&lt;/span>pid 776&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>以RK3568开发板，buildroot系统为例，修改&lt;code>/etc/init.d/S50launcher&lt;/code>，找到weston所在行，添加&lt;code>--debug&lt;/code>选项。&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="shell">shell&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">......
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Uncomment to disable mirror mode&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># unset WESTON_DRM_MIRROR&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="k">:-&lt;/span>&lt;span class="p">/var/run&lt;/span>&lt;span class="si">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">QT_QPA_PLATFORM&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">QT_QPA_PLATFORM&lt;/span>&lt;span class="k">:-&lt;/span>&lt;span class="nv">wayland&lt;/span>&lt;span class="si">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">weston --tty&lt;span class="o">=&lt;/span>&lt;span class="m">2&lt;/span> --debug --idle-time&lt;span class="o">=&lt;/span>0&lt;span class="p">&amp;amp;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Wait for weston ready&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> ! -e &lt;span class="si">${&lt;/span>&lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="si">}&lt;/span>/wayland-0 &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep .1
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">done&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /usr/bin/QLauncher &lt;span class="p">&amp;amp;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>&lt;span class="p">&amp;amp;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">......&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>forlinx开发板使用的yocto系统也类似，修改&lt;code>/lib/systemd/system/weston.service&lt;/code>，在weston后添加&lt;code>--debug&lt;/code>选项。&lt;/p></description></item><item><title>Calculate Spacing Between Slices</title><link>https://kira-96.github.io/notes/calculate-spacing-between-slices/</link><pubDate>Fri, 30 Apr 2021 10:26:13 +0800</pubDate><guid>https://kira-96.github.io/notes/calculate-spacing-between-slices/</guid><description>&lt;p>计算切片间距的方法：&lt;/p>
-&lt;p>对于CT扫描出的断层图像，没有存储&lt;strong>Spacing Between Slices&lt;/strong>信息，但可以利用位置信息计算得到。&lt;/p>
-&lt;p>需要先读取相邻两层切片的位置信息，假设为&lt;code>pos1&lt;/code>和&lt;code>pos2&lt;/code>，然后计算两个位置的距离即为切片间距。&lt;/p></description></item><item><title>Running Dcm4chee Arc Light on Docker</title><link>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</link><pubDate>Wed, 03 Feb 2021 09:26:58 +0800</pubDate><guid>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</guid><description>&lt;p>首先需要&lt;a href="https://docs.docker.com/get-docker/">安装Docker&lt;/a>&lt;/p>
-&lt;p>安装完成后，拉取以下3个仓库&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="bash">bash&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ docker pull dcm4che/postgres-dcm4chee:13.1-23
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ docker pull dcm4che/dcm4chee-arc-psql:5.23.1&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Docker命令行依次启动上面3个服务，不过比较麻烦，也容易出错，另一种是直接使用Docker Copmose，相对来说要简单很多。这里就直接使用 Docker Compose的方式。&lt;/p></description></item><item><title>GDI+绘制旋转的椭圆</title><link>https://kira-96.github.io/notes/draw-rotate-ellipse-with-gdi/</link><pubDate>Thu, 21 Jan 2021 16:23:42 +0800</pubDate><guid>https://kira-96.github.io/notes/draw-rotate-ellipse-with-gdi/</guid><description>&lt;p>GDI+绘制椭圆时只支持输入一个矩形范围，无法绘制倾斜的椭圆。&lt;/p>
-&lt;p>绘制椭圆的 API：&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="csharp">csharp&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;span class="lnt">27
-&lt;/span>&lt;span class="lnt">28
-&lt;/span>&lt;span class="lnt">29
-&lt;/span>&lt;span class="lnt">30
-&lt;/span>&lt;span class="lnt">31
-&lt;/span>&lt;span class="lnt">32
-&lt;/span>&lt;span class="lnt">33
-&lt;/span>&lt;span class="lnt">34
-&lt;/span>&lt;span class="lnt">35
-&lt;/span>&lt;span class="lnt">36
-&lt;/span>&lt;span class="lnt">37
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 摘要: 绘制边界 System.Drawing.RectangleF 定义的椭圆。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 参数:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// pen: System.Drawing.Pen，它确定曲线的颜色、宽度和样式。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// rect: System.Drawing.RectangleF 结构，它定义椭圆的边界。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 异常:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// T:System.ArgumentNullException: pen 为 null。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">DrawEllipse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Pen&lt;/span> &lt;span class="n">pen&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">RectangleF&lt;/span> &lt;span class="n">rect&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 摘要: 绘制一个由边框（该边框由一对坐标、高度和宽度指定）定义的椭圆。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 参数:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// pen: System.Drawing.Pen，它确定曲线的颜色、宽度和样式。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// x: 定义椭圆的边框的左上角的 X 坐标。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// y: 定义椭圆的边框的左上角的 Y 坐标。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// width: 定义椭圆的边框的宽度。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// height: 定义椭圆的边框的高度。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 异常:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// T:System.ArgumentNullException: pen 为 null。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">DrawEllipse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Pen&lt;/span> &lt;span class="n">pen&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">float&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">float&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">float&lt;/span> &lt;span class="n">width&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">float&lt;/span> &lt;span class="n">height&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 摘要: 绘制边界 System.Drawing.Rectangle 结构指定的椭圆。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 参数:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// pen: System.Drawing.Pen，它确定曲线的颜色、宽度和样式。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// rect: System.Drawing.Rectangle 结构，它定义椭圆的边界。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 异常:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// T:System.ArgumentNullException: pen 为 null。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">DrawEllipse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Pen&lt;/span> &lt;span class="n">pen&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Rectangle&lt;/span> &lt;span class="n">rect&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 摘要: 绘制一个由边框定义的椭圆，该边框由矩形的左上角坐标、高度和宽度指定。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 参数:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// pen: System.Drawing.Pen，它确定曲线的颜色、宽度和样式。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// x: 定义椭圆的边框的左上角的 X 坐标。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// y: 定义椭圆的边框的左上角的 Y 坐标。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// width: 定义椭圆的边框的宽度。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// height: 定义椭圆的边框的高度。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 异常:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// T:System.ArgumentNullException: pen 为 null。&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">DrawEllipse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Pen&lt;/span> &lt;span class="n">pen&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">width&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">height&lt;/span>&lt;span class="p">);&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>可以看到，绘制椭圆的API，都只支持输入一个矩形区域，长和宽都只能是水平或者竖直的，因此，绘制出椭圆的长轴和短轴也是水平或竖直的，而无法绘制一个旋转过的椭圆，如下图：&lt;/p></description></item><item><title>Private Dicom Element</title><link>https://kira-96.github.io/notes/private-dicom-element/</link><pubDate>Thu, 21 Jan 2021 15:31:46 +0800</pubDate><guid>https://kira-96.github.io/notes/private-dicom-element/</guid><description>&lt;p>&lt;strong>规则&lt;/strong>&lt;/p>
-&lt;p>私有 Tag (gggg, xxxx)&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>Group number (gggg) 必须为奇数 (odd)，并且 (0001, xxxx)，(0003, xxxx)，(0005, xxxx)，(0007, xxxx)，(FFFF, xxxx) 不允许使用。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Notes on ✨kiraの博客</title><link>https://kira-96.github.io/notes/</link><description>Recent content in Notes on ✨kiraの博客</description><generator>Hugo -- 0.152.2</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Tue, 17 Jun 2025 11:21:08 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>EPICS IOC 使用 ProcServControl</title><link>https://kira-96.github.io/notes/epics-ioc-procservcontrol/</link><pubDate>Tue, 03 Jun 2025 09:58:47 +0800</pubDate><guid>https://kira-96.github.io/notes/epics-ioc-procservcontrol/</guid><description>EPICS IOC 使用 ProcServControl 过程记录</description></item><item><title>Linux CPU核心隔离</title><link>https://kira-96.github.io/notes/linux-cpu-isolation/</link><pubDate>Thu, 13 Mar 2025 14:59:45 +0800</pubDate><guid>https://kira-96.github.io/notes/linux-cpu-isolation/</guid><description>Linux CPU核心隔离技术</description></item><item><title>EPICS IOC 使用 SNCSEQ</title><link>https://kira-96.github.io/notes/epics-ioc-%E4%BD%BF%E7%94%A8-sncseq/</link><pubDate>Mon, 13 Jan 2025 10:45:01 +0800</pubDate><guid>https://kira-96.github.io/notes/epics-ioc-%E4%BD%BF%E7%94%A8-sncseq/</guid><description>EPICS IOC 使用 SNCSEQ 过程记录</description></item><item><title>ecmc构建指南</title><link>https://kira-96.github.io/notes/ecmc%E6%9E%84%E5%BB%BA%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 26 Nov 2024 08:56:34 +0800</pubDate><guid>https://kira-96.github.io/notes/ecmc%E6%9E%84%E5%BB%BA%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="软件包"&gt;软件包&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/epics-base/epics-base"&gt;epics-base/epics-base: The C/C++ core of the EPICS Base control system toolkit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/epics-modules/ecmc"&gt;epics-modules/ecmc: EPICS Support for EtherCAT Motion Controller (ECMC) and Generic IO Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/paulscherrerinstitute/exprtk-ecmc"&gt;paulscherrerinstitute/exprtk-ecmc: ESS Customized exprtk : C++ Mathematical Expression Parsing And Evaluation Library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/paulscherrerinstitute/ecmccfg"&gt;paulscherrerinstitute/ecmccfg: Module to handle configuration scripts for EtherCATMotion Controller (ECMC)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/epics-modules/asyn"&gt;epics-modules/asyn: EPICS module for driver and device support&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/EuropeanSpallationSource/motor"&gt;EuropeanSpallationSource/motor: APS BCDA synApps module: motor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/pantor/ruckig"&gt;pantor/ruckig: Motion Generation for Robots and Machines. &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gitlab.com/etherlab.org/ethercat"&gt;EtherLab / EtherCAT Master · GitLab&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="构建顺序"&gt;构建顺序&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;epics-base&lt;/li&gt;
+&lt;li&gt;asyn&lt;/li&gt;
+&lt;li&gt;motor&lt;/li&gt;
+&lt;li&gt;etherlab&lt;/li&gt;
+&lt;li&gt;ruckig&lt;/li&gt;
+&lt;li&gt;ecmc&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="epics-base"&gt;epics-base&lt;/h3&gt;
+&lt;p&gt;正常交叉编译。&lt;/p&gt;</description></item><item><title>Hugo Diagrams</title><link>https://kira-96.github.io/notes/hugo-diagrams/</link><pubDate>Tue, 30 Jan 2024 09:45:30 +0800</pubDate><guid>https://kira-96.github.io/notes/hugo-diagrams/</guid><description>在Hugo中使用示意图</description></item><item><title>交叉编译 ACAI</title><link>https://kira-96.github.io/notes/cross-compiling-acai/</link><pubDate>Tue, 26 Dec 2023 19:31:56 +0800</pubDate><guid>https://kira-96.github.io/notes/cross-compiling-acai/</guid><description>交叉编译 ACAI</description></item><item><title>Windows上使用MinGW编译安装EPICS</title><link>https://kira-96.github.io/notes/windows%E4%B8%8A%E4%BD%BF%E7%94%A8mingw%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85epics/</link><pubDate>Wed, 29 Nov 2023 18:57:02 +0800</pubDate><guid>https://kira-96.github.io/notes/windows%E4%B8%8A%E4%BD%BF%E7%94%A8mingw%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85epics/</guid><description>&lt;h2 id="需要使用的软件"&gt;需要使用的软件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://strawberryperl.com/"&gt;Strawberry Perl for Windows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://epics.anl.gov/base/index.php"&gt;EPICS Base&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;编译Base需要有gcc、g++、make、perl这些工具，但其实我们只需要安装&lt;code&gt;Strawberry Perl&lt;/code&gt;就可以了，安装完成后就有了&lt;code&gt;MinGW&lt;/code&gt;的编译环境，足够编译安装EPICS了。&lt;/p&gt;
+&lt;p&gt;这里使用MinGW环境编译EPICS，不使用MSVC编译器。&lt;/p&gt;
+&lt;h2 id="安装-strawberry-perl"&gt;安装 Strawberry Perl&lt;/h2&gt;
+&lt;p&gt;这里选择 &lt;a href="https://strawberryperl.com/release-notes/5.38.2.1-64bit.html"&gt;Strawberry Perl 5.38.2.1&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;直接安装即可，需要注意的是，安装路径不能有空格和中文，最好放在盘符的根目录下。&lt;br&gt;
+例：&lt;code&gt;D:\Strawberry&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后检查&lt;strong&gt;系统环境变量&lt;/strong&gt;，查看系统&lt;code&gt;Path&lt;/code&gt;环境变量是否有&lt;code&gt;Strawberry Perl&lt;/code&gt;的路径。没有则手动添加，以安装在D盘为例。&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="shell"&gt;shell&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;D:&lt;span class="se"&gt;\S&lt;/span&gt;trawberry&lt;span class="se"&gt;\c\b&lt;/span&gt;in
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;D:&lt;span class="se"&gt;\S&lt;/span&gt;trawberry&lt;span class="se"&gt;\p&lt;/span&gt;erl&lt;span class="se"&gt;\s&lt;/span&gt;ite&lt;span class="se"&gt;\b&lt;/span&gt;in
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;D:&lt;span class="se"&gt;\S&lt;/span&gt;trawberry&lt;span class="se"&gt;\p&lt;/span&gt;erl&lt;span class="se"&gt;\b&lt;/span&gt;in&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;其中&lt;code&gt;D:\Strawberry\c\bin&lt;/code&gt;就是MinGW环境的路径。&lt;/p&gt;
+&lt;p&gt;查看&lt;code&gt;Perl&lt;/code&gt;版本，检查一下是不是装好了。&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="shell"&gt;shell&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;gt; perl -v
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;This is perl 5, version 38, subversion &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;v5.38.2&lt;span class="o"&gt;)&lt;/span&gt; built &lt;span class="k"&gt;for&lt;/span&gt; MSWin32-x64-multi-thread
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Copyright 1987-2023, Larry Wall
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Perl may be copied only under the terms of either the Artistic License or the
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GNU General Public License, which may be found in the Perl &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="nb"&gt;source&lt;/span&gt; kit.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Complete documentation &lt;span class="k"&gt;for&lt;/span&gt; Perl, including FAQ lists, should be found on
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;this system using &lt;span class="s2"&gt;&amp;#34;man perl&amp;#34;&lt;/span&gt; or &lt;span class="s2"&gt;&amp;#34;perldoc perl&amp;#34;&lt;/span&gt;. If you have access to the
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Internet, point your browser at https://www.perl.org/, the Perl Home Page.&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;注意：perl 5.32.1.1 之后的版本可能会提示&lt;/p&gt;</description></item><item><title>weston桌面系统截屏方法</title><link>https://kira-96.github.io/notes/weston-screenshot/</link><pubDate>Fri, 03 Feb 2023 11:34:14 +0800</pubDate><guid>https://kira-96.github.io/notes/weston-screenshot/</guid><description>&lt;p&gt;使用&lt;code&gt;weston-screenshooter&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;但必须启用weston桌面&lt;code&gt;--debug&lt;/code&gt;选项，否则会出现以下错误：&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="shell"&gt;shell&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@RK356X:/&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# weston-screenshooter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;02:41:05.145&lt;span class="o"&gt;]&lt;/span&gt; libwayland: error in client communication &lt;span class="o"&gt;(&lt;/span&gt;pid 776&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;以RK3568开发板，buildroot系统为例，修改&lt;code&gt;/etc/init.d/S50launcher&lt;/code&gt;，找到weston所在行，添加&lt;code&gt;--debug&lt;/code&gt;选项。&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="shell"&gt;shell&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;......
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Uncomment to disable mirror mode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# unset WESTON_DRM_MIRROR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;XDG_RUNTIME_DIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;XDG_RUNTIME_DIR&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="p"&gt;/var/run&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;QT_QPA_PLATFORM&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;QT_QPA_PLATFORM&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="nv"&gt;wayland&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;weston --tty&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt; --debug --idle-time&lt;span class="o"&gt;=&lt;/span&gt;0&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Wait for weston ready&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -e &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;XDG_RUNTIME_DIR&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/wayland-0 &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sleep .1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /usr/bin/QLauncher &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;......&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;forlinx开发板使用的yocto系统也类似，修改&lt;code&gt;/lib/systemd/system/weston.service&lt;/code&gt;，在weston后添加&lt;code&gt;--debug&lt;/code&gt;选项。&lt;/p&gt;</description></item><item><title>Calculate Spacing Between Slices</title><link>https://kira-96.github.io/notes/calculate-spacing-between-slices/</link><pubDate>Fri, 30 Apr 2021 10:26:13 +0800</pubDate><guid>https://kira-96.github.io/notes/calculate-spacing-between-slices/</guid><description>&lt;p&gt;计算切片间距的方法：&lt;/p&gt;
+&lt;p&gt;对于CT扫描出的断层图像，没有存储&lt;strong&gt;Spacing Between Slices&lt;/strong&gt;信息，但可以利用位置信息计算得到。&lt;/p&gt;
+&lt;p&gt;需要先读取相邻两层切片的位置信息，假设为&lt;code&gt;pos1&lt;/code&gt;和&lt;code&gt;pos2&lt;/code&gt;，然后计算两个位置的距离即为切片间距。&lt;/p&gt;</description></item><item><title>Running Dcm4chee Arc Light on Docker</title><link>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</link><pubDate>Wed, 03 Feb 2021 09:26:58 +0800</pubDate><guid>https://kira-96.github.io/notes/running-dcm4chee-arc-light-on-docker/</guid><description>&lt;p&gt;首先需要&lt;a href="https://docs.docker.com/get-docker/"&gt;安装Docker&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后，拉取以下3个仓库&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="bash"&gt;bash&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ docker pull dcm4che/slapd-dcm4chee:2.4.56-23.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ docker pull dcm4che/postgres-dcm4chee:13.1-23
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ docker pull dcm4che/dcm4chee-arc-psql:5.23.1&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;拉取完成后，就可以启动服务了，这里有两种方式，一种是使用Docker命令行依次启动上面3个服务，不过比较麻烦，也容易出错，另一种是直接使用Docker Copmose，相对来说要简单很多。这里就直接使用 Docker Compose的方式。&lt;/p&gt;</description></item><item><title>GDI+绘制旋转的椭圆</title><link>https://kira-96.github.io/notes/draw-rotate-ellipse-with-gdi/</link><pubDate>Thu, 21 Jan 2021 16:23:42 +0800</pubDate><guid>https://kira-96.github.io/notes/draw-rotate-ellipse-with-gdi/</guid><description>&lt;p&gt;GDI+绘制椭圆时只支持输入一个矩形范围，无法绘制倾斜的椭圆。&lt;/p&gt;
+&lt;p&gt;绘制椭圆的 API：&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="csharp"&gt;csharp&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-csharp" data-lang="csharp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 摘要: 绘制边界 System.Drawing.RectangleF 定义的椭圆。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 参数:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// pen: System.Drawing.Pen，它确定曲线的颜色、宽度和样式。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// rect: System.Drawing.RectangleF 结构，它定义椭圆的边界。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 异常:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// T:System.ArgumentNullException: pen 为 null。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;DrawEllipse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Pen&lt;/span&gt; &lt;span class="n"&gt;pen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RectangleF&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;//&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 摘要: 绘制一个由边框（该边框由一对坐标、高度和宽度指定）定义的椭圆。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 参数:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// pen: System.Drawing.Pen，它确定曲线的颜色、宽度和样式。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// x: 定义椭圆的边框的左上角的 X 坐标。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// y: 定义椭圆的边框的左上角的 Y 坐标。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// width: 定义椭圆的边框的宽度。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// height: 定义椭圆的边框的高度。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 异常:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// T:System.ArgumentNullException: pen 为 null。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;DrawEllipse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Pen&lt;/span&gt; &lt;span class="n"&gt;pen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;//&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 摘要: 绘制边界 System.Drawing.Rectangle 结构指定的椭圆。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 参数:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// pen: System.Drawing.Pen，它确定曲线的颜色、宽度和样式。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// rect: System.Drawing.Rectangle 结构，它定义椭圆的边界。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 异常:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// T:System.ArgumentNullException: pen 为 null。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;DrawEllipse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Pen&lt;/span&gt; &lt;span class="n"&gt;pen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Rectangle&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;//&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 摘要: 绘制一个由边框定义的椭圆，该边框由矩形的左上角坐标、高度和宽度指定。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 参数:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// pen: System.Drawing.Pen，它确定曲线的颜色、宽度和样式。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// x: 定义椭圆的边框的左上角的 X 坐标。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// y: 定义椭圆的边框的左上角的 Y 坐标。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// width: 定义椭圆的边框的宽度。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// height: 定义椭圆的边框的高度。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 异常:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// T:System.ArgumentNullException: pen 为 null。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="n"&gt;DrawEllipse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Pen&lt;/span&gt; &lt;span class="n"&gt;pen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;可以看到，绘制椭圆的API，都只支持输入一个矩形区域，长和宽都只能是水平或者竖直的，因此，绘制出椭圆的长轴和短轴也是水平或竖直的，而无法绘制一个旋转过的椭圆，如下图：&lt;/p&gt;</description></item><item><title>Private Dicom Element</title><link>https://kira-96.github.io/notes/private-dicom-element/</link><pubDate>Thu, 21 Jan 2021 15:31:46 +0800</pubDate><guid>https://kira-96.github.io/notes/private-dicom-element/</guid><description>&lt;p&gt;&lt;strong&gt;规则&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;私有 Tag (gggg, xxxx)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Group number (gggg) 必须为奇数 (odd)，并且 (0001, xxxx)，(0003, xxxx)，(0005, xxxx)，(0007, xxxx)，(FFFF, xxxx) 不允许使用。&lt;/p&gt;</description></item></channel></rss>

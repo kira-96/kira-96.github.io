@@ -1,80 +1,80 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Linux on ✨kiraの博客</title><link>https://kira-96.github.io/categories/linux/</link><description>Recent content in Linux on ✨kiraの博客</description><generator>Hugo -- 0.147.8</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Mon, 07 Apr 2025 20:52:22 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux CPU核心隔离</title><link>https://kira-96.github.io/notes/linux-cpu-isolation/</link><pubDate>Thu, 13 Mar 2025 14:59:45 +0800</pubDate><guid>https://kira-96.github.io/notes/linux-cpu-isolation/</guid><description>Linux CPU核心隔离技术</description></item><item><title>weston桌面系统截屏方法</title><link>https://kira-96.github.io/notes/weston-screenshot/</link><pubDate>Fri, 03 Feb 2023 11:34:14 +0800</pubDate><guid>https://kira-96.github.io/notes/weston-screenshot/</guid><description>&lt;p>使用&lt;code>weston-screenshooter&lt;/code>&lt;/p>
-&lt;p>但必须启用weston桌面&lt;code>--debug&lt;/code>选项，否则会出现以下错误：&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="shell">shell&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>root@RK356X:/&lt;span class="o">]&lt;/span>&lt;span class="c1"># weston-screenshooter&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>02:41:05.145&lt;span class="o">]&lt;/span> libwayland: error in client communication &lt;span class="o">(&lt;/span>pid 776&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>以RK3568开发板，buildroot系统为例，修改&lt;code>/etc/init.d/S50launcher&lt;/code>，找到weston所在行，添加&lt;code>--debug&lt;/code>选项。&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="shell">shell&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">......
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Uncomment to disable mirror mode&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># unset WESTON_DRM_MIRROR&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="k">:-&lt;/span>&lt;span class="p">/var/run&lt;/span>&lt;span class="si">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">QT_QPA_PLATFORM&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">QT_QPA_PLATFORM&lt;/span>&lt;span class="k">:-&lt;/span>&lt;span class="nv">wayland&lt;/span>&lt;span class="si">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">weston --tty&lt;span class="o">=&lt;/span>&lt;span class="m">2&lt;/span> --debug --idle-time&lt;span class="o">=&lt;/span>0&lt;span class="p">&amp;amp;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Wait for weston ready&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> ! -e &lt;span class="si">${&lt;/span>&lt;span class="nv">XDG_RUNTIME_DIR&lt;/span>&lt;span class="si">}&lt;/span>/wayland-0 &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep .1
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">done&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /usr/bin/QLauncher &lt;span class="p">&amp;amp;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>&lt;span class="p">&amp;amp;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">......&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>forlinx开发板使用的yocto系统也类似，修改&lt;code>/lib/systemd/system/weston.service&lt;/code>，在weston后添加&lt;code>--debug&lt;/code>选项。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Linux on ✨kiraの博客</title><link>https://kira-96.github.io/categories/linux/</link><description>Recent content in Linux on ✨kiraの博客</description><generator>Hugo -- 0.152.2</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Mon, 07 Apr 2025 20:52:22 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux CPU核心隔离</title><link>https://kira-96.github.io/notes/linux-cpu-isolation/</link><pubDate>Thu, 13 Mar 2025 14:59:45 +0800</pubDate><guid>https://kira-96.github.io/notes/linux-cpu-isolation/</guid><description>Linux CPU核心隔离技术</description></item><item><title>weston桌面系统截屏方法</title><link>https://kira-96.github.io/notes/weston-screenshot/</link><pubDate>Fri, 03 Feb 2023 11:34:14 +0800</pubDate><guid>https://kira-96.github.io/notes/weston-screenshot/</guid><description>&lt;p&gt;使用&lt;code&gt;weston-screenshooter&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;但必须启用weston桌面&lt;code&gt;--debug&lt;/code&gt;选项，否则会出现以下错误：&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="shell"&gt;shell&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;root@RK356X:/&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="c1"&gt;# weston-screenshooter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;02:41:05.145&lt;span class="o"&gt;]&lt;/span&gt; libwayland: error in client communication &lt;span class="o"&gt;(&lt;/span&gt;pid 776&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;weston_screenshooter@5: error 0: screenshooter failed: permission denied. Debug protocol must be enabled&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;以RK3568开发板，buildroot系统为例，修改&lt;code&gt;/etc/init.d/S50launcher&lt;/code&gt;，找到weston所在行，添加&lt;code&gt;--debug&lt;/code&gt;选项。&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="shell"&gt;shell&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;......
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Uncomment to disable mirror mode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# unset WESTON_DRM_MIRROR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;XDG_RUNTIME_DIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;XDG_RUNTIME_DIR&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="p"&gt;/var/run&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;QT_QPA_PLATFORM&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;QT_QPA_PLATFORM&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="nv"&gt;wayland&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;weston --tty&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt; --debug --idle-time&lt;span class="o"&gt;=&lt;/span&gt;0&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Wait for weston ready&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -e &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;XDG_RUNTIME_DIR&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/wayland-0 &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sleep .1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /usr/bin/QLauncher &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;......&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;forlinx开发板使用的yocto系统也类似，修改&lt;code&gt;/lib/systemd/system/weston.service&lt;/code&gt;，在weston后添加&lt;code&gt;--debug&lt;/code&gt;选项。&lt;/p&gt;</description></item></channel></rss>

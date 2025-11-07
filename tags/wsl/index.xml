@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>WSL on ✨kiraの博客</title><link>https://kira-96.github.io/tags/wsl/</link><description>Recent content in WSL on ✨kiraの博客</description><generator>Hugo -- 0.147.8</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Wed, 09 Feb 2022 08:48:30 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL libcuda.so.1 is not a symbolic link 的解决方法</title><link>https://kira-96.github.io/posts/wsl-libcuda.so.1-is-not-a-symbolic-link-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><pubDate>Wed, 09 Feb 2022 08:48:30 +0800</pubDate><guid>https://kira-96.github.io/posts/wsl-libcuda.so.1-is-not-a-symbolic-link-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><description>&lt;h2 id="问题描述">问题描述&lt;/h2>
-&lt;p>在使用 WSL 更新软件包的时候经常会遇到这样一个报错&lt;/p>
-&lt;div class="mac-codeblock">
-&lt;div class="mac-titlebar">
-&lt;div class="mac-left-group">
-&lt;span class="mac-close">&lt;/span>
-&lt;span class="mac-minimize">&lt;/span>
-&lt;span class="mac-expand">&lt;/span>
-&lt;/div>
-&lt;div class="mac-title" title="shell">shell&lt;/div>
-&lt;div class="mac-right-group">
-&lt;button class="fold-button">&amp;#9660;&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="mac-content">&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/div>
-&lt;/div>
-&lt;p>意思是说 &lt;code>/usr/lib/wsl/lib/libcuda.so.1&lt;/code> 不是一个符号链接。&lt;/p>
-&lt;h2 id="问题分析">问题分析&lt;/h2>
-&lt;p>通过名字可以判断这应该是nVidia显卡驱动相关的库，进入 &lt;code>/usr/lib/wsl/lib/&lt;/code> 目录，可以看到有 &lt;code>libcuda.so&lt;/code>、&lt;code>libcuda.so.1&lt;/code>、&lt;code>libcuda.so.1.1&lt;/code> 三个文件，都是文件形式，而通过报错我们知道 &lt;code>libcuda.so&lt;/code>、&lt;code>libcuda.so.1&lt;/code> 应该是符号链接文件。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>WSL on ✨kiraの博客</title><link>https://kira-96.github.io/tags/wsl/</link><description>Recent content in WSL on ✨kiraの博客</description><generator>Hugo -- 0.152.2</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Wed, 09 Feb 2022 08:48:30 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL libcuda.so.1 is not a symbolic link 的解决方法</title><link>https://kira-96.github.io/posts/wsl-libcuda.so.1-is-not-a-symbolic-link-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><pubDate>Wed, 09 Feb 2022 08:48:30 +0800</pubDate><guid>https://kira-96.github.io/posts/wsl-libcuda.so.1-is-not-a-symbolic-link-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><description>&lt;h2 id="问题描述"&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;在使用 WSL 更新软件包的时候经常会遇到这样一个报错&lt;/p&gt;
+&lt;div class="mac-codeblock"&gt;
+&lt;div class="mac-titlebar"&gt;
+&lt;div class="mac-left-group"&gt;
+&lt;span class="mac-close"&gt;&lt;/span&gt;
+&lt;span class="mac-minimize"&gt;&lt;/span&gt;
+&lt;span class="mac-expand"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mac-title" title="shell"&gt;shell&lt;/div&gt;
+&lt;div class="mac-right-group"&gt;
+&lt;button class="fold-button"&gt;&amp;#9660;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="mac-content"&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/sbin/ldconfig.real: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;意思是说 &lt;code&gt;/usr/lib/wsl/lib/libcuda.so.1&lt;/code&gt; 不是一个符号链接。&lt;/p&gt;
+&lt;h2 id="问题分析"&gt;问题分析&lt;/h2&gt;
+&lt;p&gt;通过名字可以判断这应该是nVidia显卡驱动相关的库，进入 &lt;code&gt;/usr/lib/wsl/lib/&lt;/code&gt; 目录，可以看到有 &lt;code&gt;libcuda.so&lt;/code&gt;、&lt;code&gt;libcuda.so.1&lt;/code&gt;、&lt;code&gt;libcuda.so.1.1&lt;/code&gt; 三个文件，都是文件形式，而通过报错我们知道 &lt;code&gt;libcuda.so&lt;/code&gt;、&lt;code&gt;libcuda.so.1&lt;/code&gt; 应该是符号链接文件。&lt;/p&gt;</description></item></channel></rss>

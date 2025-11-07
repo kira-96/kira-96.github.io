@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>EtherCAT on ✨kiraの博客</title><link>https://kira-96.github.io/tags/ethercat/</link><description>Recent content in EtherCAT on ✨kiraの博客</description><generator>Hugo -- 0.147.8</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Tue, 26 Nov 2024 08:56:34 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/ethercat/index.xml" rel="self" type="application/rss+xml"/><item><title>ecmc构建指南</title><link>https://kira-96.github.io/notes/ecmc%E6%9E%84%E5%BB%BA%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 26 Nov 2024 08:56:34 +0800</pubDate><guid>https://kira-96.github.io/notes/ecmc%E6%9E%84%E5%BB%BA%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="软件包">软件包&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/epics-base/epics-base">epics-base/epics-base: The C/C++ core of the EPICS Base control system toolkit&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/epics-modules/ecmc">epics-modules/ecmc: EPICS Support for EtherCAT Motion Controller (ECMC) and Generic IO Controller&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/paulscherrerinstitute/exprtk-ecmc">paulscherrerinstitute/exprtk-ecmc: ESS Customized exprtk : C++ Mathematical Expression Parsing And Evaluation Library&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/paulscherrerinstitute/ecmccfg">paulscherrerinstitute/ecmccfg: Module to handle configuration scripts for EtherCATMotion Controller (ECMC)&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/epics-modules/asyn">epics-modules/asyn: EPICS module for driver and device support&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/EuropeanSpallationSource/motor">EuropeanSpallationSource/motor: APS BCDA synApps module: motor&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/pantor/ruckig">pantor/ruckig: Motion Generation for Robots and Machines. &lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://gitlab.com/etherlab.org/ethercat">EtherLab / EtherCAT Master · GitLab&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="构建顺序">构建顺序&lt;/h2>
-&lt;ol>
-&lt;li>epics-base&lt;/li>
-&lt;li>asyn&lt;/li>
-&lt;li>motor&lt;/li>
-&lt;li>etherlab&lt;/li>
-&lt;li>ruckig&lt;/li>
-&lt;li>ecmc&lt;/li>
-&lt;/ol>
-&lt;h3 id="epics-base">epics-base&lt;/h3>
-&lt;p>正常交叉编译。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>EtherCAT on ✨kiraの博客</title><link>https://kira-96.github.io/tags/ethercat/</link><description>Recent content in EtherCAT on ✨kiraの博客</description><generator>Hugo -- 0.152.2</generator><language>zh</language><copyright>2019-2025 kira&amp;rsquo;s blog · LICENSED under CC-BY-4.0</copyright><lastBuildDate>Tue, 26 Nov 2024 08:56:34 +0800</lastBuildDate><atom:link href="https://kira-96.github.io/tags/ethercat/index.xml" rel="self" type="application/rss+xml"/><item><title>ecmc构建指南</title><link>https://kira-96.github.io/notes/ecmc%E6%9E%84%E5%BB%BA%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 26 Nov 2024 08:56:34 +0800</pubDate><guid>https://kira-96.github.io/notes/ecmc%E6%9E%84%E5%BB%BA%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="软件包"&gt;软件包&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/epics-base/epics-base"&gt;epics-base/epics-base: The C/C++ core of the EPICS Base control system toolkit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/epics-modules/ecmc"&gt;epics-modules/ecmc: EPICS Support for EtherCAT Motion Controller (ECMC) and Generic IO Controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/paulscherrerinstitute/exprtk-ecmc"&gt;paulscherrerinstitute/exprtk-ecmc: ESS Customized exprtk : C++ Mathematical Expression Parsing And Evaluation Library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/paulscherrerinstitute/ecmccfg"&gt;paulscherrerinstitute/ecmccfg: Module to handle configuration scripts for EtherCATMotion Controller (ECMC)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/epics-modules/asyn"&gt;epics-modules/asyn: EPICS module for driver and device support&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/EuropeanSpallationSource/motor"&gt;EuropeanSpallationSource/motor: APS BCDA synApps module: motor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/pantor/ruckig"&gt;pantor/ruckig: Motion Generation for Robots and Machines. &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gitlab.com/etherlab.org/ethercat"&gt;EtherLab / EtherCAT Master · GitLab&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="构建顺序"&gt;构建顺序&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;epics-base&lt;/li&gt;
+&lt;li&gt;asyn&lt;/li&gt;
+&lt;li&gt;motor&lt;/li&gt;
+&lt;li&gt;etherlab&lt;/li&gt;
+&lt;li&gt;ruckig&lt;/li&gt;
+&lt;li&gt;ecmc&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="epics-base"&gt;epics-base&lt;/h3&gt;
+&lt;p&gt;正常交叉编译。&lt;/p&gt;</description></item></channel></rss>
