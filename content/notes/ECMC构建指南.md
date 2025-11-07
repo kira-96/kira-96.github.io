@@ -81,7 +81,7 @@ make
 配置如下：
 
 ``` shell { title="configure/RELEASE.local" }
-EPICS_BASE=/path/to/epics/base-7.0.8.1
+EPICS_BASE=/path/to/epics/base-7.0.9
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
 MOTOR=$(SUPPORT)/motor
@@ -151,18 +151,18 @@ ecmc_SRCS += ecmcPLCMain.cpp
 
 SRC_DIRS  += $(ECMC)/misc
 ecmc_SRCS += ecmcMisc.cpp
-ecmc_SRCS += ecmcEvent.cpp
-ecmc_SRCS += ecmcEventConsumer.cpp
-ecmc_SRCS += ecmcDataRecorder.cpp
+- ecmc_SRCS += ecmcEvent.cpp
+- ecmc_SRCS += ecmcEventConsumer.cpp
+- ecmc_SRCS += ecmcDataRecorder.cpp
 ecmc_SRCS += ecmcDataStorage.cpp
-ecmc_SRCS += ecmcCommandList.cpp
+- ecmc_SRCS += ecmcCommandList.cpp
 
 SRC_DIRS  += $(ECMC)/main
 ecmc_SRCS += ecmcGeneral.cpp
 ecmc_SRCS += ecmcError.cpp
 ecmc_SRCS += ecmcMainThread.cpp
 ecmc_SRCS += gitversion.c
-  
+
 
 SRC_DIRS  += $(ECMC)/ethercat
 ecmc_SRCS += ecmcEthercat.cpp
@@ -201,6 +201,7 @@ ecmc_SRCS += ecmcDriveStepper.cpp
 ecmc_SRCS += ecmcDriveDS402.cpp
 ecmc_SRCS += ecmcEncoder.cpp
 ecmc_SRCS += ecmcFilter.cpp
++ ecmc_SRCS += ecmcMasterSlaveStateMachine.cpp
 ecmc_SRCS += ecmcMonitor.cpp
 + ecmc_SRCS += ecmcMotionUtils.cpp
 ecmc_SRCS += ecmcPIDController.cpp
@@ -247,7 +248,7 @@ gitversion.c:
 修改`ecmcExampleTop/configure/RELEASE.local`
 
 ``` shell { title="ecmcExampleTop/configure/RELEASE.local" }
-EPICS_BASE=/home/ubuntu/epics/base-7.0.8.1
+EPICS_BASE=/path/to/epics/base-7.0.9
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
 MOTOR=$(SUPPORT)/motor
@@ -305,6 +306,7 @@ DBD += ecmcIoc.dbd
 # opcuaIoc.dbd will be made up from these files:
 ecmcIoc_DBD += base.dbd
 ecmcIoc_DBD += ecmcController.dbd
+ecmcIoc_DBD += ecmcMotorRecordSupport.dbd
 
 # Add all the support libraries needed by this IOC
 ecmcIoc_LIBS += asyn
