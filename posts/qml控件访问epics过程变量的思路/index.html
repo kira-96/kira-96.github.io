@@ -174,7 +174,7 @@
 </span></span><span class=line><span class=cl><span class=k>protected</span><span class=o>:</span>
 </span></span><span class=line><span class=cl>    <span class=n>QPointer</span><span class=o>&lt;</span><span class=n>qcaobject</span><span class=o>::</span><span class=n>QCaObject</span><span class=o>&gt;</span> <span class=n>m_caobject</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// ...
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>};</span></span></span></code></pre></td></tr></table></div></div></div></div><p>注意到<code>QPvObject</code>类有两个虚函数<code>setPvName</code>和<code>setValue</code>，这两个函数需要子类实现。</p><p>在<code>setPvName</code>中实现<code>QCaObject</code>变量的实例化和EPICS过程变量的连接等操作，在<code>setValue</code>中将值写入到EPICS过程变量。</p><p>例如：整数类型的过程变量</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
+</span></span></span><span class=line><span class=cl><span class=p>};</span></span></span></code></pre></td></tr></table></div></div></div></div><p>注意到<code>QPvObject</code>类有两个虚函数<code>setPvName</code>和<code>setValue</code>，这两个函数需要子类实现。</p><p>在<code>setPvName</code>中实现<code>QCaObject</code>变量的实例化和EPICS过程变量的连接等操作，在<code>setValue</code>中将值写入到EPICS过程变量。</p><p>例如：整数类型的过程变量</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
 <span class=mac-expand></span></div><div class=mac-title title=qpvint.h>qpvint.h</div><div class=mac-right-group><button class=fold-button>&#9660;</button></div></div><div class=mac-content><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -384,7 +384,7 @@
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-qml data-lang=qml><span class=line><span class=cl><span class=kr>import</span> <span class=nx>QtQuick</span> <span class=mf>2.15</span>
 </span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>QtQuick</span><span class=p>.</span><span class=nx>Window</span> <span class=mf>2.15</span>
 </span></span><span class=line><span class=cl><span class=c1>// 导入自定义控件
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=s1>&#39;qrc:/&#39;</span>
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=s1>&#39;qrc:/&#39;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=nx>Window</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kd>id: window</span>
@@ -392,7 +392,7 @@
 </span></span><span class=line><span class=cl>    <span class=k>height:</span> <span class=mi>480</span>
 </span></span><span class=line><span class=cl>    <span class=k>visible:</span> <span class=kc>true</span>
 </span></span><span class=line><span class=cl>    <span class=k>title:</span> <span class=nx>qsTr</span><span class=p>(</span><span class=s2>&#34;Hello World&#34;</span><span class=p>)</span>  <span class=c1>// @disable-check M16
-</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=nx>PvLabel</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=kd>id: testLabel</span>
 </span></span><span class=line><span class=cl>        <span class=k>pvName:</span> <span class=s2>&#34;ca://user:circle:angle&#34;</span>
@@ -415,9 +415,9 @@
 </span><span class=lnt>4
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=n>QQmlApplicationEngine</span> <span class=n>engine</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=c1>// 定义qml文件的路径或通过 argv 参数传入
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>const</span> <span class=n>QUrl</span> <span class=nf>url</span><span class=p>(</span><span class=s>&#34;./main.qml&#34;</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl><span class=k>const</span> <span class=n>QUrl</span> <span class=nf>url</span><span class=p>(</span><span class=s>&#34;./main.qml&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=n>engine</span><span class=p>.</span><span class=n>load</span><span class=p>(</span><span class=n>url</span><span class=p>);</span></span></span></code></pre></td></tr></table></div></div></div></div><ol><li><del>使用<code>qputenv</code>设置<strong>EPICS</strong>相关的环境变量。</del></li><li>可使用传入程序的参数动态加载界面文件。例如：<em>myapp myui.qml</em></li></ol><p><strong>运行结果</strong></p><p><img alt="QML EPICS" loading=lazy src=https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/PixPin_2025-02-20_15-48-48.png></p><h2 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h2><p>本文给出了自定义QML控件实现EPICS过程变量访问的思路，后续可能需要添加更多的自定义控件和更多的功能实现。</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/epics/>EPICS</a></li><li><a href=https://kira-96.github.io/tags/qt/>Qt</a></li></ul><nav class=paginav><a class=prev href=https://kira-96.github.io/posts/qt5-quick2-extension-plugin/><span class=title>« 上一页</span><br><span>Qt5编写Qt Quick2插件</span>
-</a><a class=next href=https://kira-96.github.io/posts/epics-pvaccess-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E7%A0%94%E7%A9%B6/><span class=title>下一页 »</span><br><span>EPICS PVAccess 使用方法研究</span></a></nav></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2025 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
+</a><a class=next href=https://kira-96.github.io/posts/epics-pvaccess-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E7%A0%94%E7%A9%B6/><span class=title>下一页 »</span><br><span>EPICS PVAccess 使用方法研究</span></a></nav></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2026 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
 <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>

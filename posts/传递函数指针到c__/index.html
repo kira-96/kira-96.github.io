@@ -57,7 +57,7 @@
 </span><span class=lnt>52
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;pch.h&#34;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=cp>#ifdef DYNLIB_EXPORTS
@@ -65,7 +65,7 @@
 </span></span></span><span class=line><span class=cl><span class=cp>#else
 </span></span></span><span class=line><span class=cl><span class=cp>#define DLL_API extern &#34;C&#34; __declspec(dllimport)
 </span></span></span><span class=line><span class=cl><span class=cp>#endif
-</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>Left</span><span class=p>;</span>
@@ -75,7 +75,7 @@
 </span></span><span class=line><span class=cl><span class=p>}</span> <span class=n>MyRect</span><span class=p>,</span> <span class=o>*</span> <span class=n>MyRectPtr</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1>// 函数指针
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>typedef</span> <span class=nf>VOID</span><span class=p>(</span><span class=n>CALLBACK</span><span class=o>*</span> <span class=n>PRINTCALLBACK</span><span class=p>)(</span><span class=n>MyRectPtr</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl><span class=k>typedef</span> <span class=nf>VOID</span><span class=p>(</span><span class=n>CALLBACK</span><span class=o>*</span> <span class=n>PRINTCALLBACK</span><span class=p>)(</span><span class=n>MyRectPtr</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>BOOL</span> <span class=n>APIENTRY</span> <span class=nf>DllMain</span><span class=p>(</span> <span class=n>HMODULE</span> <span class=n>hModule</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>                       <span class=n>DWORD</span>  <span class=n>ul_reason_for_call</span><span class=p>,</span>
@@ -94,7 +94,7 @@
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1>// 导出函数，使用上面定义的函数指针类型作为参数
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>DLL_API</span> <span class=n>VOID</span> <span class=nf>Print</span><span class=p>(</span><span class=n>MyRectPtr</span> <span class=n>pRect</span><span class=p>,</span> <span class=n>PRINTCALLBACK</span> <span class=n>callback</span><span class=p>)</span>
+</span></span></span><span class=line><span class=cl><span class=n>DLL_API</span> <span class=n>VOID</span> <span class=nf>Print</span><span class=p>(</span><span class=n>MyRectPtr</span> <span class=n>pRect</span><span class=p>,</span> <span class=n>PRINTCALLBACK</span> <span class=n>callback</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>callback</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
@@ -199,7 +199,7 @@
 </span></span><span class=line><span class=cl>C# Print func called.
 </span></span><span class=line><span class=cl><span class=o>[(</span>100,100<span class=o>)</span>,<span class=o>(</span>220,200<span class=o>)]</span>
 </span></span><span class=line><span class=cl>Press any key exit...</span></span></code></pre></td></tr></table></div></div></div></div></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/c%23/>C#</a></li><li><a href=https://kira-96.github.io/tags/c++/>C++</a></li></ul><nav class=paginav><a class=prev href=https://kira-96.github.io/posts/inno-setup-6.1.0-%E6%96%B0%E5%A2%9E%E7%9A%84%E5%8A%9F%E8%83%BD%E4%BD%93%E9%AA%8C/><span class=title>« 上一页</span><br><span>Inno Setup 6.1.0 新增的功能体验</span>
-</a><a class=next href=https://kira-96.github.io/posts/dicom%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3tag%E8%AF%B4%E6%98%8E/><span class=title>下一页 »</span><br><span>DICOM图像像素相关Tag说明</span></a></nav></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2025 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
+</a><a class=next href=https://kira-96.github.io/posts/dicom%E5%9B%BE%E5%83%8F%E5%83%8F%E7%B4%A0%E7%9B%B8%E5%85%B3tag%E8%AF%B4%E6%98%8E/><span class=title>下一页 »</span><br><span>DICOM图像像素相关Tag说明</span></a></nav></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2026 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
 <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>

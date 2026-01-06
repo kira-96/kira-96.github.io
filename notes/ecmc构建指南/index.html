@@ -61,7 +61,7 @@ epics-base
 <span class=mac-expand></span></div><div class=mac-title title=toolchain.cmake>toolchain.cmake</div><div class=mac-right-group><button class=fold-button>&#9660;</button></div></div><div class=mac-content><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cmake data-lang=cmake><span class=line><span class=cl><span class=nb>set</span><span class=p>(</span><span class=s>CMAKE_C_COMPILER</span> <span class=s2>&#34;loongarch64-linux-gnu-gcc&#34;</span><span class=p>)</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=nb>set</span><span class=p>(</span><span class=s>CMAKE_CXX_COMPILER</span> <span class=s2>&#34;loongarch64-linux-gnu-g++&#34;</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div></div></div><p>编译步骤</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
+</span></span></span><span class=line><span class=cl><span class=nb>set</span><span class=p>(</span><span class=s>CMAKE_CXX_COMPILER</span> <span class=s2>&#34;loongarch64-linux-gnu-g++&#34;</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div></div></div><p>编译步骤</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
 <span class=mac-expand></span></div><div class=mac-title title=shell>shell</div><div class=mac-right-group><button class=fold-button>&#9660;</button></div></div><div class=mac-content><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -268,7 +268,7 @@ epics-base
 </span></span><span class=line><span class=cl># Assume that the etherlab user library is done via
 </span></span><span class=line><span class=cl># Yocto ESS Linux bb recipe
 </span></span><span class=line><span class=cl><span class=gi>+ # 这里注意etherlab的路径
-</span></span></span><span class=line><span class=cl><span class=gi></span>USR_INCLUDES += -I$(SDKTARGETSYSROOT)/usr/include/etherlab
+</span></span></span><span class=line><span class=cl>USR_INCLUDES += -I$(SDKTARGETSYSROOT)/usr/include/etherlab
 </span></span><span class=line><span class=cl>USR_CFLAGS   += -fPIC
 </span></span><span class=line><span class=cl>USR_LDFLAGS  += -L $(SDKTARGETSYSROOT)/usr/lib/etherlab
 </span></span><span class=line><span class=cl>USR_LDFLAGS  += -lethercat
@@ -279,7 +279,7 @@ epics-base
 </span></span></span><span class=line><span class=cl><span class=gi>+ USR_INCLUDES += -I/path/to/ruckig/include
 </span></span></span><span class=line><span class=cl><span class=gi>+ USR_LDFLAGS  += -L /path/to/ruckig/build
 </span></span></span><span class=line><span class=cl><span class=gi>+ USR_LDFLAGS  += -lruckig
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>SRC_DIRS  += $(ECMC)/plc
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcPLC.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcPLCTask.cpp
@@ -287,16 +287,16 @@ epics-base
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcPLCMain.cpp
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcPLCLib.cpp
 </span></span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcPLCLibFunc.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>SRC_DIRS  += $(ECMC)/misc
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcMisc.cpp
 </span></span><span class=line><span class=cl><span class=gd>- ecmc_SRCS += ecmcEvent.cpp
 </span></span></span><span class=line><span class=cl><span class=gd>- ecmc_SRCS += ecmcEventConsumer.cpp
 </span></span></span><span class=line><span class=cl><span class=gd>- ecmc_SRCS += ecmcDataRecorder.cpp
-</span></span></span><span class=line><span class=cl><span class=gd></span>ecmc_SRCS += ecmcDataStorage.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcDataStorage.cpp
 </span></span><span class=line><span class=cl><span class=gd>- ecmc_SRCS += ecmcCommandList.cpp
-</span></span></span><span class=line><span class=cl><span class=gd></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>SRC_DIRS  += $(ECMC)/main
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcGeneral.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcError.cpp
@@ -309,21 +309,21 @@ epics-base
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEc.cpp
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcEcData.cpp
 </span></span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcEcDomain.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmc_SRCS += ecmcEcEntry.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEcEntry.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEcPdo.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEcSDO.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEcSlave.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEcSyncManager.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEcEntryLink.cpp  
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcEcAsyncSDO.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmc_SRCS += ecmcAsynLink.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcAsynLink.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEcMemMap.cpp
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>SRC_DIRS  += $(ECMC)/com
 </span></span><span class=line><span class=cl>DBD       += ecmcController.dbd
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcDataItem.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmc_SRCS += ecmcCom.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcCom.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcOctetIF.c
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcCmdParser.c
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcAsynPortDriver.cpp
@@ -334,7 +334,7 @@ epics-base
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcMotion.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcAxisBase.cpp
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcAxisGroup.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmc_SRCS += ecmcAxisReal.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcAxisReal.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcAxisVirt.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcDriveBase.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcDriveStepper.cpp
@@ -342,15 +342,15 @@ epics-base
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcEncoder.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcFilter.cpp
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcMasterSlaveStateMachine.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmc_SRCS += ecmcMonitor.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcMonitor.cpp
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcMotionUtils.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmc_SRCS += ecmcPIDController.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcPIDController.cpp
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcPVTController.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmc_SRCS += ecmcAxisSequencer.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcAxisSequencer.cpp
 </span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcAxisPVTSequence.cpp
 </span></span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcTrajectoryBase.cpp
 </span></span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcTrajectoryS.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmc_SRCS += ecmcTrajectoryTrapetz.cpp
+</span></span></span><span class=line><span class=cl>ecmc_SRCS += ecmcTrajectoryTrapetz.cpp
 </span></span><span class=line><span class=cl>ecmc_SRCS += ecmcAxisData.cpp
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>SRC_DIRS  += $(ECMC)/motor
@@ -362,7 +362,7 @@ epics-base
 </span></span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcPluginLib.cpp
 </span></span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcPlugin.cpp
 </span></span></span><span class=line><span class=cl><span class=gi>+ ecmc_SRCS += ecmcPluginClient.cpp
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>ecmc_LIBS += exprtkSupport
 </span></span><span class=line><span class=cl>ecmc_LIBS += $(EPICS_BASE_IOC_LIBS)
 </span></span><span class=line><span class=cl>
@@ -382,7 +382,7 @@ epics-base
 </span><span class=lnt>3
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl>#include &#34;ecmcecmcTrajectoryBase.h&#34;
 </span></span><span class=line><span class=cl><span class=gd>- #include &lt;ruckig.hpp&gt;
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+ #include &lt;ruckig/ruckig.hpp&gt;
+</span></span></span><span class=line><span class=cl><span class=gi>+ #include &lt;ruckig/ruckig.hpp&gt;
 </span></span></span></code></pre></td></tr></table></div></div></div></div><p>修改<code>ecmcExampleTop/configure/RELEASE.local</code></p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
 <span class=mac-expand></span></div><div class=mac-title title=ecmcExampleTop/configure/RELEASE.local>ecmcExampleTop/configure/RELEASE.local</div><div class=mac-right-group><button class=fold-button>&#9660;</button></div></div><div class=mac-content><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -518,12 +518,12 @@ epics-base
 </span></span></span><span class=line><span class=cl><span class=gi>+ USR_LDFLAGS  += -lethercat
 </span></span></span><span class=line><span class=cl><span class=gi>+ USR_LDFLAGS  += -Wl,-rpath=$(SDKTARGETSYSROOT)/usr/lib/etherlab
 </span></span></span><span class=line><span class=cl><span class=gi>+ endif
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gi>+ # ruckig路径
 </span></span></span><span class=line><span class=cl><span class=gi>+ USR_INCLUDES += -I/path/to/ruckig/include
 </span></span></span><span class=line><span class=cl><span class=gi>+ USR_LDFLAGS  += -L /path/to/ruckig/build
 </span></span></span><span class=line><span class=cl><span class=gi>+ USR_LDFLAGS  += -lruckig
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># ecmcioc.dbd will be created and installed
 </span></span><span class=line><span class=cl>DBD += ecmcIoc.dbd
 </span></span><span class=line><span class=cl>
@@ -536,11 +536,11 @@ epics-base
 </span></span><span class=line><span class=cl>ecmcIoc_LIBS += asyn
 </span></span><span class=line><span class=cl>ecmcIoc_LIBS += ecmc
 </span></span><span class=line><span class=cl><span class=gi>+ ecmcIoc_LIBS += motor
-</span></span></span><span class=line><span class=cl><span class=gi></span>ecmcIoc_LIBS += exprtkSupport
+</span></span></span><span class=line><span class=cl>ecmcIoc_LIBS += exprtkSupport
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gi>+ ecmcIoc_DBD += asyn.dbd
 </span></span></span><span class=line><span class=cl><span class=gi>+ ecmcIoc_DBD += motorSupport.dbd
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>ecmcIoc_SRCS += ecmcIoc_registerRecordDeviceDriver.cpp
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># Build the main IOC entry point on workstation OSs.
@@ -560,7 +560,7 @@ epics-base
 </span></span></span><span class=line><span class=cl><span class=gi>+     ecmcIoc_DBD += qsrv.dbd
 </span></span></span><span class=line><span class=cl><span class=gi>+ endif
 </span></span></span><span class=line><span class=cl><span class=gi>+ endif
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># Finally link to the EPICS Base libraries
 </span></span><span class=line><span class=cl>ecmcIoc_LIBS += $(EPICS_BASE_IOC_LIBS)
 </span></span><span class=line><span class=cl>
@@ -577,9 +577,9 @@ epics-base
 </span><span class=lnt>5
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 执行交叉编译</span>
 </span></span><span class=line><span class=cl>make <span class=nv>CPPFLAGS</span><span class=o>=</span>-std<span class=o>=</span>c++17 <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span><span class=nv>LD</span><span class=o>=</span>loongarch64-linux-gnu-ld <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span><span class=nv>CC</span><span class=o>=</span>loongarch64-linux-gnu-gcc <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span><span class=nv>CCC</span><span class=o>=</span>loongarch64-linux-gnu-g++ -j4</span></span></code></pre></td></tr></table></div></div></div></div><h2 id=使用方法>使用方法<a hidden class=anchor aria-hidden=true href=#使用方法>#</a></h2><p>主要使用<code>ecmccfg</code>软件包提供的预编写脚本进行<code>EtherCAT</code>主站、从站配置。</p><p>修改IOC环境变量配置<code>iocBoot/iocExample/envPaths</code>：</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
+</span></span></span><span class=line><span class=cl><span class=nv>LD</span><span class=o>=</span>loongarch64-linux-gnu-ld <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=nv>CC</span><span class=o>=</span>loongarch64-linux-gnu-gcc <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=nv>CCC</span><span class=o>=</span>loongarch64-linux-gnu-g++ -j4</span></span></code></pre></td></tr></table></div></div></div></div><h2 id=使用方法>使用方法<a hidden class=anchor aria-hidden=true href=#使用方法>#</a></h2><p>主要使用<code>ecmccfg</code>软件包提供的预编写脚本进行<code>EtherCAT</code>主站、从站配置。</p><p>修改IOC环境变量配置<code>iocBoot/iocExample/envPaths</code>：</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
 <span class=mac-expand></span></div><div class=mac-title title=envPaths>envPaths</div><div class=mac-right-group><button class=fold-button>&#9660;</button></div></div><div class=mac-content><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -658,7 +658,7 @@ epics-base
 </span><span class=lnt>64
 </span><span class=lnt>65
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=cp>#!../../bin/linux-loong64/ecmcIoc
-</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>&lt; envPaths
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=nb>cd</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>TOP</span><span class=si>}</span><span class=s2>&#34;</span>
@@ -721,7 +721,7 @@ epics-base
 </span></span><span class=line><span class=cl>iocInit
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1>## Start any sequence programs</span>
-</span></span><span class=line><span class=cl><span class=c1>#seq sncxxx,&#34;user=${USER}&#34;</span></span></span></code></pre></td></tr></table></div></div></div></div><ul><li><code>ecmcXXxxxx.cmd</code>：从站配置脚本</li><li><code>ecmcXXxxxx.substitutions</code>：记录(records)</li></ul><p><em>参考链接</em></p><ul><li><a href=https://e3pages.readthedocs.io/en/latest/index.html>ESS EPICS Environment (e3) — ESS EPICS Environment (e3) documentation</a></li><li><a href=https://paulscherrerinstitute.github.io/ecmccfg/>ecmccfg 手册</a></li></ul></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/epics/>EPICS</a></li><li><a href=https://kira-96.github.io/tags/ethercat/>EtherCAT</a></li></ul></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2025 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
+</span></span><span class=line><span class=cl><span class=c1>#seq sncxxx,&#34;user=${USER}&#34;</span></span></span></code></pre></td></tr></table></div></div></div></div><ul><li><code>ecmcXXxxxx.cmd</code>：从站配置脚本</li><li><code>ecmcXXxxxx.substitutions</code>：记录(records)</li></ul><p><em>参考链接</em></p><ul><li><a href=https://e3pages.readthedocs.io/en/latest/index.html>ESS EPICS Environment (e3) — ESS EPICS Environment (e3) documentation</a></li><li><a href=https://paulscherrerinstitute.github.io/ecmccfg/>ecmccfg 手册</a></li></ul></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/epics/>EPICS</a></li><li><a href=https://kira-96.github.io/tags/ethercat/>EtherCAT</a></li></ul></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2026 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
 <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>

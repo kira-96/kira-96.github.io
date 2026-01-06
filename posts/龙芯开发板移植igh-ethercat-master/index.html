@@ -96,25 +96,25 @@
 </span><span class=lnt>23
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl># lib/master.c.rej
 </span></span><span class=line><span class=cl><span class=gd>--- lib/master.c	Tue Feb 12 17:31:08 2013 +0100
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ lib/master.c	Mon Mar 23 15:52:53 2015 +0000
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -419,7 +431,8 @@
-</span></span></span><span class=line><span class=cl><span class=gu></span>         if (EC_IOCTL_ERRNO(ret) == EIO &amp;&amp; abort_code) {
+</span></span></span><span class=line><span class=cl><span class=gi>+++ lib/master.c	Mon Mar 23 15:52:53 2015 +0000
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -419,7 +431,8 @@
+</span></span></span><span class=line><span class=cl>         if (EC_IOCTL_ERRNO(ret) == EIO &amp;&amp; abort_code) {
 </span></span><span class=line><span class=cl>             *abort_code = download.abort_code;
 </span></span><span class=line><span class=cl>         }
 </span></span><span class=line><span class=cl><span class=gd>-        fprintf(stderr, &#34;Failed to execute SDO download: %s\n&#34;,
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+        ecrt_errcode = ECRT_ERRMASTERSDODOWNLOAD;
+</span></span></span><span class=line><span class=cl><span class=gi>+        ecrt_errcode = ECRT_ERRMASTERSDODOWNLOAD;
 </span></span></span><span class=line><span class=cl><span class=gi>+        ERRPRINTF(&#34;Failed to execute SDO download: %s\n&#34;,
-</span></span></span><span class=line><span class=cl><span class=gi></span>             strerror(EC_IOCTL_ERRNO(ret)));
+</span></span></span><span class=line><span class=cl>             strerror(EC_IOCTL_ERRNO(ret)));
 </span></span><span class=line><span class=cl>         return -EC_IOCTL_ERRNO(ret);
 </span></span><span class=line><span class=cl>     }
 </span></span><span class=line><span class=cl><span class=gu>@@ -448,7 +461,8 @@
-</span></span></span><span class=line><span class=cl><span class=gu></span>         if (EC_IOCTL_ERRNO(ret) == EIO &amp;&amp; abort_code) {
+</span></span></span><span class=line><span class=cl>         if (EC_IOCTL_ERRNO(ret) == EIO &amp;&amp; abort_code) {
 </span></span><span class=line><span class=cl>             *abort_code = download.abort_code;
 </span></span><span class=line><span class=cl>         }
 </span></span><span class=line><span class=cl><span class=gd>-        fprintf(stderr, &#34;Failed to execute SDO download: %s\n&#34;,
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+        ecrt_errcode = ECRT_ERRMASTERSDODOWNLOADCOMPLETE;
+</span></span></span><span class=line><span class=cl><span class=gi>+        ecrt_errcode = ECRT_ERRMASTERSDODOWNLOADCOMPLETE;
 </span></span></span><span class=line><span class=cl><span class=gi>+        ERRPRINTF(&#34;Failed to execute SDO download: %s\n&#34;,
-</span></span></span><span class=line><span class=cl><span class=gi></span>             strerror(EC_IOCTL_ERRNO(ret)));
+</span></span></span><span class=line><span class=cl>             strerror(EC_IOCTL_ERRNO(ret)));
 </span></span><span class=line><span class=cl>         return -EC_IOCTL_ERRNO(ret);
 </span></span><span class=line><span class=cl>     }
 </span></span></code></pre></td></tr></table></div></div></div></div><p>然后这个补丁还有点问题，我们需要手动修改一下<code>lib/liberror.c</code>。这里源文件和头文件变量定义不一致，编译会报错，以头文件为准。</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
@@ -127,10 +127,10 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;liberror.h&#34;</span><span class=cp>
-</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=n>ecrt_err_to_stderr</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=c1>// char *ecrt_errstring[ERRSTRING_LEN];
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>char</span> <span class=n>ecrt_errstring</span><span class=p>[</span><span class=n>ERRSTRING_LEN</span><span class=p>];</span>
+</span></span></span><span class=line><span class=cl><span class=kt>char</span> <span class=n>ecrt_errstring</span><span class=p>[</span><span class=n>ERRSTRING_LEN</span><span class=p>];</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=n>ecrt_errcode</span><span class=p>;</span></span></span></code></pre></td></tr></table></div></div></div></div><h3 id=准备内核源码>准备内核源码<a hidden class=anchor aria-hidden=true href=#准备内核源码>#</a></h3><p>由于需要将源码编译成相应的系统驱动，所以这里需要使用内核的源码。</p><p>如果是标准系统，可以直接安装<code>linux-headers</code>。</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
@@ -472,8 +472,8 @@
 </span></span><span class=line><span class=cl> * Whether icu support is available
 </span></span><span class=line><span class=cl> */
 </span></span><span class=line><span class=cl><span class=gd>- #if 0
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+ #if 1
-</span></span></span><span class=line><span class=cl><span class=gi></span>#define LIBXML_ICU_ENABLED
+</span></span></span><span class=line><span class=cl><span class=gi>+ #if 1
+</span></span></span><span class=line><span class=cl>#define LIBXML_ICU_ENABLED
 </span></span><span class=line><span class=cl>#endif
 </span></span></code></pre></td></tr></table></div></div></div></div><p>做好上面的准备工作，还需要修改源码中的路径配置，然后才能正常编译。<br>下面都是我踩坑留下的记录。</p><ol><li>修改 <em>configure/RELEASE</em></li></ol><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
@@ -624,23 +624,23 @@
 </span><span class=lnt>18
 </span><span class=lnt>19
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// ethercatApp/scannerSrc/slave-list-path.c
-</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>get_root_dir_index</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>program_name</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// Search for the binary path
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kt>char</span> <span class=n>binary_dir</span><span class=p>[]</span> <span class=o>=</span> <span class=s>&#34;bin/linux-x86_64/&#34;</span><span class=p>;</span>
+</span></span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>binary_dir</span><span class=p>[]</span> <span class=o>=</span> <span class=s>&#34;bin/linux-x86_64/&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// Find the binary path in the program path and return the pointer
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kt>char</span> <span class=o>*</span><span class=n>found</span> <span class=o>=</span> <span class=nf>strstr</span><span class=p>(</span><span class=n>program_name</span><span class=p>,</span> <span class=n>binary_dir</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>found</span> <span class=o>=</span> <span class=nf>strstr</span><span class=p>(</span><span class=n>program_name</span><span class=p>,</span> <span class=n>binary_dir</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// Handle the case where it is not found
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=p>(</span><span class=n>found</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span>
+</span></span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>found</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=o>-</span><span class=mi>1</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>    
 </span></span><span class=line><span class=cl>    <span class=c1>// Calculate the difference in the pointers to get the index
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>return</span> <span class=n>found</span> <span class=o>-</span> <span class=n>program_name</span><span class=p>;</span>
+</span></span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>found</span> <span class=o>-</span> <span class=n>program_name</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div></div></div><p>这个<code>get_root_dir_index</code>函数是用于计算当前程序(<code>slaveinfo</code>)所在的<strong>根</strong>目录。这里向上查找的路径为<code>bin/linux-x86_64</code>，当然不能找到<code>LoongArch</code>的目录<code>bin/linux-loong64</code>了。所以，此函数只在路径为<code>bin/linux-x86_64/slaveinfo</code>时才能正常运行，其它情况都返回<code>-1</code>。（第一次见到这样写的，真无语了……）</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
 <span class=mac-expand></span></div><div class=mac-title title=c>c</div><div class=mac-right-group><button class=fold-button>&#9660;</button></div></div><div class=mac-content><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -679,18 +679,18 @@
 </span><span class=lnt>34
 </span><span class=lnt>35
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>//  ethercatApp/scannerSrc/slave-list-path.c
-</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kt>char</span> <span class=o>*</span><span class=nf>get_slave_list_filename</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>program_path</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>relative_path</span><span class=p>[]</span> <span class=o>=</span> <span class=s>&#34;etc/scripts/slave-types.txt&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>slave_list_filename</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// Get absolute path of application
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kt>char</span> <span class=o>*</span><span class=n>real_path</span> <span class=o>=</span> <span class=nf>calloc</span><span class=p>(</span><span class=n>PATH_MAX</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>char</span><span class=p>));</span>
+</span></span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>real_path</span> <span class=o>=</span> <span class=nf>calloc</span><span class=p>(</span><span class=n>PATH_MAX</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>char</span><span class=p>));</span>
 </span></span><span class=line><span class=cl>    <span class=nf>get_app_path</span><span class=p>(</span><span class=n>program_path</span><span class=p>,</span> <span class=n>real_path</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// Get root directory
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kt>int</span> <span class=n>root_dir_index</span> <span class=o>=</span> <span class=nf>get_root_dir_index</span><span class=p>(</span><span class=n>real_path</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>root_dir_index</span> <span class=o>=</span> <span class=nf>get_root_dir_index</span><span class=p>(</span><span class=n>real_path</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>root_dir_index</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=n>slave_list_filename</span> <span class=o>=</span> <span class=nf>calloc</span><span class=p>(</span><span class=n>root_dir_index</span> <span class=o>+</span> <span class=nf>strlen</span><span class=p>(</span><span class=n>relative_path</span><span class=p>)</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>char</span><span class=p>));</span>
@@ -698,10 +698,10 @@
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// Append relative path
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nf>strcat</span><span class=p>(</span><span class=n>slave_list_filename</span><span class=p>,</span> <span class=n>relative_path</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl>    <span class=nf>strcat</span><span class=p>(</span><span class=n>slave_list_filename</span><span class=p>,</span> <span class=n>relative_path</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// Check file
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>struct</span> <span class=n>stat</span> <span class=n>fstat</span><span class=p>;</span>
+</span></span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>stat</span> <span class=n>fstat</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>result</span> <span class=o>=</span> <span class=nf>stat</span><span class=p>(</span><span class=n>slave_list_filename</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>fstat</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>result</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
@@ -709,7 +709,7 @@
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// Cleanup
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nf>free</span><span class=p>(</span><span class=n>real_path</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl>    <span class=nf>free</span><span class=p>(</span><span class=n>real_path</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>slave_list_filename</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div></div></div><p>而在<code>get_slave_list_filename</code>函数中，只处理了<code>get_root_dir_index</code>正常返回的情况。当<code>get_root_dir_index</code>返回<code>-1</code>时，<code>slave_list_filename</code>始终为<code>NULL</code>，这就导致后续操作出错。</p><p>其实这个问题直接把程序放到<code>bin/linux-x86_64</code>目录下运行就可以了，不过既然找到了问题，索性就改一改。</p><p>现在已经知道了出错的地方，该如何修改呢？这里我本着尽量少改动源码的原则，在<code>get_root_dir_index</code>查找<strong>根</strong>目录出错时，直接使用当前目录。</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
@@ -779,7 +779,7 @@
 </span></span></span><span class=line><span class=cl><span class=gi>+            strcat(slave_list_filename, &#34;/&#34;);
 </span></span></span><span class=line><span class=cl><span class=gi>+        }
 </span></span></span><span class=line><span class=cl><span class=gi>+    }
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    // Append relative path
 </span></span><span class=line><span class=cl>    strcat(slave_list_filename, relative_path);
 </span></span><span class=line><span class=cl>
@@ -826,24 +826,24 @@
 </span></span><span class=line><span class=cl>#include &#34;simulation.h&#34;
 </span></span><span class=line><span class=cl>#include &#34;version.h&#34;
 </span></span><span class=line><span class=cl><span class=gd>- #include &#34;liberror.h&#34;
-</span></span></span><span class=line><span class=cl><span class=gd></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gu>@@ -290,8 +297,6 @@ void cyclic_task(void * usr)
-</span></span></span><span class=line><span class=cl><span class=gu></span>        nslaves++;
+</span></span></span><span class=line><span class=cl>        nslaves++;
 </span></span><span class=line><span class=cl>    }
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gd>-    /* suppress errors to stderr */
 </span></span></span><span class=line><span class=cl><span class=gd>-    ecrt_err_to_stderr = 0;
-</span></span></span><span class=line><span class=cl><span class=gd></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    while(1)
 </span></span><span class=line><span class=cl>    {
 </span></span><span class=line><span class=cl>        rtMessageQueueReceive(scanner-&gt;workq, msg, scanner-&gt;max_message);
 </span></span><span class=line><span class=cl><span class=gu>@@ -500,7 +505,7 @@ void cyclic_task(void * usr)
-</span></span></span><span class=line><span class=cl><span class=gu></span>            {
+</span></span></span><span class=line><span class=cl>            {
 </span></span><span class=line><span class=cl>                if (error_to_console)
 </span></span><span class=line><span class=cl>                {
 </span></span><span class=line><span class=cl><span class=gd>-                    fprintf(stderr,&#34;etherlab library error: %s&#34;, ecrt_errstring);
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+                    fprintf(stderr,&#34;etherlab library error: %d&#34;, slave_info_status);
-</span></span></span><span class=line><span class=cl><span class=gi></span>                    error_to_console = FALSE;
+</span></span></span><span class=line><span class=cl><span class=gi>+                    fprintf(stderr,&#34;etherlab library error: %d&#34;, slave_info_status);
+</span></span></span><span class=line><span class=cl>                    error_to_console = FALSE;
 </span></span><span class=line><span class=cl>                }
 </span></span><span class=line><span class=cl>            }
 </span></span></code></pre></td></tr></table></div></div></div></div><ol start=5><li>编译</li></ol><p>最后终于可以开始编译了。</p><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
@@ -1098,13 +1098,13 @@
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl>LSMOD=/sbin/lsmod
 </span></span><span class=line><span class=cl>MODPROBE=/sbin/modprobe
 </span></span><span class=line><span class=cl><span class=gi>+ INSMOD=/sbin/insmod
-</span></span></span><span class=line><span class=cl><span class=gi></span>RMMOD=/sbin/rmmod
+</span></span></span><span class=line><span class=cl>RMMOD=/sbin/rmmod
 </span></span><span class=line><span class=cl>MODINFO=/sbin/modinfo
 </span></span><span class=line><span class=cl><span class=gd>- ETHERCAT=/home/loongson/__install_dir/bin/ethercat
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+ ETHERCAT=/usr/bin/ethercat
-</span></span></span><span class=line><span class=cl><span class=gi></span>MASTER_ARGS=
+</span></span></span><span class=line><span class=cl><span class=gi>+ ETHERCAT=/usr/bin/ethercat
+</span></span></span><span class=line><span class=cl>MASTER_ARGS=
 </span></span><span class=line><span class=cl><span class=gi>+ MODULE_DIR=/root/modules
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>start)
 </span></span><span class=line><span class=cl>    echo -n &#34;Starting EtherCAT master 1.5.2 &#34;
 </span></span><span class=line><span class=cl>
@@ -1112,8 +1112,8 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># load master module
 </span></span><span class=line><span class=cl><span class=gd>- if ! ${MODPROBE} ${MODPROBE_FLAGS} ec_master &#34;${MASTER_ARGS}&#34; \
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+ if ! ${INSMOD} ${MODULE_DIR}/ec_master.ko &#34;${MASTER_ARGS}&#34; \
-</span></span></span><span class=line><span class=cl><span class=gi></span>        main_devices=&#34;${DEVICES}&#34; backup_devices=&#34;${BACKUPS}&#34;; then
+</span></span></span><span class=line><span class=cl><span class=gi>+ if ! ${INSMOD} ${MODULE_DIR}/ec_master.ko &#34;${MASTER_ARGS}&#34; \
+</span></span></span><span class=line><span class=cl>        main_devices=&#34;${DEVICES}&#34; backup_devices=&#34;${BACKUPS}&#34;; then
 </span></span><span class=line><span class=cl>    exit_fail
 </span></span><span class=line><span class=cl>fi
 </span></span><span class=line><span class=cl>
@@ -1123,7 +1123,7 @@
 </span></span><span class=line><span class=cl><span class=gd>-    if ! ${MODINFO} &#34;${ECMODULE}&#34; &gt; /dev/null; then
 </span></span></span><span class=line><span class=cl><span class=gd>-        continue # ec_* module not found
 </span></span></span><span class=line><span class=cl><span class=gd>-    fi
-</span></span></span><span class=line><span class=cl><span class=gd></span>    if [ &#34;${MODULE}&#34; != &#34;generic&#34; ]; then
+</span></span></span><span class=line><span class=cl>    if [ &#34;${MODULE}&#34; != &#34;generic&#34; ]; then
 </span></span><span class=line><span class=cl>        if ${LSMOD} | grep &#34;^${MODULE} &#34; &gt; /dev/null; then
 </span></span><span class=line><span class=cl>            if ! ${RMMOD} &#34;${MODULE}&#34;; then
 </span></span><span class=line><span class=cl>                exit_fail
@@ -1131,8 +1131,8 @@
 </span></span><span class=line><span class=cl>        fi
 </span></span><span class=line><span class=cl>    fi
 </span></span><span class=line><span class=cl><span class=gd>-    if ! ${MODPROBE} ${MODPROBE_FLAGS} &#34;${ECMODULE}&#34;; then
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+    if ! ${INSMOD} &#34;${MODULE_DIR}/${ECMODULE}.ko&#34;; then
-</span></span></span><span class=line><span class=cl><span class=gi></span>        if [ &#34;${MODULE}&#34; != &#34;generic&#34; ]; then
+</span></span></span><span class=line><span class=cl><span class=gi>+    if ! ${INSMOD} &#34;${MODULE_DIR}/${ECMODULE}.ko&#34;; then
+</span></span></span><span class=line><span class=cl>        if [ &#34;${MODULE}&#34; != &#34;generic&#34; ]; then
 </span></span><span class=line><span class=cl>            ${MODPROBE} ${MODPROBE_FLAGS} &#34;${MODULE}&#34; # try to restore
 </span></span><span class=line><span class=cl>        fi
 </span></span><span class=line><span class=cl>        exit_fail
@@ -1206,27 +1206,27 @@
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl>LSMOD=/sbin/lsmod
 </span></span><span class=line><span class=cl>MODPROBE=/sbin/modprobe
 </span></span><span class=line><span class=cl><span class=gi>+ INSMOD=/sbin/insmod
-</span></span></span><span class=line><span class=cl><span class=gi></span>RMMOD=/sbin/rmmod
+</span></span></span><span class=line><span class=cl>RMMOD=/sbin/rmmod
 </span></span><span class=line><span class=cl>MODINFO=/sbin/modinfo
 </span></span><span class=line><span class=cl>IP=/bin/ip
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gd>- ETHERCAT=/home/loongson/__install_dir/bin/ethercat
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+ ETHERCAT=/usr/bin/ethercat
+</span></span></span><span class=line><span class=cl><span class=gi>+ ETHERCAT=/usr/bin/ethercat
 </span></span></span><span class=line><span class=cl><span class=gi>+ MODULE_DIR=/root/modules
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>#------------------------------------------------------------------------------
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gd>- ETHERCAT_CONFIG=/home/loongson/__install_dir/etc/ethercat.conf
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+ ETHERCAT_CONFIG=/etc/ethercat.conf
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl><span class=gi>+ ETHERCAT_CONFIG=/etc/ethercat.conf
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>start)
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>...
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># load master module
 </span></span><span class=line><span class=cl><span class=gd>- if ! ${MODPROBE} ${MODPROBE_FLAGS} ec_master \
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+ if ! ${INSMOD} ${MODULE_DIR}/ec_master.ko \
-</span></span></span><span class=line><span class=cl><span class=gi></span>        main_devices=&#34;${DEVICES}&#34; backup_devices=&#34;${BACKUPS}&#34;; then
+</span></span></span><span class=line><span class=cl><span class=gi>+ if ! ${INSMOD} ${MODULE_DIR}/ec_master.ko \
+</span></span></span><span class=line><span class=cl>        main_devices=&#34;${DEVICES}&#34; backup_devices=&#34;${BACKUPS}&#34;; then
 </span></span><span class=line><span class=cl>    exit 1
 </span></span><span class=line><span class=cl>fi
 </span></span><span class=line><span class=cl>
@@ -1238,7 +1238,7 @@
 </span></span><span class=line><span class=cl><span class=gd>-    if ! ${MODINFO} &#34;${ECMODULE}&#34; &gt; /dev/null; then
 </span></span></span><span class=line><span class=cl><span class=gd>-        continue # ec_* module not found
 </span></span></span><span class=line><span class=cl><span class=gd>-    fi
-</span></span></span><span class=line><span class=cl><span class=gd></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    if [ &#34;${MODULE}&#34; != &#34;generic&#34; ] &amp;&amp; [ &#34;${MODULE}&#34; != &#34;ccat&#34; ]; then
 </span></span><span class=line><span class=cl>        # unload standard module and check if unloading was successful
 </span></span><span class=line><span class=cl>        ${RMMOD} &#34;${MODULE}&#34; 2&gt; /dev/null || true
@@ -1250,8 +1250,8 @@
 </span></span><span class=line><span class=cl>    fi
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gd>-    if ! ${MODPROBE} ${MODPROBE_FLAGS} &#34;${ECMODULE}&#34;; then
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+    if ! ${INSMOD} &#34;${MODULE_DIR}/${ECMODULE}.ko&#34;; then
-</span></span></span><span class=line><span class=cl><span class=gi></span>        if [ &#34;${MODULE}&#34; != &#34;generic&#34; ] &amp;&amp; [ &#34;${MODULE}&#34; != &#34;ccat&#34; ]; then
+</span></span></span><span class=line><span class=cl><span class=gi>+    if ! ${INSMOD} &#34;${MODULE_DIR}/${ECMODULE}.ko&#34;; then
+</span></span></span><span class=line><span class=cl>        if [ &#34;${MODULE}&#34; != &#34;generic&#34; ] &amp;&amp; [ &#34;${MODULE}&#34; != &#34;ccat&#34; ]; then
 </span></span><span class=line><span class=cl>            ${MODPROBE} ${MODPROBE_FLAGS} &#34;${MODULE}&#34; # try to restore
 </span></span><span class=line><span class=cl>        fi
 </span></span><span class=line><span class=cl>        ${RMMOD} ${LOADED_MODULES}
@@ -1361,7 +1361,7 @@
 <span class=mac-minimize></span>
 <span class=mac-expand></span></div><div class=mac-title title=shell>shell</div><div class=mac-right-group><button class=fold-button>&#9660;</button></div></div><div class=mac-content><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>root@LS-GD ~<span class=o>]</span><span class=c1># ethercat xml &gt; scanner.xml</span></span></span></code></pre></td></tr></table></div></div></div></div></li><li><p>其他<code>ethercat</code>命令</p><p>使用<code>ethercat -h</code>命令查看其他命令的使用方法。</p></li></ul><h2 id=参考>参考<a hidden class=anchor aria-hidden=true href=#参考>#</a></h2><ul><li><a href=https://docs.etherlab.org/ethercat/1.5/doxygen/index.html>IgH EtherCAT Master</a></li><li><a href=https://gitlab.com/etherlab.org/ethercat/-/blob/master/INSTALL.md>Building and installing IgH EtherCAT Master</a></li><li><a href=https://github.com/landaurobotics/igh-ethercat-master/blob/main/README.md>IgH EtherCAT Master for Linux</a></li><li><a href=https://accelconf.web.cern.ch/pcapac2018/papers/wep01.pdf>EtherCAT DRIVER AND TOOLS FOR EPICS AND LINUX AT PSI</a></li><li><a href=https://accelconf.web.cern.ch/cyclotrons2019/papers/tup004.pdf>INTEGRATION OF EtherCAT HARDWARE INTO THE EPICS BASED DISTRIBUTED CONTROL SYSTEM AT iThemba LABS</a></li><li><a href=https://blog.csdn.net/honeymelon3/article/details/113175863>在“福珑2.0”主机上编译EPICS Ehtercat驱动软件的体验</a></li></ul></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/linux/>Linux</a></li><li><a href=https://kira-96.github.io/tags/epics/>EPICS</a></li><li><a href=https://kira-96.github.io/tags/%E9%BE%99%E8%8A%AF/>龙芯</a></li></ul><nav class=paginav><a class=prev href=https://kira-96.github.io/posts/epics-ioc-access-security/><span class=title>« 上一页</span><br><span>EPICS IOC 访问安全</span>
-</a><a class=next href=https://kira-96.github.io/posts/build-epics-module-modbus/><span class=title>下一页 »</span><br><span>EPICS的MODBUS模块的编译和使用</span></a></nav></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2025 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
+</a><a class=next href=https://kira-96.github.io/posts/build-epics-module-modbus/><span class=title>下一页 »</span><br><span>EPICS的MODBUS模块的编译和使用</span></a></nav></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2026 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
 <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>

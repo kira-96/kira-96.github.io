@@ -32,27 +32,27 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span><span class=lnt>23
 </span><span class=lnt>24
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gh>index 244da04..98d30ca 100644
-</span></span></span><span class=line><span class=cl><span class=gh></span><span class=gd>--- a/configure/RELEASE
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/configure/RELEASE
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -20,15 +20,15 @@
-</span></span></span><span class=line><span class=cl><span class=gu></span> # CONFIG_SITE file.
+</span></span></span><span class=line><span class=cl><span class=gd>--- a/configure/RELEASE
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/configure/RELEASE
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -20,15 +20,15 @@
+</span></span></span><span class=line><span class=cl> # CONFIG_SITE file.
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 </span></span><span class=line><span class=cl><span class=gd>-SUPPORT=/dls_sw/prod/R3.14.12.7/support
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+SUPPORT=/home/kira/epics/epics-modules
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl><span class=gi>+SUPPORT=/home/kira/epics/epics-modules
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> # If using the sequencer, point SNCSEQ at its top directory:
 </span></span><span class=line><span class=cl><span class=gd>-SNCSEQ=$(SUPPORT)/seq/2-2-5dls1
 </span></span></span><span class=line><span class=cl><span class=gd>-ASYN=$(SUPPORT)/asyn/4-41
 </span></span></span><span class=line><span class=cl><span class=gd>-BUSY=$(SUPPORT)/busy/1-7-2dls5
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+SNCSEQ=$(SUPPORT)/sequencer
+</span></span></span><span class=line><span class=cl><span class=gi>+SNCSEQ=$(SUPPORT)/sequencer
 </span></span></span><span class=line><span class=cl><span class=gi>+ASYN=$(SUPPORT)/asyn
 </span></span></span><span class=line><span class=cl><span class=gi>+BUSY=$(SUPPORT)/busy
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> # EPICS_BASE usually appears last so other apps can override stuff:
 </span></span><span class=line><span class=cl><span class=gd>-EPICS_BASE=/dls_sw/epics/R3.14.12.7/base
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+EPICS_BASE=/home/kira/epics/base-7.0.9
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl><span class=gi>+EPICS_BASE=/home/kira/epics/base-7.0.9
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> # Set RULES here if you want to take build rules from somewhere
 </span></span><span class=line><span class=cl> # other than EPICS_BASE:
 </span></span></code></pre></td></tr></table></div></div></div></div><ol start=2><li>如果需要交叉编译，修改<code>configure/CONFIG_SITE</code>：</li></ol><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
@@ -70,15 +70,15 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span><span class=lnt>11
 </span><span class=lnt>12
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gh>index f30c124..53c5e23 100644
-</span></span></span><span class=line><span class=cl><span class=gh></span><span class=gd>--- a/configure/CONFIG_SITE
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/configure/CONFIG_SITE
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -19,7 +19,7 @@ CHECK_RELEASE = YES
-</span></span></span><span class=line><span class=cl><span class=gu></span> # Set this when you only want to compile this application
+</span></span></span><span class=line><span class=cl><span class=gd>--- a/configure/CONFIG_SITE
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/configure/CONFIG_SITE
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -19,7 +19,7 @@ CHECK_RELEASE = YES
+</span></span></span><span class=line><span class=cl> # Set this when you only want to compile this application
 </span></span><span class=line><span class=cl> #   for a subset of the cross-compiled target architectures
 </span></span><span class=line><span class=cl> #   that Base is built for.
 </span></span><span class=line><span class=cl><span class=gd>-CROSS_COMPILER_TARGET_ARCHS =
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+CROSS_COMPILER_TARGET_ARCHS = linux-loong64
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl><span class=gi>+CROSS_COMPILER_TARGET_ARCHS = linux-loong64
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> # To install files into a location other than $(TOP) define
 </span></span><span class=line><span class=cl> #   INSTALL_LOCATION here.
 </span></span></code></pre></td></tr></table></div></div></div></div><ol start=3><li>编译</li></ol><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
@@ -151,15 +151,15 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span><span class=lnt>11
 </span><span class=lnt>12
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gh>index c8d04a2..385f788 100644
-</span></span></span><span class=line><span class=cl><span class=gh></span><span class=gd>--- a/procServ.cc
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/procServ.cc
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -65,7 +65,7 @@ int    connectionNo;             // Total number of connections
-</span></span></span><span class=line><span class=cl><span class=gu></span> char   *ignChars = NULL;         // Characters to ignore
+</span></span></span><span class=line><span class=cl><span class=gd>--- a/procServ.cc
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/procServ.cc
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -65,7 +65,7 @@ int    connectionNo;             // Total number of connections
+</span></span></span><span class=line><span class=cl> char   *ignChars = NULL;         // Characters to ignore
 </span></span><span class=line><span class=cl> char   killChar = 0x18;          // Kill command character (default: ^X)
 </span></span><span class=line><span class=cl> char   toggleRestartChar = 0x14; // Toggle autorestart character (default: ^T)
 </span></span><span class=line><span class=cl><span class=gd>-char   restartChar = 0x12;       // Restart character (default: ^R)
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+char   restartChar = 0x18;       // Restart character (default: ^X)
-</span></span></span><span class=line><span class=cl><span class=gi></span> char   quitChar = 0x11;          // Quit character (default: ^Q)
+</span></span></span><span class=line><span class=cl><span class=gi>+char   restartChar = 0x18;       // Restart character (default: ^X)
+</span></span></span><span class=line><span class=cl> char   quitChar = 0x11;          // Quit character (default: ^Q)
 </span></span><span class=line><span class=cl> char   logoutChar = 0x00;        // Logout client connection character (default: none)
 </span></span><span class=line><span class=cl> int    killSig = SIGKILL;        // Kill signal (default: SIGKILL)
 </span></span></code></pre></td></tr></table></div></div></div></div><ol start=2><li>修改<code>Makefile.Epics.in</code>：</li></ol><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
@@ -175,14 +175,14 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gh>index ef6073c..85336f9 100644
-</span></span></span><span class=line><span class=cl><span class=gh></span><span class=gd>--- a/Makefile.Epics.in
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/Makefile.Epics.in
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -17,6 +17,7 @@ procServ_OBJS = @LIBOBJS@
-</span></span></span><span class=line><span class=cl><span class=gu></span>
+</span></span></span><span class=line><span class=cl><span class=gd>--- a/Makefile.Epics.in
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/Makefile.Epics.in
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -17,6 +17,7 @@ procServ_OBJS = @LIBOBJS@
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> USR_CXXFLAGS += @DEFS@
 </span></span><span class=line><span class=cl> procServ_SYS_LIBS += $(subst -l,,@LIBS@)
 </span></span><span class=line><span class=cl><span class=gi>+procServ_SYS_LIBS += util
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> include $(TOP)/configure/RULES
 </span></span></code></pre></td></tr></table></div></div></div></div><h2 id=在-ioc-中使用-procservcontrol>在 IOC 中使用 procServControl<a hidden class=anchor aria-hidden=true href=#在-ioc-中使用-procservcontrol>#</a></h2><ol><li>修改<code>configure/RELEASE</code>：</li></ol><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
@@ -198,14 +198,14 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gd>--- a/configure/RELEASE
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/configure/RELEASE
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -29,9 +29,12 @@ SUPPORT=$(EPICS_BASE)/../epics-modules
-</span></span></span><span class=line><span class=cl><span class=gu></span> # If using the sequencer, point SNCSEQ at its top directory:
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/configure/RELEASE
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -29,9 +29,12 @@ SUPPORT=$(EPICS_BASE)/../epics-modules
+</span></span></span><span class=line><span class=cl> # If using the sequencer, point SNCSEQ at its top directory:
 </span></span><span class=line><span class=cl><span class=gi>+SNCSEQ = $(SUPPORT)/seq
 </span></span></span><span class=line><span class=cl><span class=gi>+ASYN=$(SUPPORT)/asyn
 </span></span></span><span class=line><span class=cl><span class=gi>+BUSY=$(SUPPORT)/busy
 </span></span></span><span class=line><span class=cl><span class=gi>+PROCSERVCTRL=$(SUPPORT)/procServControl
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> # EPICS_BASE should appear last so earlier modules can override stuff:
 </span></span><span class=line><span class=cl> EPICS_BASE = /path/to/epics/base
 </span></span></code></pre></td></tr></table></div></div></div></div><ol start=2><li>修改<code>exampleApp/src/Makefile</code>：</li></ol><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
@@ -228,9 +228,9 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gd>--- a/exampleApp/src/Makefile
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/exampleApp/src/Makefile
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -109,12 +109,21 @@ DB_INSTALLS += $(IOCADMIN)/db/iocAdminScanMon.db
-</span></span></span><span class=line><span class=cl><span class=gu></span> IOCRELEASE_DB += iocRelease.db
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/exampleApp/src/Makefile
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -109,12 +109,21 @@ DB_INSTALLS += $(IOCADMIN)/db/iocAdminScanMon.db
+</span></span></span><span class=line><span class=cl> IOCRELEASE_DB += iocRelease.db
 </span></span><span class=line><span class=cl> endif
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gi>+# procServControl
@@ -242,7 +242,7 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span></span></span><span class=line><span class=cl><span class=gi>+example_LIBS += asyn busy seq pv procServControl
 </span></span></span><span class=line><span class=cl><span class=gi>+endif
 </span></span></span><span class=line><span class=cl><span class=gi>+
-</span></span></span><span class=line><span class=cl><span class=gi></span> # Finally link IOC to the EPICS Base libraries
+</span></span></span><span class=line><span class=cl> # Finally link IOC to the EPICS Base libraries
 </span></span><span class=line><span class=cl> sysStats_LIBS += $(EPICS_BASE_IOC_LIBS)
 </span></span></code></pre></td></tr></table></div></div></div></div><ol start=3><li>修改<code>exampleApp/Db/Makefile</code>：</li></ol><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
 <span class=mac-minimize></span>
@@ -257,13 +257,13 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gd>--- a/exampleApp/Db/Makefile
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/exampleApp/Db/Makefile
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -6,6 +6,7 @@ include $(TOP)/configure/CONFIG
-</span></span></span><span class=line><span class=cl><span class=gu></span> # Install databases, templates &amp; substitutions like this
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/exampleApp/Db/Makefile
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -6,6 +6,7 @@ include $(TOP)/configure/CONFIG
+</span></span></span><span class=line><span class=cl> # Install databases, templates &amp; substitutions like this
 </span></span><span class=line><span class=cl> DB += exampleVersion.db
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gi>+DB_INSTALLS += $(PROCSERVCTRL)/db/procServControl.template
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># If &lt;anyname&gt;.db template is not named &lt;anyname&gt;*.template add
 </span></span><span class=line><span class=cl># &lt;anyname&gt;_TEMPLATE = &lt;templatename&gt;
 </span></span></code></pre></td></tr></table></div></div></div></div><ol start=4><li>修改<code>iocBoot/iocexample/st.cmd</code>：</li></ol><div class=mac-codeblock><div class=mac-titlebar><div class=mac-left-group><span class=mac-close></span>
@@ -292,25 +292,25 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span><span class=lnt>22
 </span><span class=lnt>23
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=line><span class=cl><span class=gd>--- a/iocBoot/iocexample/st.cmd
-</span></span></span><span class=line><span class=cl><span class=gd></span><span class=gi>+++ b/iocBoot/iocexample/st.cmd
-</span></span></span><span class=line><span class=cl><span class=gi></span><span class=gu>@@ -12,11 +12,16 @@ dbLoadDatabase &#34;dbd/example.dbd&#34;
-</span></span></span><span class=line><span class=cl><span class=gu></span> sysStats_registerRecordDeviceDriver pdbbase
+</span></span></span><span class=line><span class=cl><span class=gi>+++ b/iocBoot/iocexample/st.cmd
+</span></span></span><span class=line><span class=cl><span class=gu>@@ -12,11 +12,16 @@ dbLoadDatabase &#34;dbd/example.dbd&#34;
+</span></span></span><span class=line><span class=cl> sysStats_registerRecordDeviceDriver pdbbase
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=gi>+## Connect to procServ
 </span></span></span><span class=line><span class=cl><span class=gi>+epicsEnvSet(&#34;ASYN_PORT_NAME&#34;, &#34;port1&#34;)
 </span></span></span><span class=line><span class=cl><span class=gi>+drvAsynIPPortConfigure(&#34;${ASYN_PORT_NAME}&#34;, &#34;localhost:7001&#34;, 100, 0, 0)
 </span></span></span><span class=line><span class=cl><span class=gi>+
-</span></span></span><span class=line><span class=cl><span class=gi></span> ## Load record instances
+</span></span></span><span class=line><span class=cl> ## Load record instances
 </span></span><span class=line><span class=cl> # dbLoadTemplate &#34;db/user.substitutions&#34;
 </span></span><span class=line><span class=cl> # dbLoadRecords &#34;db/dbSubExample.db&#34;, &#34;user=${USER}&#34;
 </span></span><span class=line><span class=cl> dbLoadRecords &#34;db/exampleVersion.db&#34;, &#34;user=${NAME}&#34;
 </span></span><span class=line><span class=cl> # dbLoadRecords &#34;db/iocAdminSoft.db&#34;, &#34;IOC=${NAME}&#34;
 </span></span><span class=line><span class=cl><span class=gi>+dbLoadRecords &#34;db/procServControl.template&#34;, &#34;P=${NAME},PORT=${ASYN_PORT_NAME}&#34;
-</span></span></span><span class=line><span class=cl><span class=gi></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> #- Set this to see messages from mySub
 </span></span><span class=line><span class=cl> #-var mySubDebug 1
 </span></span><span class=line><span class=cl><span class=gu>@@ -29,3 +34,4 @@ iocInit
-</span></span></span><span class=line><span class=cl><span class=gu></span>
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl> ## Start any sequence programs
 </span></span><span class=line><span class=cl> #seq sncExample, &#34;user=${USER}&#34;
 </span></span><span class=line><span class=cl><span class=gi>+seq procServControl, &#34;P=${NAME}&#34;
@@ -324,7 +324,7 @@ Title</p><p>编译<strong>sequencer</strong>模块需要用到<strong>re2c</stro
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=nb>cd</span> /path/to/example/iocBoot/iocexample
 </span></span><span class=line><span class=cl>procServ -n <span class=nv>$NAME</span> -P <span class=m>7001</span> ./st.cmd</span></span></code></pre></td></tr></table></div></div></div></div><blockquote class="alert-blockquote alert-important"><p class=alert-heading>ℹ️
 注意</p><p><strong>procServ</strong>指定的端口（例：7001）必需和<strong>st.cmd</strong>脚本中的端口对应。</p></blockquote><blockquote class="alert-blockquote alert-note"><p class=alert-heading>ℹ️
-The most important PVs provided are:</p><ul><li>$(P):START - Start IOC</li><li>$(P):STOP - Stop IOC</li><li>$(P):RESTART - Restart IOC</li><li>$(P):IOCOUT - Last 20 lines of IOC output</li></ul></blockquote><p><img alt=监控&操作页面 loading=lazy src=https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/PixPin_2025-06-03_13-44-09.png></p></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/linux/>Linux</a></li><li><a href=https://kira-96.github.io/tags/epics/>EPICS</a></li></ul></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2025 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
+The most important PVs provided are:</p><ul><li>$(P):START - Start IOC</li><li>$(P):STOP - Stop IOC</li><li>$(P):RESTART - Restart IOC</li><li>$(P):IOCOUT - Last 20 lines of IOC output</li></ul></blockquote><p><img alt=监控&操作页面 loading=lazy src=https://cdn.jsdelivr.net/gh/kira-96/Picture@main/blog/images/PixPin_2025-06-03_13-44-09.png></p></div><footer class=post-footer><ul class=post-tags><li><a href=https://kira-96.github.io/tags/linux/>Linux</a></li><li><a href=https://kira-96.github.io/tags/epics/>EPICS</a></li></ul></footer><script src=https://utteranc.es/client.js repo=kira-96/kira-96.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></article></main><footer class=footer><span>© 2019-2026 <a href=/>kira&rsquo;s blog</a> · LICENSED under <a href=https://github.com/kira-96/kira-96.github.io/tree/main/LICENSE>CC-BY-4.0</a></span> ·
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
 <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
