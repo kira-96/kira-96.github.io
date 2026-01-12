@@ -11,7 +11,7 @@ procServControl 修改configure/RELEASE： configure/RELEASE ▼ 1 2 3 4 5 6 7 8
 ...</p></div><footer class=entry-footer><span title='2025-06-03 09:58:47 +0800 +0800'>2025年6月3日</span>&nbsp;·&nbsp;<span>4 分钟</span>&nbsp;·&nbsp;<span>798 字</span></footer><a class=entry-link aria-label="post link to EPICS IOC 使用 ProcServControl" href=https://kira-96.github.io/notes/epics-ioc-procservcontrol/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2 class=entry-hint-parent>Linux CPU核心隔离
 <span class=entry-hint title=Draft><svg height="20" viewBox="0 -960 960 960" fill="currentColor"><path d="M160-410v-60h3e2v60H160zm0-165v-60h470v60H160zm0-165v-60h470v60H160zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22-4.5 22.5T862.09-380L643-160H520zm3e2-263-37-37 37 37zM580-220h38l121-122-18-19-19-18-122 121v38zm141-141-19-18 37 37-18-19z"/></svg></span></h2></header><div class=entry-content><p>CPU隔离主要是为了确保关键进程获得更高的性能，减少干扰。常见的隔离方法有cgroups、taskset、isolcpus内核参数，还有实时内核（PREEMPT RT）配置。还有CPU亲和性、IRQ屏蔽技术。
 isolcpus：在启动内核时隔离某些CPU核心，防止普通进程使用。但需要结合cgroups或taskset来分配进程到隔离核心。 nohz_full：在隔离核心禁用时钟中断（Tickless 模式）。 rcu_nocbs：将 RCU 回调任务移出隔离核心。 修改内核启动参数
-主要参数：ioslcpus=? nohz_full=? rcu_nocbs=?
+主要参数：isolcpus=? nohz_full=? rcu_nocbs=?
 例： earlycon console=tty console=ttyS0,115200 isolcpus=1,2 nohz_full=1,2 rcu_nocbs=1,2 acpi=off rdinit=/sbin/init rootdelay=5 root=/dev/sda1
 通过GRUB配置
 /etc/default/grub ▼ 1 2 # 添加isolcpus参数 GRUB_CMDLINE_LINUX="isolcpus=1,2 nohz_full=1,2 rcu_nocbs=1,2" 修改完成后更新GRUB配置：sudo update-grub
