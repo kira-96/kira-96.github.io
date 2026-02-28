@@ -1,7 +1,7 @@
 ---
 title: 一些常用的git命令
 date: 2020-11-26T09:45:36+08:00
-lastmod: 2020-12-17T08:47:56+08:00
+lastmod: 2026-02-28T15:53:12+08:00
 draft: false
 description: 一些常用的git命令
 tags: [ "git" ]
@@ -19,9 +19,9 @@ isCJKLanguage: true
 首先是git的下载地址：
 
 - 官网：[https://git-scm.com/](https://git-scm.com/)
-- taobao镜像：[https://npm.taobao.org/mirrors/git-for-windows/](https://npm.taobao.org/mirrors/git-for-windows/)
+- ~~taobao镜像：[https://npm.taobao.org/mirrors/git-for-windows/](https://npm.taobao.org/mirrors/git-for-windows/)~~
 
-由于官网的下载速度很慢，推荐使用taobao镜像的下载地址。
+~~由于官网的下载速度很慢，推荐使用taobao镜像的下载地址。~~
 
 ## 设置用户名和邮箱
 
@@ -216,6 +216,18 @@ $ git push origin -d 分支名
 
 ``` bash
 $ git push origin :分支名
+```
+
+分支合并
+
+``` bash
+$ git merge 分支名
+```
+
+或
+
+``` bash
+$ git rebase 分支名
 ```
 
 **删除远程已经删除的分支**

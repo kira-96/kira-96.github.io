@@ -14,7 +14,7 @@ isCJKLanguage: true
 [Typora](https://www.typora.io/)
 收费，支持 Mac, Windows, Linux
 
-[MarkText](https://marktext.app/)
+~[MarkText](https://marktext.app/)~
 支持 Mac, Windows, Linux
 
 [iA Writer](https://ia.net/writer)
@@ -35,3 +35,6 @@ Android - 免费
 支持 Windows, Mac, Linux, Android, iOS
 真正的全平台，支持Markdown语法，可以配合OneDrive或者WebDav同步笔记
 这里推荐使用[坚果云](https://www.jianguoyun.com/)做同步盘。
+
+[Obsidian](https://obsidian.md/)
+支持 Windows, Mac, Linux, Android, iOS

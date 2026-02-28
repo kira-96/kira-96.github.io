@@ -1,7 +1,7 @@
 ---
 title: "ecmc构建指南"
 date: 2024-11-26T08:56:34+08:00
-lastmod: 2024-11-26T08:56:34+08:00
+lastmod: 2026-02-28T16:22:50+08:00
 draft: true
 searchHidden: true
 tags: ["EPICS", "EtherCAT"]
@@ -45,7 +45,7 @@ categories: ["EPICS"]
 BUILD_IOCS = YES
 ```
 ``` shell { title="configure/RELEASE.local" }
-EPICS_BASE=/path/to/epics/base-7.0.8.1
+EPICS_BASE=/path/to/epics/base-7.0.10
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
 ```
@@ -55,7 +55,7 @@ ASYN=$(SUPPORT)/asyn
 
 ### ruckig 编译
 
-机器人运动控制库。
+机器人运动控制库，版本：[0.15.3](https://github.com/pantor/ruckig/releases/tag/v0.15.3)。
 
 配置交叉编译工具链
 
@@ -81,7 +81,7 @@ make
 配置如下：
 
 ``` shell { title="configure/RELEASE.local" }
-EPICS_BASE=/path/to/epics/base-7.0.9
+EPICS_BASE=/path/to/epics/base-7.0.10
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
 MOTOR=$(SUPPORT)/motor
@@ -248,7 +248,7 @@ gitversion.c:
 修改`ecmcExampleTop/configure/RELEASE.local`
 
 ``` shell { title="ecmcExampleTop/configure/RELEASE.local" }
-EPICS_BASE=/path/to/epics/base-7.0.9
+EPICS_BASE=/path/to/epics/base-7.0.10
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
 MOTOR=$(SUPPORT)/motor
@@ -366,7 +366,7 @@ CCC=loongarch64-linux-gnu-g++ -j4
 ``` shell { title="envPaths" }
 epicsEnvSet("IOC", "iocExample")
 epicsEnvSet("TOP", "../..")
-epicsEnvSet("SUPPORT", "/root/epics-modules")
+epicsEnvSet("SUPPORT", "/path/to/epics-modules")
 epicsEnvSet("ASYN", "${SUPPORT}/asyn")
 epicsEnvSet("ECMC", "${SUPPORT}/ecmc")
 ```
@@ -399,6 +399,10 @@ ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}initAll.cmd", "SM_MOTOR_PORT=MCU1,SM_ASYN_PORT
 epicsEnvSet "MASTER_ID", 0
 # 扫描频率，默认 1000
 epicsEnvSet "EC_RATE", 100
+# 工作模式，默认 FULL，可选 FULL/DAQ/NO_MR
+epicsEnvSet "ECMC_MODE", "DAQ"
+epicsEnvSet "ECMC_PVA", "NO"
+epicsEnvSet "ECMC_EC_TOOL_PATH", "/usr/bin/ethercat"
 
 #-
 #-------------------------------------------------------------------------------
@@ -415,7 +419,7 @@ ecmcEpicsEnvSetCalcTernary(ECMC_SAMPLE_RATE_MS, "'${ECMC_MODE=FULL}'=='DAQ'","${
 epicsEnvSet(ECMC_SAMPLE_RATE_MS_ORIGINAL, ${ECMC_SAMPLE_RATE_MS})
 
 #- define naming convention script
-#epicsEnvSet "ECMC_P_SCRIPT", "${NAMING=mXsXXX}"
+epicsEnvSet "ECMC_P_SCRIPT", "${NAMING=mXsXXX}"
 
 #- Set master
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addMaster.cmd", "MASTER_ID=${MASTER_ID=0}"
@@ -425,23 +429,36 @@ epicsEnvSet "ECMC_EC_MASTER_ID", ${MASTER_ID=0}
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=0, HW_DESC=EK1100"
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=1, HW_DESC=EL4024"
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=2, HW_DESC=EL2624"
-${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=3, HW_DESC=EL3742"
+${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=3, HW_DESC=EL3742, NELM=10"
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}addSlave.cmd", "SLAVE_ID=4, HW_DESC=EK1110"
 
 #- Apply hardware configuration
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}applyConfig.cmd"
+
+#- Load PLCs
+#${SCRIPTEXEC} "${ecmccfg_DIR}loadPLCFile.cmd", "FILE=${TOP}/iocBoot/${IOC}/test1.plc, ECMC_TMP_FILE=/tmp/PLC1.plc, DESC=test, SAMPLE_RATE_MS=125"
+
+#- Configure diagnostics:
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+
 #- Activate
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}setAppMode.cmd"
+
+#Set Affinity of ecmc_rt (core 1)
+epicsThreadSetAffinity ecmc_rt 1
 
 cd "${TOP}/iocBoot/${IOC}"
 iocInit
 
 ## Start any sequence programs
 #seq sncxxx,"user=${USER}"
+#seq procServControl, "P=${IOC}"
 ```
 
 * `ecmcXXxxxx.cmd`：从站配置脚本
-* `ecmcXXxxxx.substitutions`：记录(records)
+* `ecmcXXxxxx.substitutions`：EPICS数据库文件(DB records)
 
 *参考链接*
 * [ESS EPICS Environment (e3) — ESS EPICS Environment (e3) documentation](https://e3pages.readthedocs.io/en/latest/index.html)
