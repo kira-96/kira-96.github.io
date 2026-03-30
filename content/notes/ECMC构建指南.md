@@ -1,7 +1,7 @@
 ---
 title: "ecmc构建指南"
 date: 2024-11-26T08:56:34+08:00
-lastmod: 2026-02-28T16:22:50+08:00
+lastmod: 2026-03-30T10:27:12+08:00
 draft: true
 searchHidden: true
 tags: ["EPICS", "EtherCAT"]
@@ -85,12 +85,14 @@ EPICS_BASE=/path/to/epics/base-7.0.10
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
 MOTOR=$(SUPPORT)/motor
+RUCKIG=$(SUPPORT)/ruckig
 # 指定交叉编译架构
 EPICS_HOST_ARCH=linux-loong64
 ```
 
 修改`devEcmcSup/Makefile`
 
+<!-- v11.0.4
 ``` diff { title="devEcmcSup/Makefile" }
 #************************************************************************
 # Copyright (c) 2019 European Spallation Source ERIC
@@ -136,9 +138,8 @@ USR_LDFLAGS  += -Wl,-rpath=$(SDKTARGETSYSROOT)/usr/lib/etherlab
 endif
 
 + # ruckig路径
-+ USR_INCLUDES += -I/path/to/ruckig/include
-+ USR_LDFLAGS  += -L /path/to/ruckig/build
-+ USR_LDFLAGS  += -lruckig
++ USR_INCLUDES += -I$(RUCKIG)/include/ruckig
++ USR_LDFLAGS  += -L$(RUCKIG)/build -lruckig
 
 SRC_DIRS  += $(ECMC)/plc
 ecmc_SRCS += ecmcPLC.cpp
@@ -236,13 +237,82 @@ gitversion.c:
     @$(RM) $@
     @sh $(TOP)/tools/gitversion.sh $@
 ```
+-->
 
-修改`devEcmcSup/motion/ecmcTrajectoryS.h`
+``` diff { title="devEcmcSup/Makefile" }
+#************************************************************************
+# Copyright (c) 2019 European Spallation Source ERIC
+# ecmc is distributed subject to a Software License Agreement found
+# in file LICENSE that is included with this distribution.
+#
+# Author: Jeong Han Lee <jeonghan.lee@gmail.com>
+#
+#*************************************************************************
 
-``` diff { title="devEcmcSup/motion/ecmcTrajectoryS.h" }
-#include "ecmcecmcTrajectoryBase.h"
-- #include <ruckig.hpp>
-+ #include <ruckig/ruckig.hpp>
+TOP=..
+include $(TOP)/configure/CONFIG
+#----------------------------------------
+#  ADD MACRO DEFINITIONS AFTER THIS LINE
+#=============================
+
+
+ECMC = $(TOP)/devEcmcSup
+
+LIBRARY_IOC += ecmc
+
+# Ubuntu needs the following ldflags
+USR_LDFLAGS += -Wl,--no-as-needed
+USR_LDFLAGS += -lstdc++
+
+ifeq ($(T_A),linux-x86_64)
+# Assume that the etherlab user library is done via
+# https://github.com/icshwi/etherlabmaster
+USR_INCLUDES += -I/opt/etherlab/include
+USR_CFLAGS += -fPIC
+USR_LDFLAGS += -L /opt/etherlab/lib
+USR_LDFLAGS += -lethercat
+USR_LDFLAGS += -Wl,-rpath=/opt/etherlab/lib
+else
+# Assume that the etherlab user library is done via
+# Yocto ESS Linux bb recipe
+USR_INCLUDES += -I$(SDKTARGETSYSROOT)/usr/include/etherlab
+USR_CFLAGS   += -fPIC
+USR_LDFLAGS  += -L $(SDKTARGETSYSROOT)/usr/lib/etherlab
+USR_LDFLAGS  += -lethercat
+USR_LDFLAGS  += -Wl,-rpath=$(SDKTARGETSYSROOT)/usr/lib/etherlab
+endif
+
++ USR_INCLUDES += -I$(RUCKIG)/include/ruckig
+USR_LDFLAGS += -L$(RUCKIG)/build/ -lruckig
+- USR_LDFLAGS += -Wl,-rpath,'$(RUCKIG)/build/'
++ #USR_LDFLAGS += -Wl,-rpath,'$(RUCKIG)/build/'
+
+SRC_DIRS += ${ECMC}/main
+SRC_DIRS += ${ECMC}/ethercat
+SRC_DIRS += ${ECMC}/com
+SRC_DIRS += ${ECMC}/motion
+SRC_DIRS += ${ECMC}/motor
+SRC_DIRS += ${ECMC}/plc
+SRC_DIRS += ${ECMC}/plugin
+SRC_DIRS += ${ECMC}/misc
+ecmc_SRCS += $(notdir $(foreach d,$(SRC_DIRS),$(wildcard $d/*.c)))
+ecmc_SRCS += $(notdir $(foreach d,$(SRC_DIRS),$(wildcard $d/*.cpp)))
+DBD += $(notdir $(foreach d,$(SRC_DIRS),$(wildcard $d/*.dbd)))
+
+$(info ===== ECMC_SRCS =====)
+$(info $(ecmc_SRCS))
+$(info =====================)
+
+ecmc_LIBS += exprtkSupport
+ecmc_LIBS += $(EPICS_BASE_IOC_LIBS)
+
+include $(TOP)/configure/RULES
+#----------------------------------------
+#  ADD RULES AFTER THIS LINE
+
+gitversion.c:
+        @$(RM) $@
+        @sh $(TOP)/tools/gitversion.sh $@
 ```
 
 修改`ecmcExampleTop/configure/RELEASE.local`
@@ -252,6 +322,7 @@ EPICS_BASE=/path/to/epics/base-7.0.10
 SUPPORT=$(EPICS_BASE)/../epics-modules
 ASYN=$(SUPPORT)/asyn
 MOTOR=$(SUPPORT)/motor
+RUCKIG=$(SUPPORT)/ruckig
 # 添加QSRV2支持
 PVXS=$(SUPPORT)/pvxs
 # 指定交叉编译架构
@@ -296,26 +367,26 @@ USR_LDFLAGS_Linux += -Wl,--no-as-needed
 + endif
 
 + # ruckig路径
-+ USR_INCLUDES += -I/path/to/ruckig/include
-+ USR_LDFLAGS  += -L /path/to/ruckig/build
-+ USR_LDFLAGS  += -lruckig
++ USR_INCLUDES += -I$(RUCKIG)/include/ruckig
++ USR_LDFLAGS  += -L$(RUCKIG)/build -lruckig
 
 # ecmcioc.dbd will be created and installed
 DBD += ecmcIoc.dbd
 
 # opcuaIoc.dbd will be made up from these files:
 ecmcIoc_DBD += base.dbd
++ ecmcIoc_DBD += system.dbd
 ecmcIoc_DBD += ecmcController.dbd
 ecmcIoc_DBD += ecmcMotorRecordSupport.dbd
+
++ ecmcIoc_DBD += asyn.dbd
++ ecmcIoc_DBD += motorSupport.dbd
 
 # Add all the support libraries needed by this IOC
 ecmcIoc_LIBS += asyn
 ecmcIoc_LIBS += ecmc
 + ecmcIoc_LIBS += motor
 ecmcIoc_LIBS += exprtkSupport
-
-+ ecmcIoc_DBD += asyn.dbd
-+ ecmcIoc_DBD += motorSupport.dbd
 
 ecmcIoc_SRCS += ecmcIoc_registerRecordDeviceDriver.cpp
 
@@ -355,7 +426,7 @@ include $(TOP)/configure/RULES
 make CPPFLAGS=-std=c++17 \
 LD=loongarch64-linux-gnu-ld \
 CC=loongarch64-linux-gnu-gcc \
-CCC=loongarch64-linux-gnu-g++ -j4
+CCC=loongarch64-linux-gnu-g++ -j8
 ```
 
 ## 使用方法
@@ -392,6 +463,9 @@ epicsEnvSet "ecmccfg_DB", "${ECMC}/db/"
 epicsEnvSet "ECMC_CONFIG_ROOT", "${ecmccfg_DIR}"
 epicsEnvSet "ECMC_CONFIG_DB", "${ecmccfg_DB}"
 epicsEnvSet "SCRIPTEXEC", "iocshLoad"
+
+# EPICS 7.0.10 支持
+epicsEnvSet "EPICS_DB_INCLUDE_PATH", "${ECMC_CONFIG_DB}"
 
 #- 初始化
 ${SCRIPTEXEC} "${ECMC_CONFIG_ROOT}initAll.cmd", "SM_MOTOR_PORT=MCU1,SM_ASYN_PORT=MC_CPU1,SM_PREFIX=${IOC}:"
