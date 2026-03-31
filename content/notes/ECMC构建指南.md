@@ -1,7 +1,7 @@
 ---
 title: "ecmc构建指南"
 date: 2024-11-26T08:56:34+08:00
-lastmod: 2026-03-30T10:27:12+08:00
+lastmod: 2026-03-31T15:39:32+08:00
 draft: true
 searchHidden: true
 tags: ["EPICS", "EtherCAT"]
@@ -138,6 +138,7 @@ USR_LDFLAGS  += -Wl,-rpath=$(SDKTARGETSYSROOT)/usr/lib/etherlab
 endif
 
 + # ruckig路径
++ USR_CXXFLAGS += -std=c++17
 + USR_INCLUDES += -I$(RUCKIG)/include/ruckig
 + USR_LDFLAGS  += -L$(RUCKIG)/build -lruckig
 
@@ -282,10 +283,10 @@ USR_LDFLAGS  += -lethercat
 USR_LDFLAGS  += -Wl,-rpath=$(SDKTARGETSYSROOT)/usr/lib/etherlab
 endif
 
++ USR_CXXFLAGS += -std=c++17
 + USR_INCLUDES += -I$(RUCKIG)/include/ruckig
 USR_LDFLAGS += -L$(RUCKIG)/build/ -lruckig
-- USR_LDFLAGS += -Wl,-rpath,'$(RUCKIG)/build/'
-+ #USR_LDFLAGS += -Wl,-rpath,'$(RUCKIG)/build/'
+USR_LDFLAGS += -Wl,-rpath,'$(RUCKIG)/build/'
 
 SRC_DIRS += ${ECMC}/main
 SRC_DIRS += ${ECMC}/ethercat
@@ -417,13 +418,13 @@ include $(TOP)/configure/RULES
 #  ADD RULES AFTER THIS LINE
 ```
 
-编译的时候需要指定使用`c++17`的标准，不然有一些语法不支持，应该是`ruckig`库比较新。
+~~编译的时候需要指定使用`c++17`的标准，不然有一些语法不支持，应该是`ruckig`库比较新。~~
 
-添加`CPPFLAGS=-std=c++17`
+~~添加`CXXFLAGS=-std=c++17`~~
 
 ``` shell
 # 执行交叉编译
-make CPPFLAGS=-std=c++17 \
+make \
 LD=loongarch64-linux-gnu-ld \
 CC=loongarch64-linux-gnu-gcc \
 CCC=loongarch64-linux-gnu-g++ -j8
